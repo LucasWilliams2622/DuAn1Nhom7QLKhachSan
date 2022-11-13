@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/mGioiThieu"
+        android:title="Giới thiệu về Savila"
+        android:icon="@drawable/ic_home"/>
+    <item android:id="@+id/mDatPhong"
+        android:title="Đặt phòng"
+        android:icon="@drawable/ic_room"/>
+    <item android:id="@+id/mPhongDaDat"
+        android:title="Phòng đã đặt"
+        android:icon="@drawable/ic_checkroom"/>
+    <item android:id="@+id/mDichVu"
+        android:title="Dịch vụ"
+        android:icon="@drawable/ic_room_service"/>
+    <item android:title="Thống kê">
+        <menu>
+            <item android:id="@+id/mTop10"
+                android:title="Top 3 phòng được đặt nhiều nhất"
+                android:icon="@drawable/ic_top"/>
+            <item android:id="@+id/mDoanhThu"
+                android:title="Doanh Thu"
+                android:icon="@drawable/ic_money"/>
+        </menu>
+    </item>
+    <item android:title="Ngưởi dùng">
+        <menu>
+            <item android:id="@+id/mDoiMatKhau"
+                android:title="Đổi mật khẩu"
+                android:icon="@drawable/ic_key"/>
+            <item android:id="@+id/mTuVanKH"
+                android:title="Tư vấn khách hàng"
+                android:icon="@drawable/ic_baseline_phone_24"/>
+            <item android:id="@+id/mDangXuat"
+                android:title="Đăng Xuất"
+                android:icon="@drawable/ic_exit"/>
+        </menu>
+    </item>
+</menu>

@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Fragment.GioiThieuFragment">
+
+    <TextView
+        android:id="@+id/tv1"
+        android:layout_width="209dp"
+        android:layout_height="59dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="GIỚI THIỆU"
+        android:textColor="#111C53"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv2"
+        android:layout_width="78dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="4dp"
+        android:gravity="center"
+        android:text="---***---"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv1" />
+
+    <ImageView
+        android:id="@+id/img1"
+        android:layout_width="563dp"
+        android:layout_height="151dp"
+        android:layout_marginTop="104dp"
+        android:src="@drawable/images"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv3"
+        android:layout_width="477dp"
+        android:layout_height="184dp"
+        android:layout_marginTop="152dp"
+        android:text="Khách sạn SAVILA tọa độ gần trung tâm quận 1. Nằm giữa trung tâm kinh tế và văn hóa của Thành Phố Hồ Chí Minh, khách sạn SAVILA mong muốn là cánh cửa đầu tiền tại Thanh Phố Hồ Chí Minh chào đón Quý Khách trong nước và quốc tế về với Hồ Chí Minh, mền đất sở hữu nhiều loại hình du lịch khác nhau và cảnh quan đẹp, ẩm thực phong phú.
+với chất lượng đạt chuẩn 4 sao, Khách sạn SAVILA không chỉ đáp ứng hoàn hảo nhu cầu nghỉ ngơi của Quý khách mà còn mang đến những phút giây thư giãn tuyệt vời và nhiều ẩm thực đặt biệt nơi đây. Khách sạn là sựu kết hợp hài hòa giữa phong cách mang màu sác sang trọng, hiện đại và cổ kính của nhà hàng, bể bơi và khu vui chơi giải trí trong một khuôn viên rộng lớn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/img1" />
+
+    <ImageView
+        android:id="@+id/img2"
+        android:layout_width="560dp"
+        android:layout_height="151dp"
+        android:layout_marginTop="440dp"
+        android:src="@drawable/img"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv4"
+        android:layout_width="564dp"
+        android:layout_height="71dp"
+        android:layout_marginTop="596dp"
+        android:gravity="center"
+        android:text="khách sạn SAVILA được thiết kế gồm 10 tầng và 200 phòng các loại với nội thất cao cấp, sang trọng. Tất cả các phòng đều có cửa sổ lớn nhìn ra không gian bên ngoài đầy hữa tình và thơ mộng và cảnh đẹp lung linh của Thành phố Hồ Chí Minh khi màn đêm xuống và ánh đèn đua naahu thắp nên khắp các con phố"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/img3"
+        android:layout_width="583dp"
+        android:layout_height="196dp"
+        android:layout_marginTop="668dp"
+        android:src="@drawable/room_2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.95"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv5"
+        android:layout_width="556dp"
+        android:layout_height="90dp"
+        android:layout_marginTop="864dp"
+        android:gravity="center"
+        android:text="Nghỉ ngơi sau một chuyến đi xa tại phòng nghỉ Khách sạn, Quý khách hãy tìm đến với dư vị ẩm thực phong phú của Nhà hàng SAVILA. Tại đây với Nhà hàng Á và Nhà hàng Âu, Quý khách có thể lựa chọn cho mình nhiều phong cách ẩm thực khác nhau từ thịt dê, cơm cháy và các món đặc sản nhiều tỉnh thành khác nhau đến những món ăn nổi tiếng Việt Nam, Châu Á hoặc các món ăn đặc trưng Tây Âu."
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/img4"
+        android:layout_width="570dp"
+        android:layout_height="195dp"
+        android:layout_marginTop="956dp"
+        android:src="@drawable/image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv6"
+        android:layout_width="558dp"
+        android:layout_height="74dp"
+        android:layout_marginTop="1148dp"
+        android:gravity="center"
+        android:text="Lựa chọn những món quà lưu niệm độc đáo tại Quầy lưu niệm, tận hưởng dòng nước trong vắt những buổi hè nóng nực với Bể bơi Khách sạn Hoàng Sơn Peace hay tham gia vào so tài cùng bạn bè tại sân Tennis rộng lớn, đó cũng là một trong những cách thư giãn của Quý khách khi về với Khách sạn SAVILA . Đặc biệt, khu sân vườn với diện tích hơn 2,000m2 rất thuận tiện để tổ chức các hoạt động ngoài trời như đốt lửa trại, gala dinner, teambuilding..."
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.481"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/img5"
+        android:layout_width="563dp"
+        android:layout_height="235dp"
+        android:layout_marginTop="1220dp"
+        android:src="@drawable/khach"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv7"
+        android:layout_width="568dp"
+        android:gravity="center"
+        android:layout_height="142dp"
+        android:layout_marginTop="232dp"
+        android:text="Ngoài ra,  Khách sạn Hoàng Sơn Peace còn đưa vào khai thác rất nhiều các dịch vụ tiện ích khác như:
+
+Tổ chức các tour du lịch trong và ngoài nước
+Cho thuê hướng dẫn viên du lịch
+Tổ chức sự kiện - hội nghị - đám cưới trọn gói
+Bar - café
+Bể bơi
+Phòng karaoke
+Tắm thuốc - massage
+Cho thuê xe du lịch các loại
+Dịch vụ chuyển đồ
+Dịch vụ dọn phòng
+Dịch vụ giặt là …"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.481"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv6" />
+</androidx.constraintlayout.widget.ConstraintLayout>

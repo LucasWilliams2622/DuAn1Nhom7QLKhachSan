@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:outlineAmbientShadowColor="#7E6F6F"
+    android:padding="5dp"
+    android:background="@drawable/background_login"
+    tools:context=".Activity.RegisterActivity">
+
+    <EditText
+        android:id="@+id/edtNameAdmin"
+        android:layout_width="343dp"
+        android:layout_height="62dp"
+        android:ems="10"
+        android:hint="Enter Name"
+        android:inputType="textPersonName"
+        android:text=""
+        android:textColorHint="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintHorizontal_bias="0.514"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtEmailAdmin" />
+
+    <EditText
+        android:id="@+id/edtRoleAdmin"
+        android:layout_width="343dp"
+        android:layout_height="62dp"
+        android:layout_marginTop="4dp"
+        android:ems="10"
+        android:hint="Enter Role (Admin | Manager)"
+        android:inputType="textPersonName"
+        android:text=""
+        android:textColorHint="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.529"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtIdAdmin" />
+
+    <EditText
+        android:id="@+id/edtEmailAdmin"
+        android:layout_width="343dp"
+        android:layout_height="62dp"
+        android:ems="10"
+        android:hint="Enter Email"
+        android:inputType="textPersonName"
+        android:text=""
+        android:textColorHint="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.514"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <EditText
+        android:id="@+id/edtIdAdmin"
+        android:layout_width="343dp"
+        android:layout_height="62dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="Enter Id Admin"
+        android:inputType="textPersonName"
+        android:text=""
+        android:textColorHint="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.529"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtPasswordAdmin" />
+
+    <EditText
+        android:id="@+id/edtPasswordAdmin"
+        android:layout_width="343dp"
+        android:layout_height="62dp"
+
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="Enter Password"
+        android:inputType="textPersonName"
+        android:text=""
+        android:textColorHint="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.529"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtNameAdmin" />
+
+    <Button
+        android:id="@+id/btnRegister"
+        android:layout_width="239dp"
+        android:layout_height="61dp"
+        android:layout_marginBottom="164dp"
+        android:text="Register"
+        android:onClick="onRegisterClick"
+        android:textColorHint="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="397dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="16dp"
+
+        android:text="Register for Admin"
+        android:textAlignment="center"
+        android:textColor="#070707"
+        android:textSize="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

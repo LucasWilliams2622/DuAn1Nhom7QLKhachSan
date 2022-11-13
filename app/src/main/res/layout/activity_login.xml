@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_login"
+    tools:context=".Activity.LoginActivity">
+
+    <Button
+        android:id="@+id/btnGoRegister"
+        android:layout_width="325dp"
+        android:layout_height="54dp"
+        android:layout_marginBottom="128dp"
+        android:background="@drawable/button_cus"
+        android:text="Register"
+        android:textColor="@color/black"
+        android:textStyle="italic|normal"
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toTopOf="@+id/textView9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/edt_username_login"
+        android:layout_width="416dp"
+        android:layout_height="51dp"
+        android:ems="10"
+android:textColorHint="#E0E1DC"
+android:drawableStart="@drawable/ic_person"
+        android:hint="   Username"
+        android:inputType="textPersonName"
+        android:paddingLeft="46dp"
+        android:text=""
+        android:textAlignment="textStart"
+        android:textSize="25dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.182" />
+
+    <EditText
+        android:id="@+id/edt_password_lgoin"
+        android:layout_width="344dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:drawableStart="@drawable/ic_lock"
+        android:hint="   Password"
+        android:textColorHint="#E0E1DC"
+
+        android:inputType="textPassword"
+        android:paddingLeft="40dp"
+        android:text=""
+        android:textAlignment="textStart"
+        android:textSize="25dp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edt_username_login" />
+
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="327dp"
+        android:layout_height="54dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/button_cus"
+        android:text="Login"
+        android:textColor="@color/black"
+        android:textStyle="italic|normal"
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toTopOf="@+id/btnGoRegister"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.511"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivShowPass"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/edt_password_lgoin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/edt_password_lgoin"
+        app:layout_constraintTop_toBottomOf="@+id/edt_username_login"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/ic_eye" />
+
+    <CheckBox
+        android:id="@+id/chkSavePassword"
+        android:layout_width="180dp"
+        android:layout_height="33dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:text=" Save password"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edt_password_lgoin" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="191dp"
+        android:layout_height="33dp"
+        android:layout_marginTop="4dp"
+        android:text="Forgot your password ?"
+        android:textColor="@color/black"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintStart_toEndOf="@+id/chkSavePassword"
+        app:layout_constraintTop_toBottomOf="@+id/edt_password_lgoin" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="188dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="88dp"
+        android:text="Or sign up with"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <LinearLayout
+        android:layout_width="276dp"
+        android:layout_height="79dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:id="@+id/btnGoogle"
+            android:layout_width="49dp"
+            android:layout_height="49dp"
+            android:layout_margin="20dp"
+            android:src="@drawable/google"
+            tools:layout_editor_absoluteX="90dp"
+            tools:layout_editor_absoluteY="625dp" />
+
+        <ImageView
+
+            android:id="@+id/login_fb"
+            android:layout_width="47dp"
+            android:layout_height="49dp"
+            android:layout_margin="20dp"
+            android:backgroundTintMode="@null"
+            android:rotationX="8"
+            android:src="@drawable/fb"
+            app:background="@null"
+            tools:layout_editor_absoluteX="90dp"
+            tools:layout_editor_absoluteY="625dp" />
+
+        <ImageView
+            android:layout_width="49dp"
+            android:layout_height="49dp"
+            android:layout_margin="20dp"
+
+            android:src="@drawable/twitter"
+            tools:layout_editor_absoluteX="90dp"
+            tools:layout_editor_absoluteY="625dp" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
