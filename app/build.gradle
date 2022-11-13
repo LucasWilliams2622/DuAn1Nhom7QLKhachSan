@@ -42,4 +42,7 @@ dependencies {
     //import gallery of glide by Lucas 11/11/2022
     implementation 'com.github.bumptech.glide:glide:4.13.2'
     annotationProcessor'com.github.bumptech.glide:compiler:4.13.2'
+    //import gallery of google by Lucas 14/11/2022
+    implementation 'com.google.android.gms:play-services-auth:19.2.0'
+
 }
