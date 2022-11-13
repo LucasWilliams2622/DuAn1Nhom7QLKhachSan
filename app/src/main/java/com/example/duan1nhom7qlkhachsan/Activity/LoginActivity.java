@@ -7,16 +7,27 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import com.example.duan1nhom7qlkhachsan.MainActivity;
 import com.example.duan1nhom7qlkhachsan.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class LoginActivity extends AppCompatActivity {
     long check = 1;
-    //FirebaseFirestore db = FirebaseFirestore.getInstance();
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,7 +71,7 @@ public class LoginActivity extends AppCompatActivity {
 //                } else {
 //                    Toast.makeText(LoginActivity.this, "Username or password is wrong !!!", Toast.LENGTH_SHORT).show();
  //               }
-                //getData();
+                getData();
 
             }
         });
@@ -89,7 +100,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
-/*
+
     public void getData(){
         db.collection("admin")
                 .get()
@@ -111,5 +122,5 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }
                 });
-    }*/
+    }
 }
