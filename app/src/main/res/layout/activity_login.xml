@@ -149,7 +149,9 @@ android:drawableStart="@drawable/ic_person"
             tools:layout_editor_absoluteX="90dp"
             tools:layout_editor_absoluteY="625dp" />
 
-        <ImageView
+
+
+        <com.facebook.login.widget.LoginButton
 
             android:id="@+id/login_fb"
             android:layout_width="47dp"

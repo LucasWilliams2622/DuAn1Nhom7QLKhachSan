@@ -15,19 +15,35 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.duan1nhom7qlkhachsan.MainActivity;
 import com.example.duan1nhom7qlkhachsan.R;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
+
+import javax.xml.transform.Result;
 
 
 public class LoginActivity extends AppCompatActivity {
+    ImageView btnFB;
+    CallbackManager callbackManager;
     long check = 1;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+    LoginButton loginManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,10 +52,40 @@ public class LoginActivity extends AppCompatActivity {
         EditText edt_password = findViewById(R.id.edt_password_lgoin);
         Button btn_login = findViewById(R.id.btn_login);
         Button btn_register = findViewById(R.id.btnGoRegister);
-        ImageView ivShowPass = findViewById(R.id.ivShowPass);
+        ImageView ivShowPass = findViewById(R.id.ivShowPass);// mốt để toàn cục nha
+        loginManager = findViewById(R.id.login_fb);
 
 
 //        ThuThuDAO thuThuDAO = new ThuThuDAO(this);
+       // btnFB = findViewById(R.id.login_fb);
+//        btnFB.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                LoginManager.getInstance().logInWithReadPermissions(LoginActivity.this, Arrays.asList("public_profile"));
+//            }
+//        });
+        callbackManager = CallbackManager.Factory.create();
+        loginManager.registerCallback(callbackManager,
+                new FacebookCallback<LoginResult>() {
+                    @Override
+                    public void onSuccess(LoginResult loginResult) {
+                        startActivity(new Intent(LoginActivity.this,LoginActivity.class));
+                        finish();
+                    }
+
+
+                    @Override
+                    public void onCancel() {
+
+                    }
+
+                    @Override
+                    public void onError(FacebookException error) {
+
+                    }
+                });
+
+
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -123,4 +169,10 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent Data){
+        callbackManager.onActivityResult(requestCode,resultCode,Data);
+        super.onActivityResult(requestCode,resultCode,Data);
+    }
+
 }
