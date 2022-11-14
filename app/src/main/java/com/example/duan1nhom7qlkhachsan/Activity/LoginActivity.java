@@ -90,6 +90,7 @@ public class LoginActivity extends AppCompatActivity {
          * Project:https://console.firebase.google.com/project/myproject262-4a887/overview
          * Created:11/14/2022
          * By: Lucas
+         *
          * */
 
         GoogleSignInOptions gso = new GoogleSignInOptions
