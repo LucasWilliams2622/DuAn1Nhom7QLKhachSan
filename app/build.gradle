@@ -45,4 +45,9 @@ dependencies {
     //import gallery of google by Lucas 14/11/2022
     implementation 'com.google.android.gms:play-services-auth:19.2.0'
 
+    //import gallery of gacebook by Lucas
+    implementation 'com.facebook.android:facebook-android-sdk:latest.release'
+    implementation 'com.google.android.gms:play-services-location:20.0.0'
+    implementation 'com.google.firebase:firebase-firestore:24.3.1'
+
 }
