@@ -149,11 +149,11 @@
             tools:layout_editor_absoluteX="90dp"
             tools:layout_editor_absoluteY="625dp" />
 
-        <ImageView
 
+        <com.facebook.login.widget.LoginButton
             android:id="@+id/login_button"
-            android:layout_width="47dp"
-            android:layout_height="49dp"
+            android:layout_width="52dp"
+            android:layout_height="46dp"
             android:layout_margin="20dp"
             android:backgroundTintMode="@null"
             android:rotationX="8"

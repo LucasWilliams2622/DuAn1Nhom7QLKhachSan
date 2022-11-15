@@ -14,11 +14,23 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 
 import com.example.duan1nhom7qlkhachsan.MainActivity;
 import com.example.duan1nhom7qlkhachsan.R;
+import com.facebook.AccessToken;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.Profile;
+import com.facebook.ProfileTracker;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -30,17 +42,26 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
 public class LoginActivity extends AppCompatActivity {
     long check = 1;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-
+    private CallbackManager callbackManager;
+    private ProfileTracker profileTracker;
+    private static final String EMAIL = "email";
     //Google
     GoogleSignInClient gsc;
 
+    //Facebook
+    LoginButton loginButton;
+    private LoginManager loginManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +77,19 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String username = edt_username.getText().toString();
                 String password = edt_password.getText().toString();
-                getData();
+
+                if(username.equals("")||password.equals(""))
+                {
+                    Toast.makeText(LoginActivity.this, "Vui lòng điền đủ thông tin", Toast.LENGTH_SHORT).show();
+
+                }
+                else
+                {
+
+                    getData();
+
+                }
+
 
             }
         });
@@ -64,8 +97,8 @@ public class LoginActivity extends AppCompatActivity {
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-               startActivity(intent);
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(intent);
 
             }
         });
@@ -92,7 +125,6 @@ public class LoginActivity extends AppCompatActivity {
          * By: Lucas
          *
          * */
-
         GoogleSignInOptions gso = new GoogleSignInOptions
                 .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
@@ -118,7 +150,47 @@ public class LoginActivity extends AppCompatActivity {
         /*
          *End: Đăng nhâp bằng Google*/
 
+
+
+        /*Start: Đăng nhâp bằng Facebook*/
+        callbackManager = CallbackManager.Factory.create();
+        profileTracker = new ProfileTracker() {
+            @Override
+            protected void onCurrentProfileChanged(@Nullable Profile oldProfile, @Nullable Profile newProfile) {
+                if (newProfile != null) {
+                    Log.d(">>>>>>>>TAB", "onCurrentProfileChanged" + newProfile.getName());
+//                    String id = oldProfile.getId();
+//                    UserDao u = new UserDao(LoginActivity.this);
+//                    u.register(id, "", 1);
+
+                }
+            }
+        };
+        loginButton = (LoginButton) findViewById(R.id.login_button);
+        loginButton.setReadPermissions(Arrays.asList(EMAIL));
+        // If you are using in a fragment, call loginButton.setFragment(this);
+
+        // Callback registration
+        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+               Log.d(">>>>>>>>>>>>","onSuccess"+loginResult.getAccessToken());
+            }
+
+            @Override
+            public void onCancel() {
+                // App code
+            }
+
+            @Override
+            public void onError(FacebookException exception) {
+                // App code
+                Log.d(">>>>>>>>>","onError:"+exception.getMessage());
+            }
+        });
+
     }
+
 
     // nhận kết quả Google SignIn
     ActivityResultLauncher<Intent> googleLauncher = registerForActivityResult(
@@ -153,7 +225,25 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
     );
-    public void getData(){
+
+
+    //nhận kết quả của fb login
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data);
+        Intent homeIntent = new Intent(LoginActivity.this, MainActivity.class);
+        startActivity(homeIntent);
+        finish();
+    }
+
+    @Override
+    protected void onDestroy() {
+        profileTracker.stopTracking();
+        super.onDestroy();
+    }
+
+    public void getData() {
         db.collection("admin")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -167,8 +257,7 @@ public class LoginActivity extends AppCompatActivity {
 
                             Toast.makeText(LoginActivity.this, "Wellcome", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                        }
-                        else {
+                        } else {
                             Toast.makeText(LoginActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
 
                         }

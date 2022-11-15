@@ -24,6 +24,12 @@ import com.example.duan1nhom7qlkhachsan.Fragment.GioiThieuFragment;
 import com.example.duan1nhom7qlkhachsan.Fragment.HoTroKHFragment;
 import com.example.duan1nhom7qlkhachsan.Fragment.PhongDaDatFragment;
 import com.example.duan1nhom7qlkhachsan.Fragment.ServiceFragment;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -33,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
     Toolbar toolBar;
     NavigationView navigationView;
     View headerLayout;
+    GoogleSignInClient gsc;
+    GoogleSignInAccount account;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +55,14 @@ public class MainActivity extends AppCompatActivity {
         ActionBar actionBar =  getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
+
+        GoogleSignInOptions gso = new GoogleSignInOptions
+                .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+        gsc = GoogleSignIn.getClient(MainActivity.this, gso);
+        account = GoogleSignIn.getLastSignedInAccount(MainActivity.this);
+
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -75,10 +91,21 @@ public class MainActivity extends AppCompatActivity {
 //                        showDialogChangePass();
 //                        break;
                     case R.id.mDangXuat:
-                        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(intent);
-
+                        if (account != null) {
+                            gsc.signOut().addOnCompleteListener(MainActivity.this,
+                                    new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            Intent homeIntent = new Intent(MainActivity.this, LoginActivity.class);
+                                            startActivity(homeIntent);
+                                            finish();
+                                        }
+                                    });
+                        } else {
+                            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+                        }
                     default:
                         fragment = new ServiceFragment();
                         break;

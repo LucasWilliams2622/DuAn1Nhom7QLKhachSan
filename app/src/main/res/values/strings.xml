@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">Savila Hotel</string>
 
+    <string name="facebook_app_id">879702789704538</string>
+    <string name="fb_login_protocol_scheme">fb1234</string>
+    <string name="facebook_client_token">23fe60c384b4f2c9b4fce5ea9e112fd3</string>
+
+
 </resources>
