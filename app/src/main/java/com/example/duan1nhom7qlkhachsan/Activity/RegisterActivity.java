@@ -2,6 +2,7 @@ package com.example.duan1nhom7qlkhachsan.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -82,7 +83,11 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                 });
     }
-
+    public void onMoveToLogin(View view)
+    {
+        Intent moveLogin = new Intent(RegisterActivity.this, LoginActivity.class);
+        startActivity(moveLogin);
+    }
     public void onRegisterClick(View view){
         // EditText    edtEmailAdmin,edtNameAdmin,edtPasswordAdmin,edtIdAdmin,edtRoleAdmin;
         String emailAdmin = edtEmailAdmin.getText().toString();

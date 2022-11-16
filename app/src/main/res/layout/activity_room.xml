@@ -94,7 +94,7 @@
         android:text="" />
 
     <Button
-        android:id="@+id/btnSave"
+        android:id="@+id/btnAddRoomActivity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="onSaveClick"

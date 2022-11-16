@@ -161,7 +161,7 @@
             android:layout_width="52dp"
             android:layout_height="46dp"
             android:layout_margin="20dp"
-            android:background="@drawable/button_cus"
+            android:background="@drawable/facebook_btn"
             android:rotationX="8"
             android:src="@drawable/fb"
             app:background="@null"
