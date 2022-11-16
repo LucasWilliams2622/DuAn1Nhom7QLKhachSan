@@ -1,6 +1,5 @@
 package com.example.duan1nhom7qlkhachsan.Fragment;
 
-import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -42,7 +41,7 @@ public class AddRoomandServiceFragment extends Fragment {
         if (itemId == R.id.bottom_nav_room) {
             selectedFragment = new AddRoomFragment();
         } else if (itemId == R.id.bottom_nav_service) {
-            selectedFragment = new AddService();
+            selectedFragment = new AddServiceFragment();
         }
         // It will help to replace the
         // one fragment to other.

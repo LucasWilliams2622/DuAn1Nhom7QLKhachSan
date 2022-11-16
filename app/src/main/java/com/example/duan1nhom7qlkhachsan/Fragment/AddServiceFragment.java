@@ -12,10 +12,10 @@ import com.example.duan1nhom7qlkhachsan.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link AddService#newInstance} factory method to
+ * Use the {@link AddServiceFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AddService extends Fragment {
+public class AddServiceFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,7 +26,7 @@ public class AddService extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public AddService() {
+    public AddServiceFragment() {
         // Required empty public constructor
     }
 
@@ -36,11 +36,11 @@ public class AddService extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment AddService.
+     * @return A new instance of fragment AddServiceFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static AddService newInstance(String param1, String param2) {
-        AddService fragment = new AddService();
+    public static AddServiceFragment newInstance(String param1, String param2) {
+        AddServiceFragment fragment = new AddServiceFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);

@@ -93,14 +93,30 @@
         android:inputType="textPersonName"
         android:text="" />
 
-    <Button
-        android:id="@+id/btnSave"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="onSaveClick"
-        android:text="Save" />
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/btnClear"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:onClick="onClearClick"
+            android:text="Clear " />
+        <Button
+            android:id="@+id/btnSave"
+
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:onClick="onAddRoomClick"
+            android:text="Add Room" />
+
+    </LinearLayout>
+
     <FrameLayout
-        android:id="@+id/flRoom"
+        android:id="@+id/flAddRoom"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 </LinearLayout>

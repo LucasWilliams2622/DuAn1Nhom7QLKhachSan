@@ -1,7 +1,6 @@
 package com.example.duan1nhom7qlkhachsan;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -23,9 +22,7 @@ import androidx.fragment.app.FragmentManager;
 
 
 import com.example.duan1nhom7qlkhachsan.Activity.LoginActivity;
-import com.example.duan1nhom7qlkhachsan.Fragment.AddRoomFragment;
 import com.example.duan1nhom7qlkhachsan.Fragment.AddRoomandServiceFragment;
-import com.example.duan1nhom7qlkhachsan.Fragment.AddService;
 import com.example.duan1nhom7qlkhachsan.Fragment.DatPhongFragment;
 import com.example.duan1nhom7qlkhachsan.Fragment.DoanhThuFragment;
 import com.example.duan1nhom7qlkhachsan.Fragment.GioiThieuFragment;
@@ -38,7 +35,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
