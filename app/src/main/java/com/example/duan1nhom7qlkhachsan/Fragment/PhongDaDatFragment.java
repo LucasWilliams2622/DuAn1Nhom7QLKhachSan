@@ -21,21 +21,43 @@ import java.util.ArrayList;
 public class PhongDaDatFragment extends Fragment {
     ListView lvFrgBookedRoom;
     BookedRoomAdapter bookedRoomAdapter;
-    ArrayList<AppRoom> list = new ArrayList<AppRoom>();
+    ArrayList<AppRoom> room = new ArrayList<>();
+
+    public PhongDaDatFragment() {
+        // Required empty public constructor
+    }
+
+
+
+    public static PhongDaDatFragment newInstance(ArrayList<AppRoom> room) {
+
+
+        PhongDaDatFragment fragment = new PhongDaDatFragment();
+        Bundle args = new Bundle();
+        args.putSerializable("room", room);
+
+        fragment.setArguments(args);
+        return fragment;
+    }
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            room = (ArrayList<AppRoom>) getArguments().getSerializable("room");
+        }
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_phong_da_dat,container,false);
-
-
         return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-//        lvFrgBookedRoom = view.findViewById(R.id.lvFrgBookedRoom);
-//        bookedRoomAdapter = new BookedRoomAdapter(list);
-//        lvFrgBookedRoom.setAdapter(bookedRoomAdapter);
+        lvFrgBookedRoom = view.findViewById(R.id.lvFrgBookedRoom);
+        bookedRoomAdapter = new BookedRoomAdapter(room);
+        lvFrgBookedRoom.setAdapter(bookedRoomAdapter);
     }
 }

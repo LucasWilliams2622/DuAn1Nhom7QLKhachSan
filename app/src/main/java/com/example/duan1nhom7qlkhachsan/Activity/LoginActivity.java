@@ -45,6 +45,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -236,6 +237,7 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(homeIntent);
         finish();
     }
+
 
     @Override
     protected void onDestroy() {
