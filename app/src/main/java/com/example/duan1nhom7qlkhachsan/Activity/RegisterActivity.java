@@ -1,5 +1,6 @@
 package com.example.duan1nhom7qlkhachsan.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -108,6 +109,8 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
                         Toast.makeText(RegisterActivity.this, "Registed", Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(RegisterActivity.this,LoginActivity.class);
+                        startActivity(i);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

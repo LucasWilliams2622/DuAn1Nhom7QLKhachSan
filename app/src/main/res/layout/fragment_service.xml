@@ -1,16 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragment.ServiceFragment">
+    android:orientation="vertical"
+    tools:context=".MainActivity">
 
-
-    <TextView
-        android:id="@+id/textView"
-        android:textAlignment="center"
-        android:paddingTop="500dp"
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="250dp"
+        android:layout_margin="2dp"
+        android:src="@drawable/background_service"
+        />
+    <Button
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Service " />
-</FrameLayout>
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"
+        android:drawableLeft="@drawable/maygiat"
+        android:hint="Dịch vụ giặc ủi"
+        android:textColorHint="@color/black"
+        />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"
+        android:drawableLeft="@drawable/clock"
+        android:hint="Dịch vụ đánh thức "
+        android:textColorHint="@color/black" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:drawableLeft="@drawable/shower"
+        android:hint="Dịch vụ xong hơi ,hồ bơi  "
+        android:textColorHint="@color/black" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:drawableLeft="@drawable/haimuoibonh"
+        android:hint="Dịch vụ 24/24  "
+        android:textColorHint="@color/black" />
+
+</LinearLayout>

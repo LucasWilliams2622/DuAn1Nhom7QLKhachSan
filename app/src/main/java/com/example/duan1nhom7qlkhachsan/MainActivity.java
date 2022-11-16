@@ -1,14 +1,19 @@
 package com.example.duan1nhom7qlkhachsan;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -18,6 +23,9 @@ import androidx.fragment.app.FragmentManager;
 
 
 import com.example.duan1nhom7qlkhachsan.Activity.LoginActivity;
+import com.example.duan1nhom7qlkhachsan.Fragment.AddRoomFragment;
+import com.example.duan1nhom7qlkhachsan.Fragment.AddRoomandServiceFragment;
+import com.example.duan1nhom7qlkhachsan.Fragment.AddService;
 import com.example.duan1nhom7qlkhachsan.Fragment.DatPhongFragment;
 import com.example.duan1nhom7qlkhachsan.Fragment.DoanhThuFragment;
 import com.example.duan1nhom7qlkhachsan.Fragment.GioiThieuFragment;
@@ -30,6 +38,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -87,9 +96,11 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.mGioiThieu:
                         fragment = new GioiThieuFragment();
                         break;
-//                    case R.id.mDoiMatKhau:
-//                        showDialogChangePass();
-//                        break;
+                    case R.id.mAddRoomandService:
+                        fragment = new AddRoomandServiceFragment();
+                        break;
+                    case R.id.mDoiMatKhau:
+                        showDialogChangePass();
                     case R.id.mDangXuat:
                         if (account != null) {
                             gsc.signOut().addOnCompleteListener(MainActivity.this,
@@ -129,12 +140,79 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId() ==  android.R.id.home){
             drawerLayout.openDrawer(GravityCompat.START);
         }
         return super.onOptionsItemSelected(item);
-//áda
+
     }
+    public void showDialogChangePass()
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this)
+                .setPositiveButton("Update",null)
+                .setNegativeButton("Cancel",null)
+                ;
+        LayoutInflater inflater = getLayoutInflater();
+        View view = inflater.inflate(R.layout.dialog_changepassword,null);
+        EditText edtOldPass = view.findViewById(R.id.edtOldPass);
+        EditText edtNewPass = view.findViewById(R.id.edtNewPass);
+        EditText edtReNewPass = view.findViewById(R.id.edtReOldPass);
+
+        builder.setView(view);
+
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.setCancelable(false);//nhấn ra ngoài k thoát
+        //alertDialog.show();
+
+        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String oldPass = edtOldPass.getText().toString();
+                String newPass = edtNewPass.getText().toString();
+                String reNewPass = edtReNewPass.getText().toString();
+                if(oldPass.equals("")||newPass.equals("")||reNewPass.equals(""))
+                {
+                    Toast.makeText(MainActivity.this, "Please enter these field", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+
+                    if(newPass.equals(reNewPass))
+                    {
+//                        SharedPreferences sharedPreferences =getSharedPreferences("THONGTIN",MODE_PRIVATE);
+//
+//                        String matt = sharedPreferences.getString("matt","");
+//                        //update
+//                        ThuThuDAO thuThuDAO=new ThuThuDAO(MainActivity.this);
+//                        int check = thuThuDAO.checkChangePassword(matt,oldPass,newPass);
+//                        if (check==1)
+//                        {
+//                            Toast.makeText(MainActivity.this, "Update Successful", Toast.LENGTH_SHORT).show();
+//                            Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+//                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                            startActivity(intent);
+//                        }
+//                        else if(check==0)
+//                        {
+//                            Toast.makeText(MainActivity.this, "Update Failed,Old password is wrong", Toast.LENGTH_SHORT).show();
+//
+//                        }else
+//                        {
+//                            Toast.makeText(MainActivity.this, "Update Failed", Toast.LENGTH_SHORT).show();
+//
+//                        }
+                    }else
+                    {
+                        Toast.makeText(MainActivity.this, "Please enter the same new password", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+            }
+        });
+    }
+
 }

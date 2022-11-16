@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/bottom_nav_service"
+        android:icon="@drawable/ic_room_service"
+        android:title="Service" />
+
+    <item
+        android:id="@+id/bottom_nav_room"
+        android:icon="@drawable/ic_room"
+        android:title="Room" />
+
+
+</menu>

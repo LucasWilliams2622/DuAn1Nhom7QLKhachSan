@@ -34,8 +34,8 @@ public class PhongDaDatFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        lvFrgBookedRoom = view.findViewById(R.id.lvFrgBookedRoom);
-        bookedRoomAdapter = new BookedRoomAdapter(list);
-        lvFrgBookedRoom.setAdapter(bookedRoomAdapter);
+//        lvFrgBookedRoom = view.findViewById(R.id.lvFrgBookedRoom);
+//        bookedRoomAdapter = new BookedRoomAdapter(list);
+//        lvFrgBookedRoom.setAdapter(bookedRoomAdapter);
     }
 }
