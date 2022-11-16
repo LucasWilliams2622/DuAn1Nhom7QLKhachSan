@@ -1,5 +1,6 @@
 package com.example.duan1nhom7qlkhachsan.Adapter;
 
+import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -15,7 +16,8 @@ import java.util.ArrayList;
 public class BookedRoomAdapter extends BaseAdapter {
 
 
-    public ArrayList<AppRoom> list;
+    private ArrayList<AppRoom> list;
+    private Context context;
     EditText txtEndDay,txtStartDay;
     Button btnHuyPhong;
     TextView tvTenPhong,tvMaPhong,tvLoaiPhong,tvGiaPhong;
@@ -57,12 +59,13 @@ public class BookedRoomAdapter extends BaseAdapter {
             view.setTag(holder);
         }
             AppRoom room = (AppRoom) getItem(_i);
-            txtEndDay.setText(room.getEndDay());
-            txtStartDay.setText(room.getStartDay());
-            tvTenPhong.setText(room.getNameRoom());
-            tvMaPhong.setText(room.getIdRoom());
-            tvLoaiPhong.setText(room.getTypeRoom());
-            tvGiaPhong.setText(room.getPriceRoom());
+            ViewHolder holder = (ViewHolder) view.getTag();
+            holder.txtEndDay.setText(room.getEndDay());
+            holder.txtStartDay.setText(room.getStartDay());
+            holder.tvTenPhong.setText(room.getNameRoom());
+            holder.tvMaPhong.setText(room.getIdRoom());
+            holder.tvLoaiPhong.setText(room.getTypeRoom());
+            holder.tvGiaPhong.setText(room.getPriceRoom());
 
         return view;
     }
