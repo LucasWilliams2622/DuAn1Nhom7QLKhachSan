@@ -12,6 +12,8 @@
     <item android:id="@+id/mDichVu"
         android:title="Dịch vụ"
         android:icon="@drawable/ic_room_service"/>
+    <item android:id="@+id/mHotro"
+        android:title="Hỗ trợ khách hàng"/>
     <item android:title="Thống kê">
         <menu>
             <item android:id="@+id/mAddRoomandService"

@@ -1,7 +1,6 @@
 package com.example.duan1nhom7qlkhachsan;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -23,13 +22,12 @@ import androidx.fragment.app.FragmentManager;
 
 
 import com.example.duan1nhom7qlkhachsan.Activity.LoginActivity;
-import com.example.duan1nhom7qlkhachsan.Fragment.AddRoomFragment;
+import com.example.duan1nhom7qlkhachsan.Activity.hotro.HotroAdminFragment;
+import com.example.duan1nhom7qlkhachsan.Activity.hotro.HoTroFragment;
 import com.example.duan1nhom7qlkhachsan.Fragment.AddRoomandServiceFragment;
-import com.example.duan1nhom7qlkhachsan.Fragment.AddService;
 import com.example.duan1nhom7qlkhachsan.Fragment.DatPhongFragment;
 import com.example.duan1nhom7qlkhachsan.Fragment.DoanhThuFragment;
 import com.example.duan1nhom7qlkhachsan.Fragment.GioiThieuFragment;
-import com.example.duan1nhom7qlkhachsan.Fragment.HoTroKHFragment;
 import com.example.duan1nhom7qlkhachsan.Fragment.PhongDaDatFragment;
 import com.example.duan1nhom7qlkhachsan.Fragment.ServiceFragment;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -38,7 +36,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -54,11 +51,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         drawerLayout = findViewById(R.id.DrawerLayout);
         frameLayout = findViewById(R.id.frameLayout);
         toolBar = findViewById(R.id.toolBar);
         navigationView = findViewById(R.id.navigationView);
         headerLayout = navigationView.getHeaderView(0);
+
         TextView tvTen = headerLayout.findViewById(R.id.tvTen);
         setSupportActionBar(toolBar);
         ActionBar actionBar =  getSupportActionBar();
@@ -87,8 +86,11 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.mDoanhThu:
                         fragment = new DoanhThuFragment();
                         break;
+                    case R.id.mHotro:
+                        fragment = new HotroAdminFragment();
+                        break;
                     case R.id.mTuVanKH:
-                        fragment = new HoTroKHFragment();
+                        fragment = new HoTroFragment();
                         break;
                     case R.id.mPhongDaDat:
                         fragment = new PhongDaDatFragment();
@@ -149,6 +151,8 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
 
     }
+
+
     public void showDialogChangePass()
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(this)
