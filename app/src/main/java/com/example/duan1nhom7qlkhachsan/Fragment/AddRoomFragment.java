@@ -1,18 +1,22 @@
 package com.example.duan1nhom7qlkhachsan.Fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.duan1nhom7qlkhachsan.Model.AppRoom;
 import com.example.duan1nhom7qlkhachsan.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -23,6 +27,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import org.checkerframework.checker.units.qual.A;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,8 +37,30 @@ import java.util.Map;
 public class AddRoomFragment extends Fragment {
     private EditText edtIdRoom, edtNameRoom, edtTypeRoom, edtPriceRoom, edtStartDay, edtEndDay;
     private Button btnAddRoom, btnClear;
+    private ArrayList<AppRoom> rooms;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
+    public AddRoomFragment() {
+        // Required empty public constructor
+    }
+    public static AddRoomFragment newInstance(ArrayList<AppRoom> rooms) {
+
+
+        AddRoomFragment fragment = new AddRoomFragment();
+        Bundle args = new Bundle();
+        args.putSerializable("room", rooms);
+
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            rooms = (ArrayList<AppRoom>) getArguments().getSerializable("room");
+        }
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -61,6 +90,7 @@ public class AddRoomFragment extends Fragment {
         return view;
     }
 
+
     public void onAddRoomClick(View view) {
         // private String idRoom,nameRoom,typeRoom,priceRoom,startDay,endDay;
         String idRoom = edtIdRoom.getText().toString();
@@ -89,6 +119,7 @@ public class AddRoomFragment extends Fragment {
                     public void onSuccess(DocumentReference documentReference) {
                         Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
                         //Log.d("TAG", "DocumentSnapshot added with ID: " + documentReference.getId());
+                        getData();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -100,6 +131,7 @@ public class AddRoomFragment extends Fragment {
                 });
     }
 
+
     public void onClearClick(View view) {
         edtIdRoom.setText(null);
         edtNameRoom.setText(null);
@@ -107,6 +139,34 @@ public class AddRoomFragment extends Fragment {
         edtPriceRoom.setText(null);
         edtStartDay.setText(null);
         edtEndDay.setText(null);
+    }
+    private  void getData()
+    {
+        db.collection("room")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            ArrayList<AppRoom> list = new ArrayList<>();
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Map<String, Object> map = document.getData();
+                                String id = map.get("idRoom").toString();
+                                String name = map.get("nameRoom").toString();
+                                String type = map.get("typeRoom").toString();
+                                String price = map.get("priceRoom").toString();
+                                String start = map.get("startDay").toString();
+                                String end = map.get("endDay").toString();
+
+                                AppRoom appRoom = new AppRoom(id, name, type, price, start, end);
+                                list.add(appRoom);
+
+                                getActivity().getSupportFragmentManager().beginTransaction()
+                                        .replace(R.id.flAddRoom, AddRoomFragment.newInstance(list)).commit();
+                            }
+                        }
+                    }
+                });
     }
 
     private void getDataService() {
