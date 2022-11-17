@@ -23,8 +23,12 @@
 
     <EditText
         android:id="@+id/edt_username_login"
-        android:layout_width="416dp"
+        android:layout_width="380dp"
         android:layout_height="51dp"
+        android:background="@drawable/design_of_edt"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+
         android:drawableStart="@drawable/ic_person"
         android:ems="10"
         android:hint="   Username"
@@ -42,11 +46,16 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.182" />
 
+
     <EditText
         android:id="@+id/edt_password_lgoin"
-        android:layout_width="344dp"
-        android:layout_height="46dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="340dp"
+        android:layout_height="51dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="60dp"
+
+        android:background="@drawable/design_of_edt"
         android:drawableStart="@drawable/ic_lock"
         android:ems="10"
         android:hint="   Password"
@@ -59,10 +68,9 @@
         android:textSize="25dp"
 
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.967"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edt_username_login" />
-
 
     <Button
         android:id="@+id/btn_login"
@@ -83,14 +91,12 @@
         android:id="@+id/ivShowPass"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/edt_password_lgoin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/edt_password_lgoin"
         app:layout_constraintTop_toBottomOf="@+id/edt_username_login"
-        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/ic_eye" />
 
     <CheckBox
@@ -155,7 +161,7 @@
             android:layout_width="52dp"
             android:layout_height="46dp"
             android:layout_margin="20dp"
-            android:backgroundTintMode="@null"
+            android:background="@drawable/facebook_btn"
             android:rotationX="8"
             android:src="@drawable/fb"
             app:background="@null"
@@ -171,5 +177,19 @@
             tools:layout_editor_absoluteX="90dp"
             tools:layout_editor_absoluteY="625dp" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="332dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="16dp"
+        android:text="Login for Savila"
+        android:textAlignment="center"
+        android:textStyle="bold|italic"
+        android:textSize="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
