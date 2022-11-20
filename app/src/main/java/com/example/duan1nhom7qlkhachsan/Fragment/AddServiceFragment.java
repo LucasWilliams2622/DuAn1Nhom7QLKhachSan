@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,12 +13,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.duan1nhom7qlkhachsan.Model.AppService;
 import com.example.duan1nhom7qlkhachsan.R;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
+import org.checkerframework.checker.units.qual.A;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -103,5 +112,28 @@ public class AddServiceFragment extends Fragment {
         edtTimeUseService.setText(null);
         edtPriceService.setText(null);
 
+    }
+
+    private void getDataService() {
+        db.collection("service")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            ArrayList<AppService> list = new ArrayList<>();
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d("TAG", document.getId() + " => " + document.getData());
+                            }
+                            getActivity().getSupportFragmentManager().
+                                    beginTransaction().
+                                    //replace(R.id.flAddService,ServiceFragment.).
+                                    commit();
+
+                        } else {
+                            Log.w("TAG", "Error getting documents.", task.getException());
+                        }
+                    }
+                });
     }
 }

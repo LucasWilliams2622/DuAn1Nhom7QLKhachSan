@@ -1,13 +1,12 @@
 package com.example.duan1nhom7qlkhachsan.Adapter;
 
-import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.duan1nhom7qlkhachsan.Activity.IAdapterClickEvent;
 import com.example.duan1nhom7qlkhachsan.Model.AppRoom;
 import com.example.duan1nhom7qlkhachsan.R;
 
@@ -15,7 +14,7 @@ import java.util.ArrayList;
 
 public class AddRoomAdapter extends BaseAdapter {
     private ArrayList<AppRoom> list;
-    private Context context;
+
 
     private Button btnUpdate,btnDelete;
     private TextView tvIdRoom,tvNameRoom,tvTypeRoom,tvPriceRoom,tvStartDay,tvEndDay;
@@ -67,13 +66,15 @@ public class AddRoomAdapter extends BaseAdapter {
         holder.btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                IAdapterClickEvent  iAdapterClickEvent = (IAdapterClickEvent) _viewGroup.getContext();
+                iAdapterClickEvent.onUpdateRoomClick(room);
             }
         });
         holder.btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                IAdapterClickEvent  iAdapterClickEvent = (IAdapterClickEvent) _viewGroup.getContext();
+                iAdapterClickEvent.onDeleteRoomClick(room);
             }
         });
 

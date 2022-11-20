@@ -1,5 +1,6 @@
 package com.example.duan1nhom7qlkhachsan.Fragment;
 
+import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.duan1nhom7qlkhachsan.Activity.RoomActivity;
 import com.example.duan1nhom7qlkhachsan.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -27,8 +29,6 @@ public class AddRoomandServiceFragment extends Fragment {
         // fragment should be shown to the user
         // in this case it is algorithm fragment
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AddRoomFragment()).commit();
-
-
         return view;
     }
 
@@ -43,6 +43,7 @@ public class AddRoomandServiceFragment extends Fragment {
         } else if (itemId == R.id.bottom_nav_service) {
             selectedFragment = new AddServiceFragment();
         }
+
         // It will help to replace the
         // one fragment to other.
         if (selectedFragment != null) {

@@ -27,10 +27,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
-    private EditText    edtEmailAdmin,edtNameAdmin,edtPasswordAdmin,edtIdAdmin,edtRoleAdmin;
+    private EditText edtEmailAdmin, edtNameAdmin, edtPasswordAdmin, edtIdAdmin, edtRoleAdmin;
     private Button btnRegister;
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,13 +46,14 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegister = findViewById(R.id.btnRegister);
 
     }
+
     @Override
     protected void onResume() {
         super.onResume();
-       getData();
+        getData();
     }
 
-    public void getData(){
+    public void getData() {
         db.collection("admin")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -60,7 +62,7 @@ public class RegisterActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             ArrayList<AppAdmin> list = new ArrayList<>();
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                Map<String,Object> map = document.getData();
+                                Map<String, Object> map = document.getData();
 //                                private String idAdmin,emailAdmin,nameAdmin,passwordAdmin,role;
 
                                 String idAdmin = map.get("idAdmin").toString();
@@ -70,8 +72,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 String role = map.get("role").toString();
 
 
-
-                                AppAdmin admin = new AppAdmin(idAdmin,emailAdmin,nameAdmin,passwordAdmin,role);
+                                AppAdmin admin = new AppAdmin(idAdmin, emailAdmin, nameAdmin, passwordAdmin, role);
                                 admin.setIdAdmin(document.getId());
                                 list.add(admin);
                             }
@@ -83,12 +84,14 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                 });
     }
-    public void onMoveToLogin(View view)
-    {
+
+    public void onMoveToLogin(View view) {
         Intent moveLogin = new Intent(RegisterActivity.this, LoginActivity.class);
         startActivity(moveLogin);
     }
-    public void onRegisterClick(View view){
+
+    public void onRegisterClick(View view) {
+
         // EditText    edtEmailAdmin,edtNameAdmin,edtPasswordAdmin,edtIdAdmin,edtRoleAdmin;
         String emailAdmin = edtEmailAdmin.getText().toString();
         String nameAdmin = edtNameAdmin.getText().toString();
@@ -96,33 +99,36 @@ public class RegisterActivity extends AppCompatActivity {
         String idAdmin = edtIdAdmin.getText().toString();
         String role = edtRoleAdmin.getText().toString();
 
+        if (emailAdmin.equals(null) || nameAdmin.equals(null) || passwordAdmin.equals(null) || idAdmin.equals(null) || role.equals(null)) {
+            Toast.makeText(this, "Vui lòng điền đủ thông tin !", Toast.LENGTH_SHORT).show();
+        } else {
+            // Create a new user with a first and last name
+            Map<String, Object> user = new HashMap<>();
+            user.put("idAdmin", idAdmin);
+            user.put("emailAdmin", emailAdmin);
+            user.put("nameAdmin", nameAdmin);
+            user.put("passwordAdmin", passwordAdmin);
+            user.put("role", role);
 
-// Create a new user with a first and last name
-        Map<String, Object> user = new HashMap<>();
-        user.put("idAdmin", idAdmin);
-        user.put("emailAdmin", emailAdmin);
-        user.put("nameAdmin", nameAdmin);
-        user.put("passwordAdmin", passwordAdmin);
-        user.put("role", role);
+            // Add a new document with a generated ID
+            db.collection("admin")
+                    .add(user)
+                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        @Override
+                        public void onSuccess(DocumentReference documentReference) {
+                            Toast.makeText(RegisterActivity.this, "Registed", Toast.LENGTH_SHORT).show();
+                            Intent i = new Intent(RegisterActivity.this, LoginActivity.class);
+                            startActivity(i);
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(RegisterActivity.this, "Faied registed", Toast.LENGTH_SHORT).show();
+                        }
+                    });
 
+        }
 
-
-// Add a new document with a generated ID
-        db.collection("admin")
-                .add(user)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Toast.makeText(RegisterActivity.this, "Registed", Toast.LENGTH_SHORT).show();
-                        Intent i = new Intent(RegisterActivity.this,LoginActivity.class);
-                        startActivity(i);
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(RegisterActivity.this, "Faied registed", Toast.LENGTH_SHORT).show();
-                    }
-                });
     }
 }

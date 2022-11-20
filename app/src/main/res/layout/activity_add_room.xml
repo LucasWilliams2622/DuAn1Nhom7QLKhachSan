@@ -4,112 +4,114 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:layout_margin="13dp"
-    tools:context=".Activity.RoomActivity" >
+    android:orientation="vertical"
+    tools:context=".Activity.RoomActivity">
 
 
     <EditText
         android:id="@+id/edtIdRoom"
-        android:textSize="17dp"
-        android:textColor="@color/black"
-        android:paddingTop="10dp"
-        android:paddingLeft="7dp"
-        android:hint="Id room"
-        android:textColorHint="@color/black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="Id room"
         android:inputType="textPersonName"
-        android:text="" />
+        android:paddingLeft="7dp"
+        android:paddingTop="10dp"
+        android:text=""
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textSize="17dp" />
 
     <EditText
         android:id="@+id/edtNameRoom"
-        android:textSize="17dp"
-        android:textColor="@color/black"
-        android:paddingTop="10dp"
-        android:paddingLeft="7dp"
-        android:hint="Name room"
-        android:textColorHint="@color/black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="Name room"
         android:inputType="textPersonName"
-        android:text="" />
+        android:paddingLeft="7dp"
+        android:paddingTop="10dp"
+        android:text=""
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textSize="17dp" />
 
     <EditText
         android:id="@+id/edtTypeRoom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:textSize="17dp"
-        android:textColor="@color/black"
-        android:paddingTop="10dp"
-        android:paddingLeft="7dp"
         android:hint="Type room"
-        android:textColorHint="@color/black"
         android:inputType="textPersonName"
-        android:text="" />
+        android:paddingLeft="7dp"
+        android:paddingTop="10dp"
+        android:text=""
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textSize="17dp" />
 
     <EditText
         android:id="@+id/edtPriceRoom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:textSize="17dp"
-        android:textColor="@color/black"
-        android:paddingTop="10dp"
-        android:paddingLeft="7dp"
         android:hint="Price room"
-        android:textColorHint="@color/black"
         android:inputType="textPersonName"
-        android:text="" />
+        android:paddingLeft="7dp"
+        android:paddingTop="10dp"
+        android:text=""
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textSize="17dp" />
 
     <EditText
         android:id="@+id/edtStartDay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:textSize="17dp"
-        android:textColor="@color/black"
-        android:paddingTop="10dp"
-        android:paddingLeft="7dp"
         android:hint="Start day"
-        android:textColorHint="@color/black"
         android:inputType="textPersonName"
-        android:text="" />
+        android:paddingLeft="7dp"
+        android:paddingTop="10dp"
+        android:text=""
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textSize="17dp" />
 
     <EditText
         android:id="@+id/edtEndDay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:textSize="17dp"
-        android:textColor="@color/black"
-        android:paddingTop="10dp"
-        android:paddingLeft="7dp"
         android:hint="End day"
-        android:textColorHint="@color/black"
         android:inputType="textPersonName"
-        android:text="" />
+        android:paddingLeft="7dp"
+        android:paddingTop="10dp"
+        android:text=""
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textSize="17dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
         <Button
             android:id="@+id/btnClear"
-            android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-
+            android:layout_weight="1"
+            android:onClick="onCancleClick"
             android:text="Clear " />
+
         <Button
             android:id="@+id/btnAddRoom"
 
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:onClick="onAddRoomClick"
             android:text="Add Room" />
 
@@ -118,5 +120,5 @@
     <FrameLayout
         android:id="@+id/flAddRoom"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
 </LinearLayout>

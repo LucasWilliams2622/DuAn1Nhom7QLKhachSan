@@ -1,7 +1,11 @@
 package com.example.duan1nhom7qlkhachsan.Activity;
 
 import android.os.Bundle;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,19 +16,28 @@ import com.example.duan1nhom7qlkhachsan.R;
 public class RoomActivity extends AppCompatActivity {
     private EditText  edtStartDay, edtEndDay;
     private TextView edtIdRoom, edtNameRoom, edtTypeRoom, edtPriceRoom;
-
+private ImageView ivRoom;
    // FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room);
-        edtIdRoom = findViewById(R.id.edtIdRoom);
-        edtNameRoom = findViewById(R.id.edtNameRoom);
-        edtTypeRoom = findViewById(R.id.edtTypeRoom);
-        edtPriceRoom = findViewById(R.id.edtPriceRoom);
-        edtStartDay = findViewById(R.id.edtStartDay);
-        edtEndDay = findViewById(R.id.edtEndDay);
+
+        final Animation animation = AnimationUtils.loadAnimation(this,R.anim.animation_scale);
+        ivRoom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                v.startAnimation(animation);
+            }
+        });
+//        edtIdRoom = findViewById(R.id.edtIdRoom);
+//        edtNameRoom = findViewById(R.id.edtNameRoom);
+//        edtTypeRoom = findViewById(R.id.edtTypeRoom);
+//        edtPriceRoom = findViewById(R.id.edtPriceRoom);
+//        edtStartDay = findViewById(R.id.edtStartDay);
+//        edtEndDay = findViewById(R.id.edtEndDay);
 
     }
     @Override

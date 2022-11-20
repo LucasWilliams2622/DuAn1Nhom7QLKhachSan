@@ -16,7 +16,10 @@
         android:title="Hỗ trợ khách hàng"/>
     <item android:title="Thống kê">
         <menu>
-            <item android:id="@+id/mAddRoomandService"
+            <item android:id="@+id/mAddRoom"
+                android:title="Thêm phòng "
+                android:icon="@drawable/ic_top"/>
+            <item android:id="@+id/mAddService"
                 android:title="Thêm phòng và dịch vụ"
                 android:icon="@drawable/ic_top"/>
             <item android:id="@+id/mTop10"

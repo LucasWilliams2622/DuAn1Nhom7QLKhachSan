@@ -21,7 +21,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 
+import com.example.duan1nhom7qlkhachsan.Activity.AddRoomActivity;
 import com.example.duan1nhom7qlkhachsan.Activity.LoginActivity;
+import com.example.duan1nhom7qlkhachsan.Activity.RoomActivity;
 import com.example.duan1nhom7qlkhachsan.Activity.hotro.HotroAdminFragment;
 import com.example.duan1nhom7qlkhachsan.Activity.hotro.HoTroFragment;
 import com.example.duan1nhom7qlkhachsan.Fragment.AddRoomandServiceFragment;
@@ -30,6 +32,7 @@ import com.example.duan1nhom7qlkhachsan.Fragment.DoanhThuFragment;
 import com.example.duan1nhom7qlkhachsan.Fragment.GioiThieuFragment;
 import com.example.duan1nhom7qlkhachsan.Fragment.PhongDaDatFragment;
 import com.example.duan1nhom7qlkhachsan.Fragment.ServiceFragment;
+
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -98,11 +101,15 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.mGioiThieu:
                         fragment = new GioiThieuFragment();
                         break;
-                    case R.id.mAddRoomandService:
-                        fragment = new AddRoomandServiceFragment();
+                    case R.id.mAddRoom:
+                        Intent intentAddRoom = new Intent(MainActivity.this, AddRoomActivity.class);
+                        startActivity(intentAddRoom);
                         break;
                     case R.id.mDoiMatKhau:
-                        showDialogChangePass();
+
+
+
+                        //showDialogChangePass();
                     case R.id.mDangXuat:
                         if (account != null) {
                             gsc.signOut().addOnCompleteListener(MainActivity.this,
@@ -153,9 +160,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+
     public void showDialogChangePass()
     {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this)
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this)
                 .setPositiveButton("Update",null)
                 .setNegativeButton("Cancel",null)
                 ;
@@ -170,7 +178,8 @@ public class MainActivity extends AppCompatActivity {
 
         AlertDialog alertDialog = builder.create();
         alertDialog.setCancelable(false);//nhấn ra ngoài k thoát
-        //alertDialog.show();
+        alertDialog.show();
+        finish();
 
         alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
             @Override

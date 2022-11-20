@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.duan1nhom7qlkhachsan.Model.AppRoom;
@@ -23,10 +25,10 @@ public class DatPhongFragment extends Fragment {
     }
     // truyền data vào fragment
 
-    public static DatPhongFragment newInstance(ArrayList<AppRoom> courses) {
+    public static DatPhongFragment newInstance(ArrayList<AppRoom> room) {
         DatPhongFragment fragment = new DatPhongFragment();
         Bundle args = new Bundle();
-        args.putSerializable("room", courses);
+        args.putSerializable("room", room);
         fragment.setArguments(args);
         return fragment;
     }
@@ -50,20 +52,21 @@ public class DatPhongFragment extends Fragment {
     //logic
     //load data vào view
     //xử lý sự kiện
-//    @Override
-//    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-//        super.onViewCreated(view, savedInstanceState);
-//        lvDatPhong =view.findViewById(R.id.lv);
-//        CourseAdapter adapter = new CourseAdapter(courses);
-//        lvDatPhong.setAdapter(adapter);
-//        lvDatPhong.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                AppCourse course = (AppCourse) parent.getItemAtPosition(position);
-//                // truyền ra activity
-//                CourseActivity activity= (CourseActivity) view.getContext();
-//                activity.onCoursesItemClick(course);
-//            }
-//        });
-//    }
+    /*
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        lvDatPhong =view.findViewById(R.id.lv);
+        CourseAdapter adapter = new CourseAdapter(courses);
+        lvDatPhong.setAdapter(adapter);
+        lvDatPhong.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                AppCourse course = (AppCourse) parent.getItemAtPosition(position);
+                // truyền ra activity
+                CourseActivity activity= (CourseActivity) view.getContext();
+                activity.onCoursesItemClick(course);
+            }
+        });
+    }*/
 }

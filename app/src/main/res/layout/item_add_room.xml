@@ -1,119 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:layout_margin="13dp"
-    tools:context=".Activity.RoomActivity" >
-
-
-    <TextView
-        android:id="@+id/tvIdRoom"
-        android:textSize="17dp"
-        android:textColor="@color/black"
-        android:paddingTop="10dp"
-        android:paddingLeft="7dp"
-        android:hint="Id room"
-        android:textColorHint="@color/black"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="" />
-
-    <TextView
-        android:id="@+id/tvNameRoom"
-        android:textSize="17dp"
-        android:textColor="@color/black"
-        android:paddingTop="10dp"
-        android:paddingLeft="7dp"
-        android:hint="Name room"
-        android:textColorHint="@color/black"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="" />
-
-    <TextView
-        android:id="@+id/tvTypeRoom"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:textSize="17dp"
-        android:textColor="@color/black"
-        android:paddingTop="10dp"
-        android:paddingLeft="7dp"
-        android:hint="Type room"
-        android:textColorHint="@color/black"
-        android:inputType="textPersonName"
-        android:text="" />
-
-    <TextView
-        android:id="@+id/tvPriceRoom"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:textSize="17dp"
-        android:textColor="@color/black"
-        android:paddingTop="10dp"
-        android:paddingLeft="7dp"
-        android:hint="Price room"
-        android:textColorHint="@color/black"
-        android:inputType="textPersonName"
-        android:text="" />
-
-    <TextView
-        android:id="@+id/tvStartDay"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:textSize="17dp"
-        android:textColor="@color/black"
-        android:paddingTop="10dp"
-        android:paddingLeft="7dp"
-        android:hint="Start day"
-        android:textColorHint="@color/black"
-        android:inputType="textPersonName"
-        android:text="" />
-
-    <TextView
-        android:id="@+id/tvEndDay"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:textSize="17dp"
-        android:textColor="@color/black"
-        android:paddingTop="10dp"
-        android:paddingLeft="7dp"
-        android:hint="End day"
-        android:textColorHint="@color/black"
-        android:inputType="textPersonName"
-        android:text="" />
-
+    app:cardCornerRadius="10dp"
+    app:cardElevation="3dp"
+    android:layout_margin="10dp"
+    app:cardPreventCornerOverlap="true"
+    android:outlineAmbientShadowColor="@color/black"
+    tools:context=".Activity.RoomActivity">
     <LinearLayout
         android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:layout_height="wrap_content">
-        <Button
-            android:id="@+id/btnUpdate"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="13dp"
 
-            android:text="Update " />
-        <Button
-            android:id="@+id/btnDelete"
+        android:orientation="vertical">
 
-            android:layout_width="0dp"
-            android:layout_weight="1"
+
+        <TextView
+            android:id="@+id/tvIdRoom"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="onAddRoomClick"
-            android:text="Delete Room" />
+            android:ems="10"
+            android:hint="Id room"
+            android:inputType="textPersonName"
+            android:paddingLeft="7dp"
+            android:paddingTop="10dp"
+            android:text=""
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textSize="17dp" />
+
+        <TextView
+            android:id="@+id/tvNameRoom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Name room"
+            android:inputType="textPersonName"
+            android:paddingLeft="7dp"
+            android:paddingTop="10dp"
+            android:text=""
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textSize="17dp" />
+
+        <TextView
+            android:id="@+id/tvTypeRoom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Type room"
+            android:inputType="textPersonName"
+            android:paddingLeft="7dp"
+            android:paddingTop="10dp"
+            android:text=""
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textSize="17dp" />
+
+        <TextView
+            android:id="@+id/tvPriceRoom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Price room"
+            android:inputType="textPersonName"
+            android:paddingLeft="7dp"
+            android:paddingTop="10dp"
+            android:text=""
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textSize="17dp" />
+
+        <TextView
+            android:id="@+id/tvStartDay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Start day"
+            android:inputType="textPersonName"
+            android:paddingLeft="7dp"
+            android:paddingTop="10dp"
+            android:text=""
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textSize="17dp" />
+
+        <TextView
+            android:id="@+id/tvEndDay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="End day"
+            android:inputType="textPersonName"
+            android:paddingLeft="7dp"
+            android:paddingTop="10dp"
+            android:text=""
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textSize="17dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnUpdate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+
+                android:text="Update " />
+
+            <Button
+                android:id="@+id/btnDelete"
+
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+
+                android:text="Delete Room" />
+
+        </LinearLayout>
 
     </LinearLayout>
-
-
-</LinearLayout>
+</androidx.cardview.widget.CardView>
