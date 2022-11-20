@@ -153,7 +153,7 @@ public class AddRoomActivity extends AppCompatActivity implements IAdapterClickE
                     }
                 });
     }
-
+//
     @Override
     public void onDeleteRoomClick(AppRoom room) {
         new AlertDialog.Builder(AddRoomActivity.this)
