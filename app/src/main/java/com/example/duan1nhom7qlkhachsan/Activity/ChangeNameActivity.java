@@ -67,7 +67,7 @@ public class ChangeNameActivity extends AppCompatActivity {
                         getDataAdmin();
                         appAdmin=null;
                     }
-                })
+                })//
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
