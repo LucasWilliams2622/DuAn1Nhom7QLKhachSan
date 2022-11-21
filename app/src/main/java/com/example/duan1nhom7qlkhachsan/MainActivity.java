@@ -23,10 +23,9 @@ import androidx.fragment.app.FragmentManager;
 
 import com.example.duan1nhom7qlkhachsan.Activity.AddRoomActivity;
 import com.example.duan1nhom7qlkhachsan.Activity.LoginActivity;
-import com.example.duan1nhom7qlkhachsan.Activity.RoomActivity;
+import com.example.duan1nhom7qlkhachsan.Activity.ChangeNameActivity;
 import com.example.duan1nhom7qlkhachsan.Activity.hotro.HotroAdminFragment;
 import com.example.duan1nhom7qlkhachsan.Activity.hotro.HoTroFragment;
-import com.example.duan1nhom7qlkhachsan.Fragment.AddRoomandServiceFragment;
 import com.example.duan1nhom7qlkhachsan.Fragment.DatPhongFragment;
 import com.example.duan1nhom7qlkhachsan.Fragment.DoanhThuFragment;
 import com.example.duan1nhom7qlkhachsan.Fragment.GioiThieuFragment;
@@ -50,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
     View headerLayout;
     GoogleSignInClient gsc;
     GoogleSignInAccount account;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
         TextView tvTen = headerLayout.findViewById(R.id.tvTen);
         setSupportActionBar(toolBar);
-        ActionBar actionBar =  getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
 
@@ -78,8 +78,8 @@ public class MainActivity extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Fragment fragment=null;
-                switch (item.getItemId()){
+                Fragment fragment = null;
+                switch (item.getItemId()) {
                     case R.id.mDichVu:
                         fragment = new ServiceFragment();
                         break;
@@ -101,12 +101,15 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.mGioiThieu:
                         fragment = new GioiThieuFragment();
                         break;
+                    case R.id.mChangeName:
+                        Intent intentChangeName = new Intent(MainActivity.this, ChangeNameActivity.class);
+                        startActivity(intentChangeName);
+                        break;
                     case R.id.mAddRoom:
                         Intent intentAddRoom = new Intent(MainActivity.this, AddRoomActivity.class);
                         startActivity(intentAddRoom);
                         break;
                     case R.id.mDoiMatKhau:
-
 
 
                         //showDialogChangePass();
@@ -130,15 +133,13 @@ public class MainActivity extends AppCompatActivity {
                         fragment = new ServiceFragment();
                         break;
                 }
-                if (fragment!=null)
-                {
+                if (fragment != null) {
                     FragmentManager fragmentManager = getSupportFragmentManager();
                     fragmentManager.beginTransaction()
                             .replace(R.id.frameLayout, fragment)
                             .commit();
                     toolBar.setTitle(item.getTitle());
                 }
-
 
 
                 drawerLayout.closeDrawer(GravityCompat.START);
@@ -152,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId() ==  android.R.id.home){
+        if (item.getItemId() == android.R.id.home) {
             drawerLayout.openDrawer(GravityCompat.START);
         }
         return super.onOptionsItemSelected(item);
@@ -160,15 +161,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-    public void showDialogChangePass()
-    {
+    public void showDialogChangePass() {
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this)
-                .setPositiveButton("Update",null)
-                .setNegativeButton("Cancel",null)
-                ;
+                .setPositiveButton("Update", null)
+                .setNegativeButton("Cancel", null);
         LayoutInflater inflater = getLayoutInflater();
-        View view = inflater.inflate(R.layout.dialog_changepassword,null);
+        View view = inflater.inflate(R.layout.dialog_changepassword, null);
         EditText edtOldPass = view.findViewById(R.id.edtOldPass);
         EditText edtNewPass = view.findViewById(R.id.edtNewPass);
         EditText edtReNewPass = view.findViewById(R.id.edtReOldPass);
@@ -187,15 +185,11 @@ public class MainActivity extends AppCompatActivity {
                 String oldPass = edtOldPass.getText().toString();
                 String newPass = edtNewPass.getText().toString();
                 String reNewPass = edtReNewPass.getText().toString();
-                if(oldPass.equals("")||newPass.equals("")||reNewPass.equals(""))
-                {
+                if (oldPass.equals("") || newPass.equals("") || reNewPass.equals("")) {
                     Toast.makeText(MainActivity.this, "Please enter these field", Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
+                } else {
 
-                    if(newPass.equals(reNewPass))
-                    {
+                    if (newPass.equals(reNewPass)) {
 //                        SharedPreferences sharedPreferences =getSharedPreferences("THONGTIN",MODE_PRIVATE);
 //
 //                        String matt = sharedPreferences.getString("matt","");
@@ -218,8 +212,7 @@ public class MainActivity extends AppCompatActivity {
 //                            Toast.makeText(MainActivity.this, "Update Failed", Toast.LENGTH_SHORT).show();
 //
 //                        }
-                    }else
-                    {
+                    } else {
                         Toast.makeText(MainActivity.this, "Please enter the same new password", Toast.LENGTH_SHORT).show();
                     }
                 }

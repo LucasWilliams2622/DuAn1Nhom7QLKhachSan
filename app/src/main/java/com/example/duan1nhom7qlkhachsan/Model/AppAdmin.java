@@ -6,6 +6,10 @@ public class AppAdmin {
     public AppAdmin() {
     }
 
+    public AppAdmin(String nameAdmin) {
+        this.nameAdmin = nameAdmin;
+    }
+
     public AppAdmin(String idAdmin, String emailAdmin, String nameAdmin, String passwordAdmin, String role) {
         this.idAdmin = idAdmin;
         this.emailAdmin = emailAdmin;

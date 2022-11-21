@@ -16,6 +16,13 @@
         android:theme="@style/Theme.DuAn1Nhom7QLKhachSan"
         tools:targetApi="31">
         <activity
+            android:name=".Activity.ChangeNameActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".Activity.AddRoomActivity"
             android:exported="false">
             <meta-data
