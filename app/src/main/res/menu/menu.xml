@@ -12,19 +12,22 @@
     <item android:id="@+id/mDichVu"
         android:title="Dịch vụ"
         android:icon="@drawable/ic_room_service"/>
-    <item android:id="@+id/mHotro"
-        android:title="Hỗ trợ khách hàng"/>
-    <item android:title="Thống kê">
+    <item android:id="@+id/mTuVanKH"
+        android:title="Tư vấn khách hàng"
+        android:icon="@drawable/ic_baseline_phone_24"/>
+    <item android:title="Admin">
         <menu>
             <item android:id="@+id/mAddRoom"
                 android:title="Thêm phòng "
                 android:icon="@drawable/ic_top"/>
             <item android:id="@+id/mAddService"
-                android:title="Thêm phòng và dịch vụ"
+                android:title="Thêm dịch vụ"
                 android:icon="@drawable/ic_top"/>
             <item android:id="@+id/mTop10"
                 android:title="Top 3 phòng được đặt nhiều nhất"
                 android:icon="@drawable/ic_top"/>
+            <item android:id="@+id/mHotro"
+                android:title="Hỗ trợ khách hàng"/>
             <item android:id="@+id/mDoanhThu"
                 android:title="Doanh Thu"
                 android:icon="@drawable/ic_money"/>
@@ -38,9 +41,7 @@
             <item android:id="@+id/mChangeName"
                 android:title="Đổi tên"
                 android:icon="@drawable/ic_key"/>
-            <item android:id="@+id/mTuVanKH"
-                android:title="Tư vấn khách hàng"
-                android:icon="@drawable/ic_baseline_phone_24"/>
+
             <item android:id="@+id/mDangXuat"
                 android:title="Đăng Xuất"
                 android:icon="@drawable/ic_exit"/>

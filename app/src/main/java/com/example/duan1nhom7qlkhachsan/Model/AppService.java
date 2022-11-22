@@ -1,7 +1,17 @@
 package com.example.duan1nhom7qlkhachsan.Model;
 
-public class AppService {
-    private String idRoom ,idService,nameService,priceService,timeUseService;
+import java.io.Serializable;
+
+public class AppService implements Serializable {
+    private String idRoom, idService, nameService, priceService, timeUseService;
+
+    public AppService(String idRoom, String idService, String nameService, String priceService, String timeUseService) {
+        this.idRoom = idRoom;
+        this.idService = idService;
+        this.nameService = nameService;
+        this.priceService = priceService;
+        this.timeUseService = timeUseService;
+    }
 
     public String getIdRoom() {
         return idRoom;
@@ -41,16 +51,5 @@ public class AppService {
 
     public void setTimeUseService(String timeUseService) {
         this.timeUseService = timeUseService;
-    }
-
-    public AppService(String idRoom, String idService, String nameService, String priceService, String timeUseService) {
-        this.idRoom = idRoom;
-        this.idService = idService;
-        this.nameService = nameService;
-        this.priceService = priceService;
-        this.timeUseService = timeUseService;
-    }
-
-    public AppService() {
     }
 }

@@ -9,6 +9,12 @@
     tools:context=".Activity.RoomActivity">
 
 
+    <Button
+        android:id="@+id/btnBackToMain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=" Back" />
+
     <EditText
         android:id="@+id/edtIdRoom"
         android:layout_width="match_parent"
@@ -121,4 +127,10 @@
         android:id="@+id/flAddRoom"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Button" />
 </LinearLayout>

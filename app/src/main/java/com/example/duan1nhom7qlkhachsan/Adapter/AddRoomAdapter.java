@@ -6,7 +6,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.duan1nhom7qlkhachsan.Activity.IAdapterClickEvent;
+import com.example.duan1nhom7qlkhachsan.Activity.IAdapterRoomClickEvent;
 import com.example.duan1nhom7qlkhachsan.Model.AppRoom;
 import com.example.duan1nhom7qlkhachsan.R;
 
@@ -66,14 +66,14 @@ public class AddRoomAdapter extends BaseAdapter {
         holder.btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                IAdapterClickEvent  iAdapterClickEvent = (IAdapterClickEvent) _viewGroup.getContext();
+                IAdapterRoomClickEvent iAdapterClickEvent = (IAdapterRoomClickEvent) _viewGroup.getContext();
                 iAdapterClickEvent.onUpdateRoomClick(room);
             }
         });
         holder.btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                IAdapterClickEvent  iAdapterClickEvent = (IAdapterClickEvent) _viewGroup.getContext();
+                IAdapterRoomClickEvent  iAdapterClickEvent = (IAdapterRoomClickEvent) _viewGroup.getContext();
                 iAdapterClickEvent.onDeleteRoomClick(room);
             }
         });
@@ -81,7 +81,7 @@ public class AddRoomAdapter extends BaseAdapter {
         return view;
 
     }
-    private static class ViewHolder{
+    static class ViewHolder{
         final Button btnDelete,btnUpdate;
         final TextView tvTenPhong,tvMaPhong,tvLoaiPhong,tvGiaPhong,tvStartDay,tvEndDay;
 

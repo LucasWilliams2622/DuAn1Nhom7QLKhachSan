@@ -26,6 +26,7 @@ import com.example.duan1nhom7qlkhachsan.Activity.LoginActivity;
 import com.example.duan1nhom7qlkhachsan.Activity.ChangeNameActivity;
 import com.example.duan1nhom7qlkhachsan.Activity.hotro.HotroAdminFragment;
 import com.example.duan1nhom7qlkhachsan.Activity.hotro.HoTroFragment;
+import com.example.duan1nhom7qlkhachsan.Fragment.AddServiceFragment;
 import com.example.duan1nhom7qlkhachsan.Fragment.DatPhongFragment;
 import com.example.duan1nhom7qlkhachsan.Fragment.DoanhThuFragment;
 import com.example.duan1nhom7qlkhachsan.Fragment.GioiThieuFragment;
@@ -109,6 +110,9 @@ public class MainActivity extends AppCompatActivity {
                         Intent intentAddRoom = new Intent(MainActivity.this, AddRoomActivity.class);
                         startActivity(intentAddRoom);
                         break;
+                    case R.id.mAddService:
+                         fragment = new AddServiceFragment();
+                         break;
                     case R.id.mDoiMatKhau:
 
 

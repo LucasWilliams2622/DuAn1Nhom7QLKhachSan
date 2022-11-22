@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.duan1nhom7qlkhachsan.Fragment.AddRoomFragment;
+import com.example.duan1nhom7qlkhachsan.MainActivity;
 import com.example.duan1nhom7qlkhachsan.Model.AppRoom;
 import com.example.duan1nhom7qlkhachsan.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -27,9 +29,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AddRoomActivity extends AppCompatActivity implements IAdapterClickEvent {
+public class AddRoomActivity extends AppCompatActivity implements IAdapterRoomClickEvent {
     private EditText edtIdRoom, edtNameRoom, edtTypeRoom, edtPriceRoom, edtStartDay, edtEndDay;
-    private Button btnAddRoom, btnClear;
+    private Button btnAddRoom, btnClear,btnBackToMain;
     private AppRoom appRoom = null;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -46,12 +48,22 @@ public class AddRoomActivity extends AppCompatActivity implements IAdapterClickE
         edtEndDay = findViewById(R.id.edtEndDay);
         btnAddRoom = findViewById(R.id.btnAddRoom);
         btnClear = findViewById(R.id.btnClear);
+        btnBackToMain = findViewById(R.id.btnBackToMain);
+        btnBackToMain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(AddRoomActivity.this, MainActivity.class);
+                startActivity(i);
+            }
+        });
+
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        getDataRoom();
+        getDataAddRoom();
     }
 
     public void onAddRoomClick(View view) {
@@ -82,9 +94,9 @@ public class AddRoomActivity extends AppCompatActivity implements IAdapterClickE
                         @Override
                         public void onSuccess(DocumentReference documentReference) {
                             Toast.makeText(AddRoomActivity.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
-                            getDataRoom();
+                            getDataAddRoom();
                             //Log.d("TAG", "DocumentSnapshot added with ID: " + documentReference.getId());
-                            getDataRoom();
+                            getDataAddRoom();
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -102,7 +114,7 @@ public class AddRoomActivity extends AppCompatActivity implements IAdapterClickE
                         @Override
                         public void onSuccess(Void aVoid) {
                             Toast.makeText(AddRoomActivity.this, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
-                            getDataRoom();
+                            getDataAddRoom();
                             appRoom=null;
                         }
                     })
@@ -125,7 +137,7 @@ public class AddRoomActivity extends AppCompatActivity implements IAdapterClickE
 
     }
 
-    public void getDataRoom() {
+    public void getDataAddRoom() {
         db.collection("room")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -169,7 +181,7 @@ public class AddRoomActivity extends AppCompatActivity implements IAdapterClickE
                                     @Override
                                     public void onSuccess(Void aVoid) {
                                         Toast.makeText(AddRoomActivity.this, "Xóa thành công", Toast.LENGTH_SHORT).show();
-                                        getDataRoom();
+                                        getDataAddRoom();
                                     }
                                 })
                                 .addOnFailureListener(new OnFailureListener() {
@@ -195,4 +207,5 @@ public class AddRoomActivity extends AppCompatActivity implements IAdapterClickE
         edtEndDay.setText(room.getEndDay());
         appRoom = room;
     }
+
 }
