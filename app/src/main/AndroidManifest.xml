@@ -23,6 +23,13 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".AddServiceActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".Activity.AddRoomActivity"
             android:exported="false">
             <meta-data

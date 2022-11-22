@@ -26,6 +26,6 @@ public class BeginActivity extends AppCompatActivity {
                 Intent i = new Intent(BeginActivity.this, LoginActivity.class);
                 startActivity(i);
             }
-        },2500);
+        },1500);
     }
 }

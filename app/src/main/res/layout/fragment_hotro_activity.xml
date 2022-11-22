@@ -27,6 +27,7 @@
             android:gravity="center"
             android:text="Phiếu Hỗ Trợ"
             android:textColor="#121315"
+            android:textStyle="italic"
             android:textSize="30sp" />
 
         <LinearLayout
@@ -47,23 +48,34 @@
                 <EditText
                     android:id="@+id/edtmanpp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
                     android:ems="10"
-                    android:gravity="center"
+
                     android:layout_marginLeft="20dp"
                     android:layout_marginBottom="10dp"
-                    android:background="@drawable/button_feedback"
+                    android:paddingTop="5dp"
+                    android:paddingLeft="20dp"
+                    android:gravity="left"
+                    android:background="@drawable/design_of_edt"
+                    android:textColorHint="@color/black"
                     android:inputType="textPersonName"
                     android:hint="Họ và tên" />
 
                 <EditText
                     android:id="@+id/edttennpp"
+
+
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginBottom="10dp"
-                    android:gravity="center"
-                    android:background="@drawable/button_feedback"
+                    android:paddingTop="5dp"
+                    android:paddingLeft="20dp"
+                    android:gravity="left"
+                    android:background="@drawable/design_of_edt"
+                    android:textColorHint="@color/black"
+
                     android:ems="10"
                     android:inputType="textPersonName"
                     android:hint="ID User" />
@@ -72,21 +84,26 @@
                 <EditText
                     android:id="@+id/edtgioithieu"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="200dp"
+                    android:textColorHint="@color/black"
                     android:layout_marginLeft="20dp"
                     android:layout_marginBottom="10dp"
-                    android:gravity="center"
-                    android:background="@drawable/button_feedback"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="20dp"
+                    android:gravity="left"
+                    android:background="@drawable/design_of_edt"
                     android:ems="10"
                     android:inputType="textPersonName"
-                    android:hint="Nội dung" />
+                    android:hint="Nội dung: " />
 
                 <Button
                     android:id="@+id/btnthem"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="#fff"
+android:textColor="@color/black"
                     android:text="Gửi hỗ trợ"
+                    android:background="@drawable/button_feedback"
+                    app:backgroundTint="@null"
                     android:layout_marginTop="20dp"
                     android:layout_marginLeft="260dp"
                     android:textAllCaps="false" />
