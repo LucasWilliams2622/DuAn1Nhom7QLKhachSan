@@ -117,7 +117,7 @@ public class BookedRoomActivity extends AppCompatActivity {
                                 String startDay=map.get("startDay").toString();
                                 String endDay=map.get("endDay").toString();
 
-                                AppRoom room = new AppRoom(name,type,id,price,startDay,endDay);
+                                AppRoom room = new AppRoom(id,type,name,price,startDay,endDay);
                                 rooms.add(room);
 
                             }

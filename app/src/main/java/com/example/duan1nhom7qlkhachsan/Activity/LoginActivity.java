@@ -48,7 +48,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -210,6 +212,9 @@ public class LoginActivity extends AppCompatActivity {
                         //neu co thi bao loi
 //                        UserDao userDao = new UserDao(LoginActivity.this);
 //                        userDao.register(email, null, 1);
+                        Map<String, Object> user = new HashMap<>();
+
+                        user.put("nameUser",displayName );
 
 
                         // chuyển màn hình qua Home

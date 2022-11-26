@@ -78,7 +78,7 @@ public class RegisterActivity extends AppCompatActivity {
                             }
                             getSupportFragmentManager()
                                     .beginTransaction()
-//                                    .replace(R.id.flRoom, DatPhongFragment.newInstance(list))
+//                                    .replace(R.id.flRoom, BookRoomFragment.newInstance(list))
                                     .commit();
                         }
                     }

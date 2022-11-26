@@ -46,8 +46,7 @@ public class AddRoomActivity extends AppCompatActivity implements IAdapterClickE
         edtPriceRoom = findViewById(R.id.edtPriceRoom);
         edtStartDay = findViewById(R.id.edtStartDay);
         edtEndDay = findViewById(R.id.edtEndDay);
-        btnAddRoom = findViewById(R.id.btnAddRoom);
-        btnClear = findViewById(R.id.btnClear);
+
         btnBackToMain = findViewById(R.id.btnBackToMain);
         btnBackToMain.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,6 +85,9 @@ public class AddRoomActivity extends AppCompatActivity implements IAdapterClickE
         user.put("endDay", endDay);
 
 
+
+
+
 // Add a new document with a generated ID
         if (appRoom == null) {
             db.collection("room")
@@ -96,7 +98,7 @@ public class AddRoomActivity extends AppCompatActivity implements IAdapterClickE
                             Toast.makeText(AddRoomActivity.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
                             getDataAddRoom();
                             //Log.d("TAG", "DocumentSnapshot added with ID: " + documentReference.getId());
-                            getDataAddRoom();
+
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -182,6 +184,7 @@ public class AddRoomActivity extends AppCompatActivity implements IAdapterClickE
                                     public void onSuccess(Void aVoid) {
                                         Toast.makeText(AddRoomActivity.this, "Xóa thành công", Toast.LENGTH_SHORT).show();
                                         getDataAddRoom();
+
                                     }
                                 })
                                 .addOnFailureListener(new OnFailureListener() {

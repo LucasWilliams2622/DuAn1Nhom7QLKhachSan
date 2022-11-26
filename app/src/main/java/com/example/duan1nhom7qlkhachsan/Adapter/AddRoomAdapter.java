@@ -52,7 +52,7 @@ public class AddRoomAdapter extends BaseAdapter {
             tvNameRoom = view.findViewById(R.id.tvNameRoom);
             tvTypeRoom = view.findViewById(R.id.tvTypeRoom);
             tvPriceRoom = view.findViewById(R.id.tvPriceRoom);
-            AddRoomAdapter.ViewHolder holder = new AddRoomAdapter.ViewHolder(btnUpdate,btnDelete,tvEndDay,tvStartDay,tvIdRoom,tvNameRoom,tvTypeRoom,tvPriceRoom);
+            AddRoomAdapter.ViewHolder holder = new AddRoomAdapter.ViewHolder(btnDelete,btnUpdate,tvEndDay,tvStartDay,tvIdRoom,tvNameRoom,tvTypeRoom,tvPriceRoom);
             view.setTag(holder);
         }
         AppRoom room = (AppRoom) getItem(_i);
@@ -63,14 +63,14 @@ public class AddRoomAdapter extends BaseAdapter {
         holder.tvMaPhong.setText(room.getIdRoom());
         holder.tvLoaiPhong.setText(room.getTypeRoom());
         holder.tvGiaPhong.setText(room.getPriceRoom());
-        holder.btnDelete.setOnClickListener(new View.OnClickListener() {
+        holder.btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 IAdapterClickEvent  iAdapterClickEvent = (IAdapterClickEvent) _viewGroup.getContext();
                 iAdapterClickEvent.onUpdateRoomClick(room);
             }
         });
-        holder.btnUpdate.setOnClickListener(new View.OnClickListener() {
+        holder.btnDelete .setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 IAdapterClickEvent  iAdapterClickEvent = (IAdapterClickEvent) _viewGroup.getContext();

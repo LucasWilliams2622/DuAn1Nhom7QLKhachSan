@@ -1,6 +1,7 @@
 package com.example.duan1nhom7qlkhachsan.Model;
 
 public class AppRoom {
+    private String id;
     private String idRoom,nameRoom,typeRoom,priceRoom,startDay,endDay;
 
     public AppRoom() {
@@ -13,6 +14,14 @@ public class AppRoom {
         this.priceRoom = priceRoom;
         this.startDay = startDay;
         this.endDay = endDay;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getIdRoom() {
