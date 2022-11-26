@@ -37,7 +37,10 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -213,8 +216,30 @@ public class LoginActivity extends AppCompatActivity {
 //                        UserDao userDao = new UserDao(LoginActivity.this);
 //                        userDao.register(email, null, 1);
                         Map<String, Object> user = new HashMap<>();
+                        user.put("nameUser", displayName);
+                        user.put("emailUser", email);
+                        user.put("idRoom", "001");
+                        user.put("idUser", "");
 
-                        user.put("nameUser",displayName );
+                        Toast.makeText(LoginActivity.this, "", Toast.LENGTH_SHORT).show();
+                        // Add a new document with a generated ID
+
+                        db.collection("user")
+                                .add(user)
+                                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                    @Override
+                                    public void onSuccess(DocumentReference documentReference) {
+                                        Toast.makeText(LoginActivity.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
+                                        //Log.d("TAG", "DocumentSnapshot added with ID: " + documentReference.getId());
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(LoginActivity.this, "Thêm thất bại", Toast.LENGTH_SHORT).show();
+
+                                    }
+                                });
 
 
                         // chuyển màn hình qua Home
