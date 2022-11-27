@@ -23,11 +23,11 @@ import androidx.fragment.app.FragmentManager;
 
 import com.example.duan1nhom7qlkhachsan.Activity.AddRoomActivity;
 import com.example.duan1nhom7qlkhachsan.Activity.LoginActivity;
-import com.example.duan1nhom7qlkhachsan.Activity.ChangeNameActivity;
+
 import com.example.duan1nhom7qlkhachsan.Activity.hotro.HotroAdminFragment;
 import com.example.duan1nhom7qlkhachsan.Activity.hotro.HoTroFragment;
 import com.example.duan1nhom7qlkhachsan.Fragment.AddServiceFragment;
-import com.example.duan1nhom7qlkhachsan.Fragment.DatPhongFragment;
+
 import com.example.duan1nhom7qlkhachsan.Fragment.DoanhThuFragment;
 import com.example.duan1nhom7qlkhachsan.Fragment.GioiThieuFragment;
 import com.example.duan1nhom7qlkhachsan.Fragment.PhongDaDatFragment;
@@ -84,9 +84,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.mDichVu:
                         fragment = new ServiceFragment();
                         break;
-                    case R.id.mDatPhong:
-                        fragment = new DatPhongFragment();
-                        break;
+
                     case R.id.mDoanhThu:
                         fragment = new DoanhThuFragment();
                         break;
@@ -102,10 +100,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.mGioiThieu:
                         fragment = new GioiThieuFragment();
                         break;
-                    case R.id.mChangeName:
-                        Intent intentChangeName = new Intent(MainActivity.this, ChangeNameActivity.class);
-                        startActivity(intentChangeName);
-                        break;
+
                     case R.id.mAddRoom:
                         Intent intentAddRoom = new Intent(MainActivity.this, AddRoomActivity.class);
                         startActivity(intentAddRoom);

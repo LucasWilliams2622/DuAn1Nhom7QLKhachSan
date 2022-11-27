@@ -16,6 +16,11 @@
         android:layout_margin="13dp"
 
         android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="13dp"
+        android:orientation="vertical">
 
 
         <TextView
@@ -112,19 +117,18 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-
+                android:textColor="@color/black"
                 android:text="Update " />
 
             <Button
                 android:id="@+id/btnDelete"
-
+                android:textColor="@color/black"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-
                 android:text="Delete Room" />
 
         </LinearLayout>
-
+    </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

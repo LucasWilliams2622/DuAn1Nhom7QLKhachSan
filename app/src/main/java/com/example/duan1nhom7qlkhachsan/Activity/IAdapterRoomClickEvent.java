@@ -6,5 +6,5 @@ public interface IAdapterRoomClickEvent {
 
     void onDeleteRoomClick(AppRoom room);
 
-    void onUpdateRoomClick(AppRoom course);
+    void onUpdateRoomClick(AppRoom room);
 }
