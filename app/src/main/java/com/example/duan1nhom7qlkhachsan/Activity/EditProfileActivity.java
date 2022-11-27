@@ -57,7 +57,8 @@ public class EditProfileActivity extends AppCompatActivity implements IAdapterUs
         btnUpdateAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(EditProfileActivity.this, "Update Successful", Toast.LENGTH_SHORT).show();
+                Toast.makeText(EditProfileActivity.this, "Update User Successful", Toast.LENGTH_SHORT).show();
+                Log.d(">>>>>>>>>>>.","Update User Successful");
             }
         });
         btnBackToMainActivity.setOnClickListener(new View.OnClickListener() {

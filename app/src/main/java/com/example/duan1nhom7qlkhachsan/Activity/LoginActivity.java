@@ -62,18 +62,21 @@ public class LoginActivity extends AppCompatActivity {
     private CallbackManager callbackManager;
     private ProfileTracker profileTracker;
     private static final String EMAIL = "email";
+    EditText edt_username;
+    EditText edt_password;
     //Google
     GoogleSignInClient gsc;
 
     //Facebook
     LoginButton loginButton;
     private LoginManager loginManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        EditText edt_username = findViewById(R.id.edt_username_login);
-        EditText edt_password = findViewById(R.id.edt_password_lgoin);
+        edt_username = findViewById(R.id.edt_username_login);
+        edt_password = findViewById(R.id.edt_password_lgoin);
         Button btn_login = findViewById(R.id.btn_login);
         Button btn_register = findViewById(R.id.btnGoRegister);
         ImageView ivShowPass = findViewById(R.id.ivShowPass);
@@ -84,15 +87,47 @@ public class LoginActivity extends AppCompatActivity {
                 String username = edt_username.getText().toString();
                 String password = edt_password.getText().toString();
 
-                if(username.equals("")||password.equals(""))
-                {
+                if (username.equals("") || password.equals("")) {
                     Toast.makeText(LoginActivity.this, "Vui lòng điền đủ thông tin", Toast.LENGTH_SHORT).show();
 
-                }
-                else
-                {
+                } else {
+                    db.collection("admin")
+                            .get()
+                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        List<String> list = new ArrayList<>();
+                                        for (QueryDocumentSnapshot document : task.getResult()) {
+                                            list.add(document.getId());
+                                            //    private String idAdmin,emailAdmin,nameAdmin,passwordAdmin,role;
+                                            Map<String, Object> map = document.getData();
+                                            String passwordAdmin = map.get("passwordAdmin").toString();
+                                            String emailAdmin = map.get("emailAdmin").toString();
+                                            String nameAdmin = map.get("nameAdmin").toString();
 
-                    getData();
+
+                                            String username = edt_username.getText().toString();
+                                            String password = edt_password.getText().toString();
+//                                            Log.d(">>>>>>>>>>>>>","username"+username);
+//                                            Log.d(">>>>>>>>>>>>>","password"+password);
+                                            if (username.equals(emailAdmin.toString()) && password.equals(passwordAdmin.toString())) {
+                                                Toast.makeText(LoginActivity.this, "Wellcome " + nameAdmin, Toast.LENGTH_SHORT).show();
+                                                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                                            } else {
+                                                Toast.makeText(LoginActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
+                                            }
+
+
+                                        }
+
+
+                                    } else {
+                                        Toast.makeText(LoginActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
+
+                                    }
+                                }
+                            });
 
                 }
 
@@ -180,7 +215,7 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-               Log.d(">>>>>>>>>>>>","onSuccess"+loginResult.getAccessToken());
+                Log.d(">>>>>>>>>>>>", "onSuccess" + loginResult.getAccessToken());
             }
 
             @Override
@@ -191,7 +226,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onError(FacebookException exception) {
                 // App code
-                Log.d(">>>>>>>>>","onError:"+exception.getMessage());
+                Log.d(">>>>>>>>>", "onError:" + exception.getMessage());
             }
         });
 
@@ -278,24 +313,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void getData() {
-        db.collection("admin")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            List<String> list = new ArrayList<>();
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                list.add(document.getId());
-                            }
 
-                            Toast.makeText(LoginActivity.this, "Wellcome", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                        } else {
-                            Toast.makeText(LoginActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
-
-                        }
-                    }
-                });
     }
 }

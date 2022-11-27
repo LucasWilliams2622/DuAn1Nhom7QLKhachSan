@@ -67,9 +67,9 @@ public class BookRoomAdapter extends BaseAdapter {
         ViewHolder holder = (BookRoomAdapter.ViewHolder) view.getTag();
 
 
-        holder.tvNameBookRoom.setText(room.getNameRoom());
-        holder.tvTypeBookRoom.setText(room.getTypeRoom());
-        holder.tvPriceBookRoom.setText(room.getPriceRoom());
+        holder.tvNameBookRoom.setText("Tên phòng: "+room.getNameRoom());
+        holder.tvTypeBookRoom.setText("Loại phòng: "+room.getTypeRoom());
+        holder.tvPriceBookRoom.setText("Gía phòng: "+room.getPriceRoom());
 
         holder.edtCheckOutDay.setText(room.getEndDay());
         holder.edtCheckInDay.setText(room.getStartDay());
@@ -146,13 +146,13 @@ public class BookRoomAdapter extends BaseAdapter {
             }
         });
 
-        holder.btnBookRoom.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Toast.makeText(btnBookRoom.getContext(), "Đặt phòng thành công", Toast.LENGTH_SHORT).show();
-            }
-        });
+//        btnBookRoom.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                Toast.makeText(btnBookRoom.getContext(), "Đặt phòng thành công", Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
         return view;
 

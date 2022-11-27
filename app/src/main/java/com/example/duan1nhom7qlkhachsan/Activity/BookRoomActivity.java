@@ -1,6 +1,7 @@
 package com.example.duan1nhom7qlkhachsan.Activity;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.view.View;
@@ -14,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 import com.example.duan1nhom7qlkhachsan.Fragment.BookRoomFragment;
+import com.example.duan1nhom7qlkhachsan.MainActivity;
 import com.example.duan1nhom7qlkhachsan.Model.AppRoom;
 import com.example.duan1nhom7qlkhachsan.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -28,13 +30,21 @@ import java.util.Map;
 public class BookRoomActivity extends AppCompatActivity {
     private ListView flRoom;
     private EditText edtCheckInDay,edtCheckOutDay;
-    private Button btnBookRoom;
+    private Button btnBookRoom,btnBackToMainActivity;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room);
+        btnBackToMainActivity= findViewById(R.id.btnBackToMainActivity);
+        btnBackToMainActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(BookRoomActivity.this, MainActivity.class);
+                startActivity(i);
+            }
+        });
         getDataRoom();
 
 
