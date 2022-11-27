@@ -1,0 +1,716 @@
+Index: app/src/main/java/com/example/duan1nhom7qlkhachsan/Activity/RoomActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.duan1nhom7qlkhachsan.Activity;\r\n\r\nimport android.os.Bundle;\r\nimport android.widget.ListView;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\n\r\nimport com.example.duan1nhom7qlkhachsan.Fragment.BookRoomFragment;\r\nimport com.example.duan1nhom7qlkhachsan.Model.AppRoom;\r\nimport com.example.duan1nhom7qlkhachsan.R;\r\nimport com.google.android.gms.tasks.OnCompleteListener;\r\nimport com.google.android.gms.tasks.Task;\r\nimport com.google.firebase.firestore.FirebaseFirestore;\r\nimport com.google.firebase.firestore.QueryDocumentSnapshot;\r\nimport com.google.firebase.firestore.QuerySnapshot;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.Map;\r\n\r\npublic class RoomActivity extends AppCompatActivity {\r\n    private ListView flRoom;\r\n    FirebaseFirestore db = FirebaseFirestore.getInstance();\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_room);\r\n        getDataRoom();\r\n\r\n    }\r\n    @Override\r\n    protected void onResume() {\r\n        super.onResume();\r\n        getDataRoom();\r\n    }\r\n\r\n    public void getDataRoom(){\r\n        db.collection(\"room\")\r\n                .get()\r\n                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {\r\n                    @Override\r\n                    public void onComplete(@NonNull Task<QuerySnapshot> task) {\r\n                        if (task.isSuccessful()) {\r\n                            ArrayList<AppRoom> list = new ArrayList<>();\r\n                            for (QueryDocumentSnapshot document : task.getResult()) {\r\n                                Map<String,Object> map = document.getData();\r\n                                String idRoom = map.get(\"idRoom\").toString();\r\n                                String nameRoom = map.get(\"nameRoom\").toString();\r\n                                String typeRoom = map.get(\"typeRoom\").toString();\r\n                                String priceRoom = map.get(\"priceRoom\").toString();\r\n                                String startDay = map.get(\"startDay\").toString();\r\n                                String endDay = map.get(\"endDay\").toString();\r\n\r\n                                AppRoom room = new AppRoom(idRoom,nameRoom,typeRoom,priceRoom,startDay,endDay);\r\n                                room.setIdRoom(document.getId());\r\n                                list.add(room);\r\n                            }\r\n                            getSupportFragmentManager()\r\n                                    .beginTransaction()\r\n                                    .replace(R.id.flRoom, BookRoomFragment.newInstance(list))\r\n                                    .commit();\r\n                        }\r\n                    }\r\n                });\r\n    }\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/duan1nhom7qlkhachsan/Activity/RoomActivity.java b/app/src/main/java/com/example/duan1nhom7qlkhachsan/Activity/RoomActivity.java
+--- a/app/src/main/java/com/example/duan1nhom7qlkhachsan/Activity/RoomActivity.java	(revision 4cb78367077c8ab43d5c2efdb65da66bec5d83b4)
++++ b/app/src/main/java/com/example/duan1nhom7qlkhachsan/Activity/RoomActivity.java	(date 1669525925265)
+@@ -7,7 +7,7 @@
+ import androidx.appcompat.app.AppCompatActivity;
+ 
+ 
+-import com.example.duan1nhom7qlkhachsan.Fragment.BookRoomFragment;
++import com.example.duan1nhom7qlkhachsan.Guide.Fragment.BookRoomFragment;
+ import com.example.duan1nhom7qlkhachsan.Model.AppRoom;
+ import com.example.duan1nhom7qlkhachsan.R;
+ import com.google.android.gms.tasks.OnCompleteListener;
+Index: app/src/main/java/com/example/duan1nhom7qlkhachsan/Fragment/BookRoomFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/duan1nhom7qlkhachsan/Fragment/BookRoomFragment.java b/app/src/main/java/com/example/duan1nhom7qlkhachsan/Guide/Fragment/BookRoomFragment.java
+rename from app/src/main/java/com/example/duan1nhom7qlkhachsan/Fragment/BookRoomFragment.java
+rename to app/src/main/java/com/example/duan1nhom7qlkhachsan/Guide/Fragment/BookRoomFragment.java
+--- a/app/src/main/java/com/example/duan1nhom7qlkhachsan/Fragment/BookRoomFragment.java	(revision 4cb78367077c8ab43d5c2efdb65da66bec5d83b4)
++++ b/app/src/main/java/com/example/duan1nhom7qlkhachsan/Guide/Fragment/BookRoomFragment.java	(date 1669525925323)
+@@ -1,4 +1,4 @@
+-package com.example.duan1nhom7qlkhachsan.Fragment;
++package com.example.duan1nhom7qlkhachsan.Guide.Fragment;
+ 
+ import android.os.Bundle;
+ import android.view.LayoutInflater;
+Index: app/src/main/java/com/example/duan1nhom7qlkhachsan/Activity/LoginActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.duan1nhom7qlkhachsan.Activity;\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.util.Log;\r\nimport android.view.View;\r\nimport android.widget.Button;\r\nimport android.widget.EditText;\r\nimport android.widget.ImageView;\r\nimport android.widget.Toast;\r\n\r\nimport androidx.activity.result.ActivityResult;\r\nimport androidx.activity.result.ActivityResultCallback;\r\nimport androidx.activity.result.ActivityResultLauncher;\r\nimport androidx.activity.result.contract.ActivityResultContracts;\r\nimport androidx.annotation.NonNull;\r\nimport androidx.annotation.Nullable;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\n\r\nimport com.example.duan1nhom7qlkhachsan.MainActivity;\r\nimport com.example.duan1nhom7qlkhachsan.R;\r\nimport com.facebook.AccessToken;\r\nimport com.facebook.CallbackManager;\r\nimport com.facebook.FacebookCallback;\r\nimport com.facebook.FacebookException;\r\nimport com.facebook.GraphRequest;\r\nimport com.facebook.GraphResponse;\r\nimport com.facebook.Profile;\r\nimport com.facebook.ProfileTracker;\r\nimport com.facebook.login.LoginManager;\r\nimport com.facebook.login.LoginResult;\r\nimport com.facebook.login.widget.LoginButton;\r\nimport com.google.android.gms.auth.api.signin.GoogleSignIn;\r\nimport com.google.android.gms.auth.api.signin.GoogleSignInAccount;\r\nimport com.google.android.gms.auth.api.signin.GoogleSignInClient;\r\nimport com.google.android.gms.auth.api.signin.GoogleSignInOptions;\r\nimport com.google.android.gms.common.api.ApiException;\r\nimport com.google.android.gms.tasks.OnCompleteListener;\r\nimport com.google.android.gms.tasks.OnFailureListener;\r\nimport com.google.android.gms.tasks.OnSuccessListener;\r\nimport com.google.android.gms.tasks.Task;\r\nimport com.google.firebase.firestore.DocumentReference;\r\nimport com.google.firebase.firestore.FirebaseFirestore;\r\nimport com.google.firebase.firestore.QueryDocumentSnapshot;\r\nimport com.google.firebase.firestore.QuerySnapshot;\r\n\r\nimport org.json.JSONException;\r\nimport org.json.JSONObject;\r\n\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.Arrays;\r\nimport java.util.HashMap;\r\nimport java.util.List;\r\nimport java.util.Map;\r\n\r\n\r\npublic class LoginActivity extends AppCompatActivity {\r\n    long check = 1;\r\n    FirebaseFirestore db = FirebaseFirestore.getInstance();\r\n    private CallbackManager callbackManager;\r\n    private ProfileTracker profileTracker;\r\n    private static final String EMAIL = \"email\";\r\n    //Google\r\n    GoogleSignInClient gsc;\r\n\r\n    //Facebook\r\n    LoginButton loginButton;\r\n    private LoginManager loginManager;\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_login);\r\n        EditText edt_username = findViewById(R.id.edt_username_login);\r\n        EditText edt_password = findViewById(R.id.edt_password_lgoin);\r\n        Button btn_login = findViewById(R.id.btn_login);\r\n        Button btn_register = findViewById(R.id.btnGoRegister);\r\n        ImageView ivShowPass = findViewById(R.id.ivShowPass);\r\n\r\n        btn_login.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                String username = edt_username.getText().toString();\r\n                String password = edt_password.getText().toString();\r\n\r\n                if(username.equals(\"\")||password.equals(\"\"))\r\n                {\r\n                    Toast.makeText(LoginActivity.this, \"Vui lòng điền đủ thông tin\", Toast.LENGTH_SHORT).show();\r\n\r\n                }\r\n                else\r\n                {\r\n\r\n                    getData();\r\n\r\n                }\r\n\r\n\r\n            }\r\n        });\r\n\r\n        btn_register.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);\r\n                startActivity(intent);\r\n\r\n            }\r\n        });\r\n\r\n        ivShowPass.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                check++;\r\n                if (check % 2 == 0) {\r\n                    edt_password.setInputType(1);\r\n                    Log.d(\">>>>>>>>>\", \"check \" + check);\r\n                } else {\r\n                    //edt_password.setInputType();\r\n\r\n                    //  edt_password.setInputType(Integer.parseInt(\"textPassword\"));\r\n                }\r\n            }\r\n        });\r\n\r\n        /*\r\n         *Start: Đăng nhâp bằng Google\r\n         * Project:https://console.firebase.google.com/project/myproject262-4a887/overview\r\n         * Created:11/14/2022\r\n         * By: Lucas\r\n         *\r\n         * */\r\n        GoogleSignInOptions gso = new GoogleSignInOptions\r\n                .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)\r\n                .requestEmail()\r\n                .build();\r\n        gsc = GoogleSignIn.getClient(LoginActivity.this, gso);\r\n        // kiểm tra login google\r\n        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(LoginActivity.this);\r\n        if (account != null) {\r\n            Intent homeIntent = new Intent(LoginActivity.this, MainActivity.class);\r\n            startActivity(homeIntent);\r\n            finish();\r\n        }\r\n        ImageView sib = findViewById(R.id.btnGoogle);\r\n        sib.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                Intent googleIntent = gsc.getSignInIntent();\r\n                googleLauncher.launch(googleIntent);//hientai khoan dang login trong may\r\n            }\r\n        });\r\n\r\n\r\n        /*\r\n         *End: Đăng nhâp bằng Google*/\r\n\r\n\r\n\r\n        /*Start: Đăng nhâp bằng Facebook*/\r\n        callbackManager = CallbackManager.Factory.create();\r\n        profileTracker = new ProfileTracker() {\r\n            @Override\r\n            protected void onCurrentProfileChanged(@Nullable Profile oldProfile, @Nullable Profile newProfile) {\r\n                if (newProfile != null) {\r\n                    Log.d(\">>>>>>>>TAB\", \"onCurrentProfileChanged\" + newProfile.getName());\r\n//                    String id = oldProfile.getId();\r\n//                    UserDao u = new UserDao(LoginActivity.this);\r\n//                    u.register(id, \"\", 1);\r\n\r\n                }\r\n            }\r\n        };\r\n        loginButton = (LoginButton) findViewById(R.id.login_button);\r\n        loginButton.setReadPermissions(Arrays.asList(EMAIL));\r\n        // If you are using in a fragment, call loginButton.setFragment(this);\r\n\r\n        // Callback registration\r\n        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {\r\n            @Override\r\n            public void onSuccess(LoginResult loginResult) {\r\n               Log.d(\">>>>>>>>>>>>\",\"onSuccess\"+loginResult.getAccessToken());\r\n            }\r\n\r\n            @Override\r\n            public void onCancel() {\r\n                // App code\r\n            }\r\n\r\n            @Override\r\n            public void onError(FacebookException exception) {\r\n                // App code\r\n                Log.d(\">>>>>>>>>\",\"onError:\"+exception.getMessage());\r\n            }\r\n        });\r\n\r\n    }\r\n\r\n\r\n    // nhận kết quả Google SignIn\r\n    ActivityResultLauncher<Intent> googleLauncher = registerForActivityResult(\r\n            new ActivityResultContracts.StartActivityForResult(),\r\n            new ActivityResultCallback<ActivityResult>() {\r\n                @Override\r\n                public void onActivityResult(ActivityResult result) {\r\n                    Intent data = result.getData();\r\n                    Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);\r\n                    try {\r\n                        GoogleSignInAccount account = task.getResult(ApiException.class);\r\n                        String email = account.getEmail();\r\n                        String displayName = account.getDisplayName();\r\n                        // lưu database (tự làm)\r\n                        //check neu email chua co trong db thi them\r\n                        //neu co thi bao loi\r\n//                        UserDao userDao = new UserDao(LoginActivity.this);\r\n//                        userDao.register(email, null, 1);\r\n                        Map<String, Object> user = new HashMap<>();\r\n                        user.put(\"nameUser\", displayName);\r\n                        user.put(\"emailUser\", email);\r\n                        user.put(\"idRoom\", \"001\");\r\n                        user.put(\"idUser\", \"\");\r\n\r\n                        Toast.makeText(LoginActivity.this, \"\", Toast.LENGTH_SHORT).show();\r\n                        // Add a new document with a generated ID\r\n\r\n                        db.collection(\"user\")\r\n                                .add(user)\r\n                                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {\r\n                                    @Override\r\n                                    public void onSuccess(DocumentReference documentReference) {\r\n                                        Toast.makeText(LoginActivity.this, \"Thêm thành công\", Toast.LENGTH_SHORT).show();\r\n                                        //Log.d(\"TAG\", \"DocumentSnapshot added with ID: \" + documentReference.getId());\r\n                                    }\r\n                                })\r\n                                .addOnFailureListener(new OnFailureListener() {\r\n                                    @Override\r\n                                    public void onFailure(@NonNull Exception e) {\r\n                                        Toast.makeText(LoginActivity.this, \"Thêm thất bại\", Toast.LENGTH_SHORT).show();\r\n\r\n                                    }\r\n                                });\r\n\r\n\r\n                        // chuyển màn hình qua Home\r\n                        Intent homeIntent = new Intent(LoginActivity.this, MainActivity.class);\r\n                        startActivity(homeIntent);\r\n                        finish();\r\n\r\n                        Log.d(\">>>>>TAG\", \"onActivityResult: \" + displayName);\r\n                        Log.d(\">>>>>TAG\", \">>>: \" + email);\r\n\r\n                    } catch (Exception e) {\r\n                        Log.d(\">>>>>TAG\", \"onActivityResult error: \" + e.getMessage());\r\n                    }\r\n                }\r\n            }\r\n    );\r\n\r\n\r\n    //nhận kết quả của fb login\r\n    @Override\r\n    protected void onActivityResult(int requestCode, int resultCode, Intent data) {\r\n        callbackManager.onActivityResult(requestCode, resultCode, data);\r\n        super.onActivityResult(requestCode, resultCode, data);\r\n        Intent homeIntent = new Intent(LoginActivity.this, MainActivity.class);\r\n        startActivity(homeIntent);\r\n        finish();\r\n    }\r\n\r\n\r\n    @Override\r\n    protected void onDestroy() {\r\n        profileTracker.stopTracking();\r\n        super.onDestroy();\r\n    }\r\n\r\n    public void getData() {\r\n        db.collection(\"admin\")\r\n                .get()\r\n                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {\r\n                    @Override\r\n                    public void onComplete(@NonNull Task<QuerySnapshot> task) {\r\n                        if (task.isSuccessful()) {\r\n                            List<String> list = new ArrayList<>();\r\n                            for (QueryDocumentSnapshot document : task.getResult()) {\r\n                                list.add(document.getId());\r\n                            }\r\n\r\n                            Toast.makeText(LoginActivity.this, \"Wellcome\", Toast.LENGTH_SHORT).show();\r\n                            startActivity(new Intent(LoginActivity.this, MainActivity.class));\r\n                        } else {\r\n                            Toast.makeText(LoginActivity.this, \"Login failed\", Toast.LENGTH_SHORT).show();\r\n\r\n                        }\r\n                    }\r\n                });\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/duan1nhom7qlkhachsan/Activity/LoginActivity.java b/app/src/main/java/com/example/duan1nhom7qlkhachsan/Activity/LoginActivity.java
+--- a/app/src/main/java/com/example/duan1nhom7qlkhachsan/Activity/LoginActivity.java	(revision 4cb78367077c8ab43d5c2efdb65da66bec5d83b4)
++++ b/app/src/main/java/com/example/duan1nhom7qlkhachsan/Activity/LoginActivity.java	(date 1669532857440)
+@@ -20,12 +20,9 @@
+ 
+ import com.example.duan1nhom7qlkhachsan.MainActivity;
+ import com.example.duan1nhom7qlkhachsan.R;
+-import com.facebook.AccessToken;
+ import com.facebook.CallbackManager;
+ import com.facebook.FacebookCallback;
+ import com.facebook.FacebookException;
+-import com.facebook.GraphRequest;
+-import com.facebook.GraphResponse;
+ import com.facebook.Profile;
+ import com.facebook.ProfileTracker;
+ import com.facebook.login.LoginManager;
+@@ -45,9 +42,6 @@
+ import com.google.firebase.firestore.QueryDocumentSnapshot;
+ import com.google.firebase.firestore.QuerySnapshot;
+ 
+-import org.json.JSONException;
+-import org.json.JSONObject;
+-
+ 
+ import java.util.ArrayList;
+ import java.util.Arrays;
+@@ -65,6 +59,7 @@
+     //Google
+     GoogleSignInClient gsc;
+ 
++
+     //Facebook
+     LoginButton loginButton;
+     private LoginManager loginManager;
+@@ -91,11 +86,8 @@
+                 }
+                 else
+                 {
+-
+                     getData();
+-
+                 }
+-
+ 
+             }
+         });
+@@ -164,7 +156,7 @@
+             @Override
+             protected void onCurrentProfileChanged(@Nullable Profile oldProfile, @Nullable Profile newProfile) {
+                 if (newProfile != null) {
+-                    Log.d(">>>>>>>>TAB", "onCurrentProfileChanged" + newProfile.getName());
++                    Log.d(">>>>>>>>>>>>>>>>>TAB", "onCurrentProfileChanged" + newProfile.getName());
+ //                    String id = oldProfile.getId();
+ //                    UserDao u = new UserDao(LoginActivity.this);
+ //                    u.register(id, "", 1);
+@@ -208,20 +200,23 @@
+                     Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+                     try {
+                         GoogleSignInAccount account = task.getResult(ApiException.class);
+-                        String email = account.getEmail();
+-                        String displayName = account.getDisplayName();
++
++                        String emailLoginUser = account.getEmail();
++                        String nameUser = account.getDisplayName();
+                         // lưu database (tự làm)
+                         //check neu email chua co trong db thi them
+                         //neu co thi bao loi
+ //                        UserDao userDao = new UserDao(LoginActivity.this);
+ //                        userDao.register(email, null, 1);
+                         Map<String, Object> user = new HashMap<>();
+-                        user.put("nameUser", displayName);
+-                        user.put("emailUser", email);
++                        user.put("nameUser", nameUser);
++                        user.put("emailUser", emailLoginUser);
+                         user.put("idRoom", "001");
+-                        user.put("idUser", "");
+ 
+-                        Toast.makeText(LoginActivity.this, "", Toast.LENGTH_SHORT).show();
++                        user.put("idUser", "USER"+emailLoginUser.substring(6));
++                        user.put("phoneNumUser", "");
++
++                        Toast.makeText(LoginActivity.this, "aaaa", Toast.LENGTH_SHORT).show();
+                         // Add a new document with a generated ID
+ 
+                         db.collection("user")
+@@ -247,8 +242,8 @@
+                         startActivity(homeIntent);
+                         finish();
+ 
+-                        Log.d(">>>>>TAG", "onActivityResult: " + displayName);
+-                        Log.d(">>>>>TAG", ">>>: " + email);
++                        Log.d(">>>>>TAG", "onActivityResult: " + nameUser);
++                        Log.d(">>>>>TAG", ">>>: " + emailLoginUser);
+ 
+                     } catch (Exception e) {
+                         Log.d(">>>>>TAG", "onActivityResult error: " + e.getMessage());
+@@ -285,6 +280,7 @@
+                             List<String> list = new ArrayList<>();
+                             for (QueryDocumentSnapshot document : task.getResult()) {
+                                 list.add(document.getId());
++
+                             }
+ 
+                             Toast.makeText(LoginActivity.this, "Wellcome", Toast.LENGTH_SHORT).show();
+Index: app/src/main/java/com/example/duan1nhom7qlkhachsan/Activity/AddRoomActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.duan1nhom7qlkhachsan.Activity;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport android.app.AlertDialog;\r\nimport android.content.DialogInterface;\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.view.View;\r\nimport android.widget.Button;\r\nimport android.widget.EditText;\r\nimport android.widget.Toast;\r\n\r\nimport com.example.duan1nhom7qlkhachsan.Fragment.AddRoomFragment;\r\nimport com.example.duan1nhom7qlkhachsan.MainActivity;\r\nimport com.example.duan1nhom7qlkhachsan.Model.AppRoom;\r\nimport com.example.duan1nhom7qlkhachsan.R;\r\nimport com.google.android.gms.tasks.OnCompleteListener;\r\nimport com.google.android.gms.tasks.OnFailureListener;\r\nimport com.google.android.gms.tasks.OnSuccessListener;\r\nimport com.google.android.gms.tasks.Task;\r\nimport com.google.firebase.firestore.DocumentReference;\r\nimport com.google.firebase.firestore.FirebaseFirestore;\r\nimport com.google.firebase.firestore.QueryDocumentSnapshot;\r\nimport com.google.firebase.firestore.QuerySnapshot;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.HashMap;\r\nimport java.util.Map;\r\n\r\npublic class AddRoomActivity extends AppCompatActivity implements IAdapterClickEvent {\r\n    private EditText edtIdRoom, edtNameRoom, edtTypeRoom, edtPriceRoom, edtStartDay, edtEndDay;\r\n    private Button btnAddRoom, btnClear,btnBackToMain;\r\n    private AppRoom appRoom = null;\r\n    FirebaseFirestore db = FirebaseFirestore.getInstance();\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_add_room);\r\n\r\n        edtIdRoom = findViewById(R.id.edtIdRoom);\r\n        edtNameRoom = findViewById(R.id.edtNameRoom);\r\n        edtTypeRoom = findViewById(R.id.edtTypeRoom);\r\n        edtPriceRoom = findViewById(R.id.edtPriceRoom);\r\n        edtStartDay = findViewById(R.id.edtStartDay);\r\n        edtEndDay = findViewById(R.id.edtEndDay);\r\n\r\n        btnBackToMain = findViewById(R.id.btnBackToMain);\r\n        btnBackToMain.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                Intent i = new Intent(AddRoomActivity.this, MainActivity.class);\r\n                startActivity(i);\r\n            }\r\n        });\r\n\r\n\r\n    }\r\n\r\n    @Override\r\n    protected void onResume() {\r\n        super.onResume();\r\n        getDataAddRoom();\r\n    }\r\n\r\n    public void onAddRoomClick(View view) {\r\n        // private String idRoom,nameRoom,typeRoom,priceRoom,startDay,endDay;\r\n        String idRoom = edtIdRoom.getText().toString();\r\n        String nameRoom = edtNameRoom.getText().toString();\r\n        String typeRoom = edtTypeRoom.getText().toString();\r\n        String priceRoom = edtPriceRoom.getText().toString();\r\n        String startDay = edtStartDay.getText().toString();\r\n        String endDay = edtEndDay.getText().toString();\r\n\r\n\r\n        // Create a new user with a first and last name\r\n        Map<String, Object> user = new HashMap<>();\r\n        user.put(\"idRoom\", idRoom);\r\n        user.put(\"nameRoom\", nameRoom);\r\n        user.put(\"typeRoom\", typeRoom);\r\n        user.put(\"priceRoom\", priceRoom);\r\n        user.put(\"startDay\", startDay);\r\n        user.put(\"endDay\", endDay);\r\n\r\n\r\n\r\n\r\n\r\n// Add a new document with a generated ID\r\n        if (appRoom == null) {\r\n            db.collection(\"room\")\r\n                    .add(user)\r\n                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {\r\n                        @Override\r\n                        public void onSuccess(DocumentReference documentReference) {\r\n                            Toast.makeText(AddRoomActivity.this, \"Thêm thành công\", Toast.LENGTH_SHORT).show();\r\n                            getDataAddRoom();\r\n                            //Log.d(\"TAG\", \"DocumentSnapshot added with ID: \" + documentReference.getId());\r\n\r\n                        }\r\n                    })\r\n                    .addOnFailureListener(new OnFailureListener() {\r\n                        @Override\r\n                        public void onFailure(@NonNull Exception e) {\r\n                            Toast.makeText(AddRoomActivity.this, \"Thêm thất bại\", Toast.LENGTH_SHORT).show();\r\n\r\n                        }\r\n                    });\r\n        } else {\r\n            db.collection(\"room\")\r\n                    .document(appRoom.getIdRoom())\r\n                    .set(user)\r\n                    .addOnSuccessListener(new OnSuccessListener<Void>() {\r\n                        @Override\r\n                        public void onSuccess(Void aVoid) {\r\n                            Toast.makeText(AddRoomActivity.this, \"Cập nhật thành công\", Toast.LENGTH_SHORT).show();\r\n                            getDataAddRoom();\r\n                            appRoom=null;\r\n                        }\r\n                    })\r\n                    .addOnFailureListener(new OnFailureListener() {\r\n                        @Override\r\n                        public void onFailure(@NonNull Exception e) {\r\n                            Toast.makeText(AddRoomActivity.this, \"Cập nhật không thành công\", Toast.LENGTH_SHORT).show();\r\n                        }\r\n                    });\r\n        }\r\n    }\r\n\r\n    public void onCancleClick(View view) {\r\n        edtIdRoom.setText(null);\r\n        edtNameRoom.setText(null);\r\n        edtTypeRoom.setText(null);\r\n        edtPriceRoom.setText(null);\r\n        edtStartDay.setText(null);\r\n        edtEndDay.setText(null);\r\n\r\n    }\r\n\r\n    public void getDataAddRoom() {\r\n        db.collection(\"room\")\r\n                .get()\r\n                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {\r\n                    @Override\r\n                    public void onComplete(@NonNull Task<QuerySnapshot> task) {\r\n                        if (task.isSuccessful()) {\r\n                            ArrayList<AppRoom> list = new ArrayList<>();\r\n                            for (QueryDocumentSnapshot document : task.getResult()) {\r\n                                Map<String, Object> map = document.getData();\r\n                                String id = map.get(\"idRoom\").toString();\r\n                                String name = map.get(\"nameRoom\").toString();\r\n                                String type = map.get(\"typeRoom\").toString();\r\n                                String price = map.get(\"priceRoom\").toString();\r\n                                String start = map.get(\"startDay\").toString();\r\n                                String end = map.get(\"endDay\").toString();\r\n\r\n                                AppRoom appRoom = new AppRoom(id, name, type, price, start, end);\r\n                                appRoom.setIdRoom(appRoom.getIdRoom());\r\n                                list.add(appRoom);\r\n\r\n                                getSupportFragmentManager().beginTransaction()\r\n                                        .replace(R.id.flAddRoom, AddRoomFragment.newInstance(list)).commit();\r\n                            }\r\n                        }\r\n                    }\r\n                });\r\n    }\r\n//\r\n    @Override\r\n    public void onDeleteRoomClick(AppRoom room) {\r\n        new AlertDialog.Builder(AddRoomActivity.this)\r\n                .setTitle(\"Xóa\")\r\n                .setMessage(\"Xóa sẽ không phục hồi được\")\r\n                .setNegativeButton(\"Hủy\", null)\r\n                .setPositiveButton(\"Đồng ý\", new DialogInterface.OnClickListener() {\r\n                    @Override\r\n                    public void onClick(DialogInterface dialog, int which) {\r\n                        db.collection(\"room\").document(room.getIdRoom())\r\n                                .delete()\r\n                                .addOnSuccessListener(new OnSuccessListener<Void>() {\r\n                                    @Override\r\n                                    public void onSuccess(Void aVoid) {\r\n                                        Toast.makeText(AddRoomActivity.this, \"Xóa thành công\", Toast.LENGTH_SHORT).show();\r\n                                        getDataAddRoom();\r\n\r\n                                    }\r\n                                })\r\n                                .addOnFailureListener(new OnFailureListener() {\r\n                                    @Override\r\n                                    public void onFailure(@NonNull Exception e) {\r\n                                        Toast.makeText(AddRoomActivity.this, \"Xóa khong thành công\", Toast.LENGTH_SHORT).show();\r\n                                    }\r\n                                });\r\n\r\n                    }\r\n                })\r\n                .show();\r\n    }\r\n\r\n\r\n    @Override\r\n    public void onUpdateRoomClick(AppRoom room) {\r\n        edtIdRoom.setText(room.getIdRoom());\r\n        edtNameRoom.setText(room.getNameRoom());\r\n        edtTypeRoom.setText(room.getTypeRoom());\r\n        edtPriceRoom.setText(room.getPriceRoom());\r\n        edtStartDay.setText(room.getStartDay());\r\n        edtEndDay.setText(room.getEndDay());\r\n        appRoom = room;\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/duan1nhom7qlkhachsan/Activity/AddRoomActivity.java b/app/src/main/java/com/example/duan1nhom7qlkhachsan/Activity/AddRoomActivity.java
+--- a/app/src/main/java/com/example/duan1nhom7qlkhachsan/Activity/AddRoomActivity.java	(revision 4cb78367077c8ab43d5c2efdb65da66bec5d83b4)
++++ b/app/src/main/java/com/example/duan1nhom7qlkhachsan/Activity/AddRoomActivity.java	(date 1669525925260)
+@@ -12,7 +12,7 @@
+ import android.widget.EditText;
+ import android.widget.Toast;
+ 
+-import com.example.duan1nhom7qlkhachsan.Fragment.AddRoomFragment;
++import com.example.duan1nhom7qlkhachsan.Guide.Fragment.AddRoomFragment;
+ import com.example.duan1nhom7qlkhachsan.MainActivity;
+ import com.example.duan1nhom7qlkhachsan.Model.AppRoom;
+ import com.example.duan1nhom7qlkhachsan.R;
+Index: app/src/main/java/com/example/duan1nhom7qlkhachsan/Activity/EditProfileActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.duan1nhom7qlkhachsan.Activity;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport android.os.Bundle;\r\nimport android.util.Log;\r\nimport android.view.View;\r\nimport android.widget.Button;\r\nimport android.widget.EditText;\r\nimport android.widget.Toast;\r\n\r\nimport com.example.duan1nhom7qlkhachsan.Model.AppAdmin;\r\nimport com.example.duan1nhom7qlkhachsan.R;\r\nimport com.google.android.gms.tasks.OnCompleteListener;\r\nimport com.google.android.gms.tasks.OnFailureListener;\r\nimport com.google.android.gms.tasks.OnSuccessListener;\r\nimport com.google.android.gms.tasks.Task;\r\nimport com.google.firebase.firestore.FirebaseFirestore;\r\nimport com.google.firebase.firestore.QueryDocumentSnapshot;\r\nimport com.google.firebase.firestore.QuerySnapshot;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.HashMap;\r\nimport java.util.Map;\r\n\r\npublic class EditProfileActivity extends AppCompatActivity {\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_edit_profile);\r\n\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/duan1nhom7qlkhachsan/Activity/EditProfileActivity.java b/app/src/main/java/com/example/duan1nhom7qlkhachsan/Activity/EditProfileActivity.java
+--- a/app/src/main/java/com/example/duan1nhom7qlkhachsan/Activity/EditProfileActivity.java	(revision 4cb78367077c8ab43d5c2efdb65da66bec5d83b4)
++++ b/app/src/main/java/com/example/duan1nhom7qlkhachsan/Activity/EditProfileActivity.java	(date 1669530321807)
+@@ -1,21 +1,31 @@
+ package com.example.duan1nhom7qlkhachsan.Activity;
+ 
++import androidx.activity.result.ActivityResult;
++import androidx.activity.result.ActivityResultCallback;
++import androidx.activity.result.ActivityResultLauncher;
++import androidx.activity.result.contract.ActivityResultContracts;
+ import androidx.annotation.NonNull;
+ import androidx.appcompat.app.AppCompatActivity;
+ 
++import android.content.Intent;
+ import android.os.Bundle;
+ import android.util.Log;
+-import android.view.View;
+ import android.widget.Button;
+ import android.widget.EditText;
+ import android.widget.Toast;
+ 
+-import com.example.duan1nhom7qlkhachsan.Model.AppAdmin;
++import com.example.duan1nhom7qlkhachsan.MainActivity;
++import com.example.duan1nhom7qlkhachsan.Model.AppRoom;
++import com.example.duan1nhom7qlkhachsan.Model.AppUser;
+ import com.example.duan1nhom7qlkhachsan.R;
++import com.google.android.gms.auth.api.signin.GoogleSignIn;
++import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
++import com.google.android.gms.common.api.ApiException;
+ import com.google.android.gms.tasks.OnCompleteListener;
+ import com.google.android.gms.tasks.OnFailureListener;
+ import com.google.android.gms.tasks.OnSuccessListener;
+ import com.google.android.gms.tasks.Task;
++import com.google.firebase.firestore.DocumentReference;
+ import com.google.firebase.firestore.FirebaseFirestore;
+ import com.google.firebase.firestore.QueryDocumentSnapshot;
+ import com.google.firebase.firestore.QuerySnapshot;
+@@ -25,11 +35,102 @@
+ import java.util.Map;
+ 
+ public class EditProfileActivity extends AppCompatActivity {
++    private EditText edtFullNameUser, edtEmailUser, edtPhoneNumberUser;
++    private Button btnUpdateAccount, btnDeleteAccount;
++    private com.google.android.material.imageview.ShapeableImageView editAvatar;
++    FirebaseFirestore db = FirebaseFirestore.getInstance();
++    String emailLoginUser;
++    String nameUser;
+ 
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+         setContentView(R.layout.activity_edit_profile);
++        edtFullNameUser = findViewById(R.id.edtFullNameUser);
++        edtEmailUser = findViewById(R.id.edtEmailUser);
++        edtPhoneNumberUser = findViewById(R.id.edtPhoneNumberUser);
++        btnUpdateAccount = findViewById(R.id.btnUpdateAccount);
++        btnDeleteAccount = findViewById(R.id.btnDeleteAccount);
++        editAvatar = findViewById(R.id.editAvatar);
++        getDataUser();
++
++    }
++
++    @Override
++    protected void onResume() {
++        super.onResume();
++        getDataUser();
++    }
++
++    public void getDataUser() {
++        db.collection("user")
++                .get()
++                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
++                    @Override
++                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
++                        if (task.isSuccessful()) {
++                            ArrayList<AppRoom> list = new ArrayList<>();
++                            for (QueryDocumentSnapshot document : task.getResult()) {
++
++
++                                Map<String, Object> map = document.getData();
++                                String nameUser = map.get("nameUser").toString();
++                                String emailUser = map.get("emailUser").toString();
++                                String idRoom = map.get("idRoom").toString();
++                                String idUser = map.get("idUser").toString();
++                                String phoneNumUser = map.get("phoneNumUser").toString();
++
++
++                                AppUser appUser = new AppUser(emailUser, idRoom, idUser,nameUser, phoneNumUser);
++                                appUser.setIdUser(appUser.getIdUser());
++                                String a = appUser.getIdUser();
++                                Log.d("", "a" + a);
++
+ 
++                                if (emailUser.equals(emailLoginUser)) {
++                                    edtFullNameUser.setText(nameUser);
++                                    edtEmailUser.setText(emailUser);
++                                    edtPhoneNumberUser.setText(phoneNumUser);
++
++                                    Log.d(">>>>>>", "nameUser " + nameUser);
++                                    Log.d(">>>>>>", "emailUser " + emailUser);
++                                    Log.d(">>>>>>", "idRoom " + idRoom);
++                                    Log.d(">>>>>>", "idUser " + idUser);
++                                    Log.d(">>>>>>", "phoneNumUser " + phoneNumUser);
++                                } else {
++                                    Log.d(">>>>>>>>>>", "Can't load");
++                                }
++
++
++                            }
++                        }
++                    }
++                });
+     }
++/*
++    private void onGetGoogle(){
++        // nhận kết quả Google SignIn
++        ActivityResultLauncher<Intent> googleLauncher = registerForActivityResult(
++                new ActivityResultContracts.StartActivityForResult(),
++                new ActivityResultCallback<ActivityResult>() {
++                    @Override
++                    public void onActivityResult(ActivityResult result) {
++                        Intent data = result.getData();
++                        Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
++                        try {
++                            GoogleSignInAccount account = task.getResult(ApiException.class);
++                             emailLoginUser = account.getEmail();
++                             nameUser = account.getDisplayName();
++
++                            Log.d(">>>>>TAG", "onActivityResult  EditPròile: " + nameUser);
++                            Log.d(">>>>>TAG", ">>>: " + emailLoginUser);
++
++                        } catch (Exception e) {
++                            Log.d(">>>>>TAG", "onActivityResult error: " + e.getMessage());
++                        }
++                    }
++                }
++        );
++    }*/
++
+ }
+\ No newline at end of file
+Index: app/src/main/java/com/example/duan1nhom7qlkhachsan/Model/AppUser.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/duan1nhom7qlkhachsan/Model/AppUser.java b/app/src/main/java/com/example/duan1nhom7qlkhachsan/Model/AppUser.java
+new file mode 100644
+--- /dev/null	(date 1669526267031)
++++ b/app/src/main/java/com/example/duan1nhom7qlkhachsan/Model/AppUser.java	(date 1669526267031)
+@@ -0,0 +1,56 @@
++package com.example.duan1nhom7qlkhachsan.Model;
++
++public class AppUser {
++    private String emailUser,idRoom,idUser,nameUser,phoneNumUser;
++
++    public AppUser() {
++    }
++
++    public AppUser(String emailUser, String idRoom, String idUser, String nameUser, String phoneNumUser) {
++        this.emailUser = emailUser;
++        this.idRoom = idRoom;
++        this.idUser = idUser;
++        this.nameUser = nameUser;
++        this.phoneNumUser = phoneNumUser;
++    }
++
++    public String getEmailUser() {
++        return emailUser;
++    }
++
++    public void setEmailUser(String emailUser) {
++        this.emailUser = emailUser;
++    }
++
++    public String getIdRoom() {
++        return idRoom;
++    }
++
++    public void setIdRoom(String idRoom) {
++        this.idRoom = idRoom;
++    }
++
++    public String getIdUser() {
++        return idUser;
++    }
++
++    public void setIdUser(String idUser) {
++        this.idUser = idUser;
++    }
++
++    public String getNameUser() {
++        return nameUser;
++    }
++
++    public void setNameUser(String nameUser) {
++        this.nameUser = nameUser;
++    }
++
++    public String getPhoneNumUser() {
++        return phoneNumUser;
++    }
++
++    public void setPhoneNumUser(String phoneNumUser) {
++        this.phoneNumUser = phoneNumUser;
++    }
++}
+Index: app/src/main/res/layout/fragment_add_room.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<FrameLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".Fragment.AddRoomFragment\">\r\n\r\n    <!-- TODO: Update blank fragment layout -->\r\n\r\n    <ListView\r\n        android:id=\"@+id/lvFragAddRoom\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"match_parent\" />\r\n\r\n</FrameLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/fragment_add_room.xml b/app/src/main/res/layout/fragment_add_room.xml
+--- a/app/src/main/res/layout/fragment_add_room.xml	(revision 4cb78367077c8ab43d5c2efdb65da66bec5d83b4)
++++ b/app/src/main/res/layout/fragment_add_room.xml	(date 1669525925273)
+@@ -3,7 +3,7 @@
+     xmlns:tools="http://schemas.android.com/tools"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+-    tools:context=".Fragment.AddRoomFragment">
++    tools:context=".Guide.Fragment.AddRoomFragment">
+ 
+     <!-- TODO: Update blank fragment layout -->
+ 
+Index: app/src/main/java/com/example/duan1nhom7qlkhachsan/Fragment/AddRoomandServiceFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/duan1nhom7qlkhachsan/Fragment/AddRoomandServiceFragment.java b/app/src/main/java/com/example/duan1nhom7qlkhachsan/Guide/Fragment/AddRoomandServiceFragment.java
+rename from app/src/main/java/com/example/duan1nhom7qlkhachsan/Fragment/AddRoomandServiceFragment.java
+rename to app/src/main/java/com/example/duan1nhom7qlkhachsan/Guide/Fragment/AddRoomandServiceFragment.java
+--- a/app/src/main/java/com/example/duan1nhom7qlkhachsan/Fragment/AddRoomandServiceFragment.java	(revision 4cb78367077c8ab43d5c2efdb65da66bec5d83b4)
++++ b/app/src/main/java/com/example/duan1nhom7qlkhachsan/Guide/Fragment/AddRoomandServiceFragment.java	(date 1669525925252)
+@@ -1,6 +1,5 @@
+-package com.example.duan1nhom7qlkhachsan.Fragment;
++package com.example.duan1nhom7qlkhachsan.Guide.Fragment;
+ 
+-import android.app.Activity;
+ import android.os.Bundle;
+ 
+ import androidx.fragment.app.Fragment;
+@@ -9,7 +8,6 @@
+ import android.view.View;
+ import android.view.ViewGroup;
+ 
+-import com.example.duan1nhom7qlkhachsan.Activity.RoomActivity;
+ import com.example.duan1nhom7qlkhachsan.R;
+ import com.google.android.material.bottomnavigation.BottomNavigationView;
+ 
+Index: app/src/main/java/com/example/duan1nhom7qlkhachsan/Activity/BookedRoomActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.duan1nhom7qlkhachsan.Activity;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.localbroadcastmanager.content.LocalBroadcastManager;\r\n\r\nimport android.content.BroadcastReceiver;\r\nimport android.content.Context;\r\nimport android.content.Intent;\r\nimport android.content.IntentFilter;\r\nimport android.os.Bundle;\r\nimport android.view.View;\r\nimport android.widget.EditText;\r\nimport android.widget.Toast;\r\n\r\nimport com.example.duan1nhom7qlkhachsan.Adapter.BookedRoomAdapter;\r\nimport com.example.duan1nhom7qlkhachsan.Fragment.PhongDaDatFragment;\r\nimport com.example.duan1nhom7qlkhachsan.Model.AppRoom;\r\nimport com.example.duan1nhom7qlkhachsan.R;\r\nimport com.google.android.gms.tasks.OnCompleteListener;\r\nimport com.google.android.gms.tasks.OnFailureListener;\r\nimport com.google.android.gms.tasks.OnSuccessListener;\r\nimport com.google.android.gms.tasks.Task;\r\nimport com.google.firebase.firestore.DocumentReference;\r\nimport com.google.firebase.firestore.FirebaseFirestore;\r\nimport com.google.firebase.firestore.QueryDocumentSnapshot;\r\nimport com.google.firebase.firestore.QuerySnapshot;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.HashMap;\r\nimport java.util.Map;\r\n\r\npublic class BookedRoomActivity extends AppCompatActivity {\r\n    FirebaseFirestore db = FirebaseFirestore.getInstance();\r\n    private EditText edtStartDay,edtEndDay,edtTenPhong,edtLoaiPhong,edtMaPhong,edtGiaPhong;\r\n    private AppRoom room = null;\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_booked_room);\r\n        edtStartDay = findViewById(R.id.edtStartDay);\r\n        edtEndDay = findViewById(R.id.edtEndDay);\r\n        edtTenPhong = findViewById(R.id.edtTenPhong);\r\n        edtLoaiPhong = findViewById(R.id.edtLoaiPhong);\r\n        edtMaPhong = findViewById(R.id.edtMaPhong);\r\n        edtGiaPhong = findViewById(R.id.edtGiaPhong);\r\n    }\r\n    @Override\r\n    protected void onResume() {\r\n        super.onResume();\r\n        getData();\r\n    }\r\n    public  void onSaveClick(View view) {\r\n        String name = edtTenPhong.getText().toString();\r\n        String type = edtLoaiPhong.getText().toString();\r\n        String id = edtMaPhong.getText().toString();\r\n        String price = edtGiaPhong.getText().toString();\r\n        String startDay = edtStartDay.getText().toString();\r\n        String endDay = edtEndDay.getText().toString();\r\n\r\n\r\n        // Create a new user with a first and last name\r\n        Map<String, Object> item = new HashMap<>();\r\n        item.put(\"nameRoom\", name);\r\n        item.put(\"typeRoom\", type);\r\n        item.put(\"idRoom\", id);\r\n        item.put(\"priceRoom\", price);\r\n        item.put(\"startDay\", startDay);\r\n        item.put(\"endDay\", endDay);\r\n\r\n        if (room == null) {\r\n            // Add a new document with a generated ID\r\n            db.collection(\"room\")\r\n                    .add(item)\r\n                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {\r\n                        @Override\r\n                        public void onSuccess(DocumentReference documentReference) {\r\n                            Toast.makeText(BookedRoomActivity.this, \"Insert thành công\", Toast.LENGTH_SHORT).show();\r\n                            getData();\r\n                        }\r\n                    })\r\n                    .addOnFailureListener(new OnFailureListener() {\r\n                        @Override\r\n                        public void onFailure(@NonNull Exception e) {\r\n\r\n                        }\r\n                    });\r\n\r\n        }\r\n    }\r\n    public void onCancelClick(View view)\r\n    {\r\n        edtTenPhong.setText(null);\r\n        edtLoaiPhong.setText(null);\r\n        edtMaPhong.setText(null);\r\n        edtGiaPhong.setText(null);\r\n        edtStartDay.setText(null);\r\n        edtEndDay.setText(null);\r\n\r\n    }\r\n    private  void getData()\r\n    {\r\n        db.collection(\"room\")\r\n                .get()\r\n                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {\r\n                    @Override\r\n                    public void onComplete(@NonNull Task<QuerySnapshot> task) {\r\n                        if (task.isSuccessful()) {\r\n                            ArrayList<AppRoom> rooms= new ArrayList<>();\r\n                            for (QueryDocumentSnapshot document : task.getResult()) {\r\n                                Map<String, Object> map= document.getData();\r\n                                String name=map.get(\"nameRoom\").toString();\r\n                                String type=map.get(\"typeRoom\").toString();\r\n                                String id=map.get(\"idRoom\").toString();\r\n                                String price=map.get(\"priceRoom\").toString();\r\n                                String startDay=map.get(\"startDay\").toString();\r\n                                String endDay=map.get(\"endDay\").toString();\r\n\r\n                                AppRoom room = new AppRoom(id,type,name,price,startDay,endDay);\r\n                                rooms.add(room);\r\n\r\n                            }\r\n\r\n                            getSupportFragmentManager().beginTransaction()\r\n                                    .replace(R.id.flm, PhongDaDatFragment.newInstance(rooms)).commit();\r\n                        }\r\n                    }\r\n                });\r\n    }\r\n\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/duan1nhom7qlkhachsan/Activity/BookedRoomActivity.java b/app/src/main/java/com/example/duan1nhom7qlkhachsan/Activity/BookedRoomActivity.java
+--- a/app/src/main/java/com/example/duan1nhom7qlkhachsan/Activity/BookedRoomActivity.java	(revision 4cb78367077c8ab43d5c2efdb65da66bec5d83b4)
++++ b/app/src/main/java/com/example/duan1nhom7qlkhachsan/Activity/BookedRoomActivity.java	(date 1669525925349)
+@@ -2,19 +2,13 @@
+ 
+ import androidx.annotation.NonNull;
+ import androidx.appcompat.app.AppCompatActivity;
+-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+ 
+-import android.content.BroadcastReceiver;
+-import android.content.Context;
+-import android.content.Intent;
+-import android.content.IntentFilter;
+ import android.os.Bundle;
+ import android.view.View;
+ import android.widget.EditText;
+ import android.widget.Toast;
+ 
+-import com.example.duan1nhom7qlkhachsan.Adapter.BookedRoomAdapter;
+-import com.example.duan1nhom7qlkhachsan.Fragment.PhongDaDatFragment;
++import com.example.duan1nhom7qlkhachsan.Guide.Fragment.PhongDaDatFragment;
+ import com.example.duan1nhom7qlkhachsan.Model.AppRoom;
+ import com.example.duan1nhom7qlkhachsan.R;
+ import com.google.android.gms.tasks.OnCompleteListener;
+Index: app/src/main/res/layout/activity_edit_profile.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:background=\"#f5f5f5\"\r\n\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\">\r\n\r\n\r\n    <com.google.android.material.imageview.ShapeableImageView\r\n        android:id=\"@+id/shapeableImageView\"\r\n        android:layout_width=\"438dp\"\r\n        android:layout_height=\"374dp\"\r\n        android:layout_alignParentStart=\"true\"\r\n        android:layout_alignParentTop=\"true\"\r\n        android:layout_alignParentEnd=\"true\"\r\n        android:layout_marginBottom=\"376dp\"\r\n        android:adjustViewBounds=\"true\"\r\n        android:scaleType=\"fitCenter\"\r\n        android:src=\"@drawable/green_field\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.518\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:shapeAppearanceOverlay=\"@style/roundImageView\" />\r\n\r\n    <com.google.android.material.imageview.ShapeableImageView\r\n        android:id=\"@+id/a\"\r\n        android:layout_width=\"100dp\"\r\n        android:layout_height=\"100dp\"\r\n        android:layout_alignParentStart=\"true\"\r\n        android:layout_alignParentTop=\"true\"\r\n        android:layout_alignParentEnd=\"true\"\r\n        android:layout_marginBottom=\"500dp\"\r\n        android:adjustViewBounds=\"true\"\r\n        android:scaleType=\"fitCenter\"\r\n        android:src=\"@drawable/avatar\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.498\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:shapeAppearanceOverlay=\"@style/roundImageView\" />\r\n\r\n    <com.google.android.material.imageview.ShapeableImageView\r\n        android:id=\"@+id/edtAvatar\"\r\n        android:layout_width=\"40dp\"\r\n        android:layout_height=\"40dp\"\r\n        android:layout_alignParentStart=\"true\"\r\n        android:layout_alignParentTop=\"true\"\r\n        android:layout_alignParentEnd=\"true\"\r\n        android:layout_marginBottom=\"488dp\"\r\n        android:adjustViewBounds=\"true\"\r\n        android:scaleType=\"fitCenter\"\r\n        android:src=\"@drawable/ic_edit\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.579\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:shapeAppearanceOverlay=\"@style/roundImageView\" />\r\n\r\n    <androidx.cardview.widget.CardView\r\n        android:layout_width=\"360dp\"\r\n        android:layout_height=\"422dp\"\r\n        android:layout_marginTop=\"264dp\"\r\n        app:cardCornerRadius=\"20dp\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.49\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"@+id/shapeableImageView\">\r\n\r\n        <TextView\r\n            android:id=\"@+id/textView4\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginLeft=\"20dp\"\r\n            android:layout_marginTop=\"20dp\"\r\n            android:text=\"Fullname\"\r\n            android:textColor=\"@color/black\"\r\n            app:layout_constraintBottom_toBottomOf=\"parent\"\r\n            app:layout_constraintEnd_toEndOf=\"parent\"\r\n            app:layout_constraintHorizontal_bias=\"0.106\"\r\n            app:layout_constraintStart_toStartOf=\"parent\"\r\n            app:layout_constraintTop_toTopOf=\"parent\"\r\n            app:layout_constraintVertical_bias=\"0.293\" />\r\n\r\n        <EditText\r\n            android:id=\"@+id/edtFullNameUser\"\r\n            android:layout_width=\"337dp\"\r\n            android:layout_height=\"42dp\"\r\n            android:layout_marginLeft=\"10dp\"\r\n            android:layout_marginTop=\"50dp\"\r\n            android:background=\"@drawable/design_edit_square\"\r\n            android:ems=\"10\"\r\n            android:inputType=\"textPersonName\"\r\n            android:paddingLeft=\"15dp\"\r\n            app:layout_constraintBottom_toBottomOf=\"parent\"\r\n            app:layout_constraintEnd_toEndOf=\"parent\"\r\n            app:layout_constraintStart_toStartOf=\"parent\"\r\n            app:layout_constraintTop_toBottomOf=\"@+id/textView4\"\r\n            app:layout_constraintVertical_bias=\"0.004\" />\r\n\r\n        <TextView\r\n            android:id=\"@+id/tv\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginLeft=\"20dp\"\r\n            android:layout_marginTop=\"100dp\"\r\n\r\n            android:text=\"Email\"\r\n            android:textColor=\"@color/black\"\r\n            app:layout_constraintBottom_toBottomOf=\"parent\"\r\n            app:layout_constraintEnd_toEndOf=\"parent\"\r\n            app:layout_constraintHorizontal_bias=\"0.106\"\r\n            app:layout_constraintStart_toStartOf=\"parent\"\r\n            app:layout_constraintTop_toTopOf=\"parent\"\r\n            app:layout_constraintVertical_bias=\"0.293\" />\r\n\r\n        <EditText\r\n            android:id=\"@+id/edtEmialUser\"\r\n            android:layout_width=\"337dp\"\r\n            android:layout_height=\"42dp\"\r\n            android:layout_marginLeft=\"10dp\"\r\n            android:layout_marginTop=\"130dp\"\r\n            android:background=\"@drawable/design_edit_square\"\r\n            android:ems=\"10\"\r\n            android:inputType=\"textPersonName\"\r\n            android:paddingLeft=\"15dp\"\r\n            app:layout_constraintBottom_toBottomOf=\"parent\"\r\n            app:layout_constraintEnd_toEndOf=\"parent\"\r\n            app:layout_constraintStart_toStartOf=\"parent\"\r\n            app:layout_constraintTop_toBottomOf=\"@+id/textView4\"\r\n            app:layout_constraintVertical_bias=\"0.004\" />\r\n\r\n\r\n        <TextView\r\n            android:id=\"@+id/tvv\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginLeft=\"20dp\"\r\n            android:layout_marginTop=\"180dp\"\r\n            android:text=\"Phone number\"\r\n\r\n            android:textColor=\"@color/black\"\r\n            app:layout_constraintBottom_toBottomOf=\"parent\"\r\n            app:layout_constraintEnd_toEndOf=\"parent\"\r\n            app:layout_constraintHorizontal_bias=\"0.106\"\r\n            app:layout_constraintStart_toStartOf=\"parent\"\r\n            app:layout_constraintTop_toTopOf=\"parent\"\r\n            app:layout_constraintVertical_bias=\"0.293\" />\r\n\r\n        <EditText\r\n            android:id=\"@+id/edtPhoneNumberUser\"\r\n            android:layout_width=\"337dp\"\r\n            android:layout_height=\"42dp\"\r\n            android:layout_marginLeft=\"10dp\"\r\n            android:layout_marginTop=\"210dp\"\r\n            android:background=\"@drawable/design_edit_square\"\r\n            android:ems=\"10\"\r\n            android:inputType=\"textPersonName\"\r\n            android:paddingLeft=\"15dp\"\r\n            app:layout_constraintBottom_toBottomOf=\"parent\"\r\n            app:layout_constraintEnd_toEndOf=\"parent\"\r\n            app:layout_constraintStart_toStartOf=\"parent\"\r\n            app:layout_constraintTop_toBottomOf=\"@+id/textView4\"\r\n            app:layout_constraintVertical_bias=\"0.004\" />\r\n\r\n        <Button\r\n            android:id=\"@+id/btnUpdateAccount\"\r\n            android:layout_width=\"337dp\"\r\n            android:layout_height=\"42dp\"\r\n            android:layout_marginLeft=\"10dp\"\r\n            android:layout_marginTop=\"280dp\"\r\n            android:background=\"@drawable/design_green_btn\"\r\n            android:backgroundTint=\"#DAF1DB\"\r\n            android:ems=\"10\"\r\n            android:inputType=\"textPersonName\"\r\n            android:paddingLeft=\"15dp\"\r\n            android:text=\"Update\"\r\n            android:textColor=\"@color/green\"\r\n            app:backgroundTint=\"@null\"\r\n            app:layout_constraintBottom_toBottomOf=\"parent\"\r\n            app:layout_constraintEnd_toEndOf=\"parent\"\r\n            app:layout_constraintStart_toStartOf=\"parent\"\r\n            app:layout_constraintTop_toBottomOf=\"@+id/textView4\"\r\n            app:layout_constraintVertical_bias=\"0.004\" />\r\n\r\n        <Button\r\n            android:id=\"@+id/btnDeleteAccount\"\r\n            android:layout_width=\"337dp\"\r\n            android:layout_height=\"42dp\"\r\n            android:layout_marginLeft=\"10dp\"\r\n            android:layout_marginTop=\"340dp\"\r\n            android:background=\"@drawable/design_btn\"\r\n            android:backgroundTint=\"#EABDBD\"\r\n            android:drawableStart=\"@drawable/ic_person\"\r\n            android:ems=\"10\"\r\n            android:inputType=\"textPersonName\"\r\n            android:paddingLeft=\"15dp\"\r\n            android:text=\"Delete Account\"\r\n            android:textColor=\"@color/red\"\r\n            app:backgroundTint=\"@null\"\r\n            app:layout_constraintBottom_toBottomOf=\"parent\"\r\n            app:layout_constraintEnd_toEndOf=\"parent\"\r\n            app:layout_constraintStart_toStartOf=\"parent\"\r\n            app:layout_constraintTop_toBottomOf=\"@+id/textView4\"\r\n            app:layout_constraintVertical_bias=\"0.004\" />\r\n    </androidx.cardview.widget.CardView>\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_edit_profile.xml b/app/src/main/res/layout/activity_edit_profile.xml
+--- a/app/src/main/res/layout/activity_edit_profile.xml	(revision 4cb78367077c8ab43d5c2efdb65da66bec5d83b4)
++++ b/app/src/main/res/layout/activity_edit_profile.xml	(date 1669527066530)
+@@ -43,7 +43,7 @@
+         app:shapeAppearanceOverlay="@style/roundImageView" />
+ 
+     <com.google.android.material.imageview.ShapeableImageView
+-        android:id="@+id/edtAvatar"
++        android:id="@+id/editAvatar"
+         android:layout_width="40dp"
+         android:layout_height="40dp"
+         android:layout_alignParentStart="true"
+@@ -117,7 +117,7 @@
+             app:layout_constraintVertical_bias="0.293" />
+ 
+         <EditText
+-            android:id="@+id/edtEmialUser"
++            android:id="@+id/edtEmailUser"
+             android:layout_width="337dp"
+             android:layout_height="42dp"
+             android:layout_marginLeft="10dp"
+@@ -170,7 +170,8 @@
+             android:layout_width="337dp"
+             android:layout_height="42dp"
+             android:layout_marginLeft="10dp"
+-            android:layout_marginTop="280dp"
++
++            android:layout_marginTop="290dp"
+             android:background="@drawable/design_green_btn"
+             android:backgroundTint="#DAF1DB"
+             android:ems="10"
+Index: app/src/main/java/com/example/duan1nhom7qlkhachsan/Fragment/PhongDaDatFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/duan1nhom7qlkhachsan/Fragment/PhongDaDatFragment.java b/app/src/main/java/com/example/duan1nhom7qlkhachsan/Guide/Fragment/PhongDaDatFragment.java
+rename from app/src/main/java/com/example/duan1nhom7qlkhachsan/Fragment/PhongDaDatFragment.java
+rename to app/src/main/java/com/example/duan1nhom7qlkhachsan/Guide/Fragment/PhongDaDatFragment.java
+--- a/app/src/main/java/com/example/duan1nhom7qlkhachsan/Fragment/PhongDaDatFragment.java	(revision 4cb78367077c8ab43d5c2efdb65da66bec5d83b4)
++++ b/app/src/main/java/com/example/duan1nhom7qlkhachsan/Guide/Fragment/PhongDaDatFragment.java	(date 1669525925298)
+@@ -1,4 +1,4 @@
+-package com.example.duan1nhom7qlkhachsan.Fragment;
++package com.example.duan1nhom7qlkhachsan.Guide.Fragment;
+ 
+ import android.os.Bundle;
+ import android.view.LayoutInflater;
+@@ -9,7 +9,6 @@
+ import androidx.annotation.NonNull;
+ import androidx.annotation.Nullable;
+ import androidx.fragment.app.Fragment;
+-import androidx.recyclerview.widget.RecyclerView;
+ 
+ import com.example.duan1nhom7qlkhachsan.Adapter.BookedRoomAdapter;
+ import com.example.duan1nhom7qlkhachsan.Model.AppRoom;
+Index: app/src/main/java/com/example/duan1nhom7qlkhachsan/Fragment/AddServiceFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/duan1nhom7qlkhachsan/Fragment/AddServiceFragment.java b/app/src/main/java/com/example/duan1nhom7qlkhachsan/Guide/Fragment/AddServiceFragment.java
+rename from app/src/main/java/com/example/duan1nhom7qlkhachsan/Fragment/AddServiceFragment.java
+rename to app/src/main/java/com/example/duan1nhom7qlkhachsan/Guide/Fragment/AddServiceFragment.java
+--- a/app/src/main/java/com/example/duan1nhom7qlkhachsan/Fragment/AddServiceFragment.java	(revision 4cb78367077c8ab43d5c2efdb65da66bec5d83b4)
++++ b/app/src/main/java/com/example/duan1nhom7qlkhachsan/Guide/Fragment/AddServiceFragment.java	(date 1669525925362)
+@@ -1,4 +1,4 @@
+-package com.example.duan1nhom7qlkhachsan.Fragment;
++package com.example.duan1nhom7qlkhachsan.Guide.Fragment;
+ 
+ import android.os.Bundle;
+ 
+Index: app/src/main/java/com/example/duan1nhom7qlkhachsan/Fragment/DoanhThuFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/duan1nhom7qlkhachsan/Fragment/DoanhThuFragment.java b/app/src/main/java/com/example/duan1nhom7qlkhachsan/Guide/Fragment/DoanhThuFragment.java
+rename from app/src/main/java/com/example/duan1nhom7qlkhachsan/Fragment/DoanhThuFragment.java
+rename to app/src/main/java/com/example/duan1nhom7qlkhachsan/Guide/Fragment/DoanhThuFragment.java
+--- a/app/src/main/java/com/example/duan1nhom7qlkhachsan/Fragment/DoanhThuFragment.java	(revision 4cb78367077c8ab43d5c2efdb65da66bec5d83b4)
++++ b/app/src/main/java/com/example/duan1nhom7qlkhachsan/Guide/Fragment/DoanhThuFragment.java	(date 1669525925384)
+@@ -1,4 +1,4 @@
+-package com.example.duan1nhom7qlkhachsan.Fragment;
++package com.example.duan1nhom7qlkhachsan.Guide.Fragment;
+ 
+ import android.app.DatePickerDialog;
+ import android.icu.util.Calendar;
+Index: app/src/main/res/layout/fragment_phong_da_dat.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<FrameLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".Fragment.PhongDaDatFragment\">\r\n\r\n\r\n    <ListView\r\n        android:layout_width=\"match_parent\"\r\n        android:id=\"@+id/lvFrgBookedRoom\"\r\n        android:layout_height=\"wrap_content\" />\r\n</FrameLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/fragment_phong_da_dat.xml b/app/src/main/res/layout/fragment_phong_da_dat.xml
+--- a/app/src/main/res/layout/fragment_phong_da_dat.xml	(revision 4cb78367077c8ab43d5c2efdb65da66bec5d83b4)
++++ b/app/src/main/res/layout/fragment_phong_da_dat.xml	(date 1669525925441)
+@@ -3,7 +3,7 @@
+     xmlns:tools="http://schemas.android.com/tools"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+-    tools:context=".Fragment.PhongDaDatFragment">
++    tools:context=".Guide.Fragment.PhongDaDatFragment">
+ 
+ 
+     <ListView
+Index: app/src/main/java/com/example/duan1nhom7qlkhachsan/Fragment/AddRoomFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/duan1nhom7qlkhachsan/Fragment/AddRoomFragment.java b/app/src/main/java/com/example/duan1nhom7qlkhachsan/Guide/Fragment/AddRoomFragment.java
+rename from app/src/main/java/com/example/duan1nhom7qlkhachsan/Fragment/AddRoomFragment.java
+rename to app/src/main/java/com/example/duan1nhom7qlkhachsan/Guide/Fragment/AddRoomFragment.java
+--- a/app/src/main/java/com/example/duan1nhom7qlkhachsan/Fragment/AddRoomFragment.java	(revision 4cb78367077c8ab43d5c2efdb65da66bec5d83b4)
++++ b/app/src/main/java/com/example/duan1nhom7qlkhachsan/Guide/Fragment/AddRoomFragment.java	(date 1669525925435)
+@@ -1,39 +1,21 @@
+-package com.example.duan1nhom7qlkhachsan.Fragment;
++package com.example.duan1nhom7qlkhachsan.Guide.Fragment;
+ 
+-import android.content.Context;
+ import android.os.Bundle;
+ 
+ import androidx.annotation.NonNull;
+ import androidx.annotation.Nullable;
+ import androidx.fragment.app.Fragment;
+ 
+-import android.util.Log;
+ import android.view.LayoutInflater;
+ import android.view.View;
+ import android.view.ViewGroup;
+-import android.widget.AdapterView;
+-import android.widget.Button;
+-import android.widget.EditText;
+ import android.widget.ListView;
+-import android.widget.Toast;
+ 
+ import com.example.duan1nhom7qlkhachsan.Adapter.AddRoomAdapter;
+ import com.example.duan1nhom7qlkhachsan.Model.AppRoom;
+ import com.example.duan1nhom7qlkhachsan.R;
+-import com.google.android.gms.tasks.OnCompleteListener;
+-import com.google.android.gms.tasks.OnFailureListener;
+-import com.google.android.gms.tasks.OnSuccessListener;
+-import com.google.android.gms.tasks.Task;
+-import com.google.firebase.firestore.DocumentReference;
+-import com.google.firebase.firestore.FirebaseFirestore;
+-import com.google.firebase.firestore.QueryDocumentSnapshot;
+-import com.google.firebase.firestore.QuerySnapshot;
+-
+-import org.checkerframework.checker.units.qual.A;
+ 
+ import java.util.ArrayList;
+-import java.util.HashMap;
+-import java.util.Map;
+ 
+ 
+ public class AddRoomFragment extends Fragment {
+Index: app/src/main/java/com/example/duan1nhom7qlkhachsan/MainActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.duan1nhom7qlkhachsan;\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.view.LayoutInflater;\r\nimport android.view.MenuItem;\r\nimport android.view.View;\r\nimport android.widget.EditText;\r\nimport android.widget.FrameLayout;\r\nimport android.widget.TextView;\r\nimport android.widget.Toast;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.appcompat.app.ActionBar;\r\nimport androidx.appcompat.app.AlertDialog;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.appcompat.widget.Toolbar;\r\nimport androidx.core.view.GravityCompat;\r\nimport androidx.drawerlayout.widget.DrawerLayout;\r\nimport androidx.fragment.app.Fragment;\r\nimport androidx.fragment.app.FragmentManager;\r\n\r\n\r\nimport com.example.duan1nhom7qlkhachsan.Activity.AddRoomActivity;\r\nimport com.example.duan1nhom7qlkhachsan.Activity.LoginActivity;\r\nimport com.example.duan1nhom7qlkhachsan.Activity.EditProfileActivity;\r\nimport com.example.duan1nhom7qlkhachsan.Activity.hotro.HotroAdminFragment;\r\nimport com.example.duan1nhom7qlkhachsan.Activity.hotro.HoTroFragment;\r\nimport com.example.duan1nhom7qlkhachsan.Fragment.BookRoomFragment;\r\nimport com.example.duan1nhom7qlkhachsan.Fragment.DoanhThuFragment;\r\nimport com.example.duan1nhom7qlkhachsan.Fragment.GioiThieuFragment;\r\nimport com.example.duan1nhom7qlkhachsan.Fragment.PhongDaDatFragment;\r\nimport com.example.duan1nhom7qlkhachsan.Fragment.ServiceFragment;\r\n\r\nimport com.google.android.gms.auth.api.signin.GoogleSignIn;\r\nimport com.google.android.gms.auth.api.signin.GoogleSignInAccount;\r\nimport com.google.android.gms.auth.api.signin.GoogleSignInClient;\r\nimport com.google.android.gms.auth.api.signin.GoogleSignInOptions;\r\nimport com.google.android.gms.tasks.OnCompleteListener;\r\nimport com.google.android.gms.tasks.Task;\r\nimport com.google.android.material.navigation.NavigationView;\r\n\r\npublic class MainActivity extends AppCompatActivity {\r\n\r\n    DrawerLayout drawerLayout;\r\n    FrameLayout frameLayout;\r\n    Toolbar toolBar;\r\n    NavigationView navigationView;\r\n    View headerLayout;\r\n    GoogleSignInClient gsc;\r\n    GoogleSignInAccount account;\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_main);\r\n\r\n        drawerLayout = findViewById(R.id.DrawerLayout);\r\n        frameLayout = findViewById(R.id.frameLayout);\r\n        toolBar = findViewById(R.id.toolBar);\r\n        navigationView = findViewById(R.id.navigationView);\r\n        headerLayout = navigationView.getHeaderView(0);\r\n\r\n        TextView tvTen = headerLayout.findViewById(R.id.tvTen);\r\n        setSupportActionBar(toolBar);\r\n        ActionBar actionBar = getSupportActionBar();\r\n        actionBar.setDisplayHomeAsUpEnabled(true);\r\n        actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);\r\n\r\n        GoogleSignInOptions gso = new GoogleSignInOptions\r\n                .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)\r\n                .requestEmail()\r\n                .build();\r\n        gsc = GoogleSignIn.getClient(MainActivity.this, gso);\r\n        account = GoogleSignIn.getLastSignedInAccount(MainActivity.this);\r\n\r\n\r\n        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {\r\n            @Override\r\n            public boolean onNavigationItemSelected(@NonNull MenuItem item) {\r\n                Fragment fragment = null;\r\n                switch (item.getItemId()) {\r\n                    case R.id.mDichVu:\r\n                        fragment = new ServiceFragment();\r\n                        break;\r\n                    case R.id.mDatPhong:\r\n                        fragment = new BookRoomFragment();\r\n                        break;\r\n                    case R.id.mDoanhThu:\r\n                        fragment = new DoanhThuFragment();\r\n                        break;\r\n                    case R.id.mHotro:\r\n                        fragment = new HotroAdminFragment();\r\n                        break;\r\n                    case R.id.mTuVanKH:\r\n                        fragment = new HoTroFragment();\r\n                        break;\r\n                    case R.id.mPhongDaDat:\r\n                        fragment = new PhongDaDatFragment();\r\n                        break;\r\n                    case R.id.mGioiThieu:\r\n                        fragment = new GioiThieuFragment();\r\n                        break;\r\n                    case R.id.mEditProfile:\r\n                        Intent intentChangeName = new Intent(MainActivity.this, EditProfileActivity.class);\r\n                        startActivity(intentChangeName);\r\n                        break;\r\n                    case R.id.mAddRoom:\r\n                        Intent intentAddRoom = new Intent(MainActivity.this, AddRoomActivity.class);\r\n                        startActivity(intentAddRoom);\r\n                        break;\r\n\r\n                    case R.id.mDangXuat:\r\n                        if (account != null) {\r\n                            gsc.signOut().addOnCompleteListener(MainActivity.this,\r\n                                    new OnCompleteListener<Void>() {\r\n                                        @Override\r\n                                        public void onComplete(@NonNull Task<Void> task) {\r\n                                            Intent homeIntent = new Intent(MainActivity.this, LoginActivity.class);\r\n                                            startActivity(homeIntent);\r\n                                            finish();\r\n                                        }\r\n                                    });\r\n                        } else {\r\n                            Intent intent = new Intent(MainActivity.this, LoginActivity.class);\r\n                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);\r\n                            startActivity(intent);\r\n                        }\r\n                    default:\r\n                        fragment = new GioiThieuFragment();\r\n\r\n                        break;\r\n                }\r\n                if (fragment != null) {\r\n                    FragmentManager fragmentManager = getSupportFragmentManager();\r\n                    fragmentManager.beginTransaction()\r\n                            .replace(R.id.frameLayout, fragment)\r\n                            .commit();\r\n                    toolBar.setTitle(item.getTitle());\r\n                }\r\n\r\n\r\n                drawerLayout.closeDrawer(GravityCompat.START);\r\n\r\n                return false;\r\n            }\r\n        });\r\n\r\n\r\n    }\r\n\r\n    @Override\r\n    public boolean onOptionsItemSelected(@NonNull MenuItem item) {\r\n        if (item.getItemId() == android.R.id.home) {\r\n            drawerLayout.openDrawer(GravityCompat.START);\r\n        }\r\n        return super.onOptionsItemSelected(item);\r\n\r\n    }\r\n\r\n\r\n    public void showDialogChangePass() {\r\n        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this)\r\n                .setPositiveButton(\"Update\", null)\r\n                .setNegativeButton(\"Cancel\", null);\r\n        LayoutInflater inflater = getLayoutInflater();\r\n        View view = inflater.inflate(R.layout.dialog_changepassword, null);\r\n        EditText edtOldPass = view.findViewById(R.id.edtOldPass);\r\n        EditText edtNewPass = view.findViewById(R.id.edtNewPass);\r\n        EditText edtReNewPass = view.findViewById(R.id.edtReOldPass);\r\n\r\n        builder.setView(view);\r\n\r\n\r\n        AlertDialog alertDialog = builder.create();\r\n        alertDialog.setCancelable(false);//nhấn ra ngoài k thoát\r\n        alertDialog.show();\r\n        finish();\r\n\r\n        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                String oldPass = edtOldPass.getText().toString();\r\n                String newPass = edtNewPass.getText().toString();\r\n                String reNewPass = edtReNewPass.getText().toString();\r\n                if (oldPass.equals(\"\") || newPass.equals(\"\") || reNewPass.equals(\"\")) {\r\n                    Toast.makeText(MainActivity.this, \"Please enter these field\", Toast.LENGTH_SHORT).show();\r\n                } else {\r\n\r\n                    if (newPass.equals(reNewPass)) {\r\n//                        SharedPreferences sharedPreferences =getSharedPreferences(\"THONGTIN\",MODE_PRIVATE);\r\n//\r\n//                        String matt = sharedPreferences.getString(\"matt\",\"\");\r\n//                        //update\r\n//                        ThuThuDAO thuThuDAO=new ThuThuDAO(MainActivity.this);\r\n//                        int check = thuThuDAO.checkChangePassword(matt,oldPass,newPass);\r\n//                        if (check==1)\r\n//                        {\r\n//                            Toast.makeText(MainActivity.this, \"Update Successful\", Toast.LENGTH_SHORT).show();\r\n//                            Intent intent = new Intent(MainActivity.this,LoginActivity.class);\r\n//                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);\r\n//                            startActivity(intent);\r\n//                        }\r\n//                        else if(check==0)\r\n//                        {\r\n//                            Toast.makeText(MainActivity.this, \"Update Failed,Old password is wrong\", Toast.LENGTH_SHORT).show();\r\n//\r\n//                        }else\r\n//                        {\r\n//                            Toast.makeText(MainActivity.this, \"Update Failed\", Toast.LENGTH_SHORT).show();\r\n//\r\n//                        }\r\n                    } else {\r\n                        Toast.makeText(MainActivity.this, \"Please enter the same new password\", Toast.LENGTH_SHORT).show();\r\n                    }\r\n                }\r\n\r\n            }\r\n        });\r\n    }\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/duan1nhom7qlkhachsan/MainActivity.java b/app/src/main/java/com/example/duan1nhom7qlkhachsan/MainActivity.java
+--- a/app/src/main/java/com/example/duan1nhom7qlkhachsan/MainActivity.java	(revision 4cb78367077c8ab43d5c2efdb65da66bec5d83b4)
++++ b/app/src/main/java/com/example/duan1nhom7qlkhachsan/MainActivity.java	(date 1669525925418)
+@@ -26,11 +26,11 @@
+ import com.example.duan1nhom7qlkhachsan.Activity.EditProfileActivity;
+ import com.example.duan1nhom7qlkhachsan.Activity.hotro.HotroAdminFragment;
+ import com.example.duan1nhom7qlkhachsan.Activity.hotro.HoTroFragment;
+-import com.example.duan1nhom7qlkhachsan.Fragment.BookRoomFragment;
+-import com.example.duan1nhom7qlkhachsan.Fragment.DoanhThuFragment;
+-import com.example.duan1nhom7qlkhachsan.Fragment.GioiThieuFragment;
+-import com.example.duan1nhom7qlkhachsan.Fragment.PhongDaDatFragment;
+-import com.example.duan1nhom7qlkhachsan.Fragment.ServiceFragment;
++import com.example.duan1nhom7qlkhachsan.Guide.Fragment.BookRoomFragment;
++import com.example.duan1nhom7qlkhachsan.Guide.Fragment.DoanhThuFragment;
++import com.example.duan1nhom7qlkhachsan.Guide.Fragment.GioiThieuFragment;
++import com.example.duan1nhom7qlkhachsan.Guide.Fragment.PhongDaDatFragment;
++import com.example.duan1nhom7qlkhachsan.Guide.Fragment.ServiceFragment;
+ 
+ import com.google.android.gms.auth.api.signin.GoogleSignIn;
+ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+Index: app/src/main/java/com/example/duan1nhom7qlkhachsan/Fragment/GioiThieuFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/duan1nhom7qlkhachsan/Fragment/GioiThieuFragment.java b/app/src/main/java/com/example/duan1nhom7qlkhachsan/Guide/Fragment/GioiThieuFragment.java
+rename from app/src/main/java/com/example/duan1nhom7qlkhachsan/Fragment/GioiThieuFragment.java
+rename to app/src/main/java/com/example/duan1nhom7qlkhachsan/Guide/Fragment/GioiThieuFragment.java
+--- a/app/src/main/java/com/example/duan1nhom7qlkhachsan/Fragment/GioiThieuFragment.java	(revision 4cb78367077c8ab43d5c2efdb65da66bec5d83b4)
++++ b/app/src/main/java/com/example/duan1nhom7qlkhachsan/Guide/Fragment/GioiThieuFragment.java	(date 1669525925369)
+@@ -1,4 +1,4 @@
+-package com.example.duan1nhom7qlkhachsan.Fragment;
++package com.example.duan1nhom7qlkhachsan.Guide.Fragment;
+ 
+ import android.os.Bundle;
+ import android.view.LayoutInflater;
+Index: app/src/main/res/layout/fragment_dat_phong.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<FrameLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".Fragment.BookRoomFragment\">\r\n\r\n    <!-- TODO: Update blank fragment layout -->\r\n\r\n    <ListView\r\n        android:id=\"@+id/lvFragmentDatPhong\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"match_parent\" />\r\n\r\n</FrameLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/fragment_dat_phong.xml b/app/src/main/res/layout/fragment_dat_phong.xml
+--- a/app/src/main/res/layout/fragment_dat_phong.xml	(revision 4cb78367077c8ab43d5c2efdb65da66bec5d83b4)
++++ b/app/src/main/res/layout/fragment_dat_phong.xml	(date 1669525925429)
+@@ -3,7 +3,7 @@
+     xmlns:tools="http://schemas.android.com/tools"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+-    tools:context=".Fragment.BookRoomFragment">
++    tools:context=".Guide.Fragment.BookRoomFragment">
+ 
+     <!-- TODO: Update blank fragment layout -->
+ 
+Index: app/src/main/java/com/example/duan1nhom7qlkhachsan/Fragment/ServiceFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/duan1nhom7qlkhachsan/Fragment/ServiceFragment.java b/app/src/main/java/com/example/duan1nhom7qlkhachsan/Guide/Fragment/ServiceFragment.java
+rename from app/src/main/java/com/example/duan1nhom7qlkhachsan/Fragment/ServiceFragment.java
+rename to app/src/main/java/com/example/duan1nhom7qlkhachsan/Guide/Fragment/ServiceFragment.java
+--- a/app/src/main/java/com/example/duan1nhom7qlkhachsan/Fragment/ServiceFragment.java	(revision 4cb78367077c8ab43d5c2efdb65da66bec5d83b4)
++++ b/app/src/main/java/com/example/duan1nhom7qlkhachsan/Guide/Fragment/ServiceFragment.java	(date 1669525925378)
+@@ -1,4 +1,4 @@
+-package com.example.duan1nhom7qlkhachsan.Fragment;
++package com.example.duan1nhom7qlkhachsan.Guide.Fragment;
+ 
+ import android.os.Bundle;
+ import android.view.LayoutInflater;
+Index: app/src/main/res/layout/fragment_doanh_thu.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<LinearLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:orientation=\"vertical\"\r\n    android:layout_margin=\"10dp\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".Fragment.DoanhThuFragment\">\r\n\r\n\r\n    <TextView\r\n        android:id=\"@+id/textView8\"\r\n        android:textSize=\"30dp\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:textColor=\"@color/black\"\r\n        android:layout_marginLeft=\"10dp\"\r\n        android:paddingBottom=\"10dp\"\r\n        android:text=\"Since:\" />\r\n\r\n    <EditText\r\n        android:layout_marginLeft=\"10dp\"\r\n\r\n        android:id=\"@+id/edtStartDay\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:ems=\"10\"\r\n        android:inputType=\"textPersonName\"\r\n        android:paddingBottom=\"10dp\"\r\n\r\n        android:hint=\"Start day\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/tvToDay\"\r\n        android:textSize=\"30dp\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:textColor=\"@color/black\"\r\n        android:paddingBottom=\"10dp\"\r\n\r\n        android:layout_marginLeft=\"10dp\"\r\n        android:text=\"To:\" />\r\n\r\n    <EditText\r\n        android:id=\"@+id/edtEndDay\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:ems=\"10\"\r\n        android:inputType=\"textPersonName\"\r\n        android:paddingBottom=\"10dp\"\r\n        android:layout_marginLeft=\"10dp\"\r\n        android:hint=\"End day\" />\r\n\r\n    <Button\r\n        android:id=\"@+id/btnThongKe\"\r\n        android:paddingBottom=\"10dp\"\r\n        android:textColor=\"@color/black\"\r\n        android:textStyle=\"bold\"\r\n        android:textSize=\"20dp\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"Statistic \" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/tvResult\"\r\n        android:textAlignment=\"center\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:paddingBottom=\"10dp\"\r\n\r\n        android:text=\"999,99VND\"\r\n        android:textColor=\"@color/black\"\r\n        android:textSize=\"30dp\" />\r\n</LinearLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/fragment_doanh_thu.xml b/app/src/main/res/layout/fragment_doanh_thu.xml
+--- a/app/src/main/res/layout/fragment_doanh_thu.xml	(revision 4cb78367077c8ab43d5c2efdb65da66bec5d83b4)
++++ b/app/src/main/res/layout/fragment_doanh_thu.xml	(date 1669525925284)
+@@ -5,7 +5,7 @@
+     android:orientation="vertical"
+     android:layout_margin="10dp"
+     android:layout_height="match_parent"
+-    tools:context=".Fragment.DoanhThuFragment">
++    tools:context=".Guide.Fragment.DoanhThuFragment">
+ 
+ 
+     <TextView

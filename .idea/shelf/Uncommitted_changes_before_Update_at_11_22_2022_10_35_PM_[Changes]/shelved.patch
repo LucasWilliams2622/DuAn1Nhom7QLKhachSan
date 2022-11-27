@@ -1,0 +1,125 @@
+Index: app/src/main/res/menu/menu.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<menu xmlns:android=\"http://schemas.android.com/apk/res/android\">\r\n    <item android:id=\"@+id/mGioiThieu\"\r\n        android:title=\"Giới thiệu về Savila\"\r\n        android:icon=\"@drawable/ic_home\"/>\r\n    <item android:id=\"@+id/mDatPhong\"\r\n        android:title=\"Đặt phòng\"\r\n        android:icon=\"@drawable/ic_room\"/>\r\n    <item android:id=\"@+id/mPhongDaDat\"\r\n        android:title=\"Phòng đã đặt\"\r\n        android:icon=\"@drawable/ic_checkroom\"/>\r\n    <item android:id=\"@+id/mDichVu\"\r\n        android:title=\"Dịch vụ\"\r\n        android:icon=\"@drawable/ic_room_service\"/>\r\n    <item android:id=\"@+id/mHotro\"\r\n        android:title=\"Hỗ trợ khách hàng\"/>\r\n    <item android:title=\"Thống kê\">\r\n        <menu>\r\n            <item android:id=\"@+id/mAddRoom\"\r\n                android:title=\"Thêm phòng \"\r\n                android:icon=\"@drawable/ic_top\"/>\r\n            <item android:id=\"@+id/mAddService\"\r\n                android:title=\"Thêm phòng và dịch vụ\"\r\n                android:icon=\"@drawable/ic_top\"/>\r\n            <item android:id=\"@+id/mTop10\"\r\n                android:title=\"Top 3 phòng được đặt nhiều nhất\"\r\n                android:icon=\"@drawable/ic_top\"/>\r\n            <item android:id=\"@+id/mDoanhThu\"\r\n                android:title=\"Doanh Thu\"\r\n                android:icon=\"@drawable/ic_money\"/>\r\n        </menu>\r\n    </item>\r\n    <item android:title=\"Ngưởi dùng\">\r\n        <menu>\r\n            <item android:id=\"@+id/mDoiMatKhau\"\r\n                android:title=\"Đổi mật khẩu\"\r\n                android:icon=\"@drawable/ic_key\"/>\r\n            <item android:id=\"@+id/mTuVanKH\"\r\n                android:title=\"Tư vấn khách hàng\"\r\n                android:icon=\"@drawable/ic_baseline_phone_24\"/>\r\n            <item android:id=\"@+id/mDangXuat\"\r\n                android:title=\"Đăng Xuất\"\r\n                android:icon=\"@drawable/ic_exit\"/>\r\n        </menu>\r\n    </item>\r\n</menu>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/menu/menu.xml b/app/src/main/res/menu/menu.xml
+--- a/app/src/main/res/menu/menu.xml	(revision 19832bb37ad83ff147ca9857530a5160efd25f08)
++++ b/app/src/main/res/menu/menu.xml	(date 1669131280197)
+@@ -20,7 +20,7 @@
+                 android:title="Thêm phòng "
+                 android:icon="@drawable/ic_top"/>
+             <item android:id="@+id/mAddService"
+-                android:title="Thêm phòng và dịch vụ"
++                android:title="Thêm dịch vụ"
+                 android:icon="@drawable/ic_top"/>
+             <item android:id="@+id/mTop10"
+                 android:title="Top 3 phòng được đặt nhiều nhất"
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\">\r\n\r\n    <uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\" />\r\n    <uses-permission android:name=\"android.permission.INTERNET\" />\r\n\r\n    <application\r\n        android:allowBackup=\"true\"\r\n        android:dataExtractionRules=\"@xml/data_extraction_rules\"\r\n        android:fullBackupContent=\"@xml/backup_rules\"\r\n        android:icon=\"@mipmap/ic_launcher\"\r\n        android:label=\"@string/app_name\"\r\n        android:roundIcon=\"@mipmap/ic_launcher_round\"\r\n        android:supportsRtl=\"true\"\r\n        android:theme=\"@style/Theme.DuAn1Nhom7QLKhachSan\"\r\n        tools:targetApi=\"31\">\r\n        <activity\r\n            android:name=\".Activity.AddRoomActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.CustomTabActivity\"\r\n            android:exported=\"true\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.VIEW\" />\r\n\r\n                <category android:name=\"android.intent.category.DEFAULT\" />\r\n                <category android:name=\"android.intent.category.BROWSABLE\" />\r\n\r\n                <data android:scheme=\"@string/fb_login_protocol_scheme\" />\r\n            </intent-filter>\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.VIEW\" />\r\n\r\n                <category android:name=\"android.intent.category.DEFAULT\" />\r\n                <category android:name=\"android.intent.category.BROWSABLE\" />\r\n\r\n                <data android:scheme=\"@string/fb_login_protocol_scheme\" />\r\n            </intent-filter>\r\n        </activity>\r\n\r\n        <meta-data\r\n            android:name=\"com.facebook.sdk.ApplicationId\"\r\n            android:value=\"@string/facebook_app_id\" />\r\n        <meta-data\r\n            android:name=\"com.facebook.sdk.ClientToken\"\r\n            android:value=\"@string/facebook_client_token\" />\r\n\r\n        <activity\r\n            android:name=\".Activity.BookedRoomActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.RoomActivity\"\r\n            android:exported=\"true\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.BeginActivity\"\r\n            android:exported=\"true\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.RegisterActivity\"\r\n            android:exported=\"true\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.LoginActivity\"\r\n            android:configChanges=\"keyboard|keyboardHidden|screenLayout|screenSize|orientation\"\r\n            android:exported=\"true\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".MainActivity\"\r\n            android:exported=\"true\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n    </application>\r\n\r\n</manifest>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/AndroidManifest.xml b/app/src/main/AndroidManifest.xml
+--- a/app/src/main/AndroidManifest.xml	(revision 19832bb37ad83ff147ca9857530a5160efd25f08)
++++ b/app/src/main/AndroidManifest.xml	(date 1668944824142)
+@@ -16,6 +16,13 @@
+         android:theme="@style/Theme.DuAn1Nhom7QLKhachSan"
+         tools:targetApi="31">
+         <activity
++            android:name=".AddServiceActivity"
++            android:exported="false">
++            <meta-data
++                android:name="android.app.lib_name"
++                android:value="" />
++        </activity>
++        <activity
+             android:name=".Activity.AddRoomActivity"
+             android:exported="false">
+             <meta-data
+Index: app/src/main/res/layout/activity_add_room.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<LinearLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    android:layout_margin=\"13dp\"\r\n    android:orientation=\"vertical\"\r\n    tools:context=\".Activity.RoomActivity\">\r\n\r\n\r\n    <EditText\r\n        android:id=\"@+id/edtIdRoom\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:ems=\"10\"\r\n        android:hint=\"Id room\"\r\n        android:inputType=\"textPersonName\"\r\n        android:paddingLeft=\"7dp\"\r\n        android:paddingTop=\"10dp\"\r\n        android:text=\"\"\r\n        android:textColor=\"@color/black\"\r\n        android:textColorHint=\"@color/black\"\r\n        android:textSize=\"17dp\" />\r\n\r\n    <EditText\r\n        android:id=\"@+id/edtNameRoom\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:ems=\"10\"\r\n        android:hint=\"Name room\"\r\n        android:inputType=\"textPersonName\"\r\n        android:paddingLeft=\"7dp\"\r\n        android:paddingTop=\"10dp\"\r\n        android:text=\"\"\r\n        android:textColor=\"@color/black\"\r\n        android:textColorHint=\"@color/black\"\r\n        android:textSize=\"17dp\" />\r\n\r\n    <EditText\r\n        android:id=\"@+id/edtTypeRoom\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:ems=\"10\"\r\n        android:hint=\"Type room\"\r\n        android:inputType=\"textPersonName\"\r\n        android:paddingLeft=\"7dp\"\r\n        android:paddingTop=\"10dp\"\r\n        android:text=\"\"\r\n        android:textColor=\"@color/black\"\r\n        android:textColorHint=\"@color/black\"\r\n        android:textSize=\"17dp\" />\r\n\r\n    <EditText\r\n        android:id=\"@+id/edtPriceRoom\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:ems=\"10\"\r\n        android:hint=\"Price room\"\r\n        android:inputType=\"textPersonName\"\r\n        android:paddingLeft=\"7dp\"\r\n        android:paddingTop=\"10dp\"\r\n        android:text=\"\"\r\n        android:textColor=\"@color/black\"\r\n        android:textColorHint=\"@color/black\"\r\n        android:textSize=\"17dp\" />\r\n\r\n    <EditText\r\n        android:id=\"@+id/edtStartDay\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:ems=\"10\"\r\n        android:hint=\"Start day\"\r\n        android:inputType=\"textPersonName\"\r\n        android:paddingLeft=\"7dp\"\r\n        android:paddingTop=\"10dp\"\r\n        android:text=\"\"\r\n        android:textColor=\"@color/black\"\r\n        android:textColorHint=\"@color/black\"\r\n        android:textSize=\"17dp\" />\r\n\r\n    <EditText\r\n        android:id=\"@+id/edtEndDay\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:ems=\"10\"\r\n        android:hint=\"End day\"\r\n        android:inputType=\"textPersonName\"\r\n        android:paddingLeft=\"7dp\"\r\n        android:paddingTop=\"10dp\"\r\n        android:text=\"\"\r\n        android:textColor=\"@color/black\"\r\n        android:textColorHint=\"@color/black\"\r\n        android:textSize=\"17dp\" />\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:orientation=\"horizontal\">\r\n\r\n        <Button\r\n            android:id=\"@+id/btnClear\"\r\n            android:layout_width=\"0dp\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_weight=\"1\"\r\n            android:onClick=\"onCancleClick\"\r\n            android:text=\"Clear \" />\r\n\r\n        <Button\r\n            android:id=\"@+id/btnAddRoom\"\r\n\r\n            android:layout_width=\"0dp\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_weight=\"1\"\r\n            android:onClick=\"onAddRoomClick\"\r\n            android:text=\"Add Room\" />\r\n\r\n    </LinearLayout>\r\n\r\n    <FrameLayout\r\n        android:id=\"@+id/flAddRoom\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"match_parent\" />\r\n</LinearLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_add_room.xml b/app/src/main/res/layout/activity_add_room.xml
+--- a/app/src/main/res/layout/activity_add_room.xml	(revision 19832bb37ad83ff147ca9857530a5160efd25f08)
++++ b/app/src/main/res/layout/activity_add_room.xml	(date 1668951608165)
+@@ -9,6 +9,12 @@
+     tools:context=".Activity.RoomActivity">
+ 
+ 
++    <Button
++        android:id="@+id/btnBackToMain"
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:text=" Back" />
++
+     <EditText
+         android:id="@+id/edtIdRoom"
+         android:layout_width="match_parent"
+@@ -121,4 +127,10 @@
+         android:id="@+id/flAddRoom"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent" />
++
++    <Button
++        android:id="@+id/button4"
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:text="Button" />
+ </LinearLayout>
+\ No newline at end of file
+Index: app/src/main/res/layout/activity_add_service.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_add_service.xml b/app/src/main/res/layout/activity_add_service.xml
+new file mode 100644
+--- /dev/null	(date 1668944824194)
++++ b/app/src/main/res/layout/activity_add_service.xml	(date 1668944824194)
+@@ -0,0 +1,9 @@
++<?xml version="1.0" encoding="utf-8"?>
++<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:app="http://schemas.android.com/apk/res-auto"
++    xmlns:tools="http://schemas.android.com/tools"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent"
++    tools:context=".Activity.AddServiceActivity">
++
++</androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file
+Index: app/src/main/java/com/example/duan1nhom7qlkhachsan/Activity/AddServiceActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/duan1nhom7qlkhachsan/Activity/AddServiceActivity.java b/app/src/main/java/com/example/duan1nhom7qlkhachsan/Activity/AddServiceActivity.java
+new file mode 100644
+--- /dev/null	(date 1668946947544)
++++ b/app/src/main/java/com/example/duan1nhom7qlkhachsan/Activity/AddServiceActivity.java	(date 1668946947544)
+@@ -0,0 +1,16 @@
++package com.example.duan1nhom7qlkhachsan.Activity;
++
++import androidx.appcompat.app.AppCompatActivity;
++
++import android.os.Bundle;
++
++import com.example.duan1nhom7qlkhachsan.R;
++
++public class AddServiceActivity extends AppCompatActivity {
++
++    @Override
++    protected void onCreate(Bundle savedInstanceState) {
++        super.onCreate(savedInstanceState);
++        setContentView(R.layout.activity_add_service);
++    }
++}
+\ No newline at end of file
