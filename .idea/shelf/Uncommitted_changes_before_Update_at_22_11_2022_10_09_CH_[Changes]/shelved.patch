@@ -1,0 +1,363 @@
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\">\r\n\r\n    <uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\" />\r\n    <uses-permission android:name=\"android.permission.INTERNET\" />\r\n\r\n    <application\r\n        android:allowBackup=\"true\"\r\n        android:dataExtractionRules=\"@xml/data_extraction_rules\"\r\n        android:fullBackupContent=\"@xml/backup_rules\"\r\n        android:icon=\"@mipmap/ic_launcher\"\r\n        android:label=\"@string/app_name\"\r\n        android:roundIcon=\"@mipmap/ic_launcher_round\"\r\n        android:supportsRtl=\"true\"\r\n        android:theme=\"@style/Theme.DuAn1Nhom7QLKhachSan\"\r\n        tools:targetApi=\"31\">\r\n        <activity\r\n            android:name=\".Activity.AddRoomActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Guide.Load2Activity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Guide.Load4Activity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Guide.Load3Activity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Guide.Load1Activity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Guide.LoadActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.CustomTabActivity\"\r\n            android:exported=\"true\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.VIEW\" />\r\n\r\n                <category android:name=\"android.intent.category.DEFAULT\" />\r\n                <category android:name=\"android.intent.category.BROWSABLE\" />\r\n\r\n                <data android:scheme=\"@string/fb_login_protocol_scheme\" />\r\n            </intent-filter>\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.VIEW\" />\r\n\r\n                <category android:name=\"android.intent.category.DEFAULT\" />\r\n                <category android:name=\"android.intent.category.BROWSABLE\" />\r\n\r\n                <data android:scheme=\"@string/fb_login_protocol_scheme\" />\r\n            </intent-filter>\r\n        </activity>\r\n\r\n        <meta-data\r\n            android:name=\"com.facebook.sdk.ApplicationId\"\r\n            android:value=\"@string/facebook_app_id\" />\r\n        <meta-data\r\n            android:name=\"com.facebook.sdk.ClientToken\"\r\n            android:value=\"@string/facebook_client_token\" />\r\n\r\n        <activity\r\n            android:name=\".Activity.BookedRoomActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.RoomActivity\"\r\n            android:exported=\"true\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.BeginActivity\"\r\n            android:exported=\"true\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.RegisterActivity\"\r\n            android:exported=\"true\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.LoginActivity\"\r\n            android:configChanges=\"keyboard|keyboardHidden|screenLayout|screenSize|orientation\"\r\n            android:exported=\"true\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".MainActivity\"\r\n            android:exported=\"true\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n    </application>\r\n\r\n</manifest>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/AndroidManifest.xml b/app/src/main/AndroidManifest.xml
+--- a/app/src/main/AndroidManifest.xml	(revision bb44b405ff26cc56c1e97e104a3ce77ba505ff93)
++++ b/app/src/main/AndroidManifest.xml	(date 1668992395770)
+@@ -15,6 +15,27 @@
+         android:supportsRtl="true"
+         android:theme="@style/Theme.DuAn1Nhom7QLKhachSan"
+         tools:targetApi="31">
++        <service
++            android:name=".AddRoomService"
++            android:enabled="true"
++            android:exported="true"></service>
++        <service
++            android:name=".AppAdminService"
++            android:enabled="true"
++            android:exported="true" />
++        <service
++            android:name=".BookedRoomService"
++            android:enabled="true"
++            android:exported="true" />
++        <service
++            android:name=".RoomService"
++            android:enabled="true"
++            android:exported="true" />
++        <service
++            android:name=".UserService"
++            android:enabled="true"
++            android:exported="true" />
++
+         <activity
+             android:name=".Activity.AddRoomActivity"
+             android:exported="false">
+Index: app/src/main/java/com/example/duan1nhom7qlkhachsan/Activity/IAdapterClickEvent.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.duan1nhom7qlkhachsan.Activity;\r\n\r\nimport com.example.duan1nhom7qlkhachsan.Model.AppRoom;\r\n\r\npublic interface IAdapterClickEvent {\r\n    void onDeleteRoomClick(AppRoom room);\r\n\r\n    void onUpdateRoomClick(AppRoom course);\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/duan1nhom7qlkhachsan/Activity/IAdapterClickEvent.java b/app/src/main/java/com/example/duan1nhom7qlkhachsan/Activity/IAdapterClickEvent.java
+--- a/app/src/main/java/com/example/duan1nhom7qlkhachsan/Activity/IAdapterClickEvent.java	(revision bb44b405ff26cc56c1e97e104a3ce77ba505ff93)
++++ b/app/src/main/java/com/example/duan1nhom7qlkhachsan/Activity/IAdapterClickEvent.java	(date 1668994801500)
+@@ -1,9 +1,15 @@
+ package com.example.duan1nhom7qlkhachsan.Activity;
+ 
+ import com.example.duan1nhom7qlkhachsan.Model.AppRoom;
++import com.example.duan1nhom7qlkhachsan.Model.AppService;
+ 
+ public interface IAdapterClickEvent {
+     void onDeleteRoomClick(AppRoom room);
+ 
+     void onUpdateRoomClick(AppRoom course);
++
++
++    void onDeleteRoomClick(AppService service);
++
++    void onUpdateRoomClick(AppService service);
+ }
+Index: app/src/main/java/com/example/duan1nhom7qlkhachsan/Model/AppService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.duan1nhom7qlkhachsan.Model;\r\n\r\npublic class AppService {\r\n    private String idRoom ,idService,nameService,priceService,timeUseService;\r\n\r\n    public String getIdRoom() {\r\n        return idRoom;\r\n    }\r\n\r\n    public void setIdRoom(String idRoom) {\r\n        this.idRoom = idRoom;\r\n    }\r\n\r\n    public String getIdService() {\r\n        return idService;\r\n    }\r\n\r\n    public void setIdService(String idService) {\r\n        this.idService = idService;\r\n    }\r\n\r\n    public String getNameService() {\r\n        return nameService;\r\n    }\r\n\r\n    public void setNameService(String nameService) {\r\n        this.nameService = nameService;\r\n    }\r\n\r\n    public String getPriceService() {\r\n        return priceService;\r\n    }\r\n\r\n    public void setPriceService(String priceService) {\r\n        this.priceService = priceService;\r\n    }\r\n\r\n    public String getTimeUseService() {\r\n        return timeUseService;\r\n    }\r\n\r\n    public void setTimeUseService(String timeUseService) {\r\n        this.timeUseService = timeUseService;\r\n    }\r\n\r\n    public AppService(String idRoom, String idService, String nameService, String priceService, String timeUseService) {\r\n        this.idRoom = idRoom;\r\n        this.idService = idService;\r\n        this.nameService = nameService;\r\n        this.priceService = priceService;\r\n        this.timeUseService = timeUseService;\r\n    }\r\n\r\n    public AppService() {\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/duan1nhom7qlkhachsan/Model/AppService.java b/app/src/main/java/com/example/duan1nhom7qlkhachsan/Model/AppService.java
+--- a/app/src/main/java/com/example/duan1nhom7qlkhachsan/Model/AppService.java	(revision bb44b405ff26cc56c1e97e104a3ce77ba505ff93)
++++ b/app/src/main/java/com/example/duan1nhom7qlkhachsan/Model/AppService.java	(date 1668992395755)
+@@ -1,7 +1,18 @@
+ package com.example.duan1nhom7qlkhachsan.Model;
+ 
+ public class AppService {
+-    private String idRoom ,idService,nameService,priceService,timeUseService;
++    private String idRoom, idService, nameService, priceService, timeUserService;
++
++    public AppService() {
++    }
++
++    public AppService(String idRoom, String idService, String nameService, String priceService, String timeUserService) {
++        this.idRoom = idRoom;
++        this.idService = idService;
++        this.nameService = nameService;
++        this.priceService = priceService;
++        this.timeUserService = timeUserService;
++    }
+ 
+     public String getIdRoom() {
+         return idRoom;
+@@ -35,22 +46,11 @@
+         this.priceService = priceService;
+     }
+ 
+-    public String getTimeUseService() {
+-        return timeUseService;
+-    }
+-
+-    public void setTimeUseService(String timeUseService) {
+-        this.timeUseService = timeUseService;
+-    }
+-
+-    public AppService(String idRoom, String idService, String nameService, String priceService, String timeUseService) {
+-        this.idRoom = idRoom;
+-        this.idService = idService;
+-        this.nameService = nameService;
+-        this.priceService = priceService;
+-        this.timeUseService = timeUseService;
++    public String getTimeUserService() {
++        return timeUserService;
+     }
+ 
+-    public AppService() {
++    public void setTimeUserService(String timeUserService) {
++        this.timeUserService = timeUserService;
+     }
+ }
+Index: app/src/main/java/com/example/duan1nhom7qlkhachsan/Activity/AppServiceActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/duan1nhom7qlkhachsan/Activity/AppServiceActivity.java b/app/src/main/java/com/example/duan1nhom7qlkhachsan/Activity/AppServiceActivity.java
+new file mode 100644
+--- /dev/null	(date 1668994801477)
++++ b/app/src/main/java/com/example/duan1nhom7qlkhachsan/Activity/AppServiceActivity.java	(date 1668994801477)
+@@ -0,0 +1,199 @@
++package com.example.duan1nhom7qlkhachsan.Activity;
++
++import android.app.AlertDialog;
++import android.content.DialogInterface;
++import android.os.Bundle;
++import android.view.View;
++import android.widget.Button;
++import android.widget.EditText;
++import android.widget.Toast;
++
++import androidx.annotation.NonNull;
++import androidx.appcompat.app.AppCompatActivity;
++
++import com.example.duan1nhom7qlkhachsan.Fragment.AddRoomFragment;
++import com.example.duan1nhom7qlkhachsan.Model.AppRoom;
++import com.example.duan1nhom7qlkhachsan.Model.AppService;
++import com.example.duan1nhom7qlkhachsan.R;
++import com.google.android.gms.tasks.OnCompleteListener;
++import com.google.android.gms.tasks.OnFailureListener;
++import com.google.android.gms.tasks.OnSuccessListener;
++import com.google.android.gms.tasks.Task;
++import com.google.firebase.firestore.DocumentReference;
++import com.google.firebase.firestore.FirebaseFirestore;
++import com.google.firebase.firestore.QueryDocumentSnapshot;
++import com.google.firebase.firestore.QuerySnapshot;
++
++import java.util.ArrayList;
++import java.util.HashMap;
++import java.util.Map;
++
++public class AppServiceActivity extends AppCompatActivity implements IAdapterClickEvent {
++    private EditText edtIdRoomUserService, edtIdService, edtNameService, edtTimeUserService, edtPriceService;
++    private Button btnAddService, btnClear;
++    private AppService appService = null;
++    FirebaseFirestore db = FirebaseFirestore.getInstance();
++
++    @Override
++    protected void onCreate(Bundle savedInstanceState) {
++        super.onCreate(savedInstanceState);
++        setContentView(R.layout.fragment_add_service);
++
++        edtIdRoomUserService = findViewById(R.id.edtIdRoomUseService);
++        edtIdService = findViewById(R.id.edtIdService);
++        edtNameService = findViewById(R.id.edtNameService);
++        edtTimeUserService = findViewById(R.id.edtTimeUseService);
++        edtPriceService = findViewById(R.id.edtPriceService);
++        btnAddService = findViewById(R.id.btnAddService);
++        btnClear = findViewById(R.id.btnClear);
++    }
++
++    @Override
++    protected void onResume() {
++        super.onResume();
++        getDataRoom();
++    }
++
++    public void onAddRoomClick(View view) {
++        //private String idRoom, idService, nameService, priceService, timeUserService;
++        String idRoom = edtIdRoomUserService.getText().toString();
++        String idService = edtIdService.getText().toString();
++        String nameService = edtNameService.getText().toString();
++        String priceService = edtPriceService.getText().toString();
++        String timeUserService = edtTimeUserService.getText().toString();
++
++
++        // Create a new user with a first and last name
++        Map<String, Object> user = new HashMap<>();
++        user.put("idRoom", idRoom);
++        user.put("idService", idService);
++        user.put("nameService", nameService);
++        user.put("priceService", priceService);
++        user.put("timeUserService", timeUserService);
++
++
++
++// Add a new document with a generated ID
++        if (appService == null) {
++            db.collection("service")
++                    .add(user)
++                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
++                        @Override
++                        public void onSuccess(DocumentReference documentReference) {
++                            Toast.makeText(AppServiceActivity.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
++                            getDataRoom();
++                            //Log.d("TAG", "DocumentSnapshot added with ID: " + documentReference.getId());
++                            getDataRoom();
++                        }
++                    })
++                    .addOnFailureListener(new OnFailureListener() {
++                        @Override
++                        public void onFailure(@NonNull Exception e) {
++                            Toast.makeText(AppServiceActivity.this, "Thêm thất bại", Toast.LENGTH_SHORT).show();
++
++                        }
++                    });
++        } else {
++            db.collection("service")
++                    .document(appService.getIdRoom())
++                    .set(user)
++                    .addOnSuccessListener(new OnSuccessListener<Void>() {
++                        @Override
++                        public void onSuccess(Void aVoid) {
++                            Toast.makeText(AppServiceActivity.this, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
++                            getDataRoom();
++                            appService=null;
++                        }
++                    })
++                    .addOnFailureListener(new OnFailureListener() {
++                        @Override
++                        public void onFailure(@NonNull Exception e) {
++                            Toast.makeText(AppServiceActivity.this, "Cập nhật không thành công", Toast.LENGTH_SHORT).show();
++                        }
++                    });
++        }
++    }
++
++    public void onCancleClick(View view) {
++        edtIdRoomUserService.setText(null);
++        edtIdService.setText(null);
++        edtNameService.setText(null);
++        edtTimeUserService.setText(null);
++        edtPriceService.setText(null);
++
++
++    }
++
++    public void getDataRoom() {
++        db.collection("room")
++                .get()
++                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
++                    @Override
++                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
++                        if (task.isSuccessful()) {
++                            ArrayList<AppRoom> list = new ArrayList<>();
++                            for (QueryDocumentSnapshot document : task.getResult()) {
++                                Map<String, Object> map = document.getData();
++                                String idRoom = map.get("idRoomUserService").toString();
++                                String idService = map.get("nameIdService").toString();
++                                String nameService = map.get("typeRoom").toString();
++                                String timeUserService = map.get("priceRoom").toString();
++                                String priceService = map.get("startDay").toString();
++
++
++                                AppService appService = new AppService(idRoom, idService, nameService, timeUserService,priceService);
++                                appService.setIdRoom(appService.getIdService());
++                                list.add(appService);
++
++                                getSupportFragmentManager().beginTransaction()
++                                        .replace(R.id.flAddService, AddRoomFragment.newInstance(list)).commit();
++                            }
++                        }
++                    }
++                });
++    }
++
++
++    //
++    @Override
++    public void onDeleteRoomClick(AppService service) {
++        new AlertDialog.Builder(AppServiceActivity.this)
++                .setTitle("Xóa")
++                .setMessage("Xóa sẽ không phục hồi được")
++                .setNegativeButton("Hủy", null)
++                .setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
++                    @Override
++                    public void onClick(DialogInterface dialog, int which) {
++                        db.collection("service").document(service.getIdRoom())
++                                .delete()
++                                .addOnSuccessListener(new OnSuccessListener<Void>() {
++                                    @Override
++                                    public void onSuccess(Void aVoid) {
++                                        Toast.makeText(AppServiceActivity.this, "Xóa thành công", Toast.LENGTH_SHORT).show();
++                                        getDataRoom();
++                                    }
++                                })
++                                .addOnFailureListener(new OnFailureListener() {
++                                    @Override
++                                    public void onFailure(@NonNull Exception e) {
++                                        Toast.makeText(AppServiceActivity.this, "Xóa khong thành công", Toast.LENGTH_SHORT).show();
++                                    }
++                                });
++
++                    }
++                })
++                .show();
++    }
++
++
++    @Override
++    public void onUpdateRoomClick(AppService service) {
++        edtIdRoomUserService.setText(service.getTimeUserService());
++        edtIdService.setText(service.getIdService());
++        edtNameService.setText(service.getNameService());
++        edtPriceService.setText(service.getPriceService());
++        edtTimeUserService.setText(service.getTimeUserService());
++        appService = service;
++    }
++
++}
+Index: app/google-services.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>{\r\n  \"project_info\": {\r\n    \"project_number\": \"1037492958687\",\r\n    \"project_id\": \"myproject262-4a887\",\r\n    \"storage_bucket\": \"myproject262-4a887.appspot.com\"\r\n  },\r\n  \"client\": [\r\n    {\r\n      \"client_info\": {\r\n        \"mobilesdk_app_id\": \"1:1037492958687:android:492eb2e6d94a07feb3806a\",\r\n        \"android_client_info\": {\r\n          \"package_name\": \"com.example.duan1nhom7qlkhachsan\"\r\n        }\r\n      },\r\n      \"oauth_client\": [\r\n        {\r\n          \"client_id\": \"1037492958687-fmj34h707mljd1e53eu6na11r3dolp1b.apps.googleusercontent.com\",\r\n          \"client_type\": 3\r\n        }\r\n      ],\r\n      \"api_key\": [\r\n        {\r\n          \"current_key\": \"AIzaSyA1cAQVAGb4Q03W7J-T9ticKCl9dJOUHMo\"\r\n        }\r\n      ],\r\n      \"services\": {\r\n        \"appinvite_service\": {\r\n          \"other_platform_oauth_client\": [\r\n            {\r\n              \"client_id\": \"1037492958687-fmj34h707mljd1e53eu6na11r3dolp1b.apps.googleusercontent.com\",\r\n              \"client_type\": 3\r\n            }\r\n          ]\r\n        }\r\n      }\r\n    }\r\n  ],\r\n  \"configuration_version\": \"1\"\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/google-services.json b/app/google-services.json
+--- a/app/google-services.json	(revision bb44b405ff26cc56c1e97e104a3ce77ba505ff93)
++++ b/app/google-services.json	(date 1668992395795)
+@@ -1,6 +1,7 @@
+ {
+   "project_info": {
+     "project_number": "1037492958687",
++    "firebase_url": "https://myproject262-4a887-default-rtdb.firebaseio.com",
+     "project_id": "myproject262-4a887",
+     "storage_bucket": "myproject262-4a887.appspot.com"
+   },
+@@ -14,6 +15,14 @@
+       },
+       "oauth_client": [
+         {
++          "client_id": "1037492958687-eu6iqa4pao5s533vn2bpej057116s0pi.apps.googleusercontent.com",
++          "client_type": 1,
++          "android_info": {
++            "package_name": "com.example.duan1nhom7qlkhachsan",
++            "certificate_hash": "963bf66dc2d3b6e90b4e1cf13ab9e505ff21bbc5"
++          }
++        },
++        {
+           "client_id": "1037492958687-fmj34h707mljd1e53eu6na11r3dolp1b.apps.googleusercontent.com",
+           "client_type": 3
+         }

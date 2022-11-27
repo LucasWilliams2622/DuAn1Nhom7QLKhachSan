@@ -1,0 +1,134 @@
+Index: app/src/main/java/com/example/duan1nhom7qlkhachsan/Activity/LoginActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.duan1nhom7qlkhachsan.Activity;\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.util.Log;\r\nimport android.view.View;\r\nimport android.widget.Button;\r\nimport android.widget.EditText;\r\nimport android.widget.ImageView;\r\nimport android.widget.Toast;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\n\r\nimport com.example.duan1nhom7qlkhachsan.MainActivity;\r\nimport com.example.duan1nhom7qlkhachsan.R;\r\nimport com.facebook.CallbackManager;\r\nimport com.facebook.FacebookCallback;\r\nimport com.facebook.FacebookException;\r\nimport com.facebook.login.LoginManager;\r\nimport com.facebook.login.LoginResult;\r\nimport com.facebook.login.widget.LoginButton;\r\nimport com.google.android.gms.tasks.OnCompleteListener;\r\nimport com.google.android.gms.tasks.Task;\r\nimport com.google.firebase.firestore.FirebaseFirestore;\r\nimport com.google.firebase.firestore.QueryDocumentSnapshot;\r\nimport com.google.firebase.firestore.QuerySnapshot;\r\n\r\nimport java.lang.reflect.Array;\r\nimport java.util.ArrayList;\r\nimport java.util.Arrays;\r\nimport java.util.List;\r\nimport com.facebook.FacebookSdk;\r\nimport com.facebook.appevents.AppEventsLogger;\r\n\r\nimport javax.xml.transform.Result;\r\n\r\n\r\npublic class LoginActivity extends AppCompatActivity {\r\n    ImageView btnFB;\r\n    CallbackManager callbackManager;\r\n    long check = 1;\r\n    FirebaseFirestore db = FirebaseFirestore.getInstance();\r\n\r\n    LoginButton loginManager;\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_login);\r\n        EditText edt_username = findViewById(R.id.edt_username_login);\r\n        EditText edt_password = findViewById(R.id.edt_password_lgoin);\r\n        Button btn_login = findViewById(R.id.btn_login);\r\n        Button btn_register = findViewById(R.id.btnGoRegister);\r\n        ImageView ivShowPass = findViewById(R.id.ivShowPass);// mốt để toàn cục nha\r\n        loginManager = findViewById(R.id.login_fb);\r\n\r\n\r\n//        ThuThuDAO thuThuDAO = new ThuThuDAO(this);\r\n       // btnFB = findViewById(R.id.login_fb);\r\n//        btnFB.setOnClickListener(new View.OnClickListener() {\r\n//            @Override\r\n//            public void onClick(View v) {\r\n//                LoginManager.getInstance().logInWithReadPermissions(LoginActivity.this, Arrays.asList(\"public_profile\"));\r\n//            }\r\n//        });\r\n        callbackManager = CallbackManager.Factory.create();\r\n        loginManager.registerCallback(callbackManager,\r\n                new FacebookCallback<LoginResult>() {\r\n                    @Override\r\n                    public void onSuccess(LoginResult loginResult) {\r\n                        startActivity(new Intent(LoginActivity.this,LoginActivity.class));\r\n                        finish();\r\n                    }\r\n\r\n\r\n                    @Override\r\n                    public void onCancel() {\r\n\r\n                    }\r\n\r\n                    @Override\r\n                    public void onError(FacebookException error) {\r\n\r\n                    }\r\n                });\r\n\r\n\r\n        btn_login.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                String username = edt_username.getText().toString();\r\n                String password = edt_password.getText().toString();\r\n\r\n//                if (thuThuDAO.checkLogin(username, password)) {\r\n//                    //save shareprefferences\r\n//                    SharedPreferences sharedPreferences = getSharedPreferences(\"THONGTIN\", MODE_PRIVATE);\r\n//                    //truyen 2 gia tri 1 la ten sharepreferences va MODE\r\n//                    SharedPreferences.Editor editor = sharedPreferences.edit();\r\n//                    editor.putString(\"matt\", username);\r\n//                    editor.commit();\r\n//\r\n//                    startActivity(new Intent(LoginActivity.this, MainActivity.class));\r\n//\r\n//                } else {\r\n//                    Toast.makeText(LoginActivity.this, \"Username or password is wrong !!!\", Toast.LENGTH_SHORT).show();\r\n //   //                if (thuThuDAO.checkLogin(username, password)) {\r\n//                    //save shareprefferences\r\n//                    SharedPreferences sharedPreferences = getSharedPreferences(\"THONGTIN\", MODE_PRIVATE);\r\n//                    //truyen 2 gia tri 1 la ten sharepreferences va MODE\r\n//                    SharedPreferences.Editor editor = sharedPreferences.edit();\r\n//                    editor.putString(\"matt\", username);\r\n//                    editor.commit();\r\n//\r\n//                    startActivity(new Intent(LoginActivity.this, MainActivity.class));\r\n//\r\n//                } else {\r\n//                    Toast.makeText(LoginActivity.this, \"Username or password is wrong !!!\", Toast.LENGTH_SHORT).show();\r\n //               }\r\n                getData();\r\n\r\n            }\r\n        });\r\n\r\n        btn_register.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n               Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);\r\n               startActivity(intent);\r\n\r\n            }\r\n        });\r\n\r\n        ivShowPass.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                check++;\r\n                if (check % 2 == 0) {\r\n                    edt_password.setInputType(1);\r\n                    Log.d(\">>>>>>>>>\", \"check \" + check);\r\n                } else {\r\n                    //edt_password.setInputType();\r\n\r\n                    //  edt_password.setInputType(Integer.parseInt(\"textPassword\"));\r\n                }\r\n            }\r\n        });\r\n    }\r\n\r\n    public void getData(){\r\n        db.collection(\"admin\")\r\n                .get()\r\n                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {\r\n                    @Override\r\n                    public void onComplete(@NonNull Task<QuerySnapshot> task) {\r\n                        if (task.isSuccessful()) {\r\n                            List<String> list = new ArrayList<>();\r\n                            for (QueryDocumentSnapshot document : task.getResult()) {\r\n                                list.add(document.getId());\r\n                            }\r\n\r\n                            Toast.makeText(LoginActivity.this, \"Wellcome\", Toast.LENGTH_SHORT).show();\r\n                            startActivity(new Intent(LoginActivity.this, MainActivity.class));\r\n                        }\r\n                        else {\r\n                            Toast.makeText(LoginActivity.this, \"Login failed\", Toast.LENGTH_SHORT).show();\r\n\r\n                        }\r\n                    }\r\n                });\r\n    }\r\n    @Override\r\n    protected void onActivityResult(int requestCode, int resultCode, Intent Data){\r\n        callbackManager.onActivityResult(requestCode,resultCode,Data);\r\n        super.onActivityResult(requestCode,resultCode,Data);\r\n    }\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/duan1nhom7qlkhachsan/Activity/LoginActivity.java b/app/src/main/java/com/example/duan1nhom7qlkhachsan/Activity/LoginActivity.java
+--- a/app/src/main/java/com/example/duan1nhom7qlkhachsan/Activity/LoginActivity.java	
++++ b/app/src/main/java/com/example/duan1nhom7qlkhachsan/Activity/LoginActivity.java	
+@@ -1,5 +1,6 @@
+ package com.example.duan1nhom7qlkhachsan.Activity;
+ 
++import android.app.Activity;
+ import android.content.Intent;
+ import android.os.Bundle;
+ import android.util.Log;
+@@ -9,6 +10,10 @@
+ import android.widget.ImageView;
+ import android.widget.Toast;
+ 
++import androidx.activity.result.ActivityResult;
++import androidx.activity.result.ActivityResultCallback;
++import androidx.activity.result.ActivityResultLauncher;
++import androidx.activity.result.contract.ActivityResultContracts;
+ import androidx.annotation.NonNull;
+ import androidx.appcompat.app.AppCompatActivity;
+ 
+@@ -21,6 +26,11 @@
+ import com.facebook.login.LoginManager;
+ import com.facebook.login.LoginResult;
+ import com.facebook.login.widget.LoginButton;
++import com.google.android.gms.auth.api.signin.GoogleSignIn;
++import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
++import com.google.android.gms.auth.api.signin.GoogleSignInClient;
++import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
++import com.google.android.gms.common.api.ApiException;
+ import com.google.android.gms.tasks.OnCompleteListener;
+ import com.google.android.gms.tasks.Task;
+ import com.google.firebase.firestore.FirebaseFirestore;
+@@ -38,6 +48,11 @@
+ 
+ 
+ public class LoginActivity extends AppCompatActivity {
++    // đăng nhập gôgle
++    GoogleSignInClient gsc;
++    GoogleSignInAccount account;
++
++
+     ImageView btnFB;
+     CallbackManager callbackManager;
+     long check = 1;
+@@ -55,7 +70,63 @@
+         ImageView ivShowPass = findViewById(R.id.ivShowPass);// mốt để toàn cục nha
+         loginManager = findViewById(R.id.login_fb);
+ 
++        // google
++        GoogleSignInOptions gso = new GoogleSignInOptions
++                .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
++                .requestProfile()
++                .requestEmail()
++                .build();
++        gsc = GoogleSignIn.getClient(LoginActivity.this, gso);
++        //kiểm tra google
++        account = GoogleSignIn.getLastSignedInAccount(LoginActivity.this);
++        if(account != null){
++            Intent homeIntent = new Intent(LoginActivity.this, MainActivity.class);
++            startActivity(homeIntent);
++            finish();
++        }
++        Button sib = findViewById(R.id.btn_login);
++        sib.setOnClickListener(new View.OnClickListener() {
++            @Override
++            public void onClick(View v) {
++                Intent googleIntent = gsc.getSignInIntent();
++                googleLauncher.launch(googleIntent);
++            }
++        });
+ 
++
++        // Nhận kết quả Gu Gồ Sai In
++        ActivityResultLauncher<Intent> googleLauncher = registerForActivityResult(
++                new ActivityResultContracts.StartActivityForResult(),
++                new ActivityResultCallback<ActivityResult>() {
++                    @Override
++                    public void onActivityResult(ActivityResult result) {
++                        Intent data  = result.getData();
++                        Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
++                        try {
++                            GoogleSignInAccount account = task.getResult(ApiException.class);
++                            String email = account.getEmail();
++                            String disPlayName = account.getDisplayName();
++                            Log.d(">>>>>>>>>TAG", "onActivityResult: " + email);
++                            Log.d(">>>>>>>>>TAG", "onActivityResult: " + disPlayName);
++                            //Lưu database
++                           // Integer role = 1;
++                            //Intent intent= new Intent(getBaseContext(), UserService.class);
++                           // intent.putExtra("email",email);
++                           // intent.putExtra("password","1");
++                            //intent.putExtra("role",role);
++                           // intent.setAction(UserService.USER_SERVICE_ACTION_REGISTER);
++                           // startService(intent);
++                            //Lưu database
++                           // Intent homeIntent = new Intent(LoginActivity.this, HomeActivity.class);
++                            //startActivity(homeIntent);
++                            //finish();
++                        }catch (Exception e)
++                        {
++                            Log.d(">>>>>>>>TAG", "onActivityResult error: " + e.getMessage());
++                        }
++                    }
++                }
++        );
+ //        ThuThuDAO thuThuDAO = new ThuThuDAO(this);
+        // btnFB = findViewById(R.id.login_fb);
+ //        btnFB.setOnClickListener(new View.OnClickListener() {
+Index: app/build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>plugins {\r\n    id 'com.android.application'\r\n    id 'com.google.gms.google-services'\r\n}\r\n\r\nandroid {\r\n    namespace 'com.example.duan1nhom7qlkhachsan'\r\n    compileSdk 32\r\n\r\n    defaultConfig {\r\n        applicationId \"com.example.duan1nhom7qlkhachsan\"\r\n        minSdk 27\r\n        targetSdk 32\r\n        versionCode 1\r\n        versionName \"1.0\"\r\n\r\n        testInstrumentationRunner \"androidx.test.runner.AndroidJUnitRunner\"\r\n    }\r\n\r\n    buildTypes {\r\n        release {\r\n            minifyEnabled false\r\n            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'\r\n        }\r\n    }\r\n    compileOptions {\r\n        sourceCompatibility JavaVersion.VERSION_1_8\r\n        targetCompatibility JavaVersion.VERSION_1_8\r\n    }\r\n}\r\n\r\ndependencies {\r\n\r\n    implementation 'androidx.appcompat:appcompat:1.5.1'\r\n    implementation 'com.google.android.material:material:1.7.0'\r\n    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'\r\n    implementation 'com.google.firebase:firebase-firestore:24.4.0'\r\n    implementation 'com.google.firebase:firebase-auth:21.1.0'\r\n    testImplementation 'junit:junit:4.13.2'\r\n    androidTestImplementation 'androidx.test.ext:junit:1.1.4'\r\n    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'\r\n\r\n    //import gallery of glide by Lucas 11/11/2022\r\n    implementation 'com.github.bumptech.glide:glide:4.13.2'\r\n    annotationProcessor'com.github.bumptech.glide:compiler:4.13.2'\r\n    //inport gallery of facebook by kiet 11/14/2022\r\n    implementation 'com.facebook.android:facebook-android-sdk:[4,5)'\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/build.gradle b/app/build.gradle
+--- a/app/build.gradle	
++++ b/app/build.gradle	
+@@ -36,6 +36,7 @@
+     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+     implementation 'com.google.firebase:firebase-firestore:24.4.0'
+     implementation 'com.google.firebase:firebase-auth:21.1.0'
++    implementation 'com.google.android.gms:play-services-auth:20.3.0'
+     testImplementation 'junit:junit:4.13.2'
+     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
+     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'

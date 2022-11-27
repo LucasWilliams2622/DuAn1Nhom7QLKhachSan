@@ -23,10 +23,11 @@ import androidx.fragment.app.FragmentManager;
 
 import com.example.duan1nhom7qlkhachsan.Activity.AddRoomActivity;
 import com.example.duan1nhom7qlkhachsan.Activity.LoginActivity;
-import com.example.duan1nhom7qlkhachsan.Activity.EditProfileActivity;
+
 import com.example.duan1nhom7qlkhachsan.Activity.hotro.HotroAdminFragment;
 import com.example.duan1nhom7qlkhachsan.Activity.hotro.HoTroFragment;
-import com.example.duan1nhom7qlkhachsan.Fragment.BookRoomFragment;
+import com.example.duan1nhom7qlkhachsan.Fragment.AddServiceFragment;
+
 import com.example.duan1nhom7qlkhachsan.Fragment.DoanhThuFragment;
 import com.example.duan1nhom7qlkhachsan.Fragment.GioiThieuFragment;
 import com.example.duan1nhom7qlkhachsan.Fragment.PhongDaDatFragment;
@@ -83,9 +84,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.mDichVu:
                         fragment = new ServiceFragment();
                         break;
-                    case R.id.mDatPhong:
-                        fragment = new BookRoomFragment();
-                        break;
+
                     case R.id.mDoanhThu:
                         fragment = new DoanhThuFragment();
                         break;
@@ -101,15 +100,18 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.mGioiThieu:
                         fragment = new GioiThieuFragment();
                         break;
-                    case R.id.mEditProfile:
-                        Intent intentChangeName = new Intent(MainActivity.this, EditProfileActivity.class);
-                        startActivity(intentChangeName);
-                        break;
+
                     case R.id.mAddRoom:
                         Intent intentAddRoom = new Intent(MainActivity.this, AddRoomActivity.class);
                         startActivity(intentAddRoom);
                         break;
+                    case R.id.mAddService:
+                         fragment = new AddServiceFragment();
+                         break;
+                    case R.id.mDoiMatKhau:
 
+
+                        //showDialogChangePass();
                     case R.id.mDangXuat:
                         if (account != null) {
                             gsc.signOut().addOnCompleteListener(MainActivity.this,
@@ -127,8 +129,7 @@ public class MainActivity extends AppCompatActivity {
                             startActivity(intent);
                         }
                     default:
-                        fragment = new GioiThieuFragment();
-
+                        fragment = new ServiceFragment();
                         break;
                 }
                 if (fragment != null) {

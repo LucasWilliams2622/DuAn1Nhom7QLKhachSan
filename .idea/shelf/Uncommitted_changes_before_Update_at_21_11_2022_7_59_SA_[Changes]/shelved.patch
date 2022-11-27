@@ -1,0 +1,157 @@
+Index: app/src/main/java/com/example/duan1nhom7qlkhachsan/Model/AppService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.duan1nhom7qlkhachsan.Model;\r\n\r\npublic class AppService {\r\n    private String idRoom ,idService,nameService,priceService,timeUseService;\r\n\r\n    public String getIdRoom() {\r\n        return idRoom;\r\n    }\r\n\r\n    public void setIdRoom(String idRoom) {\r\n        this.idRoom = idRoom;\r\n    }\r\n\r\n    public String getIdService() {\r\n        return idService;\r\n    }\r\n\r\n    public void setIdService(String idService) {\r\n        this.idService = idService;\r\n    }\r\n\r\n    public String getNameService() {\r\n        return nameService;\r\n    }\r\n\r\n    public void setNameService(String nameService) {\r\n        this.nameService = nameService;\r\n    }\r\n\r\n    public String getPriceService() {\r\n        return priceService;\r\n    }\r\n\r\n    public void setPriceService(String priceService) {\r\n        this.priceService = priceService;\r\n    }\r\n\r\n    public String getTimeUseService() {\r\n        return timeUseService;\r\n    }\r\n\r\n    public void setTimeUseService(String timeUseService) {\r\n        this.timeUseService = timeUseService;\r\n    }\r\n\r\n    public AppService(String idRoom, String idService, String nameService, String priceService, String timeUseService) {\r\n        this.idRoom = idRoom;\r\n        this.idService = idService;\r\n        this.nameService = nameService;\r\n        this.priceService = priceService;\r\n        this.timeUseService = timeUseService;\r\n    }\r\n\r\n    public AppService() {\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/duan1nhom7qlkhachsan/Model/AppService.java b/app/src/main/java/com/example/duan1nhom7qlkhachsan/Model/AppService.java
+--- a/app/src/main/java/com/example/duan1nhom7qlkhachsan/Model/AppService.java	(revision 2514a9b19918a330e8992262f941ff0a45cd38b7)
++++ b/app/src/main/java/com/example/duan1nhom7qlkhachsan/Model/AppService.java	(date 1668741237200)
+@@ -1,7 +1,18 @@
+ package com.example.duan1nhom7qlkhachsan.Model;
+ 
+ public class AppService {
+-    private String idRoom ,idService,nameService,priceService,timeUseService;
++    private String idRoom, idService, nameService, priceService, timeUserService;
++
++    public AppService() {
++    }
++
++    public AppService(String idRoom, String idService, String nameService, String priceService, String timeUserService) {
++        this.idRoom = idRoom;
++        this.idService = idService;
++        this.nameService = nameService;
++        this.priceService = priceService;
++        this.timeUserService = timeUserService;
++    }
+ 
+     public String getIdRoom() {
+         return idRoom;
+@@ -35,22 +46,11 @@
+         this.priceService = priceService;
+     }
+ 
+-    public String getTimeUseService() {
+-        return timeUseService;
+-    }
+-
+-    public void setTimeUseService(String timeUseService) {
+-        this.timeUseService = timeUseService;
+-    }
+-
+-    public AppService(String idRoom, String idService, String nameService, String priceService, String timeUseService) {
+-        this.idRoom = idRoom;
+-        this.idService = idService;
+-        this.nameService = nameService;
+-        this.priceService = priceService;
+-        this.timeUseService = timeUseService;
++    public String getTimeUserService() {
++        return timeUserService;
+     }
+ 
+-    public AppService() {
++    public void setTimeUserService(String timeUserService) {
++        this.timeUserService = timeUserService;
+     }
+ }
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\">\r\n\r\n    <uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\" />\r\n    <uses-permission android:name=\"android.permission.INTERNET\" />\r\n\r\n    <application\r\n        android:allowBackup=\"true\"\r\n        android:dataExtractionRules=\"@xml/data_extraction_rules\"\r\n        android:fullBackupContent=\"@xml/backup_rules\"\r\n        android:icon=\"@mipmap/ic_launcher\"\r\n        android:label=\"@string/app_name\"\r\n        android:roundIcon=\"@mipmap/ic_launcher_round\"\r\n        android:supportsRtl=\"true\"\r\n        android:theme=\"@style/Theme.DuAn1Nhom7QLKhachSan\"\r\n        tools:targetApi=\"31\">\r\n        <activity\r\n            android:name=\".Activity.CustomTabActivity\"\r\n            android:exported=\"true\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.VIEW\" />\r\n                <category android:name=\"android.intent.category.DEFAULT\" />\r\n                <category android:name=\"android.intent.category.BROWSABLE\" />\r\n                <data android:scheme=\"@string/fb_login_protocol_scheme\" />\r\n            </intent-filter>        <intent-filter>\r\n            <action android:name=\"android.intent.action.VIEW\" />\r\n            <category android:name=\"android.intent.category.DEFAULT\" />\r\n            <category android:name=\"android.intent.category.BROWSABLE\" />\r\n            <data android:scheme=\"@string/fb_login_protocol_scheme\" />\r\n        </intent-filter>\r\n        </activity>\r\n\r\n        <meta-data\r\n            android:name=\"com.facebook.sdk.ApplicationId\"\r\n            android:value=\"@string/facebook_app_id\" />\r\n        <meta-data\r\n            android:name=\"com.facebook.sdk.ClientToken\"\r\n            android:value=\"@string/facebook_client_token\" />\r\n\r\n        <activity\r\n            android:name=\".BookedRoomActivity\"\r\n            android:exported=\"false\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.RoomActivity\"\r\n            android:exported=\"true\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.BeginActivity\"\r\n            android:exported=\"true\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.RegisterActivity\"\r\n            android:exported=\"true\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Activity.LoginActivity\"\r\n            android:configChanges=\"keyboard|keyboardHidden|screenLayout|screenSize|orientation\"\r\n            android:exported=\"true\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".MainActivity\"\r\n            android:exported=\"true\">\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n    </application>\r\n\r\n</manifest>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/AndroidManifest.xml b/app/src/main/AndroidManifest.xml
+--- a/app/src/main/AndroidManifest.xml	(revision 2514a9b19918a330e8992262f941ff0a45cd38b7)
++++ b/app/src/main/AndroidManifest.xml	(date 1668741237175)
+@@ -15,23 +15,50 @@
+         android:supportsRtl="true"
+         android:theme="@style/Theme.DuAn1Nhom7QLKhachSan"
+         tools:targetApi="31">
++        <service
++            android:name=".AddRoomService"
++            android:enabled="true"
++            android:exported="true"></service>
++        <service
++            android:name=".AppAdminService"
++            android:enabled="true"
++            android:exported="true" />
++        <service
++            android:name=".BookedRoomService"
++            android:enabled="true"
++            android:exported="true" />
++        <service
++            android:name=".RoomService"
++            android:enabled="true"
++            android:exported="true" />
++        <service
++            android:name=".UserService"
++            android:enabled="true"
++            android:exported="true" />
++
+         <activity
+             android:name=".Activity.CustomTabActivity"
+             android:exported="true">
+             <meta-data
+                 android:name="android.app.lib_name"
+                 android:value="" />
++
+             <intent-filter>
+                 <action android:name="android.intent.action.VIEW" />
++
+                 <category android:name="android.intent.category.DEFAULT" />
+                 <category android:name="android.intent.category.BROWSABLE" />
++
+                 <data android:scheme="@string/fb_login_protocol_scheme" />
+-            </intent-filter>        <intent-filter>
+-            <action android:name="android.intent.action.VIEW" />
+-            <category android:name="android.intent.category.DEFAULT" />
+-            <category android:name="android.intent.category.BROWSABLE" />
+-            <data android:scheme="@string/fb_login_protocol_scheme" />
+-        </intent-filter>
++            </intent-filter>
++            <intent-filter>
++                <action android:name="android.intent.action.VIEW" />
++
++                <category android:name="android.intent.category.DEFAULT" />
++                <category android:name="android.intent.category.BROWSABLE" />
++
++                <data android:scheme="@string/fb_login_protocol_scheme" />
++            </intent-filter>
+         </activity>
+ 
+         <meta-data
+Index: app/google-services.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>{\r\n  \"project_info\": {\r\n    \"project_number\": \"1037492958687\",\r\n    \"project_id\": \"myproject262-4a887\",\r\n    \"storage_bucket\": \"myproject262-4a887.appspot.com\"\r\n  },\r\n  \"client\": [\r\n    {\r\n      \"client_info\": {\r\n        \"mobilesdk_app_id\": \"1:1037492958687:android:492eb2e6d94a07feb3806a\",\r\n        \"android_client_info\": {\r\n          \"package_name\": \"com.example.duan1nhom7qlkhachsan\"\r\n        }\r\n      },\r\n      \"oauth_client\": [\r\n        {\r\n          \"client_id\": \"1037492958687-fmj34h707mljd1e53eu6na11r3dolp1b.apps.googleusercontent.com\",\r\n          \"client_type\": 3\r\n        }\r\n      ],\r\n      \"api_key\": [\r\n        {\r\n          \"current_key\": \"AIzaSyA1cAQVAGb4Q03W7J-T9ticKCl9dJOUHMo\"\r\n        }\r\n      ],\r\n      \"services\": {\r\n        \"appinvite_service\": {\r\n          \"other_platform_oauth_client\": [\r\n            {\r\n              \"client_id\": \"1037492958687-fmj34h707mljd1e53eu6na11r3dolp1b.apps.googleusercontent.com\",\r\n              \"client_type\": 3\r\n            }\r\n          ]\r\n        }\r\n      }\r\n    }\r\n  ],\r\n  \"configuration_version\": \"1\"\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/google-services.json b/app/google-services.json
+--- a/app/google-services.json	(revision 2514a9b19918a330e8992262f941ff0a45cd38b7)
++++ b/app/google-services.json	(date 1668741237199)
+@@ -1,6 +1,7 @@
+ {
+   "project_info": {
+     "project_number": "1037492958687",
++    "firebase_url": "https://myproject262-4a887-default-rtdb.firebaseio.com",
+     "project_id": "myproject262-4a887",
+     "storage_bucket": "myproject262-4a887.appspot.com"
+   },
+@@ -14,6 +15,14 @@
+       },
+       "oauth_client": [
+         {
++          "client_id": "1037492958687-eu6iqa4pao5s533vn2bpej057116s0pi.apps.googleusercontent.com",
++          "client_type": 1,
++          "android_info": {
++            "package_name": "com.example.duan1nhom7qlkhachsan",
++            "certificate_hash": "963bf66dc2d3b6e90b4e1cf13ab9e505ff21bbc5"
++          }
++        },
++        {
+           "client_id": "1037492958687-fmj34h707mljd1e53eu6na11r3dolp1b.apps.googleusercontent.com",
+           "client_type": 3
+         }
