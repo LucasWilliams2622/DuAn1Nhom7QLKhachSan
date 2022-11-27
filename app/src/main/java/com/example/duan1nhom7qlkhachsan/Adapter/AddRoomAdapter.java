@@ -6,6 +6,8 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.duan1nhom7qlkhachsan.Activity.IAdapterClickEvent;
 import com.example.duan1nhom7qlkhachsan.Model.AppRoom;
 import com.example.duan1nhom7qlkhachsan.R;
@@ -52,7 +54,9 @@ public class AddRoomAdapter extends BaseAdapter {
             tvNameRoom = view.findViewById(R.id.tvNameRoom);
             tvTypeRoom = view.findViewById(R.id.tvTypeRoom);
             tvPriceRoom = view.findViewById(R.id.tvPriceRoom);
-            ViewHolder holder = new ViewHolder(tvCodeRoom,tvNameRoom,tvTypeRoom,tvPriceRoom,tvStartDay,tvEndDay,btnUpdate,btnDelete);
+
+          ViewHolder holder = new ViewHolder(tvCodeRoom,tvNameRoom,tvTypeRoom,tvPriceRoom,tvEndDay,tvStartDay,btnDelete,btnUpdate);
+
             view.setTag(holder);
         }
         AppRoom room = (AppRoom) getItem(_i);
@@ -64,14 +68,16 @@ public class AddRoomAdapter extends BaseAdapter {
         holder.tvStartDay.setText(room.getStartDay());
         holder.tvEndDay.setText(room.getEndDay());
 
-        holder.btnDelete.setOnClickListener(new View.OnClickListener() {
+
+        holder.btnUpdate.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 IAdapterClickEvent  iAdapterClickEvent = (IAdapterClickEvent) _viewGroup.getContext();
                 iAdapterClickEvent.onUpdateRoomClick(room);
             }
         });
-        holder.btnUpdate.setOnClickListener(new View.OnClickListener() {
+        holder.btnDelete .setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 IAdapterClickEvent  iAdapterClickEvent = (IAdapterClickEvent) _viewGroup.getContext();

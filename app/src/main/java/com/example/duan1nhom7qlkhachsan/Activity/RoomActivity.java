@@ -1,19 +1,13 @@
 package com.example.duan1nhom7qlkhachsan.Activity;
 
 import android.os.Bundle;
-import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 
-import com.example.duan1nhom7qlkhachsan.Fragment.DatPhongFragment;
+import com.example.duan1nhom7qlkhachsan.Fragment.BookRoomFragment;
 import com.example.duan1nhom7qlkhachsan.Model.AppRoom;
 import com.example.duan1nhom7qlkhachsan.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -65,7 +59,7 @@ public class RoomActivity extends AppCompatActivity {
                             }
                             getSupportFragmentManager()
                                     .beginTransaction()
-                                    .replace(R.id.flRoom, DatPhongFragment.newInstance(list))
+                                    .replace(R.id.flRoom, BookRoomFragment.newInstance(list))
                                     .commit();
                         }
                     }

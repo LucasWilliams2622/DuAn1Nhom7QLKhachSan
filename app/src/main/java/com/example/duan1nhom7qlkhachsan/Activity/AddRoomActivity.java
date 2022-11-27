@@ -46,8 +46,7 @@ public class AddRoomActivity extends AppCompatActivity implements IAdapterClickE
         edtPriceRoom = findViewById(R.id.edtPriceRoom);
         edtStartDay = findViewById(R.id.edtStartDay);
         edtEndDay = findViewById(R.id.edtEndDay);
-        btnAddRoom = findViewById(R.id.btnAddRoom);
-        btnClear = findViewById(R.id.btnClear);
+
         btnBackToMain = findViewById(R.id.btnBackToMain);
         btnBackToMain.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,6 +83,9 @@ public class AddRoomActivity extends AppCompatActivity implements IAdapterClickE
         user.put("priceRoom", priceRoom);
         user.put("startDay", startDay);
         user.put("endDay", endDay);
+
+
+
 
 
 // Add a new document with a generated ID
@@ -182,6 +184,7 @@ public class AddRoomActivity extends AppCompatActivity implements IAdapterClickE
                                     public void onSuccess(Void aVoid) {
                                         Toast.makeText(AddRoomActivity.this, "Xóa thành công", Toast.LENGTH_SHORT).show();
                                         getDataAddRoom();
+
                                     }
                                 })
                                 .addOnFailureListener(new OnFailureListener() {
