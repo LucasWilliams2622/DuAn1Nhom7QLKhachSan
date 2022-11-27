@@ -69,6 +69,7 @@ public class LoginActivity extends AppCompatActivity {
 
     //Facebook
     LoginButton loginButton;
+
     private LoginManager loginManager;
 
     @Override
@@ -200,6 +201,9 @@ public class LoginActivity extends AppCompatActivity {
             protected void onCurrentProfileChanged(@Nullable Profile oldProfile, @Nullable Profile newProfile) {
                 if (newProfile != null) {
                     Log.d(">>>>>>>>TAB", "onCurrentProfileChanged" + newProfile.getName());
+                    Log.d(">>>>>>>>TAB", "onCurrentProfileChanged" + newProfile.getId());
+
+
 //                    String id = oldProfile.getId();
 //                    UserDao u = new UserDao(LoginActivity.this);
 //                    u.register(id, "", 1);
@@ -215,6 +219,55 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
+                GraphRequest request = GraphRequest.newMeRequest(
+                        loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
+                            @Override
+                            public void onCompleted(JSONObject me, GraphResponse response) {
+
+                                if (response.getError() != null) {
+                                    // handle error
+                                } else {
+
+                                    String user_lastname = me.optString("last_name");
+                                    String user_firstname = me.optString("first_name");
+                                    String user_email = response.getJSONObject().optString("email");
+
+                                    Log.d(">>>>>>>>", "email" + user_email);
+                                    Log.d(">>>>>>>>", "name " + user_firstname + user_lastname);
+
+                                    Map<String, Object> user = new HashMap<>();
+                                    user.put("nameUser", user_firstname + user_lastname);
+                                    user.put("emailUser", user_email);
+                                    user.put("idRoom", "000");
+                                    user.put("idUser", "USER"+user_firstname);
+                                    user.put("phoneNumUser", "");
+                                    // Add a new document with a generated ID
+                                    db.collection("user")
+                                            .add(user)
+                                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                                @Override
+                                                public void onSuccess(DocumentReference documentReference) {
+                                                    Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                                                    //Log.d("TAG", "DocumentSnapshot added with ID: " + documentReference.getId());
+                                                }
+                                            })
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Toast.makeText(LoginActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
+
+                                                }
+                                            });
+
+
+                                }
+                            }
+                        });
+
+                Bundle parameters = new Bundle();
+                parameters.putString("fields", "last_name,first_name,email");
+                request.setParameters(parameters);
+                request.executeAsync();
                 Log.d(">>>>>>>>>>>>", "onSuccess" + loginResult.getAccessToken());
             }
 
@@ -266,14 +319,15 @@ public class LoginActivity extends AppCompatActivity {
                                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                     @Override
                                     public void onSuccess(DocumentReference documentReference) {
-                                        Toast.makeText(LoginActivity.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+
                                         //Log.d("TAG", "DocumentSnapshot added with ID: " + documentReference.getId());
                                     }
                                 })
                                 .addOnFailureListener(new OnFailureListener() {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(LoginActivity.this, "Thêm thất bại", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(LoginActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
 
                                     }
                                 });

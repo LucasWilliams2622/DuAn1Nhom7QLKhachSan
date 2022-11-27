@@ -117,7 +117,7 @@
         android:id="@+id/btnRegister"
         android:layout_width="343dp"
         android:layout_height="46dp"
-        android:layout_marginBottom="240dp"
+        android:layout_marginBottom="156dp"
         android:background="@drawable/button_cus"
         android:onClick="onRegisterClick"
         android:text="Register"
@@ -126,7 +126,6 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView

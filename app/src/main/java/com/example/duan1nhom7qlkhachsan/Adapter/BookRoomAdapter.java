@@ -2,6 +2,7 @@ package com.example.duan1nhom7qlkhachsan.Adapter;
 
 import android.app.DatePickerDialog;
 import android.icu.util.Calendar;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -74,7 +75,7 @@ public class BookRoomAdapter extends BaseAdapter {
         holder.edtCheckOutDay.setText(room.getEndDay());
         holder.edtCheckInDay.setText(room.getStartDay());
 
-        holder.edtCheckInDay.setOnClickListener(new View.OnClickListener() {
+        edtCheckInDay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(
@@ -99,7 +100,8 @@ public class BookRoomAdapter extends BaseAdapter {
                                 {
                                     thang = String.valueOf(month+1);
                                 }
-                                edtCheckInDay.setText(ngay+"/"+thang+"/"+year);//month in DatePickerDialog 0 -->11
+                                holder.edtCheckInDay.setText(year+"/"+thang+"/"+ngay);//month in DatePickerDialog 0 -->11
+                                Log.d(">>>>>>>>>>>>>>>>>>","date:"+year+"/"+thang+"/"+ngay);
                             }
                         }
                         ,calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH)
@@ -136,7 +138,9 @@ public class BookRoomAdapter extends BaseAdapter {
                                 {
                                     thang = String.valueOf(month+1);
                                 }
-                                edtCheckOutDay.setText(ngay+"/"+thang+"/"+year);//month in DatePickerDialog 0 -->11
+                                holder.edtCheckOutDay.setText(year+"/"+thang+"/"+ngay);//month in DatePickerDialog 0 -->11
+                                Log.d(">>>>>>>>>>>>>>>>>>","date:"+year+"/"+thang+"/"+ngay);
+
                             }
                         }
                         ,calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH)
@@ -146,13 +150,18 @@ public class BookRoomAdapter extends BaseAdapter {
             }
         });
 
-//        btnBookRoom.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                Toast.makeText(btnBookRoom.getContext(), "Đặt phòng thành công", Toast.LENGTH_SHORT).show();
-//            }
-//        });
+
+        holder.btnBookRoom.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+
+                AdapterAddRoomClick iAdapterClickEvent = (AdapterAddRoomClick) _viewGroup.getContext();
+                iAdapterClickEvent.onUpdateRoomClick(room);
+            }
+        });
+
 
         return view;
 
