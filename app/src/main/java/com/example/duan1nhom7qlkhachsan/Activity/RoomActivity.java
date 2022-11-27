@@ -52,15 +52,15 @@ public class RoomActivity extends AppCompatActivity {
                             ArrayList<AppRoom> list = new ArrayList<>();
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Map<String,Object> map = document.getData();
-                                String idRoom = map.get("idRoom").toString();
+                                String codeRoom = map.get("codeRoom").toString();
                                 String nameRoom = map.get("nameRoom").toString();
                                 String typeRoom = map.get("typeRoom").toString();
                                 String priceRoom = map.get("priceRoom").toString();
                                 String startDay = map.get("startDay").toString();
                                 String endDay = map.get("endDay").toString();
 
-                                AppRoom room = new AppRoom(idRoom,nameRoom,typeRoom,priceRoom,startDay,endDay);
-                                room.setIdRoom(document.getId());
+                                AppRoom room = new AppRoom(-1,codeRoom,nameRoom,typeRoom,priceRoom,startDay,endDay);
+                                room.setCodeRoom(document.getId());
                                 list.add(room);
                             }
                             getSupportFragmentManager()

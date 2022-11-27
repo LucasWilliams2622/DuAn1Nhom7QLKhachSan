@@ -16,11 +16,11 @@
         android:text=" Back" />
 
     <EditText
-        android:id="@+id/edtIdRoom"
+        android:id="@+id/edtCodeRoom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Id room"
+        android:hint="Code room"
         android:inputType="textPersonName"
         android:paddingLeft="7dp"
         android:paddingTop="10dp"

@@ -1,13 +1,15 @@
 package com.example.duan1nhom7qlkhachsan.Model;
 
 public class AppRoom {
-    private String idRoom,nameRoom,typeRoom,priceRoom,startDay,endDay;
+    private Integer id;
+    private String codeRoom,nameRoom,typeRoom,priceRoom,startDay,endDay,roomId;
 
     public AppRoom() {
     }
 
-    public AppRoom(String idRoom, String nameRoom, String typeRoom, String priceRoom, String startDay, String endDay) {
-        this.idRoom = idRoom;
+    public AppRoom(Integer id, String codeRoom, String nameRoom, String typeRoom, String priceRoom, String startDay, String endDay) {
+        this.id = id;
+        this.codeRoom = codeRoom;
         this.nameRoom = nameRoom;
         this.typeRoom = typeRoom;
         this.priceRoom = priceRoom;
@@ -15,12 +17,28 @@ public class AppRoom {
         this.endDay = endDay;
     }
 
-    public String getIdRoom() {
-        return idRoom;
+    public String getRoomId() {
+        return roomId;
     }
 
-    public void setIdRoom(String idRoom) {
-        this.idRoom = idRoom;
+    public void setRoomId(String roomId) {
+        this.roomId = roomId;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getCodeRoom() {
+        return codeRoom;
+    }
+
+    public void setCodeRoom(String codeRoom) {
+        this.codeRoom = codeRoom;
     }
 
     public String getNameRoom() {
