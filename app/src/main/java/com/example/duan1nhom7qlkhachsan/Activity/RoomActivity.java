@@ -13,7 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 
-import com.example.duan1nhom7qlkhachsan.Fragment.DatPhongFragment;
+import com.example.duan1nhom7qlkhachsan.Fragment.BookRoomFragment;
 import com.example.duan1nhom7qlkhachsan.Model.AppRoom;
 import com.example.duan1nhom7qlkhachsan.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -65,7 +65,7 @@ public class RoomActivity extends AppCompatActivity {
                             }
                             getSupportFragmentManager()
                                     .beginTransaction()
-                                    .replace(R.id.flRoom, DatPhongFragment.newInstance(list))
+                                    .replace(R.id.flRoom, BookRoomFragment.newInstance(list))
                                     .commit();
                         }
                     }

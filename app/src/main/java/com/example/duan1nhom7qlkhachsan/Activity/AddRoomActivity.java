@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AddRoomActivity extends AppCompatActivity implements IAdapterClickEvent {
+public class AddRoomActivity extends AppCompatActivity implements  AdapterAddRoomClick {
     private EditText edtCodeRoom, edtNameRoom, edtTypeRoom, edtPriceRoom, edtStartDay, edtEndDay;
     private Button btnAddRoom, btnClear,btnBackToMain;
     private AppRoom appRoom = null;

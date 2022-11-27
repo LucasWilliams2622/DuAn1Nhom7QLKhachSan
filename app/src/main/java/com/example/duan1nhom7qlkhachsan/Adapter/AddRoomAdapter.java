@@ -8,7 +8,8 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.duan1nhom7qlkhachsan.Activity.IAdapterClickEvent;
+import com.example.duan1nhom7qlkhachsan.Activity.AdapterAddRoomClick;
+
 import com.example.duan1nhom7qlkhachsan.Model.AppRoom;
 import com.example.duan1nhom7qlkhachsan.R;
 
@@ -73,14 +74,14 @@ public class AddRoomAdapter extends BaseAdapter {
 
             @Override
             public void onClick(View v) {
-                IAdapterClickEvent  iAdapterClickEvent = (IAdapterClickEvent) _viewGroup.getContext();
+                AdapterAddRoomClick iAdapterClickEvent = (AdapterAddRoomClick) _viewGroup.getContext();
                 iAdapterClickEvent.onUpdateRoomClick(room);
             }
         });
         holder.btnDelete .setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                IAdapterClickEvent  iAdapterClickEvent = (IAdapterClickEvent) _viewGroup.getContext();
+                AdapterAddRoomClick  iAdapterClickEvent = (AdapterAddRoomClick) _viewGroup.getContext();
                 iAdapterClickEvent.onDeleteRoomClick(room);
             }
         });

@@ -7,7 +7,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.duan1nhom7qlkhachsan.Activity.IAdapterClickEvent;
+import com.example.duan1nhom7qlkhachsan.Activity.AdapterAddRoomClick;
+
 import com.example.duan1nhom7qlkhachsan.Model.AppRoom;
 import com.example.duan1nhom7qlkhachsan.R;
 
@@ -63,13 +64,13 @@ public class BookRoomAdapter extends BaseAdapter {
         holder.tvNameBookRoom.setText(room.getEndDay());
         holder.tvTypeBookRoom.setText(room.getStartDay());
         holder.tvPriceBookRoom.setText(room.getNameRoom());
-        holder.edtCheckInDay.setText(room.getIdRoom());
+//        holder.edtCheckInDay.setText(room.getIdRoom());
         holder.edtCheckOutDay.setText(room.getTypeRoom());
 
         holder.btnBookRoom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                IAdapterClickEvent iAdapterClickEvent = (IAdapterClickEvent) _viewGroup.getContext();
+                AdapterAddRoomClick iAdapterClickEvent = (AdapterAddRoomClick) _viewGroup.getContext();
                 iAdapterClickEvent.onUpdateRoomClick(room);
             }
         });
