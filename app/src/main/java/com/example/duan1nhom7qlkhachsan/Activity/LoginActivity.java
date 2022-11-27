@@ -220,6 +220,8 @@ public class LoginActivity extends AppCompatActivity {
                         user.put("emailUser", email);
                         user.put("idRoom", "001");
                         user.put("idUser", "");
+                        user.put("phoneNumUser", "099999");
+
 
                         Toast.makeText(LoginActivity.this, "", Toast.LENGTH_SHORT).show();
                         // Add a new document with a generated ID

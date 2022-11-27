@@ -117,7 +117,7 @@
             app:layout_constraintVertical_bias="0.293" />
 
         <EditText
-            android:id="@+id/edtEmialUser"
+            android:id="@+id/edtEmailUser"
             android:layout_width="337dp"
             android:layout_height="42dp"
             android:layout_marginLeft="10dp"
@@ -195,6 +195,8 @@
             android:backgroundTint="#EABDBD"
             android:drawableStart="@drawable/ic_person"
             android:ems="10"
+
+
             android:inputType="textPersonName"
             android:paddingLeft="15dp"
             android:text="Delete Account"
@@ -206,5 +208,19 @@
             app:layout_constraintTop_toBottomOf="@+id/textView4"
             app:layout_constraintVertical_bias="0.004" />
     </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/btnBackToMainActivity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:background="@drawable/design_green_btn"
+        android:text="Back"
+        android:textColor="#454242"
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.077"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

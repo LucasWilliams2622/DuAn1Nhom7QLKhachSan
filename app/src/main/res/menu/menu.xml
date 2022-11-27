@@ -35,12 +35,10 @@
     </item>
     <item android:title="Ngưởi dùng">
         <menu>
-            <item android:id="@+id/mDoiMatKhau"
-                android:title="Đổi mật khẩu"
-                android:icon="@drawable/ic_key"/>
-            <item android:id="@+id/mChangeName"
-                android:title="Đổi tên"
-                android:icon="@drawable/ic_key"/>
+            <item android:id="@+id/mEditProfile"
+                android:title="Profile"
+                android:icon="@drawable/ic_person"/>
+
 
             <item android:id="@+id/mDangXuat"
                 android:title="Đăng Xuất"

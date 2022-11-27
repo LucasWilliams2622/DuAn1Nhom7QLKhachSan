@@ -1,11 +1,15 @@
 package com.example.duan1nhom7qlkhachsan.Adapter;
 
+import android.app.DatePickerDialog;
+import android.icu.util.Calendar;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.duan1nhom7qlkhachsan.Activity.AdapterAddRoomClick;
 
@@ -19,7 +23,7 @@ public class BookRoomAdapter extends BaseAdapter {
     private TextView tvNameBookRoom,tvTypeBookRoom,tvPriceBookRoom;
     private EditText edtCheckInDay,edtCheckOutDay;
     private ArrayList<AppRoom> list;
-
+    Calendar calendar = Calendar.getInstance();
     public BookRoomAdapter(ArrayList<AppRoom> list) {
         this.list = list;
     }
@@ -60,18 +64,93 @@ public class BookRoomAdapter extends BaseAdapter {
             view.setTag(holder);
         }
         AppRoom room = (AppRoom) getItem(_i);
-        BookRoomAdapter.ViewHolder holder = (BookRoomAdapter.ViewHolder) view.getTag();
-        holder.tvNameBookRoom.setText(room.getEndDay());
-        holder.tvTypeBookRoom.setText(room.getStartDay());
-        holder.tvPriceBookRoom.setText(room.getNameRoom());
-//        holder.edtCheckInDay.setText(room.getIdRoom());
-        holder.edtCheckOutDay.setText(room.getTypeRoom());
+        ViewHolder holder = (BookRoomAdapter.ViewHolder) view.getTag();
+
+
+        holder.tvNameBookRoom.setText(room.getNameRoom());
+        holder.tvTypeBookRoom.setText(room.getTypeRoom());
+        holder.tvPriceBookRoom.setText(room.getPriceRoom());
+
+        holder.edtCheckOutDay.setText(room.getEndDay());
+        holder.edtCheckInDay.setText(room.getStartDay());
+
+        holder.edtCheckInDay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(
+                        edtCheckInDay.getContext(),
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                                String ngay  ="";
+                                String  thang ="";
+                                if(dayOfMonth<10)
+                                {
+                                    ngay ="0"+dayOfMonth;
+                                }
+                                else
+                                {
+                                    ngay = String.valueOf(dayOfMonth);
+                                }
+                                if (month<10)
+                                {
+                                    thang ="0"+(month+1);
+                                }else
+                                {
+                                    thang = String.valueOf(month+1);
+                                }
+                                edtCheckInDay.setText(ngay+"/"+thang+"/"+year);//month in DatePickerDialog 0 -->11
+                            }
+                        }
+                        ,calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH)
+
+                );
+                datePickerDialog.show();
+            }
+        });
+
+
+
+        holder.edtCheckOutDay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(
+                        edtCheckOutDay.getContext(),
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                                String ngay  ="";
+                                String  thang ="";
+                                if(dayOfMonth<10)
+                                {
+                                    ngay ="0"+dayOfMonth;
+                                }
+                                else
+                                {
+                                    ngay = String.valueOf(dayOfMonth);
+                                }
+                                if (month<10)
+                                {
+                                    thang ="0"+(month+1);
+                                }else
+                                {
+                                    thang = String.valueOf(month+1);
+                                }
+                                edtCheckOutDay.setText(ngay+"/"+thang+"/"+year);//month in DatePickerDialog 0 -->11
+                            }
+                        }
+                        ,calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH)
+
+                );
+                datePickerDialog.show();
+            }
+        });
 
         holder.btnBookRoom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AdapterAddRoomClick iAdapterClickEvent = (AdapterAddRoomClick) _viewGroup.getContext();
-                iAdapterClickEvent.onUpdateRoomClick(room);
+
+                Toast.makeText(btnBookRoom.getContext(), "Đặt phòng thành công", Toast.LENGTH_SHORT).show();
             }
         });
 

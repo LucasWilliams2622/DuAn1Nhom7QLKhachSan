@@ -1,6 +1,5 @@
 package com.example.duan1nhom7qlkhachsan.Fragment;
 
-import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.duan1nhom7qlkhachsan.Activity.RoomActivity;
 import com.example.duan1nhom7qlkhachsan.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 

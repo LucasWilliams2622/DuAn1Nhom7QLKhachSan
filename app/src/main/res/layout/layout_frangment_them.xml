@@ -27,7 +27,7 @@ android:orientation="horizontal">
         android:gravity="center"
         android:text="Phiếu Hỗ Trợ"
         android:textColor="#121315"
-        android:textStyle="italic"
+        android:textStyle="italic|bold"
         android:textSize="30sp" />
 
     <LinearLayout
@@ -52,7 +52,7 @@ android:orientation="horizontal">
                 android:layout_marginTop="10dp"
                 android:ems="10"
 
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="0dp"
                 android:layout_marginBottom="10dp"
                 android:paddingTop="5dp"
                 android:paddingLeft="20dp"
@@ -68,7 +68,7 @@ android:orientation="horizontal">
 
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="0dp"
                 android:layout_marginBottom="10dp"
                 android:paddingTop="5dp"
                 android:paddingLeft="20dp"
@@ -86,7 +86,7 @@ android:orientation="horizontal">
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:textColorHint="@color/black"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="0dp"
                 android:layout_marginBottom="10dp"
                 android:paddingTop="10dp"
                 android:paddingLeft="20dp"

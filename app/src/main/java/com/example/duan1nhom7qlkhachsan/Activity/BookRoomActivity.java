@@ -1,13 +1,13 @@
 package com.example.duan1nhom7qlkhachsan.Activity;
 
+import android.app.DatePickerDialog;
+import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,8 +25,10 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class RoomActivity extends AppCompatActivity {
+public class BookRoomActivity extends AppCompatActivity {
     private ListView flRoom;
+    private EditText edtCheckInDay,edtCheckOutDay;
+    private Button btnBookRoom;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
@@ -34,6 +36,8 @@ public class RoomActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room);
         getDataRoom();
+
+
 
     }
     @Override
@@ -71,5 +75,7 @@ public class RoomActivity extends AppCompatActivity {
                     }
                 });
     }
+
+
 
 }

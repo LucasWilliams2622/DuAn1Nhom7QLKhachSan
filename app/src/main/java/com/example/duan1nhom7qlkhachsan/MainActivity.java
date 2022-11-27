@@ -22,8 +22,10 @@ import androidx.fragment.app.FragmentManager;
 
 
 import com.example.duan1nhom7qlkhachsan.Activity.AddRoomActivity;
+import com.example.duan1nhom7qlkhachsan.Activity.EditProfileActivity;
 import com.example.duan1nhom7qlkhachsan.Activity.LoginActivity;
 
+import com.example.duan1nhom7qlkhachsan.Activity.BookRoomActivity;
 import com.example.duan1nhom7qlkhachsan.Activity.hotro.HotroAdminFragment;
 import com.example.duan1nhom7qlkhachsan.Activity.hotro.HoTroFragment;
 import com.example.duan1nhom7qlkhachsan.Fragment.AddServiceFragment;
@@ -84,6 +86,10 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.mDichVu:
                         fragment = new ServiceFragment();
                         break;
+                    case R.id.mDatPhong:
+                        Intent itentBookRoom = new Intent(MainActivity.this, BookRoomActivity.class);
+                        startActivity(itentBookRoom);
+                        break;
 
                     case R.id.mDoanhThu:
                         fragment = new DoanhThuFragment();
@@ -108,10 +114,13 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.mAddService:
                          fragment = new AddServiceFragment();
                          break;
-                    case R.id.mDoiMatKhau:
+                    case R.id.mEditProfile:
 
 
-                        //showDialogChangePass();
+                        Intent intentProfile = new Intent(MainActivity.this, EditProfileActivity.class);
+                        startActivity(intentProfile);
+                        break;
+
                     case R.id.mDangXuat:
                         if (account != null) {
                             gsc.signOut().addOnCompleteListener(MainActivity.this,
