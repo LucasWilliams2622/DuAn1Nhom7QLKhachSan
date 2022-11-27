@@ -56,7 +56,7 @@ public class AddRoomAdapter extends BaseAdapter {
             tvTypeRoom = view.findViewById(R.id.tvTypeRoom);
             tvPriceRoom = view.findViewById(R.id.tvPriceRoom);
 
-          ViewHolder holder = new ViewHolder(tvCodeRoom,tvNameRoom,tvTypeRoom,tvPriceRoom,tvEndDay,tvStartDay,btnDelete,btnUpdate);
+          ViewHolder holder = new ViewHolder(tvCodeRoom,tvNameRoom,tvTypeRoom,tvPriceRoom,tvStartDay,tvEndDay,btnDelete,btnUpdate);
 
             view.setTag(holder);
         }
