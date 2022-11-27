@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragment.AddServiceFragment"
+    android:background="#BA9AF3">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/edtIdRoom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="ID Room" />
+
+        <EditText
+            android:id="@+id/edtIdService"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="ID Service" />
+
+        <EditText
+            android:id="@+id/edtNameService"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Name Service" />
+
+        <EditText
+            android:id="@+id/edtTimeService"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Time use service" />
+
+        <EditText
+            android:id="@+id/edtPriceService"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Price service" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btnUpdateService"
+                android:layout_width="201dp"
+                android:layout_height="wrap_content"
+                android:text="UPDATE"
+                android:textSize="15dp" />
+
+            <Button
+                android:id="@+id/btnAddService"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ADD SERVICE"
+                android:textSize="15dp" />
+        </LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/reAddService"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+
+</FrameLayout>

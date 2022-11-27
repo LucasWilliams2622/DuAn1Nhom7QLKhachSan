@@ -63,7 +63,7 @@ public class BookedRoomAdapter extends BaseAdapter {
             holder.txtEndDay.setText(room.getEndDay());
             holder.txtStartDay.setText(room.getStartDay());
             holder.tvTenPhong.setText(room.getNameRoom());
-            holder.tvMaPhong.setText(room.getIdRoom());
+            holder.tvMaPhong.setText(room.getCodeRoom());
             holder.tvLoaiPhong.setText(room.getTypeRoom());
             holder.tvGiaPhong.setText(room.getPriceRoom());
 

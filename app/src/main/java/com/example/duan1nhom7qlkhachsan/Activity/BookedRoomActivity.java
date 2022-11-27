@@ -54,7 +54,7 @@ public class BookedRoomActivity extends AppCompatActivity {
     public  void onSaveClick(View view) {
         String name = edtTenPhong.getText().toString();
         String type = edtLoaiPhong.getText().toString();
-        String id = edtMaPhong.getText().toString();
+        String code = edtMaPhong.getText().toString();
         String price = edtGiaPhong.getText().toString();
         String startDay = edtStartDay.getText().toString();
         String endDay = edtEndDay.getText().toString();
@@ -64,7 +64,7 @@ public class BookedRoomActivity extends AppCompatActivity {
         Map<String, Object> item = new HashMap<>();
         item.put("nameRoom", name);
         item.put("typeRoom", type);
-        item.put("idRoom", id);
+        item.put("codeRoom", code);
         item.put("priceRoom", price);
         item.put("startDay", startDay);
         item.put("endDay", endDay);
@@ -112,12 +112,15 @@ public class BookedRoomActivity extends AppCompatActivity {
                                 Map<String, Object> map= document.getData();
                                 String name=map.get("nameRoom").toString();
                                 String type=map.get("typeRoom").toString();
-                                String id=map.get("idRoom").toString();
+                                String code=map.get("codeRoom").toString();
                                 String price=map.get("priceRoom").toString();
                                 String startDay=map.get("startDay").toString();
                                 String endDay=map.get("endDay").toString();
 
-                                AppRoom room = new AppRoom(id,type,name,price,startDay,endDay);
+
+                                AppRoom room = new AppRoom(-1,code,name,type,price,startDay,endDay);
+
+
                                 rooms.add(room);
 
                             }

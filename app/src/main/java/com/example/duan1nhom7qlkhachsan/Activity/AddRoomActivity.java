@@ -29,8 +29,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AddRoomActivity extends AppCompatActivity implements IAdapterClickEvent {
-    private EditText edtIdRoom, edtNameRoom, edtTypeRoom, edtPriceRoom, edtStartDay, edtEndDay;
+public class AddRoomActivity extends AppCompatActivity implements  AdapterAddRoomClick {
+    private EditText edtCodeRoom, edtNameRoom, edtTypeRoom, edtPriceRoom, edtStartDay, edtEndDay;
     private Button btnAddRoom, btnClear,btnBackToMain;
     private AppRoom appRoom = null;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -40,7 +40,7 @@ public class AddRoomActivity extends AppCompatActivity implements IAdapterClickE
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_room);
 
-        edtIdRoom = findViewById(R.id.edtIdRoom);
+        edtCodeRoom = findViewById(R.id.edtCodeRoom);
         edtNameRoom = findViewById(R.id.edtNameRoom);
         edtTypeRoom = findViewById(R.id.edtTypeRoom);
         edtPriceRoom = findViewById(R.id.edtPriceRoom);
@@ -67,7 +67,7 @@ public class AddRoomActivity extends AppCompatActivity implements IAdapterClickE
 
     public void onAddRoomClick(View view) {
         // private String idRoom,nameRoom,typeRoom,priceRoom,startDay,endDay;
-        String idRoom = edtIdRoom.getText().toString();
+        String codeRoom = edtCodeRoom.getText().toString();
         String nameRoom = edtNameRoom.getText().toString();
         String typeRoom = edtTypeRoom.getText().toString();
         String priceRoom = edtPriceRoom.getText().toString();
@@ -77,7 +77,7 @@ public class AddRoomActivity extends AppCompatActivity implements IAdapterClickE
 
         // Create a new user with a first and last name
         Map<String, Object> user = new HashMap<>();
-        user.put("idRoom", idRoom);
+        user.put("codeRoom", codeRoom);
         user.put("nameRoom", nameRoom);
         user.put("typeRoom", typeRoom);
         user.put("priceRoom", priceRoom);
@@ -110,7 +110,7 @@ public class AddRoomActivity extends AppCompatActivity implements IAdapterClickE
                     });
         } else {
             db.collection("room")
-                    .document(appRoom.getIdRoom())
+                    .document(appRoom.getRoomId())
                     .set(user)
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
@@ -130,7 +130,7 @@ public class AddRoomActivity extends AppCompatActivity implements IAdapterClickE
     }
 
     public void onCancleClick(View view) {
-        edtIdRoom.setText(null);
+        edtCodeRoom.setText(null);
         edtNameRoom.setText(null);
         edtTypeRoom.setText(null);
         edtPriceRoom.setText(null);
@@ -149,15 +149,15 @@ public class AddRoomActivity extends AppCompatActivity implements IAdapterClickE
                             ArrayList<AppRoom> list = new ArrayList<>();
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Map<String, Object> map = document.getData();
-                                String id = map.get("idRoom").toString();
+                                String code = map.get("codeRoom").toString();
                                 String name = map.get("nameRoom").toString();
                                 String type = map.get("typeRoom").toString();
                                 String price = map.get("priceRoom").toString();
                                 String start = map.get("startDay").toString();
                                 String end = map.get("endDay").toString();
 
-                                AppRoom appRoom = new AppRoom(id, name, type, price, start, end);
-                                appRoom.setIdRoom(appRoom.getIdRoom());
+                                AppRoom appRoom = new AppRoom(-1,code,name, type, price, start, end);
+                                appRoom.setRoomId(document.getId());
                                 list.add(appRoom);
 
                                 getSupportFragmentManager().beginTransaction()
@@ -177,7 +177,7 @@ public class AddRoomActivity extends AppCompatActivity implements IAdapterClickE
                 .setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        db.collection("room").document(room.getIdRoom())
+                        db.collection("room").document(room.getRoomId())
                                 .delete()
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
@@ -202,7 +202,7 @@ public class AddRoomActivity extends AppCompatActivity implements IAdapterClickE
 
     @Override
     public void onUpdateRoomClick(AppRoom room) {
-        edtIdRoom.setText(room.getIdRoom());
+        edtCodeRoom.setText(room.getCodeRoom());
         edtNameRoom.setText(room.getNameRoom());
         edtTypeRoom.setText(room.getTypeRoom());
         edtPriceRoom.setText(room.getPriceRoom());
