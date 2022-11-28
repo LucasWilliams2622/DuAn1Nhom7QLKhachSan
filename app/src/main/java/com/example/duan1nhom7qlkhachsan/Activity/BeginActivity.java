@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 
+import com.example.duan1nhom7qlkhachsan.Guide.Load2Activity;
 import com.example.duan1nhom7qlkhachsan.R;
 
 
@@ -19,11 +20,13 @@ public class BeginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_begin);
         ImageView ivLogo = findViewById(R.id.ivLogo);
+
+
         Glide.with(this).load(R.drawable.logo).into(ivLogo);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent i = new Intent(BeginActivity.this, LoginActivity.class);
+                Intent i = new Intent(BeginActivity.this, Load2Activity.class);
                 startActivity(i);
             }
         },1500);

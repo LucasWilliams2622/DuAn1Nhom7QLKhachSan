@@ -15,26 +15,26 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DuAn1Nhom7QLKhachSan"
         tools:targetApi="31">
-<!--       <service-->
-<!--           android:name=".AddRoomService"-->
-<!--            android:enabled="true"-->
-<!--            android:exported="true"></service> -->
-<!--        <service-->
-<!--            android:name=".AppAdminService"-->
-<!--            android:enabled="true"-->
-<!--            android:exported="true" />-->
-<!--        <service-->
-<!--            android:name=".BookedRoomService"-->
-<!--            android:enabled="true"-->
-<!--            android:exported="true" />-->
-<!--        <service-->
-<!--            android:name=".RoomService"-->
-<!--            android:enabled="true"-->
-<!--            android:exported="true" />-->
-<!--        <service-->
-<!--            android:name=".UserService"-->
-<!--            android:enabled="true"-->
-<!--            android:exported="true" />-->
+        <!--       <service-->
+        <!--           android:name=".AddRoomService"-->
+        <!--            android:enabled="true"-->
+        <!--            android:exported="true"></service> -->
+        <!--        <service-->
+        <!--            android:name=".AppAdminService"-->
+        <!--            android:enabled="true"-->
+        <!--            android:exported="true" />-->
+        <!--        <service-->
+        <!--            android:name=".BookedRoomService"-->
+        <!--            android:enabled="true"-->
+        <!--            android:exported="true" />-->
+        <!--        <service-->
+        <!--            android:name=".RoomService"-->
+        <!--            android:enabled="true"-->
+        <!--            android:exported="true" />-->
+        <!--        <service-->
+        <!--            android:name=".UserService"-->
+        <!--            android:enabled="true"-->
+        <!--            android:exported="true" />-->
 
         <activity
             android:name=".Activity.EditProfileActivity"
@@ -145,8 +145,11 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".Activity.RegisterActivity"
@@ -162,11 +165,6 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".MainActivity"
@@ -174,7 +172,6 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-
         </activity>
     </application>
 
