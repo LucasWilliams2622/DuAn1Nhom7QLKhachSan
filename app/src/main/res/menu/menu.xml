@@ -1,48 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/mGioiThieu"
-        android:title="Giới thiệu về Savila"
-        android:icon="@drawable/ic_home"/>
-    <item android:id="@+id/mDatPhong"
-        android:title="Đặt phòng"
-        android:icon="@drawable/ic_room"/>
-    <item android:id="@+id/mPhongDaDat"
-        android:title="Phòng đã đặt"
-        android:icon="@drawable/ic_checkroom"/>
-    <item android:id="@+id/mDichVu"
-        android:title="Dịch vụ"
-        android:icon="@drawable/ic_room_service"/>
-    <item android:id="@+id/mTuVanKH"
-        android:title="Tư vấn khách hàng"
-        android:icon="@drawable/ic_baseline_phone_24"/>
+    <item
+        android:id="@+id/mEditProfile"
+        android:icon="@drawable/ic_person"
+        android:title="Profile" />
+
+    <item
+        android:id="@+id/mGioiThieu"
+        android:icon="@drawable/ic_home"
+        android:title="Trang chủ" />
+    <item
+        android:id="@+id/mDatPhong"
+        android:icon="@drawable/ic_room"
+        android:title="Đặt phòng" />
+    <item
+        android:id="@+id/mPhongDaDat"
+        android:icon="@drawable/ic_checkroom"
+        android:title="Phòng đã đặt" />
+    <item
+        android:id="@+id/mDichVu"
+        android:icon="@drawable/ic_room_service"
+        android:title="Dịch vụ" />
+    <item
+        android:id="@+id/mTuVanKH"
+        android:icon="@drawable/ic_baseline_phone_24"
+        android:title="Tư vấn khách hàng" />
     <item android:title="Admin">
         <menu>
-            <item android:id="@+id/mAddRoom"
-                android:title="Thêm phòng "
-                android:icon="@drawable/ic_top"/>
-            <item android:id="@+id/mAddService"
-                android:title="Thêm dịch vụ"
-                android:icon="@drawable/ic_top"/>
-            <item android:id="@+id/mTop10"
-                android:title="Top 3 phòng được đặt nhiều nhất"
-                android:icon="@drawable/ic_top"/>
-            <item android:id="@+id/mHotro"
-                android:title="Hỗ trợ khách hàng"/>
-            <item android:id="@+id/mDoanhThu"
-                android:title="Doanh Thu"
-                android:icon="@drawable/ic_money"/>
+            <item
+                android:id="@+id/mAddRoom"
+                android:icon="@drawable/ic_room_no2"
+                android:title="Thêm phòng " />
+            <item
+                android:id="@+id/mAddService"
+                android:icon="@drawable/ic_baseline_local_laundry_service_24"
+                android:title="Thêm dịch vụ" />
+            <item
+                android:id="@+id/mTop10"
+                android:icon="@drawable/ic_top"
+                android:title="Top 3 phòng được đặt nhiều nhất" />
+            <item
+                android:id="@+id/mHotro"
+                android:icon="@drawable/ic_baseline_phone_24"
+                android:title="Hỗ trợ khách hàng" />
+            <item
+                android:id="@+id/mDoanhThu"
+                android:icon="@drawable/ic_money"
+                android:title="Doanh Thu" />
         </menu>
     </item>
     <item android:title="Ngưởi dùng">
         <menu>
-            <item android:id="@+id/mEditProfile"
-                android:title="Profile"
-                android:icon="@drawable/ic_person"/>
 
 
-            <item android:id="@+id/mDangXuat"
-                android:title="Đăng Xuất"
-                android:icon="@drawable/ic_exit"/>
+            <item
+                android:id="@+id/mDangXuat"
+                android:icon="@drawable/ic_exit"
+                android:title="Đăng Xuất" />
         </menu>
     </item>
 </menu>

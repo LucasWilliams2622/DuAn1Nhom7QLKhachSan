@@ -32,7 +32,7 @@ import com.example.duan1nhom7qlkhachsan.Fragment.AddServiceFragment;
 
 import com.example.duan1nhom7qlkhachsan.Fragment.DoanhThuFragment;
 import com.example.duan1nhom7qlkhachsan.Fragment.GioiThieuFragment;
-import com.example.duan1nhom7qlkhachsan.Fragment.PhongDaDatFragment;
+import com.example.duan1nhom7qlkhachsan.Fragment.BookedRoomFragment;
 import com.example.duan1nhom7qlkhachsan.Fragment.ServiceFragment;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -42,6 +42,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
     View headerLayout;
     GoogleSignInClient gsc;
     GoogleSignInAccount account;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +66,12 @@ public class MainActivity extends AppCompatActivity {
         navigationView = findViewById(R.id.navigationView);
         headerLayout = navigationView.getHeaderView(0);
 
-        TextView tvTen = headerLayout.findViewById(R.id.tvTen);
+//        TextView tvNameUserLogin = headerLayout.findViewById(R.id.tvNameUserLogin);
+//        TextView tvEmailUserLogin = headerLayout.findViewById(R.id.tvEmailUserLogin);
+
+//        tvNameUserLogin.setText(account.getDisplayName());
+//        tvEmailUserLogin.setText(account.getEmail());
+
         setSupportActionBar(toolBar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -101,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
                         fragment = new HoTroFragment();
                         break;
                     case R.id.mPhongDaDat:
-                        fragment = new PhongDaDatFragment();
+                        fragment = new BookedRoomFragment();
                         break;
                     case R.id.mGioiThieu:
                         fragment = new GioiThieuFragment();

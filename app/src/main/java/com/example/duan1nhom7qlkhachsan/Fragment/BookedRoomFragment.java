@@ -9,7 +9,6 @@ import android.widget.ListView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.duan1nhom7qlkhachsan.Adapter.BookedRoomAdapter;
 import com.example.duan1nhom7qlkhachsan.Model.AppRoom;
@@ -18,23 +17,23 @@ import com.example.duan1nhom7qlkhachsan.R;
 import java.util.ArrayList;
 
 
-public class PhongDaDatFragment extends Fragment {
-    ListView lvFrgBookedRoom;
-    BookedRoomAdapter bookedRoomAdapter;
-    ArrayList<AppRoom> room = new ArrayList<>();
+public class BookedRoomFragment extends Fragment {
+    private ListView lvFrgBookedRoom;
 
-    public PhongDaDatFragment() {
+    private ArrayList<AppRoom>  room ;
+
+    public BookedRoomFragment() {
         // Required empty public constructor
     }
 
 
 
-    public static PhongDaDatFragment newInstance(ArrayList<AppRoom> room) {
+    public static BookedRoomFragment newInstance(ArrayList<AppRoom> room) {
 
 
-        PhongDaDatFragment fragment = new PhongDaDatFragment();
+        BookedRoomFragment fragment = new BookedRoomFragment();
         Bundle args = new Bundle();
-        args.putSerializable("room", room);
+        args.putSerializable("bookedRoom", room);
 
         fragment.setArguments(args);
         return fragment;
@@ -43,7 +42,7 @@ public class PhongDaDatFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            room = (ArrayList<AppRoom>) getArguments().getSerializable("room");
+            room = (ArrayList<AppRoom>) getArguments().getSerializable("bookedRoom");
         }
     }
     @Override
@@ -57,7 +56,7 @@ public class PhongDaDatFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         lvFrgBookedRoom = view.findViewById(R.id.lvFrgBookedRoom);
-        bookedRoomAdapter = new BookedRoomAdapter(room);
+        BookedRoomAdapter bookedRoomAdapter = new BookedRoomAdapter(room);
         lvFrgBookedRoom.setAdapter(bookedRoomAdapter);
     }
 }

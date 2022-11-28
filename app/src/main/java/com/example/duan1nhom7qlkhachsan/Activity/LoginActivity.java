@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
@@ -64,6 +65,7 @@ public class LoginActivity extends AppCompatActivity {
     private static final String EMAIL = "email";
     EditText edt_username;
     EditText edt_password;
+    TextView tvNameUserLogin;
     //Google
     GoogleSignInClient gsc;
 
@@ -81,13 +83,11 @@ public class LoginActivity extends AppCompatActivity {
         Button btn_login = findViewById(R.id.btn_login);
         Button btn_register = findViewById(R.id.btnGoRegister);
         ImageView ivShowPass = findViewById(R.id.ivShowPass);
-
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String username = edt_username.getText().toString();
                 String password = edt_password.getText().toString();
-
                 if (username.equals("") || password.equals("")) {
                     Toast.makeText(LoginActivity.this, "Vui lòng điền đủ thông tin", Toast.LENGTH_SHORT).show();
 
@@ -203,11 +203,6 @@ public class LoginActivity extends AppCompatActivity {
                     Log.d(">>>>>>>>TAB", "onCurrentProfileChanged" + newProfile.getName());
                     Log.d(">>>>>>>>TAB", "onCurrentProfileChanged" + newProfile.getId());
 
-
-//                    String id = oldProfile.getId();
-//                    UserDao u = new UserDao(LoginActivity.this);
-//                    u.register(id, "", 1);
-
                 }
             }
         };
@@ -216,72 +211,7 @@ public class LoginActivity extends AppCompatActivity {
         // If you are using in a fragment, call loginButton.setFragment(this);
 
         // Callback registration
-        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-            @Override
-            public void onSuccess(LoginResult loginResult) {
-                GraphRequest request = GraphRequest.newMeRequest(
-                        loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
-                            @Override
-                            public void onCompleted(JSONObject me, GraphResponse response) {
 
-                                if (response.getError() != null) {
-                                    // handle error
-                                } else {
-
-                                    String user_lastname = me.optString("last_name");
-                                    String user_firstname = me.optString("first_name");
-                                    String user_email = response.getJSONObject().optString("email");
-
-                                    Log.d(">>>>>>>>", "email" + user_email);
-                                    Log.d(">>>>>>>>", "name " + user_firstname + user_lastname);
-
-                                    Map<String, Object> user = new HashMap<>();
-                                    user.put("nameUser", user_firstname + user_lastname);
-                                    user.put("emailUser", user_email);
-                                    user.put("idRoom", "000");
-                                    user.put("idUser", "USER"+user_firstname);
-                                    user.put("phoneNumUser", "");
-                                    // Add a new document with a generated ID
-                                    db.collection("user")
-                                            .add(user)
-                                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                                @Override
-                                                public void onSuccess(DocumentReference documentReference) {
-                                                    Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                                                    //Log.d("TAG", "DocumentSnapshot added with ID: " + documentReference.getId());
-                                                }
-                                            })
-                                            .addOnFailureListener(new OnFailureListener() {
-                                                @Override
-                                                public void onFailure(@NonNull Exception e) {
-                                                    Toast.makeText(LoginActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
-
-                                                }
-                                            });
-
-
-                                }
-                            }
-                        });
-
-                Bundle parameters = new Bundle();
-                parameters.putString("fields", "last_name,first_name,email");
-                request.setParameters(parameters);
-                request.executeAsync();
-                Log.d(">>>>>>>>>>>>", "onSuccess" + loginResult.getAccessToken());
-            }
-
-            @Override
-            public void onCancel() {
-                // App code
-            }
-
-            @Override
-            public void onError(FacebookException exception) {
-                // App code
-                Log.d(">>>>>>>>>", "onError:" + exception.getMessage());
-            }
-        });
 
     }
 

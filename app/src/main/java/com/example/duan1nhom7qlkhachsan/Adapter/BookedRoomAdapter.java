@@ -10,17 +10,16 @@ import android.widget.TextView;
 
 import com.example.duan1nhom7qlkhachsan.Model.AppRoom;
 import com.example.duan1nhom7qlkhachsan.R;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
 public class BookedRoomAdapter extends BaseAdapter {
-
-
-    private ArrayList<AppRoom> list;
-    private Context context;
-    EditText txtEndDay,txtStartDay;
-    Button btnHuyPhong;
-    TextView tvTenPhong,tvMaPhong,tvLoaiPhong,tvGiaPhong;
+    private ArrayList<AppRoom> list ;
+    private EditText txtEndDay, txtStartDay;
+    private Button btnHuyPhong;
+    private TextView tvTenPhong, tvMaPhong, tvLoaiPhong, tvGiaPhong;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public BookedRoomAdapter(ArrayList<AppRoom> list) {
         this.list = list;
@@ -45,9 +44,8 @@ public class BookedRoomAdapter extends BaseAdapter {
     @Override
     public View getView(int _i, View _view, ViewGroup _viewGroup) {
         View view = _view;
-        if (view == null)
-        {
-            view = View.inflate(_viewGroup.getContext(), R.layout.item_recycler_booked_room,null);
+        if (view == null) {
+            view = View.inflate(_viewGroup.getContext(), R.layout.item_recycler_booked_room, null);
             txtEndDay = view.findViewById(R.id.txtEndDay);
             txtStartDay = view.findViewById(R.id.txtStartDay);
             btnHuyPhong = view.findViewById(R.id.btnHuyPhong);
@@ -55,24 +53,25 @@ public class BookedRoomAdapter extends BaseAdapter {
             tvMaPhong = view.findViewById(R.id.tvMaPhong);
             tvLoaiPhong = view.findViewById(R.id.tvLoaiPhong);
             tvGiaPhong = view.findViewById(R.id.tvGiaPhong);
-            ViewHolder holder = new ViewHolder(txtEndDay,txtStartDay,btnHuyPhong,tvTenPhong,tvMaPhong,tvLoaiPhong,tvGiaPhong);
+            ViewHolder holder = new ViewHolder(txtEndDay, txtStartDay, btnHuyPhong, tvTenPhong, tvMaPhong, tvLoaiPhong, tvGiaPhong);
             view.setTag(holder);
         }
-            AppRoom room = (AppRoom) getItem(_i);
-            ViewHolder holder = (ViewHolder) view.getTag();
-            holder.txtEndDay.setText(room.getEndDay());
-            holder.txtStartDay.setText(room.getStartDay());
-            holder.tvTenPhong.setText(room.getNameRoom());
-            holder.tvMaPhong.setText(room.getCodeRoom());
-            holder.tvLoaiPhong.setText(room.getTypeRoom());
-            holder.tvGiaPhong.setText(room.getPriceRoom());
+        AppRoom room = (AppRoom) getItem(_i);
+        ViewHolder holder = (ViewHolder) view.getTag();
+        holder.txtEndDay.setText(room.getEndDay());
+        holder.txtStartDay.setText(room.getStartDay());
+        holder.tvTenPhong.setText(room.getNameRoom());
+        holder.tvMaPhong.setText(room.getCodeRoom());
+        holder.tvLoaiPhong.setText(room.getTypeRoom());
+        holder.tvGiaPhong.setText(room.getPriceRoom());
 
         return view;
     }
-    private static class ViewHolder{
-        final EditText txtEndDay,txtStartDay;
+
+    private static class ViewHolder {
+        final EditText txtEndDay, txtStartDay;
         final Button btnHuyPhong;
-        final TextView tvTenPhong,tvMaPhong,tvLoaiPhong,tvGiaPhong;
+        final TextView tvTenPhong, tvMaPhong, tvLoaiPhong, tvGiaPhong;
 
         public ViewHolder(EditText txtEndDay, EditText txtStartDay, Button btnHuyPhong, TextView tvTenPhong, TextView tvMaPhong, TextView tvLoaiPhong, TextView tvGiaPhong) {
             this.txtEndDay = txtEndDay;

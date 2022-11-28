@@ -66,6 +66,7 @@ public class BookRoomActivity extends AppCompatActivity {
                             ArrayList<AppRoom> list = new ArrayList<>();
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Map<String,Object> map = document.getData();
+
                                 String codeRoom = map.get("codeRoom").toString();
                                 String nameRoom = map.get("nameRoom").toString();
                                 String typeRoom = map.get("typeRoom").toString();
