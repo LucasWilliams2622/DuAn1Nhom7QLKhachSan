@@ -236,8 +236,6 @@ public class AddServiceActivity extends AppCompatActivity implements IAdapterAdd
                 })
                 .show();
     }
-
-
     @Override
     public void onUpdateServiceClick(AppService service) {
         //private EditText edtIdRoom, edtIdService, edtNameService, edtPriceService;
