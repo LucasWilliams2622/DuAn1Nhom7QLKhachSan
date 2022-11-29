@@ -45,7 +45,7 @@ android:background="#f5f5f5">
             android:paddingLeft="15dp"
             android:paddingTop="4dp"
             android:paddingRight="15dp"
-            android:text="Id phòng: 002"
+            android:text="002"
             android:textColor="@color/black"
             android:textSize="20dp"
             android:textStyle="normal" />
@@ -57,7 +57,7 @@ android:background="#f5f5f5">
             android:paddingLeft="15dp"
             android:paddingTop="4dp"
             android:paddingRight="15dp"
-            android:text="Tên phòng: R002"
+            android:text="R002"
             android:textColor="@color/black"
             android:textSize="20dp"
             android:textStyle="normal" />
@@ -69,7 +69,7 @@ android:background="#f5f5f5">
             android:paddingLeft="15dp"
             android:paddingTop="4dp"
             android:paddingRight="15dp"
-            android:text="Loại phòng: King Room"
+            android:text="King Room"
             android:textColor="@color/black"
             android:textSize="20dp"
             android:textStyle="normal" />
@@ -82,35 +82,35 @@ android:background="#f5f5f5">
             android:paddingTop="4dp"
 
             android:paddingRight="15dp"
-            android:text="Giá phòng: 999$"
+            android:text="999$"
             android:textColor="@color/black"
             android:textSize="20dp"
             android:textStyle="normal" />
 
 
-        <EditText
-            android:id="@+id/txtStartDay"
+        <TextView
+            android:id="@+id/tvStartDay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/design_edit_no_stoke"
-            android:hint="Chọn ngày check in:"
             android:paddingLeft="15dp"
-            android:paddingTop="10dp"
-            android:textColorHint="@color/black"
-            android:textSize="17dp" />
+            android:paddingTop="4dp"
+            android:paddingRight="15dp"
+            android:text="11/11/1111"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="normal" />
 
-        <EditText
-            android:id="@+id/txtEndDay"
-
+        <TextView
+            android:id="@+id/tvEndDay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/design_edit_no_stoke"
-            android:hint="Ngày check out:"
             android:paddingLeft="15dp"
-            android:paddingTop="10dp"
-
-            android:textColorHint="#323030"
-            android:textSize="17dp" />
+            android:paddingTop="4dp"
+            android:paddingRight="15dp"
+            android:text="11/11/1111"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="normal" />
 
 
         <Button

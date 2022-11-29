@@ -107,7 +107,7 @@ public class BookRoomAdapter extends BaseAdapter {
                                 } else {
                                     thang = String.valueOf(month + 1);
                                 }
-                                holder.edtCheckInDay.setText(year + "/" + thang + "/" + ngay);//month in DatePickerDialog 0 -->11
+                                holder.edtCheckInDay.setText("Check In Day: " + year + "/" + thang + "/" + ngay);//month in DatePickerDialog 0 -->11
                                 Log.d(">>>>>>>>>>>>>>>>>>", "date:" + year + "/" + thang + "/" + ngay);
                             }
                         }
@@ -139,7 +139,7 @@ public class BookRoomAdapter extends BaseAdapter {
                                 } else {
                                     thang = String.valueOf(month + 1);
                                 }
-                                holder.edtCheckOutDay.setText(year + "/" + thang + "/" + ngay);//month in DatePickerDialog 0 -->11
+                                holder.edtCheckOutDay.setText("Check Out Day: " +year + "/" + thang + "/" + ngay);//month in DatePickerDialog 0 -->11
                                 Log.d(">>>>>>>>>>>>>>>>>>", "date:" + year + "/" + thang + "/" + ngay);
 
                             }

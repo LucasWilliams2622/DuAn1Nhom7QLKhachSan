@@ -31,7 +31,6 @@ public class BookRoomActivity extends AppCompatActivity {
 
     private EditText edtCheckInDay,edtCheckOutDay;
     private Button btnBookRoom,btnBackToMainActivity;
-    private AppRoom appRoom = null;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
