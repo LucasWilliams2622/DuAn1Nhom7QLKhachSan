@@ -12,11 +12,6 @@ import com.example.duan1nhom7qlkhachsan.R;
 
 
 public class ServiceFragment extends Fragment {
-
-
-
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

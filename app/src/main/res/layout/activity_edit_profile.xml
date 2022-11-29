@@ -189,6 +189,7 @@
             android:id="@+id/btnDeleteAccount"
             android:layout_width="337dp"
             android:layout_height="42dp"
+
             android:layout_marginLeft="10dp"
             android:layout_marginTop="340dp"
             android:background="@drawable/design_btn"

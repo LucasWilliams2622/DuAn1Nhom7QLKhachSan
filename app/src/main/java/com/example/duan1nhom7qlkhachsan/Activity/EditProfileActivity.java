@@ -51,7 +51,7 @@ public class EditProfileActivity extends AppCompatActivity implements IAdapterUs
         btnDeleteAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                onDeleteAccountClick(appUser);
             }
         });
         btnUpdateAccount.setOnClickListener(new View.OnClickListener() {

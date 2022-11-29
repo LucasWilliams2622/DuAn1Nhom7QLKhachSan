@@ -1,6 +1,7 @@
 package com.example.duan1nhom7qlkhachsan.Activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -63,8 +64,9 @@ public class LoginActivity extends AppCompatActivity {
     private CallbackManager callbackManager;
     private ProfileTracker profileTracker;
     private static final String EMAIL = "email";
-    EditText edt_username;
-    EditText edt_password;
+    EditText edt_username, edt_password;
+    SharedPreferences sharedPreferences;
+
     TextView tvNameUserLogin;
     //Google
     GoogleSignInClient gsc;
@@ -83,6 +85,8 @@ public class LoginActivity extends AppCompatActivity {
         Button btn_login = findViewById(R.id.btn_login);
         Button btn_register = findViewById(R.id.btnGoRegister);
         ImageView ivShowPass = findViewById(R.id.ivShowPass);
+        sharedPreferences = getSharedPreferences("AdminInfo", 0);
+
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,9 +114,10 @@ public class LoginActivity extends AppCompatActivity {
 
                                             String username = edt_username.getText().toString();
                                             String password = edt_password.getText().toString();
-//                                            Log.d(">>>>>>>>>>>>>","username"+username);
-//                                            Log.d(">>>>>>>>>>>>>","password"+password);
-                                            if (username.equals(emailAdmin.toString()) && password.equals(passwordAdmin.toString())) {
+
+                                            String registerEmailAdmin = sharedPreferences.getString("emailAdmin", "");
+                                            String registerPasswordAdmin = sharedPreferences.getString("passwordAdmin", "");
+                                            if (username.equals(registerEmailAdmin) && password.equals(registerPasswordAdmin)) {
                                                 Toast.makeText(LoginActivity.this, "Wellcome " + nameAdmin, Toast.LENGTH_SHORT).show();
                                                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
                                             } else {

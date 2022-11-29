@@ -97,7 +97,6 @@ public class MainActivity extends AppCompatActivity {
                         Intent itentBookRoom = new Intent(MainActivity.this, BookRoomActivity.class);
                         startActivity(itentBookRoom);
                         break;
-
                     case R.id.mDoanhThu:
                         fragment = new DoanhThuFragment();
                         break;
