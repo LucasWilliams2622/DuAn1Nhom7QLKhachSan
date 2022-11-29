@@ -51,7 +51,7 @@ public class AddRoomActivity extends AppCompatActivity implements  AdapterAddRoo
         btnBackToMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(AddRoomActivity.this, MainActivity.class);
+                Intent i = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(i);
             }
         });
@@ -74,7 +74,6 @@ public class AddRoomActivity extends AppCompatActivity implements  AdapterAddRoo
         String startDay = edtStartDay.getText().toString();
         String endDay = edtEndDay.getText().toString();
 
-
         // Create a new user with a first and last name
         Map<String, Object> user = new HashMap<>();
         user.put("codeRoom", codeRoom);
@@ -83,10 +82,6 @@ public class AddRoomActivity extends AppCompatActivity implements  AdapterAddRoo
         user.put("priceRoom", priceRoom);
         user.put("startDay", startDay);
         user.put("endDay", endDay);
-
-
-
-
 
 // Add a new document with a generated ID
         if (appRoom == null) {

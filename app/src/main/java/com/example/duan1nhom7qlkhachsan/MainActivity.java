@@ -22,6 +22,7 @@ import androidx.fragment.app.FragmentManager;
 
 
 import com.example.duan1nhom7qlkhachsan.Activity.AddRoomActivity;
+import com.example.duan1nhom7qlkhachsan.Activity.AddServiceActivity;
 import com.example.duan1nhom7qlkhachsan.Activity.EditProfileActivity;
 import com.example.duan1nhom7qlkhachsan.Activity.LoginActivity;
 
@@ -118,7 +119,8 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intentAddRoom);
                         break;
                     case R.id.mAddService:
-                         fragment = new AddServiceFragment();
+                        Intent intentAddService = new Intent(MainActivity.this, AddServiceActivity.class);
+                        startActivity(intentAddService);
                          break;
                     case R.id.mEditProfile:
 

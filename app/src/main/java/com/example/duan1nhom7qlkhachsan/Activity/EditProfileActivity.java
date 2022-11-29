@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -36,7 +37,9 @@ public class EditProfileActivity extends AppCompatActivity implements IAdapterUs
     private Button btnUpdateAccount, btnDeleteAccount, btnBackToMainActivity;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private AppUser appUser = null;
-
+    SharedPreferences sharedPreferForUser;
+//    ActivityUpdateDataBinding
+//    DatabaseReferance
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +50,7 @@ public class EditProfileActivity extends AppCompatActivity implements IAdapterUs
         btnUpdateAccount = findViewById(R.id.btnUpdateAccount);
         btnDeleteAccount = findViewById(R.id.btnDeleteAccount);
         btnBackToMainActivity = findViewById(R.id.btnBackToMainActivity);
+        sharedPreferForUser = getSharedPreferences("UserInfo", 0);
 
         btnDeleteAccount.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,8 +61,10 @@ public class EditProfileActivity extends AppCompatActivity implements IAdapterUs
         btnUpdateAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
                 Toast.makeText(EditProfileActivity.this, "Update User Successful", Toast.LENGTH_SHORT).show();
-                Log.d(">>>>>>>>>>>.","Update User Successful");
+                Log.d(">>>>>>>>>>>.", "Update User Successful");
             }
         });
         btnBackToMainActivity.setOnClickListener(new View.OnClickListener() {
@@ -70,15 +76,29 @@ public class EditProfileActivity extends AppCompatActivity implements IAdapterUs
             }
         });
 
-        getUserData();
+//        getUserData();
 
-
+        getLoginUserData();
     }
+
     @Override
     protected void onResume() {
         super.onResume();
-        getUserData();
+//        getUserData();
     }
+
+    public void getLoginUserData() {
+        String emailUser = sharedPreferForUser.getString("emailUser", "");
+        String nameUser = sharedPreferForUser.getString("nameUser", "");
+        String phoneNumUser = sharedPreferForUser.getString("phoneNumUser", "");
+//                Log.d(">>>>>>>>>>>>>>>>>>>>", "emailUser" + emailUser);
+//                Log.d(">>>>>>>>>>>>>>>>>>>>", "nameUser" + nameUser);
+//                Log.d(">>>>>>>>>>>>>>>>>>>>", "phoneNumUser" + phoneNumUser);
+        edtFullNameUser.setText(nameUser);
+        edtEmailUser.setText(emailUser);
+        edtPhoneNumberUser.setText(phoneNumUser);
+    }
+
     public void getUserData() {
         db.collection("user")
                 .get()
@@ -102,14 +122,13 @@ public class EditProfileActivity extends AppCompatActivity implements IAdapterUs
 //                                appUser.setIdUser((document.getId()));
                                 list.add(appUser);
 
-                                Log.d(">>>>>>","nameUser"+nameUser);
-                                Log.d(">>>>>>","emailUser"+emailUser);
-                                Log.d(">>>>>>","phoneUser"+phoneNumUser);
+//                                Log.d(">>>>>>", "nameUser" + nameUser);
+//                                Log.d(">>>>>>", "emailUser" + emailUser);
+//                                Log.d(">>>>>>", "phoneUser" + phoneNumUser);
 
                                 edtFullNameUser.setText(nameUser);
                                 edtEmailUser.setText(emailUser);
                                 edtPhoneNumberUser.setText(phoneNumUser);
-
 
 
                             }
@@ -133,7 +152,7 @@ public class EditProfileActivity extends AppCompatActivity implements IAdapterUs
                                     @Override
                                     public void onSuccess(Void aVoid) {
                                         Toast.makeText(EditProfileActivity.this, "Xóa thành công", Toast.LENGTH_SHORT).show();
-                                        Intent i = new Intent(EditProfileActivity.this,LoginActivity.class);
+                                        Intent i = new Intent(EditProfileActivity.this, LoginActivity.class);
                                         startActivity(i);
 
                                     }
@@ -149,5 +168,8 @@ public class EditProfileActivity extends AppCompatActivity implements IAdapterUs
                 })
                 .show();
     }
+
+
+
 
 }

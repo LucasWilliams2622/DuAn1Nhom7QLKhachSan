@@ -1,9 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="13dp"
+    android:orientation="vertical"
     tools:context=".Activity.AddServiceActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <Button
+        android:id="@+id/btnBackToMain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Back" />
+
+    <Spinner
+        android:id="@+id/spnTypeService"
+        android:layout_width="match_parent"
+        android:layout_height="38dp">
+
+    </Spinner>
+
+    <EditText
+        android:id="@+id/edtIdRoom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Id room"
+        android:inputType="textPersonName"
+        android:paddingLeft="7dp"
+        android:paddingTop="10dp"
+        android:text=""
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textSize="17dp" />
+
+    <EditText
+        android:id="@+id/edtIdService"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Id Service"
+        android:inputType="textPersonName"
+        android:paddingLeft="7dp"
+        android:paddingTop="10dp"
+        android:text=""
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textSize="17dp" />
+
+    <EditText
+        android:id="@+id/edtNameService"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Name service"
+        android:inputType="textPersonName"
+        android:paddingLeft="7dp"
+        android:paddingTop="10dp"
+        android:text=""
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textSize="17dp" />
+
+    <EditText
+        android:id="@+id/edtPriceService"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Price service"
+        android:inputType="textPersonName"
+        android:paddingLeft="7dp"
+        android:paddingTop="10dp"
+        android:text=""
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textSize="17dp" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnClear"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="onCancleClick"
+            android:text="Clear " />
+
+        <Button
+            android:id="@+id/btnAddService"
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+android:onClick="onAddServiceClick"
+            android:text="Add Service" />
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/flAddService"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

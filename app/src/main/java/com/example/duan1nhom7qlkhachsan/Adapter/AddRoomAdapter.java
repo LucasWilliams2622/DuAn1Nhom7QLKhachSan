@@ -18,7 +18,6 @@ import java.util.ArrayList;
 public class AddRoomAdapter extends BaseAdapter {
     private ArrayList<AppRoom> list;
 
-
     private Button btnUpdate,btnDelete;
     private TextView tvCodeRoom,tvNameRoom,tvTypeRoom,tvPriceRoom,tvStartDay,tvEndDay;
 

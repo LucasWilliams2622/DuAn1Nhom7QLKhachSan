@@ -4,83 +4,105 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.duan1nhom7qlkhachsan.Activity.IAdapterServiceClickEvent;
+import com.example.duan1nhom7qlkhachsan.Activity.AdapterAddRoomClick;
+import com.example.duan1nhom7qlkhachsan.Activity.IAdapterAddServiceClickEvent;
 import com.example.duan1nhom7qlkhachsan.Model.AppService;
 import com.example.duan1nhom7qlkhachsan.R;
 
 import java.util.ArrayList;
 
-public class AddServiceAdapter extends RecyclerView.Adapter<AddServiceAdapter.ViewHolder> {
-    private ArrayList<AppService> dsService;
-    Context context;
+public class AddServiceAdapter extends BaseAdapter {
+    private ArrayList<AppService> list;
 
-    public AddServiceAdapter(ArrayList<AppService> dsService) {
-        this.dsService = dsService;
-        this.context = context;
-    }
+    private Button btnUpdateService, btnDeleteService;
+    private TextView tvIdRoom, tvIdService, tvNameService, tvPriceService, tvTypeService;
 
-    @NonNull
-    @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_add_service, parent, false);
-        return new ViewHolder(view);
+    public AddServiceAdapter(ArrayList<AppService> list) {
+        this.list = list;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        AppService service = dsService.get(position);
+    public int getCount() {
+        return list.size();
+    }
 
-        holder.tvIdRoom.setText(service.getIdRoom());
-        holder.tvIdService.setText(service.getIdService());
-        holder.tvNameService.setText(service.getNameService());
-        holder.tvTimeUseService.setText(service.getTimeUseService());
-        holder.tvPriceService.setText(service.getPriceService());
+    @Override
+    public Object getItem(int position) {
+        return list.get(position);
+    }
 
-        holder.btnUpdate.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public View getView(int _i, View _view, ViewGroup _viewGroup) {
+        View view = _view;
+
+        if (view == null) {
+            view = View.inflate(_viewGroup.getContext(), R.layout.item_add_service, null);
+
+            tvIdRoom = view.findViewById(R.id.tvIdRoom);
+            tvIdService = view.findViewById(R.id.tvIdService);
+            tvNameService = view.findViewById(R.id.tvNameService);
+            tvTypeService = view.findViewById(R.id.tvTypeService);
+            tvPriceService = view.findViewById(R.id.tvPriceService);
+            btnDeleteService = view.findViewById(R.id.btnDeleteService);
+            btnUpdateService = view.findViewById(R.id.btnUpdateService);
+
+            AddServiceAdapter.ViewHolder holder = new AddServiceAdapter.ViewHolder(tvIdRoom, tvIdService, tvNameService, tvTypeService, tvPriceService, btnDeleteService, btnUpdateService);
+
+            view.setTag(holder);
+        }
+        AppService service = (AppService) getItem(_i);
+        AddServiceAdapter.ViewHolder holder = (AddServiceAdapter.ViewHolder) view.getTag();
+        holder.tvIdRoom.setText("Id Room: "+service.getIdRoom());
+        holder.tvIdService.setText("Id: "+service.getIdService());
+        holder.tvNameService.setText("Tên: "+service.getNameService());
+        holder.tvTypeService.setText("Loại: "+service.getTypeService());
+        holder.tvPriceService.setText("Gía: "+service.getPriceService());
+
+
+
+        holder.btnUpdateService.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Toast.makeText(view.getContext(), "Update", Toast.LENGTH_SHORT).show();
+            public void onClick(View v) {
+                IAdapterAddServiceClickEvent iAdapterAddServiceClickEvent = (IAdapterAddServiceClickEvent) _viewGroup.getContext();
+                iAdapterAddServiceClickEvent.onUpdateServiceClick(service);
+            }
+        });
+        holder.btnDeleteService.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                IAdapterAddServiceClickEvent iAdapterAddServiceClickEvent = (IAdapterAddServiceClickEvent) _viewGroup.getContext();
+                iAdapterAddServiceClickEvent.onDeleteServiceClick(service);
             }
         });
 
-        holder.btnClear.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(view.getContext(), "Clear", Toast.LENGTH_SHORT).show();
-
-            }
-        });
+        return view;
     }
 
-    @Override
-    public int getItemCount() {
-        return dsService.size();
-    }
+    private static class ViewHolder {
+        final Button btnUpdateService, btnDeleteService;
+        final TextView tvIdRoom, tvIdService, tvNameService, tvPriceService, tvTypeService;
 
+        public ViewHolder(TextView tvIdRoom, TextView tvIdService, TextView tvNameService, TextView tvPriceService, TextView tvTypeService, Button btnDeleteService, Button btnUpdateService) {
+            this.tvIdRoom = tvIdRoom;
+            this.tvIdService = tvIdService;
+            this.tvNameService = tvNameService;
+            this.tvPriceService = tvPriceService;
+            this.tvTypeService = tvTypeService;
+            this.btnDeleteService = btnDeleteService;
+            this.btnUpdateService = btnUpdateService;
 
-
-    //private Button btnAddService,btnClearService, btnUpdateService;
-    //private EditText edtIdRoom, edtIdService, edtNameService,edtTimeService, edtPriceService;
-    static class ViewHolder extends RecyclerView.ViewHolder {
-        final TextView tvIdRoom ,tvIdService, tvNameService, tvPriceService, tvTimeUseService;
-        final Button btnUpdate, btnClear;
-        public  ViewHolder(@NonNull View itemView){
-            super(itemView);
-            tvIdRoom = itemView.findViewById(R.id.tvIdRoom1);
-            tvIdService = itemView.findViewById(R.id.tvIdService1);
-            tvNameService = itemView.findViewById(R.id.tvNameService1);
-            tvPriceService = itemView.findViewById(R.id.tvPriceService1);
-            tvTimeUseService =itemView.findViewById(R.id.tvTimeService1);
-            btnUpdate = itemView.findViewById(R.id.btnUpdateService);
-            btnClear = itemView.findViewById(R.id.btnClearService);
         }
     }
 }

@@ -66,6 +66,8 @@ public class LoginActivity extends AppCompatActivity {
     private static final String EMAIL = "email";
     EditText edt_username, edt_password;
     SharedPreferences sharedPreferences;
+    SharedPreferences sharedPreferForUser;
+
 
     TextView tvNameUserLogin;
     //Google
@@ -86,6 +88,8 @@ public class LoginActivity extends AppCompatActivity {
         Button btn_register = findViewById(R.id.btnGoRegister);
         ImageView ivShowPass = findViewById(R.id.ivShowPass);
         sharedPreferences = getSharedPreferences("AdminInfo", 0);
+        sharedPreferForUser = getSharedPreferences("UserInfo",0);
+
 
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -241,12 +245,17 @@ public class LoginActivity extends AppCompatActivity {
                         Map<String, Object> user = new HashMap<>();
                         user.put("nameUser", displayName);
                         user.put("emailUser", email);
-                        user.put("idRoom", "001");
-                        user.put("idUser", "");
-                        user.put("phoneNumUser", "099999");
+                        user.put("idRoom", "");
+                        user.put("idUser", "USER"+email.toUpperCase().substring(2)+email.toUpperCase().charAt(5));
+                        user.put("phoneNumUser", "");
 
-
-                        Toast.makeText(LoginActivity.this, "", Toast.LENGTH_SHORT).show();
+                        //SharedPreFerances
+                        SharedPreferences.Editor editor = sharedPreferForUser.edit();
+                        editor.putString("emailUser", email);
+                        editor.putString("nameUser", displayName);
+                        editor.putString("phoneNumUser", "");
+                        editor.apply();
+                        //end saving by sharedPreferances
                         // Add a new document with a generated ID
 
                         db.collection("user")

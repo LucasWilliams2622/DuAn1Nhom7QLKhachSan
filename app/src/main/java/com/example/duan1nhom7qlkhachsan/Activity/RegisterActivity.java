@@ -104,6 +104,7 @@ public class RegisterActivity extends AppCompatActivity {
         if (emailAdmin.equals(null) || nameAdmin.equals(null) || passwordAdmin.equals(null) || idAdmin.equals(null) || role.equals(null)) {
             Toast.makeText(this, "Vui lòng điền đủ thông tin !", Toast.LENGTH_SHORT).show();
         } else {
+
             //save information of admin for login
             sharedPreferences = getSharedPreferences("AdminInfo", 0);
             SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -113,6 +114,8 @@ public class RegisterActivity extends AppCompatActivity {
             Log.d(">>>>>>>>>","passwordAdmin"+passwordAdmin);
             editor.apply();
             //end saving by sharedPreferances
+
+
             // Create a new user with a first and last name
             Map<String, Object> user = new HashMap<>();
             user.put("idAdmin", idAdmin);
