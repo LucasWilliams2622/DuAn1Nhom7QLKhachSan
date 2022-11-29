@@ -62,12 +62,12 @@ public class AddRoomAdapter extends BaseAdapter {
         }
         AppRoom room = (AppRoom) getItem(_i);
         ViewHolder holder = (ViewHolder) view.getTag();
-        holder.tvCodeRoom.setText(room.getCodeRoom());
-        holder.tvNameRoom.setText(room.getNameRoom());
-        holder.tvTypePhong.setText(room.getTypeRoom());
-        holder.tvPricePhong.setText(room.getPriceRoom());
-        holder.tvStartDay.setText(room.getStartDay());
-        holder.tvEndDay.setText(room.getEndDay());
+        holder.tvCodeRoom.setText("Mã phòng: " + room.getCodeRoom());
+        holder.tvNameRoom.setText("Tên phòng: " + room.getNameRoom());
+        holder.tvTypePhong.setText("Loại phòng: " + room.getTypeRoom());
+        holder.tvPricePhong.setText("Giá phòng: " + room.getPriceRoom());
+        holder.tvStartDay.setText("Ngày ở: " + room.getStartDay());
+        holder.tvEndDay.setText("Ngày về: " + room.getEndDay());
 
 
         holder.btnUpdate.setOnClickListener(new View.OnClickListener() {
