@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class BookRoomActivity extends AppCompatActivity {
-    private ListView flRoom;
+
     private EditText edtCheckInDay,edtCheckOutDay;
     private Button btnBookRoom,btnBackToMainActivity;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -75,7 +75,7 @@ public class BookRoomActivity extends AppCompatActivity {
                                 String endDay = map.get("endDay").toString();
 
                                 AppRoom room = new AppRoom(-1,codeRoom,nameRoom,typeRoom,priceRoom,startDay,endDay);
-                                room.setCodeRoom(document.getId());
+                                room.setRoomId(document.getId());
                                 list.add(room);
                             }
                             getSupportFragmentManager()

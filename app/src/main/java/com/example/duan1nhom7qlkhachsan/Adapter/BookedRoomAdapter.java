@@ -1,24 +1,37 @@
 package com.example.duan1nhom7qlkhachsan.Adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
+import com.example.duan1nhom7qlkhachsan.Activity.AddRoomActivity;
+import com.example.duan1nhom7qlkhachsan.Activity.BookedRoomActivity;
 import com.example.duan1nhom7qlkhachsan.Model.AppRoom;
 import com.example.duan1nhom7qlkhachsan.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class BookedRoomAdapter extends BaseAdapter {
     private ArrayList<AppRoom> list ;
-    private EditText txtEndDay, txtStartDay;
+    private Context context;
     private Button btnHuyPhong;
-    private TextView tvTenPhong, tvMaPhong, tvLoaiPhong, tvGiaPhong;
+    private TextView tvTenPhong, tvMaPhong, tvLoaiPhong, tvGiaPhong,tvEndDay,tvStartDay;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public BookedRoomAdapter(ArrayList<AppRoom> list) {
@@ -46,41 +59,90 @@ public class BookedRoomAdapter extends BaseAdapter {
         View view = _view;
         if (view == null) {
             view = View.inflate(_viewGroup.getContext(), R.layout.item_recycler_booked_room, null);
-            txtEndDay = view.findViewById(R.id.txtEndDay);
-            txtStartDay = view.findViewById(R.id.txtStartDay);
+            tvEndDay = view.findViewById(R.id.tvEndDay);
+            tvStartDay = view.findViewById(R.id.tvStartDay);
             btnHuyPhong = view.findViewById(R.id.btnHuyPhong);
             tvTenPhong = view.findViewById(R.id.tvTenPhong);
             tvMaPhong = view.findViewById(R.id.tvMaPhong);
             tvLoaiPhong = view.findViewById(R.id.tvLoaiPhong);
             tvGiaPhong = view.findViewById(R.id.tvGiaPhong);
-            ViewHolder holder = new ViewHolder(txtEndDay, txtStartDay, btnHuyPhong, tvTenPhong, tvMaPhong, tvLoaiPhong, tvGiaPhong);
+            ViewHolder holder = new ViewHolder(btnHuyPhong, tvTenPhong, tvMaPhong, tvLoaiPhong, tvGiaPhong,tvEndDay,tvStartDay);
             view.setTag(holder);
         }
         AppRoom room = (AppRoom) getItem(_i);
         ViewHolder holder = (ViewHolder) view.getTag();
-        holder.txtEndDay.setText(room.getEndDay());
-        holder.txtStartDay.setText(room.getStartDay());
-        holder.tvTenPhong.setText(room.getNameRoom());
         holder.tvMaPhong.setText(room.getCodeRoom());
+        holder.tvTenPhong.setText(room.getNameRoom());
         holder.tvLoaiPhong.setText(room.getTypeRoom());
         holder.tvGiaPhong.setText(room.getPriceRoom());
+        holder.tvStartDay.setText(room.getStartDay());
+        holder.tvEndDay.setText(room.getEndDay());
 
+        holder.btnHuyPhong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String codeRoom = holder.tvMaPhong.getText().toString();
+                String nameRoom = holder.tvTenPhong.getText().toString();
+                String typeRoom = holder.tvLoaiPhong.getText().toString();
+                String priceRoom = holder.tvGiaPhong.getText().toString();
+                String startDay = holder.tvStartDay.getText().toString();
+                String endDay = holder.tvEndDay.getText().toString();
+
+                // private String idRoom,nameRoom,typeRoom,priceRoom,startDay,endDay;
+                // Create a new user with a first and last name
+                Map<String, Object> user = new HashMap<>();
+                user.put("codeRoom", codeRoom);
+                user.put("nameRoom", nameRoom);
+                user.put("typeRoom", typeRoom);
+                user.put("priceRoom", priceRoom);
+                user.put("startDay", startDay);
+                user.put("endDay", endDay);
+
+                new AlertDialog.Builder(context)
+                        .setTitle("Xóa")
+                        .setMessage("Xóa sẽ không phục hồi được")
+                        .setNegativeButton("Hủy", null)
+                        .setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                db.collection("room").document(room.getRoomId())
+                                        .delete()
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
+
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Toast.makeText(context, "Xóa khong thành công", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+
+                            }
+                        })
+                        .show();
+
+
+            }
+        });
         return view;
     }
 
     private static class ViewHolder {
-        final EditText txtEndDay, txtStartDay;
         final Button btnHuyPhong;
-        final TextView tvTenPhong, tvMaPhong, tvLoaiPhong, tvGiaPhong;
+        final TextView tvTenPhong, tvMaPhong, tvLoaiPhong, tvGiaPhong,tvStartDay,tvEndDay;
 
-        public ViewHolder(EditText txtEndDay, EditText txtStartDay, Button btnHuyPhong, TextView tvTenPhong, TextView tvMaPhong, TextView tvLoaiPhong, TextView tvGiaPhong) {
-            this.txtEndDay = txtEndDay;
-            this.txtStartDay = txtStartDay;
+        public ViewHolder(Button btnHuyPhong, TextView tvTenPhong, TextView tvMaPhong, TextView tvLoaiPhong, TextView tvGiaPhong, TextView tvStartDay, TextView tvEndDay) {
             this.btnHuyPhong = btnHuyPhong;
             this.tvTenPhong = tvTenPhong;
             this.tvMaPhong = tvMaPhong;
             this.tvLoaiPhong = tvLoaiPhong;
             this.tvGiaPhong = tvGiaPhong;
+            this.tvStartDay = tvStartDay;
+            this.tvEndDay = tvEndDay;
         }
     }
 

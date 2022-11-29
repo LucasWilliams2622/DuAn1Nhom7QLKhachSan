@@ -37,18 +37,20 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingTop="210dp">
+
             <TextView
-                android:id="@+id/tvIdBookRoom"
+                android:id="@+id/tvCodeBookRoom"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
                 android:paddingLeft="15dp"
                 android:paddingTop="4dp"
                 android:paddingRight="15dp"
-                android:text="Id phòng: 002"
+                android:text=" 002"
                 android:textColor="@color/black"
                 android:textSize="20dp"
                 android:textStyle="normal" />
+
             <TextView
                 android:id="@+id/tvNameBookRoom"
                 android:layout_width="match_parent"
@@ -57,7 +59,7 @@
                 android:paddingLeft="15dp"
                 android:paddingTop="4dp"
                 android:paddingRight="15dp"
-                android:text="Tên phòng: R002"
+                android:text=" R002"
                 android:textColor="@color/black"
                 android:textSize="20dp"
                 android:textStyle="normal" />
@@ -69,7 +71,7 @@
                 android:paddingLeft="15dp"
                 android:paddingTop="4dp"
                 android:paddingRight="15dp"
-                android:text="Loại phòng: King Room"
+                android:text=" King Room"
                 android:textColor="@color/black"
                 android:textSize="20dp"
                 android:textStyle="normal" />
@@ -82,7 +84,7 @@
                 android:paddingTop="4dp"
 
                 android:paddingRight="15dp"
-                android:text="Giá phòng: 999$"
+                android:text=" 999$"
                 android:textColor="@color/black"
                 android:textSize="20dp"
                 android:textStyle="normal" />

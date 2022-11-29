@@ -32,7 +32,7 @@ import java.util.Map;
 
 public class BookRoomAdapter extends BaseAdapter {
     private Button btnBookRoom;
-    private TextView tvIdBookRoom, tvNameBookRoom, tvTypeBookRoom, tvPriceBookRoom;
+    private TextView tvCodeBookRoom, tvNameBookRoom, tvTypeBookRoom, tvPriceBookRoom;
     private EditText edtCheckInDay, edtCheckOutDay;
     private ArrayList<AppRoom> list;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -67,23 +67,23 @@ public class BookRoomAdapter extends BaseAdapter {
         if (view == null) {
             view = View.inflate(_viewGroup.getContext(), R.layout.item_book_room, null);
             btnBookRoom = view.findViewById(R.id.btnBookRoom);
-            tvIdBookRoom = view.findViewById(R.id.tvIdBookRoom);
+            tvCodeBookRoom = view.findViewById(R.id.tvCodeBookRoom);
             tvNameBookRoom = view.findViewById(R.id.tvNameBookRoom);
             tvTypeBookRoom = view.findViewById(R.id.tvTypeBookRoom);
             tvPriceBookRoom = view.findViewById(R.id.tvPriceBookRoom);
             edtCheckInDay = view.findViewById(R.id.edtCheckInDay);
             edtCheckOutDay = view.findViewById(R.id.edtCheckOutDay);
 
-            BookRoomAdapter.ViewHolder holder = new BookRoomAdapter.ViewHolder(btnBookRoom,tvIdBookRoom, tvNameBookRoom, tvTypeBookRoom, tvPriceBookRoom, edtCheckInDay, edtCheckOutDay);
+            BookRoomAdapter.ViewHolder holder = new BookRoomAdapter.ViewHolder(btnBookRoom,tvCodeBookRoom, tvNameBookRoom, tvTypeBookRoom, tvPriceBookRoom, edtCheckInDay, edtCheckOutDay);
             view.setTag(holder);
         }
         AppRoom room = (AppRoom) getItem(_i);
         ViewHolder holder = (BookRoomAdapter.ViewHolder) view.getTag();
 
-        holder.tvIdBookRoom.setText("Id phòng: " + room.getRoomId());
+        holder.tvCodeBookRoom.setText("Mã phòng: " + room.getCodeRoom());
         holder.tvNameBookRoom.setText("Tên phòng: " + room.getNameRoom());
         holder.tvTypeBookRoom.setText("Loại phòng: " + room.getTypeRoom());
-        holder.tvPriceBookRoom.setText("Gía phòng: " + room.getPriceRoom());
+        holder.tvPriceBookRoom.setText("Giá phòng: " + room.getPriceRoom());
         holder.edtCheckOutDay.setText(room.getEndDay());
         holder.edtCheckInDay.setText(room.getStartDay());
 
@@ -107,7 +107,7 @@ public class BookRoomAdapter extends BaseAdapter {
                                 } else {
                                     thang = String.valueOf(month + 1);
                                 }
-                                holder.edtCheckInDay.setText(year + "/" + thang + "/" + ngay);//month in DatePickerDialog 0 -->11
+                                holder.edtCheckInDay.setText("Check In Day: " + year + "/" + thang + "/" + ngay);//month in DatePickerDialog 0 -->11
                                 Log.d(">>>>>>>>>>>>>>>>>>", "date:" + year + "/" + thang + "/" + ngay);
                             }
                         }
@@ -139,7 +139,7 @@ public class BookRoomAdapter extends BaseAdapter {
                                 } else {
                                     thang = String.valueOf(month + 1);
                                 }
-                                holder.edtCheckOutDay.setText(year + "/" + thang + "/" + ngay);//month in DatePickerDialog 0 -->11
+                                holder.edtCheckOutDay.setText("Check Out Day: " +year + "/" + thang + "/" + ngay);//month in DatePickerDialog 0 -->11
                                 Log.d(">>>>>>>>>>>>>>>>>>", "date:" + year + "/" + thang + "/" + ngay);
 
                             }
@@ -160,7 +160,7 @@ public class BookRoomAdapter extends BaseAdapter {
 
 //                private TextView tvIdBookRoom, tvNameBookRoom, tvTypeBookRoom, tvPriceBookRoom;
 //                private EditText edtCheckInDay, edtCheckOutDay;
-                String idRoom = holder.tvIdBookRoom.getText().toString();
+                String codeRoom = holder.tvCodeBookRoom.getText().toString();
                 String nameRoom = holder.tvNameBookRoom.getText().toString();
                 String typeRoom = holder.tvTypeBookRoom.getText().toString();
                 String priceRoom = holder.tvPriceBookRoom.getText().toString();
@@ -170,7 +170,7 @@ public class BookRoomAdapter extends BaseAdapter {
                 // private String idRoom,nameRoom,typeRoom,priceRoom,startDay,endDay;
                 // Create a new user with a first and last name
                 Map<String, Object> user = new HashMap<>();
-                user.put("idRoom", idRoom);
+                user.put("codeRoom", codeRoom);
                 user.put("nameRoom", nameRoom);
                 user.put("typeRoom", typeRoom);
                 user.put("priceRoom", priceRoom);
@@ -204,12 +204,12 @@ public class BookRoomAdapter extends BaseAdapter {
 
     private static class ViewHolder {
         final Button btnBookRoom;
-        final TextView tvIdBookRoom, tvNameBookRoom, tvTypeBookRoom, tvPriceBookRoom;
+        final TextView tvCodeBookRoom, tvNameBookRoom, tvTypeBookRoom, tvPriceBookRoom;
         final EditText edtCheckInDay, edtCheckOutDay;
 
-        public ViewHolder(Button btnBookRoom, TextView tvIdBookRoom, TextView tvNameBookRoom, TextView tvTypeBookRoom, TextView tvPriceBookRoom, EditText edtCheckInDay, EditText edtCheckOutDay) {
+        public ViewHolder(Button btnBookRoom, TextView tvCodeBookRoom, TextView tvNameBookRoom, TextView tvTypeBookRoom, TextView tvPriceBookRoom, EditText edtCheckInDay, EditText edtCheckOutDay) {
             this.btnBookRoom = btnBookRoom;
-            this.tvIdBookRoom = tvIdBookRoom;
+            this.tvCodeBookRoom = tvCodeBookRoom;
             this.tvNameBookRoom = tvNameBookRoom;
             this.tvTypeBookRoom = tvTypeBookRoom;
             this.tvPriceBookRoom = tvPriceBookRoom;
