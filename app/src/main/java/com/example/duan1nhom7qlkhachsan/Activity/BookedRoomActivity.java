@@ -13,6 +13,7 @@ import android.widget.EditText;
 
 import com.example.duan1nhom7qlkhachsan.Fragment.BookedRoomFragment;
 import com.example.duan1nhom7qlkhachsan.MainActivity;
+import com.example.duan1nhom7qlkhachsan.Model.AppBookedRoom;
 import com.example.duan1nhom7qlkhachsan.Model.AppRoom;
 import com.example.duan1nhom7qlkhachsan.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -27,6 +28,7 @@ import java.util.Map;
 public class BookedRoomActivity extends AppCompatActivity {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private Button btnBackToMainActivity;
+    private AppBookedRoom appRoom = null;
 
 
 
@@ -59,7 +61,7 @@ public class BookedRoomActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
-                            ArrayList<AppRoom> list= new ArrayList<>();
+                            ArrayList<AppBookedRoom> list= new ArrayList<>();
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Map<String, Object> map= document.getData();
                                 String code=map.get("codeRoom").toString();
@@ -69,7 +71,7 @@ public class BookedRoomActivity extends AppCompatActivity {
                                 String startDay=map.get("startDay").toString();
                                 String endDay=map.get("endDay").toString();
 
-                                AppRoom room = new AppRoom(-1,code,name,type,price,startDay,endDay);
+                                AppBookedRoom room = new AppBookedRoom(-1,code,name,type,price,startDay,endDay);
                                 room.setRoomId(document.getId());
                                 list.add(room);
 

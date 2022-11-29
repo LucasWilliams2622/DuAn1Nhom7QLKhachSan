@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.duan1nhom7qlkhachsan.Adapter.BookedRoomAdapter;
+import com.example.duan1nhom7qlkhachsan.Model.AppBookedRoom;
 import com.example.duan1nhom7qlkhachsan.Model.AppRoom;
 import com.example.duan1nhom7qlkhachsan.R;
 
@@ -20,17 +21,12 @@ import java.util.ArrayList;
 public class BookedRoomFragment extends Fragment {
     private ListView lvFrgBookedRoom;
 
-    private ArrayList<AppRoom>  room ;
+    private ArrayList<AppBookedRoom>  room ;
 
     public BookedRoomFragment() {
         // Required empty public constructor
     }
-
-
-
-    public static BookedRoomFragment newInstance(ArrayList<AppRoom> room) {
-
-
+    public static BookedRoomFragment newInstance(ArrayList<AppBookedRoom> room) {
         BookedRoomFragment fragment = new BookedRoomFragment();
         Bundle args = new Bundle();
         args.putSerializable("bookedRoom", room);
@@ -42,7 +38,7 @@ public class BookedRoomFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            room = (ArrayList<AppRoom>) getArguments().getSerializable("bookedRoom");
+            room = (ArrayList<AppBookedRoom>) getArguments().getSerializable("bookedRoom");
         }
     }
     @Override

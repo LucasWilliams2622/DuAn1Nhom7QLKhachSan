@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 
 import com.example.duan1nhom7qlkhachsan.Activity.AddRoomActivity;
 import com.example.duan1nhom7qlkhachsan.Activity.BookedRoomActivity;
+import com.example.duan1nhom7qlkhachsan.Model.AppBookedRoom;
 import com.example.duan1nhom7qlkhachsan.Model.AppRoom;
 import com.example.duan1nhom7qlkhachsan.R;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -28,13 +29,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class BookedRoomAdapter extends BaseAdapter {
-    private ArrayList<AppRoom> list ;
-    private Context context;
+    private ArrayList<AppBookedRoom> list ;
     private Button btnHuyPhong;
     private TextView tvTenPhong, tvMaPhong, tvLoaiPhong, tvGiaPhong,tvEndDay,tvStartDay;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    public BookedRoomAdapter(ArrayList<AppRoom> list) {
+    public BookedRoomAdapter(ArrayList<AppBookedRoom> list) {
         this.list = list;
     }
 
@@ -69,7 +69,7 @@ public class BookedRoomAdapter extends BaseAdapter {
             ViewHolder holder = new ViewHolder(btnHuyPhong, tvTenPhong, tvMaPhong, tvLoaiPhong, tvGiaPhong,tvEndDay,tvStartDay);
             view.setTag(holder);
         }
-        AppRoom room = (AppRoom) getItem(_i);
+        AppBookedRoom room = (AppBookedRoom) getItem(_i);
         ViewHolder holder = (ViewHolder) view.getTag();
         holder.tvMaPhong.setText(room.getCodeRoom());
         holder.tvTenPhong.setText(room.getNameRoom());
@@ -98,7 +98,7 @@ public class BookedRoomAdapter extends BaseAdapter {
                 user.put("startDay", startDay);
                 user.put("endDay", endDay);
 
-                new AlertDialog.Builder(context)
+                new AlertDialog.Builder(btnHuyPhong.getContext())
                         .setTitle("Xóa")
                         .setMessage("Xóa sẽ không phục hồi được")
                         .setNegativeButton("Hủy", null)
@@ -110,14 +110,14 @@ public class BookedRoomAdapter extends BaseAdapter {
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void aVoid) {
-                                                Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(btnHuyPhong.getContext(), "Xóa thành công", Toast.LENGTH_SHORT).show();
 
                                             }
                                         })
                                         .addOnFailureListener(new OnFailureListener() {
                                             @Override
                                             public void onFailure(@NonNull Exception e) {
-                                                Toast.makeText(context, "Xóa khong thành công", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(btnHuyPhong.getContext(), "Xóa khong thành công", Toast.LENGTH_SHORT).show();
                                             }
                                         });
 

@@ -74,7 +74,7 @@ public class BookRoomAdapter extends BaseAdapter {
             edtCheckInDay = view.findViewById(R.id.edtCheckInDay);
             edtCheckOutDay = view.findViewById(R.id.edtCheckOutDay);
 
-            BookRoomAdapter.ViewHolder holder = new BookRoomAdapter.ViewHolder(btnBookRoom,tvCodeBookRoom, tvNameBookRoom, tvTypeBookRoom, tvPriceBookRoom, edtCheckInDay, edtCheckOutDay);
+            BookRoomAdapter.ViewHolder holder = new BookRoomAdapter.ViewHolder(btnBookRoom, tvCodeBookRoom, tvNameBookRoom, tvTypeBookRoom, tvPriceBookRoom, edtCheckInDay, edtCheckOutDay);
             view.setTag(holder);
         }
         AppRoom room = (AppRoom) getItem(_i);
@@ -83,7 +83,7 @@ public class BookRoomAdapter extends BaseAdapter {
         holder.tvCodeBookRoom.setText("Mã phòng: " + room.getCodeRoom());
         holder.tvNameBookRoom.setText("Tên phòng: " + room.getNameRoom());
         holder.tvTypeBookRoom.setText("Loại phòng: " + room.getTypeRoom());
-        holder.tvPriceBookRoom.setText("Giá phòng: " + room.getPriceRoom());
+        holder.tvPriceBookRoom.setText(room.getPriceRoom());
         holder.edtCheckOutDay.setText(room.getEndDay());
         holder.edtCheckInDay.setText(room.getStartDay());
 
@@ -139,7 +139,7 @@ public class BookRoomAdapter extends BaseAdapter {
                                 } else {
                                     thang = String.valueOf(month + 1);
                                 }
-                                holder.edtCheckOutDay.setText("Check Out Day: " +year + "/" + thang + "/" + ngay);//month in DatePickerDialog 0 -->11
+                                holder.edtCheckOutDay.setText("Check Out Day: " + year + "/" + thang + "/" + ngay);//month in DatePickerDialog 0 -->11
                                 Log.d(">>>>>>>>>>>>>>>>>>", "date:" + year + "/" + thang + "/" + ngay);
 
                             }

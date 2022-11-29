@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.mAddService:
                         Intent intentAddService = new Intent(MainActivity.this, AddServiceActivity.class);
                         startActivity(intentAddService);
-                         break;
+                        break;
                     case R.id.mEditProfile:
 
 
