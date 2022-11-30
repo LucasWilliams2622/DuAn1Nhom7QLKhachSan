@@ -19,7 +19,8 @@
         android:title="Phòng đã đặt" />
     <item
         android:id="@+id/mDichVu"
-        android:icon="@drawable/ic_room_service"
+        android:icon="@drawable/ic_baseline_local_laundry_service_24"
+
         android:title="Dịch vụ" />
     <item
         android:id="@+id/mTuVanKH"
@@ -33,7 +34,7 @@
                 android:title="Thêm phòng " />
             <item
                 android:id="@+id/mAddService"
-                android:icon="@drawable/ic_baseline_local_laundry_service_24"
+                android:icon="@drawable/ic_room_service"
                 android:title="Thêm dịch vụ" />
             <item
                 android:id="@+id/mTop10"
@@ -49,7 +50,7 @@
                 android:title="Doanh Thu" />
         </menu>
     </item>
-    <item android:title="Ngưởi dùng">
+    <item android:title="">
         <menu>
 
 

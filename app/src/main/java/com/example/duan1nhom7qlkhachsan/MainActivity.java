@@ -1,8 +1,11 @@
 package com.example.duan1nhom7qlkhachsan;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -164,7 +167,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
+        SharedPreferences sharedPreferences = getSharedPreferences("AdminInfo", 0);
+        String role  = sharedPreferences.getString("role","");
+        Log.d(">>>>>>>>>>>","role "+role);
+        if(!role.equals("admin"))
+        {
+            Menu menu = navigationView.getMenu();
+            menu.findItem(R.id.mDoanhThu).setVisible(false);
+            menu.findItem(R.id.mTop10).setVisible(false);
+            menu.findItem(R.id.mAddRoom).setVisible(false);
+            menu.findItem(R.id.mAddService).setVisible(false);
+            menu.findItem(R.id.mHotro).setVisible(false);
+        }
     }
 
     @Override

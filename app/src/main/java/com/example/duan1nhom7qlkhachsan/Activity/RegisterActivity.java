@@ -101,7 +101,7 @@ public class RegisterActivity extends AppCompatActivity {
         String idAdmin = edtIdAdmin.getText().toString();
         String role = edtRoleAdmin.getText().toString();
 
-        if (emailAdmin.equals(null) || nameAdmin.equals(null) || passwordAdmin.equals(null) || idAdmin.equals(null) || role.equals(null)) {
+        if (emailAdmin.equals("") || nameAdmin.equals("") || passwordAdmin.equals("") || idAdmin.equals("") || role.equals("")) {
             Toast.makeText(this, "Vui lòng điền đủ thông tin !", Toast.LENGTH_SHORT).show();
         } else {
 
@@ -110,6 +110,8 @@ public class RegisterActivity extends AppCompatActivity {
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putString("emailAdmin", emailAdmin);
             editor.putString("passwordAdmin", passwordAdmin);
+            editor.putString("role", "admin");
+
             Log.d(">>>>>>>>>","emailAdmin"+emailAdmin);
             Log.d(">>>>>>>>>","passwordAdmin"+passwordAdmin);
             editor.apply();

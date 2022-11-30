@@ -185,6 +185,9 @@ public class BookRoomAdapter extends BaseAdapter {
                             public void onSuccess(DocumentReference documentReference) {
                                 //Log.d("TAG", "DocumentSnapshot added with ID: " + documentReference.getId());
                                 Log.d(">>>>>>>>>>>>", "Booked room successful");
+                                holder.btnBookRoom.setText("Đã đặt thành công");
+                                holder.btnBookRoom.setVisibility(View.INVISIBLE);
+
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {

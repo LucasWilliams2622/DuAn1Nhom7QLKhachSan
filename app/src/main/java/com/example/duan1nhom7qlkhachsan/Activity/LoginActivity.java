@@ -3,6 +3,8 @@ package com.example.duan1nhom7qlkhachsan.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -67,7 +69,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText edt_username, edt_password;
     SharedPreferences sharedPreferences;
     SharedPreferences sharedPreferForUser;
-
+    ImageView ivShowPass;
 
     TextView tvNameUserLogin;
     //Google
@@ -86,10 +88,13 @@ public class LoginActivity extends AppCompatActivity {
         edt_password = findViewById(R.id.edt_password_lgoin);
         Button btn_login = findViewById(R.id.btn_login);
         Button btn_register = findViewById(R.id.btnGoRegister);
-        ImageView ivShowPass = findViewById(R.id.ivShowPass);
+        ivShowPass = findViewById(R.id.ivShowPass);
         sharedPreferences = getSharedPreferences("AdminInfo", 0);
-        sharedPreferForUser = getSharedPreferences("UserInfo",0);
-
+        sharedPreferForUser = getSharedPreferences("UserInfo", 0);
+        //Show Password
+        edt_username.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+        //Hide Password
+        edt_password.setTransformationMethod(PasswordTransformationMethod.getInstance());
 
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,11 +115,13 @@ public class LoginActivity extends AppCompatActivity {
                                         for (QueryDocumentSnapshot document : task.getResult()) {
                                             list.add(document.getId());
                                             //    private String idAdmin,emailAdmin,nameAdmin,passwordAdmin,role;
+                                            SharedPreferences.Editor editorAdmin = sharedPreferences.edit();
+                                            editorAdmin.putString("role", "admin");
+                                            editorAdmin.apply();
                                             Map<String, Object> map = document.getData();
                                             String passwordAdmin = map.get("passwordAdmin").toString();
                                             String emailAdmin = map.get("emailAdmin").toString();
                                             String nameAdmin = map.get("nameAdmin").toString();
-
 
                                             String username = edt_username.getText().toString();
                                             String password = edt_password.getText().toString();
@@ -125,23 +132,16 @@ public class LoginActivity extends AppCompatActivity {
                                                 Toast.makeText(LoginActivity.this, "Wellcome " + nameAdmin, Toast.LENGTH_SHORT).show();
                                                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
                                             } else {
-                                                Toast.makeText(LoginActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(LoginActivity.this, "Login failed !", Toast.LENGTH_SHORT).show();
                                             }
-
-
                                         }
-
-
                                     } else {
-                                        Toast.makeText(LoginActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(LoginActivity.this, "Login failed !!!", Toast.LENGTH_SHORT).show();
 
                                     }
                                 }
                             });
-
                 }
-
-
             }
         });
 
@@ -154,20 +154,24 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        ivShowPass.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                check++;
-                if (check % 2 == 0) {
-                    edt_password.setInputType(1);
-                    Log.d(">>>>>>>>>", "check " + check);
-                } else {
-                    //edt_password.setInputType();
+//        ivShowPass.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                check++;
+//                if (check % 2 == 0) {
+//                    edt_password.setInputType(1);
+//                    Log.d(">>>>>>>>>", "check " + check);
+//                } else {
+//                    //edt_password.setInputType();
+//
+//                    //  edt_password.setInputType(Integer.parseInt("textPassword"));
+//                }
+//            }
+//        });
 
-                    //  edt_password.setInputType(Integer.parseInt("textPassword"));
-                }
-            }
-        });
+
+
+
 
         /*
          *Start: Đăng nhâp bằng Google
@@ -246,7 +250,7 @@ public class LoginActivity extends AppCompatActivity {
                         user.put("nameUser", displayName);
                         user.put("emailUser", email);
                         user.put("idRoom", "");
-                        user.put("idUser", "USER"+email.toUpperCase().substring(2)+email.toUpperCase().charAt(5));
+                        user.put("idUser", "USER" + email.toUpperCase().substring(2) + email.toUpperCase().charAt(5));
                         user.put("phoneNumUser", "");
 
                         //SharedPreFerances
@@ -255,6 +259,10 @@ public class LoginActivity extends AppCompatActivity {
                         editor.putString("nameUser", displayName);
                         editor.putString("phoneNumUser", "");
                         editor.apply();
+                        SharedPreferences.Editor editorAdmin = sharedPreferences.edit();
+                        editorAdmin.putString("role", "user");
+                        editorAdmin.apply();
+
                         //end saving by sharedPreferances
                         // Add a new document with a generated ID
 
@@ -298,6 +306,9 @@ public class LoginActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         callbackManager.onActivityResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
+        SharedPreferences.Editor editorAdmin = sharedPreferences.edit();
+        editorAdmin.putString("role", "user");
+        editorAdmin.apply();
         Intent homeIntent = new Intent(LoginActivity.this, MainActivity.class);
         startActivity(homeIntent);
         finish();
@@ -308,6 +319,25 @@ public class LoginActivity extends AppCompatActivity {
     protected void onDestroy() {
         profileTracker.stopTracking();
         super.onDestroy();
+    }
+
+    public void ShowHidePass(View view) {
+
+        if (view.getId() == R.id.ivShowPass) {
+
+            if (edt_password.getTransformationMethod().equals(PasswordTransformationMethod.getInstance())) {
+                ((ImageView)(view)).setImageResource(R.drawable.hide_password);
+
+                //Show Password
+                edt_password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            } else {
+                ((ImageView) (view)).setImageResource(R.drawable.show_password);
+
+                //Hide Password
+                edt_password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+
+            }
+        }
     }
 
     public void getData() {
