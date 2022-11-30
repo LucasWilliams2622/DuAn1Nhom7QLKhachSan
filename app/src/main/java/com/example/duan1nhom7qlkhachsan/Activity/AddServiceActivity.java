@@ -121,7 +121,7 @@ public class AddServiceActivity extends AppCompatActivity implements IAdapterAdd
                                 String typeService = map.get("typeService").toString();
 
                                 AppService appService = new AppService(-1, idRoom, idService, nameService, priceService, typeService);
-                                appService.setIdService(document.getId());
+                                appService.setServiceId(document.getId());
                                 list.add(appService);
 
                                 getSupportFragmentManager().beginTransaction()
@@ -177,7 +177,7 @@ public class AddServiceActivity extends AppCompatActivity implements IAdapterAdd
                     });
         } else {
             db.collection("service")
-                    .document(appService.getIdService())
+                    .document(appService.getServiceId())
                     .set(service)
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
@@ -215,7 +215,7 @@ public class AddServiceActivity extends AppCompatActivity implements IAdapterAdd
                 .setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        db.collection("service").document(service.getIdService())
+                        db.collection("service").document(service.getServiceId())
                                 .delete()
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
@@ -239,8 +239,8 @@ public class AddServiceActivity extends AppCompatActivity implements IAdapterAdd
     @Override
     public void onUpdateServiceClick(AppService service) {
         //private EditText edtIdRoom, edtIdService, edtNameService, edtPriceService;
-        edtIdRoom.setText(service.getIdRoom());
-        edtIdService.setText(service.getIdService());
+        edtIdRoom.setText(service.getCodeRoom());
+        edtIdService.setText(service.getCodeService());
         edtNameService.setText(service.getNameService());
         edtPriceService.setText(service.getPriceService());
         appService = service;
