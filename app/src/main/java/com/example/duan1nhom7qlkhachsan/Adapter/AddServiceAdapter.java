@@ -64,8 +64,8 @@ public class AddServiceAdapter extends BaseAdapter {
         }
         AppService service = (AppService) getItem(_i);
         AddServiceAdapter.ViewHolder holder = (AddServiceAdapter.ViewHolder) view.getTag();
-        holder.tvIdRoom.setText("Id Room: "+service.getIdRoom());
-        holder.tvIdService.setText("Id: "+service.getIdService());
+        holder.tvIdRoom.setText("Id Room: "+service.getCodeRoom());
+        holder.tvIdService.setText("Id: "+service.getCodeService());
         holder.tvNameService.setText("Tên: "+service.getNameService());
         holder.tvTypeService.setText("Loại: "+service.getTypeService());
         holder.tvPriceService.setText("Gía: "+service.getPriceService());

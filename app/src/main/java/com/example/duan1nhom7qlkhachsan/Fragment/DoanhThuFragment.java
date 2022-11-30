@@ -26,8 +26,10 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.Map;
 
-
 public class DoanhThuFragment extends Fragment {
+    EditText edtStartDay,edtEndDay;
+    Button btnThongKe;
+    TextView tvResult;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     ArrayList<Integer> sumDoanhThu = new ArrayList<>();
 
@@ -150,4 +152,5 @@ public class DoanhThuFragment extends Fragment {
         });
         return view;
     }
+
 }

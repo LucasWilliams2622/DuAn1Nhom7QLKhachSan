@@ -2,16 +2,17 @@ package com.example.duan1nhom7qlkhachsan.Model;
 
 
 public class AppService {
-    private String idRoom, idService, nameService, priceService, typeService;
     private Integer id;
+    private String codeRoom, codeService, nameService, priceService, typeService,serviceId;
+
 
     public AppService() {
     }
 
-    public AppService(Integer id, String idRoom, String idService, String nameService, String priceService, String typeService) {
-        this.idRoom = idRoom;
+    public AppService(Integer id, String codeRoom, String codeService, String nameService, String priceService, String typeService) {
         this.id = id;
-        this.idService = idService;
+        this.codeRoom = codeRoom;
+        this.codeService = codeService;
         this.nameService = nameService;
         this.priceService = priceService;
         this.typeService = typeService;
@@ -25,20 +26,20 @@ public class AppService {
         this.id = id;
     }
 
-    public String getIdRoom() {
-        return idRoom;
+    public String getCodeRoom() {
+        return codeRoom;
     }
 
-    public void setIdRoom(String idRoom) {
-        this.idRoom = idRoom;
+    public void setCodeRoom(String codeRoom) {
+        this.codeRoom = codeRoom;
     }
 
-    public String getIdService() {
-        return idService;
+    public String getCodeService() {
+        return codeService;
     }
 
-    public void setIdService(String idService) {
-        this.idService = idService;
+    public void setCodeService(String codeService) {
+        this.codeService = codeService;
     }
 
     public String getNameService() {
@@ -63,5 +64,13 @@ public class AppService {
 
     public void setTypeService(String typeService) {
         this.typeService = typeService;
+    }
+
+    public String getServiceId() {
+        return serviceId;
+    }
+
+    public void setServiceId(String serviceId) {
+        this.serviceId = serviceId;
     }
 }
