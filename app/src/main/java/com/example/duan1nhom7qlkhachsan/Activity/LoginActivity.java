@@ -8,6 +8,7 @@ import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -70,6 +71,7 @@ public class LoginActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     SharedPreferences sharedPreferForUser;
     ImageView ivShowPass;
+    CheckBox chkSavePassword;
 
     TextView tvNameUserLogin;
     //Google
@@ -89,6 +91,15 @@ public class LoginActivity extends AppCompatActivity {
         Button btn_login = findViewById(R.id.btn_login);
         Button btn_register = findViewById(R.id.btnGoRegister);
         ivShowPass = findViewById(R.id.ivShowPass);
+        chkSavePassword = findViewById(R.id.chkSavePassword);
+        chkSavePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                Toast.makeText(LoginActivity.this, "Đã lưu mậy khẩu", Toast.LENGTH_SHORT).show();
+            }
+        });
         sharedPreferences = getSharedPreferences("AdminInfo", 0);
         sharedPreferForUser = getSharedPreferences("UserInfo", 0);
         //Show Password
@@ -128,7 +139,7 @@ public class LoginActivity extends AppCompatActivity {
 
                                             String registerEmailAdmin = sharedPreferences.getString("emailAdmin", "");
                                             String registerPasswordAdmin = sharedPreferences.getString("passwordAdmin", "");
-                                            if ((username.equals(registerEmailAdmin) && password.equals(registerPasswordAdmin))||(username.equals(emailAdmin)&&password.equals(passwordAdmin))) {
+                                            if ((username.equals(registerEmailAdmin) && password.equals(registerPasswordAdmin)) || (username.equals(emailAdmin) && password.equals(passwordAdmin))) {
                                                 Toast.makeText(LoginActivity.this, "Wellcome " + nameAdmin, Toast.LENGTH_SHORT).show();
                                                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
                                             } else {
@@ -238,7 +249,7 @@ public class LoginActivity extends AppCompatActivity {
                     Intent data = result.getData();
                     Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
                     try {
-                        Log.d(">>>>>>>>>>>>","Login Google");
+                        Log.d(">>>>>>>>>>>>", "Login Google");
                         GoogleSignInAccount account = task.getResult(ApiException.class);
                         String email = account.getEmail();
                         String displayName = account.getDisplayName();
@@ -251,7 +262,7 @@ public class LoginActivity extends AppCompatActivity {
                         user.put("nameUser", displayName);
                         user.put("emailUser", email);
                         user.put("idRoom", "");
-                        user.put("idUser", "USER" + email.toLowerCase().substring(1,5) + email.toUpperCase().lastIndexOf(1));
+                        user.put("idUser", "USER" + email.toLowerCase().substring(1, 5) + email.toUpperCase().lastIndexOf(1));
                         user.put("phoneNumUser", "");
 
                         //SharedPreFerances
@@ -323,17 +334,13 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void ShowHidePass(View view) {
-
         if (view.getId() == R.id.ivShowPass) {
-
             if (edt_password.getTransformationMethod().equals(PasswordTransformationMethod.getInstance())) {
-                ((ImageView)(view)).setImageResource(R.drawable.hide_password);
-
+                ((ImageView) (view)).setImageResource(R.drawable.hide_password);
                 //Show Password
                 edt_password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
             } else {
                 ((ImageView) (view)).setImageResource(R.drawable.show_password);
-
                 //Hide Password
                 edt_password.setTransformationMethod(PasswordTransformationMethod.getInstance());
 
