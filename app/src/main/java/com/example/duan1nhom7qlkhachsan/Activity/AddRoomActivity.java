@@ -29,9 +29,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AddRoomActivity extends AppCompatActivity implements  AdapterAddRoomClick {
+public class AddRoomActivity extends AppCompatActivity implements AdapterAddRoomClick {
     private EditText edtCodeRoom, edtNameRoom, edtTypeRoom, edtPriceRoom, edtStartDay, edtEndDay;
-    private Button btnAddRoom, btnClear,btnBackToMain;
+    private Button btnAddRoom, btnClear, btnBackToMain;
     private AppRoom appRoom = null;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -73,55 +73,59 @@ public class AddRoomActivity extends AppCompatActivity implements  AdapterAddRoo
         String priceRoom = edtPriceRoom.getText().toString();
         String startDay = edtStartDay.getText().toString();
         String endDay = edtEndDay.getText().toString();
-
-        // Create a new user with a first and last name
-        Map<String, Object> user = new HashMap<>();
-        user.put("codeRoom", codeRoom);
-        user.put("nameRoom", nameRoom);
-        user.put("typeRoom", typeRoom);
-        user.put("priceRoom", priceRoom);
-        user.put("startDay", startDay);
-        user.put("endDay", endDay);
+        if (codeRoom.equals("") || nameRoom.equals("") || typeRoom.equals("") || priceRoom.equals("")) {
+            Toast.makeText(this, "Hãy nhập đủ thông tin", Toast.LENGTH_SHORT).show();
+        } else {
+            // Create a new user with a first and last name
+            Map<String, Object> user = new HashMap<>();
+            user.put("codeRoom", codeRoom);
+            user.put("nameRoom", nameRoom);
+            user.put("typeRoom", typeRoom);
+            user.put("priceRoom", priceRoom);
+            user.put("startDay", startDay);
+            user.put("endDay", endDay);
 
 // Add a new document with a generated ID
-        if (appRoom == null) {
-            db.collection("room")
-                    .add(user)
-                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                        @Override
-                        public void onSuccess(DocumentReference documentReference) {
-                            Toast.makeText(AddRoomActivity.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
-                            getDataAddRoom();
-                            //Log.d("TAG", "DocumentSnapshot added with ID: " + documentReference.getId());
+            if (appRoom == null) {
+                db.collection("room")
+                        .add(user)
+                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                            @Override
+                            public void onSuccess(DocumentReference documentReference) {
+                                Toast.makeText(AddRoomActivity.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
+                                getDataAddRoom();
+                                //Log.d("TAG", "DocumentSnapshot added with ID: " + documentReference.getId());
 
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(AddRoomActivity.this, "Thêm thất bại", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(AddRoomActivity.this, "Thêm thất bại", Toast.LENGTH_SHORT).show();
 
-                        }
-                    });
-        } else {
-            db.collection("room")
-                    .document(appRoom.getRoomId())
-                    .set(user)
-                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            Toast.makeText(AddRoomActivity.this, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
-                            getDataAddRoom();
-                            appRoom=null;
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(AddRoomActivity.this, "Cập nhật không thành công", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                            }
+                        });
+            } else {
+                db.collection("room")
+                        .document(appRoom.getRoomId())
+                        .set(user)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Toast.makeText(AddRoomActivity.this, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
+                                getDataAddRoom();
+                                appRoom = null;
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(AddRoomActivity.this, "Cập nhật không thành công", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+            }
         }
+
     }
 
     public void onCancleClick(View view) {
@@ -151,7 +155,7 @@ public class AddRoomActivity extends AppCompatActivity implements  AdapterAddRoo
                                 String start = map.get("startDay").toString();
                                 String end = map.get("endDay").toString();
 
-                                AppRoom appRoom = new AppRoom(-1,code,name, type, price, start, end);
+                                AppRoom appRoom = new AppRoom(-1, code, name, type, price, start, end);
                                 appRoom.setRoomId(document.getId());
                                 list.add(appRoom);
 
@@ -162,7 +166,8 @@ public class AddRoomActivity extends AppCompatActivity implements  AdapterAddRoo
                     }
                 });
     }
-//
+
+    //
     @Override
     public void onDeleteRoomClick(AppRoom room) {
         new AlertDialog.Builder(AddRoomActivity.this)
@@ -192,6 +197,7 @@ public class AddRoomActivity extends AppCompatActivity implements  AdapterAddRoo
                     }
                 })
                 .show();
+
     }
 
 

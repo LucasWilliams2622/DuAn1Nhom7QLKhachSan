@@ -128,7 +128,7 @@ public class LoginActivity extends AppCompatActivity {
 
                                             String registerEmailAdmin = sharedPreferences.getString("emailAdmin", "");
                                             String registerPasswordAdmin = sharedPreferences.getString("passwordAdmin", "");
-                                            if (username.equals(registerEmailAdmin) && password.equals(registerPasswordAdmin)) {
+                                            if ((username.equals(registerEmailAdmin) && password.equals(registerPasswordAdmin))||(username.equals(emailAdmin)&&password.equals(passwordAdmin))) {
                                                 Toast.makeText(LoginActivity.this, "Wellcome " + nameAdmin, Toast.LENGTH_SHORT).show();
                                                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
                                             } else {
@@ -238,6 +238,7 @@ public class LoginActivity extends AppCompatActivity {
                     Intent data = result.getData();
                     Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
                     try {
+                        Log.d(">>>>>>>>>>>>","Login Google");
                         GoogleSignInAccount account = task.getResult(ApiException.class);
                         String email = account.getEmail();
                         String displayName = account.getDisplayName();
@@ -250,7 +251,7 @@ public class LoginActivity extends AppCompatActivity {
                         user.put("nameUser", displayName);
                         user.put("emailUser", email);
                         user.put("idRoom", "");
-                        user.put("idUser", "USER" + email.toUpperCase().substring(2) + email.toUpperCase().charAt(5));
+                        user.put("idUser", "USER" + email.toLowerCase().substring(1,5) + email.toUpperCase().lastIndexOf(1));
                         user.put("phoneNumUser", "");
 
                         //SharedPreFerances

@@ -1,14 +1,18 @@
 package com.example.duan1nhom7qlkhachsan.Adapter;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.icu.util.Calendar;
 import android.util.Log;
+import android.view.ActionMode;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +38,7 @@ public class BookRoomAdapter extends BaseAdapter {
     private Button btnBookRoom;
     private TextView tvCodeBookRoom, tvNameBookRoom, tvTypeBookRoom, tvPriceBookRoom;
     private EditText edtCheckInDay, edtCheckOutDay;
+    private ImageView ivHotelRoom;
     private ArrayList<AppRoom> list;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -74,6 +79,15 @@ public class BookRoomAdapter extends BaseAdapter {
             edtCheckInDay = view.findViewById(R.id.edtCheckInDay);
             edtCheckOutDay = view.findViewById(R.id.edtCheckOutDay);
 
+//            view.findViewById(R.id.ivHotelRoom).setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    ivHotelRoom.startActionMode((ActionMode.Callback) AnimationUtils.loadAnimation(
+//                            _viewGroup.getContext(),
+//                            R.anim.animation_scale
+//                    ));
+//                }
+//            });
             BookRoomAdapter.ViewHolder holder = new BookRoomAdapter.ViewHolder(btnBookRoom, tvCodeBookRoom, tvNameBookRoom, tvTypeBookRoom, tvPriceBookRoom, edtCheckInDay, edtCheckOutDay);
             view.setTag(holder);
         }
@@ -209,6 +223,7 @@ public class BookRoomAdapter extends BaseAdapter {
         final Button btnBookRoom;
         final TextView tvCodeBookRoom, tvNameBookRoom, tvTypeBookRoom, tvPriceBookRoom;
         final EditText edtCheckInDay, edtCheckOutDay;
+
 
         public ViewHolder(Button btnBookRoom, TextView tvCodeBookRoom, TextView tvNameBookRoom, TextView tvTypeBookRoom, TextView tvPriceBookRoom, EditText edtCheckInDay, EditText edtCheckOutDay) {
             this.btnBookRoom = btnBookRoom;

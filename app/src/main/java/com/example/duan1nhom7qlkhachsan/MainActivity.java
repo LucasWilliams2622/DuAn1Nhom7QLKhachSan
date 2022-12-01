@@ -126,8 +126,6 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intentAddService);
                         break;
                     case R.id.mEditProfile:
-
-
                         Intent intentProfile = new Intent(MainActivity.this, EditProfileActivity.class);
                         startActivity(intentProfile);
                         break;
