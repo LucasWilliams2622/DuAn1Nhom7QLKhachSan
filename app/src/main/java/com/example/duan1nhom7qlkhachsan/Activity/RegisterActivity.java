@@ -4,7 +4,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -30,9 +33,11 @@ import java.util.Map;
 public class RegisterActivity extends AppCompatActivity {
     private EditText edtEmailAdmin, edtNameAdmin, edtPasswordAdmin, edtIdAdmin, edtRoleAdmin;
     private Button btnRegister;
+    Animation scaleUp,scaleDown;
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     SharedPreferences sharedPreferences;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,11 +48,12 @@ public class RegisterActivity extends AppCompatActivity {
         edtPasswordAdmin = findViewById(R.id.edtPasswordAdmin);
         edtIdAdmin = findViewById(R.id.edtIdAdmin);
         edtRoleAdmin = findViewById(R.id.edtRoleAdmin);
-
-
+        scaleUp = AnimationUtils.loadAnimation(this,R.anim.scale_up);
+        scaleDown = AnimationUtils.loadAnimation(this,R.anim.scale_down);
         btnRegister = findViewById(R.id.btnRegister);
 
     }
+
 
     @Override
     protected void onResume() {
@@ -91,6 +97,7 @@ public class RegisterActivity extends AppCompatActivity {
         Intent moveLogin = new Intent(RegisterActivity.this, LoginActivity.class);
         startActivity(moveLogin);
     }
+
 
     public void onRegisterClick(View view) {
 
@@ -145,6 +152,18 @@ public class RegisterActivity extends AppCompatActivity {
                     });
 
         }
+        btnRegister.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction()==MotionEvent.ACTION_UP){
+                    btnRegister.startAnimation(scaleDown);
+
+                }else if(event.getAction()==MotionEvent.ACTION_DOWN){
+                    btnRegister.startAnimation(scaleUp);
+                }
+                return false;
+            }
+        });
 
     }
 }

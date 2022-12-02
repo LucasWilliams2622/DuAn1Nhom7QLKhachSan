@@ -1,9 +1,13 @@
 package com.example.duan1nhom7qlkhachsan.Activity.hotro;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -16,6 +20,9 @@ import com.example.duan1nhom7qlkhachsan.R;
 
 
 public class HoTroFragment extends Fragment {
+    Animation scaleUp,scaleDown;
+    private Context HoTroFragment;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -26,7 +33,26 @@ public class HoTroFragment extends Fragment {
         EditText edtgioithiue=view.findViewById(R.id.edtgioithieu);
         Button btnthem=view.findViewById(R.id.btnthem);
 
+        scaleUp = AnimationUtils.loadAnimation(getActivity(),R.anim.scale_up);
+        scaleDown = AnimationUtils.loadAnimation(getActivity(),R.anim.scale_down);
+
+        btnthem.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction()==MotionEvent.ACTION_UP){
+                    btnthem.startAnimation(scaleDown);
+
+                }else if(event.getAction()==MotionEvent.ACTION_DOWN){
+                    btnthem.startAnimation(scaleUp);
+                }
+                return false;
+            }
+        });
+
+
+
         btnthem.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 String ma=edtmanpp.getText().toString();
@@ -51,6 +77,7 @@ public class HoTroFragment extends Fragment {
 
             }
         });
+
 
 
         return view;
