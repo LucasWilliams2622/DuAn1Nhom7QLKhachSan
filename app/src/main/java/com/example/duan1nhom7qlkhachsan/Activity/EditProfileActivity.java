@@ -1,17 +1,26 @@
 package com.example.duan1nhom7qlkhachsan.Activity;
 
+import static com.example.duan1nhom7qlkhachsan.MainActivity.MY_REQUEST_CODE;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.duan1nhom7qlkhachsan.Fragment.AddRoomFragment;
@@ -37,7 +46,11 @@ public class EditProfileActivity extends AppCompatActivity implements IAdapterUs
     private Button btnUpdateAccount, btnDeleteAccount, btnBackToMainActivity;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private AppUser appUser = null;
+    private MainActivity mMainActivity;
     SharedPreferences sharedPreferForUser;
+   ImageView edtAvatar,ivEditProfileUser;
+    private Uri mUri;
+    private ProgressDialog progressDialog;
 
     //    ActivityUpdateDataBinding
 //    DatabaseReferance
@@ -51,6 +64,17 @@ public class EditProfileActivity extends AppCompatActivity implements IAdapterUs
         btnUpdateAccount = findViewById(R.id.btnUpdateAccount);
         btnDeleteAccount = findViewById(R.id.btnDeleteAccount);
         btnBackToMainActivity = findViewById(R.id.btnBackToMainActivity);
+        ivEditProfileUser =findViewById(R.id.ivEditProfileUser);
+        mMainActivity = (MainActivity) getApplicationContext();
+        progressDialog = new ProgressDialog(getApplicationContext());
+
+        ivEditProfileUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(">>>>>>>>>>>","click");
+                openAlbum();
+            }
+        });
         sharedPreferForUser = getSharedPreferences("UserInfo", 0);
 
         btnDeleteAccount.setOnClickListener(new View.OnClickListener() {
@@ -81,13 +105,56 @@ public class EditProfileActivity extends AppCompatActivity implements IAdapterUs
 
         getLoginUserData();
     }
-
+    public void setBitmapImageView(Bitmap bitmapImageView) {
+        ivEditProfileUser.setImageBitmap(bitmapImageView);
+    }
     @Override
     protected void onResume() {
         super.onResume();
 //        getUserData();
     }
+//    private void clickAvatar() {
+//        ivEditProfileUser.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                openAlbum();
+//            }
+//        });
+//
+//        ivEditProfileUser.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                onClickUpdateProFile();
+//            }
+//        });
+//
+//        ivEditProfileUser.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                onClickEditEmail();
+//            }
+//        });
+//    }
 
+    private void openAlbum() {
+        if (mMainActivity == null) {
+            return;
+        }
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) { // < hon android 6
+            mMainActivity.openGallery();
+            return;
+        }
+        if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+            mMainActivity.openGallery();
+        } else {
+            String[] permission = {Manifest.permission.READ_EXTERNAL_STORAGE};
+            requestPermissions(permission, MY_REQUEST_CODE);
+
+        }
+    }
+    public void setUri(Uri mUri) {
+        this.mUri = mUri;
+    }
     public void getLoginUserData() {
         String emailUser = sharedPreferForUser.getString("emailUser", "");
         String nameUser = sharedPreferForUser.getString("nameUser", "");

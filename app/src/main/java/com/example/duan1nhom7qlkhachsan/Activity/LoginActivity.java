@@ -100,6 +100,7 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(LoginActivity.this, "Đã lưu mậy khẩu", Toast.LENGTH_SHORT).show();
             }
         });
+
         sharedPreferences = getSharedPreferences("AdminInfo", 0);
         sharedPreferForUser = getSharedPreferences("UserInfo", 0);
         //Show Password
@@ -114,7 +115,6 @@ public class LoginActivity extends AppCompatActivity {
                 String password = edt_password.getText().toString();
                 if (username.equals("") || password.equals("")) {
                     Toast.makeText(LoginActivity.this, "Vui lòng điền đủ thông tin", Toast.LENGTH_SHORT).show();
-
                 } else {
                     db.collection("admin")
                             .get()
@@ -164,26 +164,6 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
-
-//        ivShowPass.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                check++;
-//                if (check % 2 == 0) {
-//                    edt_password.setInputType(1);
-//                    Log.d(">>>>>>>>>", "check " + check);
-//                } else {
-//                    //edt_password.setInputType();
-//
-//                    //  edt_password.setInputType(Integer.parseInt("textPassword"));
-//                }
-//            }
-//        });
-
-
-
-
-
         /*
          *Start: Đăng nhâp bằng Google
          * Project:https://console.firebase.google.com/project/myproject262-4a887/overview
@@ -211,7 +191,6 @@ public class LoginActivity extends AppCompatActivity {
                 googleLauncher.launch(googleIntent);//hientai khoan dang login trong may
             }
         });
-
 
         /*
          *End: Đăng nhâp bằng Google*/

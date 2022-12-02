@@ -2,6 +2,7 @@ package com.example.duan1nhom7qlkhachsan.Adapter;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.icu.util.Calendar;
 import android.util.Log;
 import android.view.ActionMode;
@@ -41,10 +42,11 @@ public class BookRoomAdapter extends BaseAdapter {
     private ImageView ivHotelRoom;
     private ArrayList<AppRoom> list;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-
+private Context context;
     Calendar calendar = Calendar.getInstance();
 
-    public BookRoomAdapter(ArrayList<AppRoom> list) {
+    public BookRoomAdapter(ArrayList<AppRoom> list, Context context) {
+        this.context =context;
         this.list = list;
     }
 
@@ -79,15 +81,18 @@ public class BookRoomAdapter extends BaseAdapter {
             edtCheckInDay = view.findViewById(R.id.edtCheckInDay);
             edtCheckOutDay = view.findViewById(R.id.edtCheckOutDay);
 
-//            view.findViewById(R.id.ivHotelRoom).setOnClickListener(new View.OnClickListener() {
+//            view.findViewById(R.id.btnBookRoom).setOnClickListener(new View.OnClickListener() {
 //                @Override
 //                public void onClick(View v) {
-//                    ivHotelRoom.startActionMode((ActionMode.Callback) AnimationUtils.loadAnimation(
-//                            _viewGroup.getContext(),
+//                    ivHotelRoom.startActionMode( AnimationUtils.loadAnimation(
+//                           context.getApplicationContext(),
 //                            R.anim.animation_scale
 //                    ));
 //                }
 //            });
+
+
+
             BookRoomAdapter.ViewHolder holder = new BookRoomAdapter.ViewHolder(btnBookRoom, tvCodeBookRoom, tvNameBookRoom, tvTypeBookRoom, tvPriceBookRoom, edtCheckInDay, edtCheckOutDay);
             view.setTag(holder);
         }

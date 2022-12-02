@@ -59,7 +59,7 @@ public class BookRoomFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         lvFragmentDatPhong =view.findViewById(R.id.lvFragmentDatPhong);
-        BookRoomAdapter adapter = new BookRoomAdapter(rooms);
+        BookRoomAdapter adapter = new BookRoomAdapter(rooms,getContext());
         lvFragmentDatPhong.setAdapter(adapter);
 //        lvDatPhong.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //            @Override

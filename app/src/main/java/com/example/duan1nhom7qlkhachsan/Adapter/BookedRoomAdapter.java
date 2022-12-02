@@ -29,7 +29,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class BookedRoomAdapter extends BaseAdapter {
-    private ArrayList<AppBookedRoom> list ;
+    private ArrayList<AppBookedRoom> list  ;
     private Button btnHuyPhong;
     private TextView tvTenPhong, tvMaPhong, tvLoaiPhong, tvGiaPhong,tvEndDay,tvStartDay;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
