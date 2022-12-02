@@ -1,10 +1,27 @@
 package com.example.duan1nhom7qlkhachsan.Model;
 
 public class AppUser {
-    private int  idUser;
-    private String nameUser,emailUser,phoneNumUser,idRoom;
+    private Integer id  ;
+    private String idUser,nameUser,emailUser,phoneNumUser,idRoom;
 
-    public AppUser(int idUser, String nameUser, String emailUser, String phoneNumUser, String idRoom) {
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getPhoneNumUser() {
+        return phoneNumUser;
+    }
+
+    public void setPhoneNumUser(String phoneNumUser) {
+        this.phoneNumUser = phoneNumUser;
+    }
+
+    public AppUser(Integer id, String idUser, String nameUser, String emailUser, String phoneNumUser, String idRoom) {
+        this.id =id;
         this.idUser = idUser;
         this.nameUser = nameUser;
         this.emailUser = emailUser;
@@ -15,11 +32,11 @@ public class AppUser {
     public AppUser() {
     }
 
-    public int getIdUser() {
+    public String getIdUser() {
         return idUser;
     }
 
-    public void setIdUser(int idUser) {
+    public void setIdUser(String idUser) {
         this.idUser = idUser;
     }
 

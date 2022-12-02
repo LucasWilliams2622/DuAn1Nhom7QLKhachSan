@@ -141,59 +141,66 @@ public class AddServiceActivity extends AppCompatActivity implements IAdapterAdd
         String nameService = edtNameService.getText().toString();
         String priceService = edtPriceService.getText().toString();
         String typeService = sharedPrefeTypeService.getString("typeService", "");
+        if (idRoom.equals("") || idService.equals("") || nameService.equals("") || priceService.equals("")) {
+            Toast.makeText(this, "Vui lòng nhập đủ thông tin", Toast.LENGTH_SHORT).show();
+        } else {
+            // Create a new user with a first and last name
+            Map<String, Object> service = new HashMap<>();
+            service.put("idRoom", idRoom);
+            service.put("idService", idService);
 
 
-        // Create a new user with a first and last name
-        Map<String, Object> service = new HashMap<>();
-        service.put("idRoom", idRoom);
-        service.put("idService", idService);
-        service.put("nameService", nameService);
-        service.put("priceService", priceService);
-        service.put("typeService", typeService);
+
+            service.put("nameService", nameService);
+            service.put("priceService", priceService);
+            service.put("typeService", typeService);
 
 
-        Log.d(">>>>>>>>>>>>>>>>>>", "typeService" + typeService);
+            Log.d(">>>>>>>>>>>>>>>>>>", "typeService" + typeService);
 
 
 // Add a new document with a generated ID
-        if (appService == null) {
-            db.collection("service")
-                    .add(service)
-                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                        @Override
-                        public void onSuccess(DocumentReference documentReference) {
-                            Toast.makeText(getApplicationContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
-                            getDataAddService();
-                            //Log.d("TAG", "DocumentSnapshot added with ID: " + documentReference.getId());
+            if (appService == null) {
+                db.collection("service")
+                        .add(service)
+                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                            @Override
+                            public void onSuccess(DocumentReference documentReference) {
+                                Toast.makeText(getApplicationContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
+                                getDataAddService();
+                                //Log.d("TAG", "DocumentSnapshot added with ID: " + documentReference.getId());
 
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(getApplicationContext(), "Thêm thất bại", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(getApplicationContext(), "Thêm thất bại", Toast.LENGTH_SHORT).show();
 
-                        }
-                    });
-        } else {
-            db.collection("service")
-                    .document(appService.getServiceId())
-                    .set(service)
-                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            Toast.makeText(getApplicationContext(), "Cập nhật thành công", Toast.LENGTH_SHORT).show();
-                            getDataAddService();
-                            appService = null;
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(getApplicationContext(), "Cập nhật không thành công", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                            }
+                        });
+            } else {
+                db.collection("service")
+                        .document(appService.getServiceId())
+                        .set(service)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Toast.makeText(getApplicationContext(), "Cập nhật thành công", Toast.LENGTH_SHORT).show();
+                                getDataAddService();
+                                appService = null;
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(getApplicationContext(), "Cập nhật không thành công", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+            }
         }
+
+
     }
 
     public void onCancleClick(View view) {
@@ -206,6 +213,7 @@ public class AddServiceActivity extends AppCompatActivity implements IAdapterAdd
 
 
     }
+
     @Override
     public void onDeleteServiceClick(AppService service) {
         new AlertDialog.Builder(AddServiceActivity.this)
@@ -236,6 +244,7 @@ public class AddServiceActivity extends AppCompatActivity implements IAdapterAdd
                 })
                 .show();
     }
+
     @Override
     public void onUpdateServiceClick(AppService service) {
         //private EditText edtIdRoom, edtIdService, edtNameService, edtPriceService;

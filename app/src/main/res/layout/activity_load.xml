@@ -35,7 +35,7 @@
         android:layout_marginTop="452dp"
         android:gravity="center"
         android:text="Tìm kiếm và lựa chọn phòng
-phù hợp với giá tiền   và nhu cầu của bản thân. "
+phù hợp với giá tiền   và nhu cầu của bản thân ! "
         android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"

@@ -42,7 +42,8 @@ public class EditProfileActivity extends AppCompatActivity implements IAdapterUs
     private AppUser appUser = null;
     Animation scaleUp,scaleDown;
     SharedPreferences sharedPreferForUser;
-//    ActivityUpdateDataBinding
+
+    //    ActivityUpdateDataBinding
 //    DatabaseReferance
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,14 +138,41 @@ public class EditProfileActivity extends AppCompatActivity implements IAdapterUs
         String emailUser = sharedPreferForUser.getString("emailUser", "");
         String nameUser = sharedPreferForUser.getString("nameUser", "");
         String phoneNumUser = sharedPreferForUser.getString("phoneNumUser", "");
-//                Log.d(">>>>>>>>>>>>>>>>>>>>", "emailUser" + emailUser);
-//                Log.d(">>>>>>>>>>>>>>>>>>>>", "nameUser" + nameUser);
-//                Log.d(">>>>>>>>>>>>>>>>>>>>", "phoneNumUser" + phoneNumUser);
+
         edtFullNameUser.setText(nameUser);
         edtEmailUser.setText(emailUser);
         edtPhoneNumberUser.setText(phoneNumUser);
     }
 
+
+    public void onUpdateProfileUser() {
+        String fullnameUser = edtFullNameUser.getText().toString();
+        String emailUser = edtEmailUser.getText().toString();
+        String phoneNumUser =edtPhoneNumberUser.getText().toString();
+
+        Map<String, Object> user = new HashMap<>();
+        user.put("nmaeUser", fullnameUser);
+        user.put("emailUser", emailUser);
+        user.put("phoneNumUser", phoneNumUser);
+        db.collection("user")
+                .document(appUser.getIdUser())
+                .set(user)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(EditProfileActivity.this, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
+                        getUserData();
+                        appUser = null;
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(EditProfileActivity.this, "Cập nhật không thành công", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+    }
 
     public void getUserData() {
         db.collection("user")
@@ -165,7 +193,7 @@ public class EditProfileActivity extends AppCompatActivity implements IAdapterUs
                                 String phoneNumUser = map.get("phoneNumUser").toString();
                                 String idRoom = map.get("idRoom").toString();
 
-                                AppUser appUser = new AppUser(-1, nameUser, emailUser, phoneNumUser, idRoom);
+                                AppUser appUser = new AppUser(-1, idUser, nameUser, emailUser, phoneNumUser, idRoom);
 //                                appUser.setIdUser((document.getId()));
                                 list.add(appUser);
 
@@ -193,7 +221,7 @@ public class EditProfileActivity extends AppCompatActivity implements IAdapterUs
                 .setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        db.collection("user").document(String.valueOf(user.getIdUser()))
+                        db.collection("user").document(user.getEmailUser())
                                 .delete()
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
@@ -215,8 +243,6 @@ public class EditProfileActivity extends AppCompatActivity implements IAdapterUs
                 })
                 .show();
     }
-
-
 
 
 }

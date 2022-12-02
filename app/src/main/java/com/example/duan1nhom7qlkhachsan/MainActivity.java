@@ -10,7 +10,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -32,10 +31,9 @@ import com.example.duan1nhom7qlkhachsan.Activity.LoginActivity;
 import com.example.duan1nhom7qlkhachsan.Activity.BookRoomActivity;
 import com.example.duan1nhom7qlkhachsan.Activity.hotro.HotroAdminFragment;
 import com.example.duan1nhom7qlkhachsan.Activity.hotro.HoTroFragment;
-import com.example.duan1nhom7qlkhachsan.Fragment.AddServiceFragment;
 
 import com.example.duan1nhom7qlkhachsan.Fragment.DoanhThuFragment;
-import com.example.duan1nhom7qlkhachsan.Fragment.GioiThieuFragment;
+import com.example.duan1nhom7qlkhachsan.Fragment.TrangChuFragment;
 import com.example.duan1nhom7qlkhachsan.Fragment.BookedRoomFragment;
 import com.example.duan1nhom7qlkhachsan.Fragment.ServiceFragment;
 
@@ -114,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
                         fragment = new BookedRoomFragment();
                         break;
                     case R.id.mGioiThieu:
-                        fragment = new GioiThieuFragment();
+                        fragment = new TrangChuFragment();
                         break;
 
                     case R.id.mAddRoom:
@@ -126,8 +124,6 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intentAddService);
                         break;
                     case R.id.mEditProfile:
-
-
                         Intent intentProfile = new Intent(MainActivity.this, EditProfileActivity.class);
                         startActivity(intentProfile);
                         break;
@@ -149,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
                             startActivity(intent);
                         }
                     default:
-                        fragment = new ServiceFragment();
+                        fragment = new TrangChuFragment();
                         break;
                 }
                 if (fragment != null) {

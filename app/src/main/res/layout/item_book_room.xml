@@ -19,7 +19,7 @@
 
 
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/shapeableImageView"
+            android:id="@+id/ivHotelRoom"
             android:layout_width="match_parent"
             android:layout_height="203dp"
             android:layout_alignParentStart="true"
