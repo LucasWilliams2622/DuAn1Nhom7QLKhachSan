@@ -112,6 +112,7 @@ public class EditProfileActivity extends AppCompatActivity implements IAdapterUs
     protected void onResume() {
         super.onResume();
 //        getUserData();
+
     }
 //    private void clickAvatar() {
 //        ivEditProfileUser.setOnClickListener(new View.OnClickListener() {
