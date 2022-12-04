@@ -38,18 +38,34 @@
             android:orientation="vertical"
             android:paddingTop="210dp">
 
-            <TextView
-                android:id="@+id/tvCodeBookRoom"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
-                android:paddingLeft="15dp"
-                android:paddingTop="4dp"
-                android:paddingRight="15dp"
-                android:text=" 002"
-                android:textColor="@color/black"
-                android:textSize="20dp"
-                android:textStyle="normal" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="15dp"
+                    android:text="Mã phòng: "
+
+                    android:textColor="@color/black"
+
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/tvCodeBookRoom"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+
+                    android:paddingTop="4dp"
+                    android:paddingRight="15dp"
+                    android:text=" 002"
+                    android:textColor="@color/black"
+                    android:textSize="20dp"
+                    android:textStyle="normal" />
+            </LinearLayout>
+
 
             <TextView
                 android:id="@+id/tvNameBookRoom"
@@ -76,19 +92,40 @@
                 android:textSize="20dp"
                 android:textStyle="normal" />
 
-            <TextView
-                android:id="@+id/tvPriceBookRoom"
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="15dp"
-                android:paddingTop="4dp"
+                android:layout_height="wrap_content">
 
-                android:paddingRight="15dp"
-                android:text=" 999$"
-                android:textColor="@color/black"
-                android:textSize="20dp"
-                android:textStyle="normal" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="15dp"
+                    android:text="Giá:"
 
+                    android:textColor="@color/black"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/tvPriceBookRoom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="4dp"
+
+                    android:paddingRight="15dp"
+                    android:text=" 99"
+                    android:textColor="@color/black"
+                    android:textSize="20dp"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="$"
+                    android:textColor="@color/black"
+                    android:textSize="20dp" />
+            </LinearLayout>
 
             <EditText
                 android:id="@+id/edtCheckInDay"
@@ -107,7 +144,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/design_edit_no_stoke"
-                android:hint="Ngày check out:"
+                android:hint="Chọn Ngày check out:"
                 android:paddingLeft="15dp"
                 android:paddingTop="10dp"
 

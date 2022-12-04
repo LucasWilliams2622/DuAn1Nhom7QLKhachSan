@@ -42,11 +42,11 @@ public class BookRoomAdapter extends BaseAdapter {
     private ImageView ivHotelRoom;
     private ArrayList<AppRoom> list;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-private Context context;
+    private Context context;
     Calendar calendar = Calendar.getInstance();
 
     public BookRoomAdapter(ArrayList<AppRoom> list, Context context) {
-        this.context =context;
+        this.context = context;
         this.list = list;
     }
 
@@ -92,14 +92,13 @@ private Context context;
 //            });
 
 
-
             BookRoomAdapter.ViewHolder holder = new BookRoomAdapter.ViewHolder(btnBookRoom, tvCodeBookRoom, tvNameBookRoom, tvTypeBookRoom, tvPriceBookRoom, edtCheckInDay, edtCheckOutDay);
             view.setTag(holder);
         }
         AppRoom room = (AppRoom) getItem(_i);
         ViewHolder holder = (BookRoomAdapter.ViewHolder) view.getTag();
 
-        holder.tvCodeBookRoom.setText("Mã phòng: " + room.getCodeRoom());
+        holder.tvCodeBookRoom.setText(room.getCodeRoom());
         holder.tvNameBookRoom.setText("Tên phòng: " + room.getNameRoom());
         holder.tvTypeBookRoom.setText("Loại phòng: " + room.getTypeRoom());
         holder.tvPriceBookRoom.setText(room.getPriceRoom());

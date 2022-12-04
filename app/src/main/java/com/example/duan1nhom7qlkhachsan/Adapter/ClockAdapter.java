@@ -42,10 +42,10 @@ public class ClockAdapter extends BaseAdapter {
             tvIdRoom = view.findViewById(R.id.tvIdRoom);
             tvIdService = view.findViewById(R.id.tvIdService);
             tvNameService = view.findViewById(R.id.tvNameService);
-            tvTypeService = view.findViewById(R.id.tvTypeService);
-            tvPriceService = view.findViewById(R.id.tvPriceService);
+            tvTypeService = view.findViewById(R.id.tvPriceService);
+            tvPriceService = view.findViewById(R.id.tvTypeService);
             btnDeleteService = view.findViewById(R.id.btnDeleteService);
-            btnUpdateService = view.findViewById(R.id.btnUpdateService);
+            btnUpdateService = view.findViewById(R.id.btnBookService);
 
             ViewHolder holder = new ViewHolder(tvIdRoom, tvIdService, tvNameService, tvTypeService, tvPriceService, btnDeleteService, btnUpdateService);
 

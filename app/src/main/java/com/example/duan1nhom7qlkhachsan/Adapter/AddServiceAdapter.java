@@ -1,17 +1,12 @@
 package com.example.duan1nhom7qlkhachsan.Adapter;
 
-import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
-import com.example.duan1nhom7qlkhachsan.Activity.AdapterAddRoomClick;
 import com.example.duan1nhom7qlkhachsan.Activity.IAdapterAddServiceClickEvent;
 import com.example.duan1nhom7qlkhachsan.Model.AppService;
 import com.example.duan1nhom7qlkhachsan.R;
@@ -53,10 +48,10 @@ public class AddServiceAdapter extends BaseAdapter {
             tvIdRoom = view.findViewById(R.id.tvIdRoom);
             tvIdService = view.findViewById(R.id.tvIdService);
             tvNameService = view.findViewById(R.id.tvNameService);
-            tvTypeService = view.findViewById(R.id.tvTypeService);
-            tvPriceService = view.findViewById(R.id.tvPriceService);
+            tvTypeService = view.findViewById(R.id.tvPriceService);
+            tvPriceService = view.findViewById(R.id.tvTypeService);
             btnDeleteService = view.findViewById(R.id.btnDeleteService);
-            btnUpdateService = view.findViewById(R.id.btnUpdateService);
+            btnUpdateService = view.findViewById(R.id.btnBookService);
 
             AddServiceAdapter.ViewHolder holder = new AddServiceAdapter.ViewHolder(tvIdRoom, tvIdService, tvNameService, tvTypeService, tvPriceService, btnDeleteService, btnUpdateService);
 

@@ -65,7 +65,7 @@ public class EditProfileActivity extends AppCompatActivity implements IAdapterUs
         btnDeleteAccount = findViewById(R.id.btnDeleteAccount);
         btnBackToMainActivity = findViewById(R.id.btnBackToMainActivity);
         ivEditProfileUser =findViewById(R.id.ivEditProfileUser);
-        mMainActivity = (MainActivity) getApplicationContext();
+//        mMainActivity = (MainActivity) getApplicationContext();
         progressDialog = new ProgressDialog(getApplicationContext());
 
         ivEditProfileUser.setOnClickListener(new View.OnClickListener() {

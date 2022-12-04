@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.duan1nhom7qlkhachsan.Fragment.AddServiceFragment;
+import com.example.duan1nhom7qlkhachsan.Fragment.LaudryFragment;
 import com.example.duan1nhom7qlkhachsan.Model.AppService;
 import com.example.duan1nhom7qlkhachsan.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -54,7 +55,7 @@ public class LaudryActivity extends AppCompatActivity {
                                 list.add(appService);
 
                                 getSupportFragmentManager().beginTransaction()
-                                        .replace(R.id.flLaudry, AddServiceFragment.newInstance(list)).commit();
+                                        .replace(R.id.flLaudry, LaudryFragment.newInstance(list)).commit();
                             }
                         }
                     }
