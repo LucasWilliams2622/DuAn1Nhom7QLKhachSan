@@ -100,12 +100,12 @@ public class BookedRoomAdapter extends BaseAdapter {
 
                 new AlertDialog.Builder(btnHuyPhong.getContext())
                         .setTitle("Xóa")
-                        .setMessage("Xóa sẽ không phục hồi được")
+                        .setMessage("Bạn có chắc muốn hủy phòng")
                         .setNegativeButton("Hủy", null)
                         .setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                db.collection("room").document(room.getRoomId())
+                                db.collection("bookedRoom").document(room.getRoomId())
                                         .delete()
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
