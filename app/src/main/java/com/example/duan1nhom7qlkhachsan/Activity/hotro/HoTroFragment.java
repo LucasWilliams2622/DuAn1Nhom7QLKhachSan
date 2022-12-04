@@ -21,8 +21,6 @@ import com.example.duan1nhom7qlkhachsan.R;
 
 public class HoTroFragment extends Fragment {
     Animation scaleUp,scaleDown;
-    private Context HoTroFragment;
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -59,27 +57,24 @@ public class HoTroFragment extends Fragment {
                 String ten=edttennpp.getText().toString();
                 String gioithieu=edtgioithiue.getText().toString();
                 if (ma.equals("")||ten.equals("")||gioithieu.equals("")){
-                    Toast.makeText(getContext(), "Ko dc de trong!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Quý khách vui lòng điển đủ thông tin để được hỗ trợ", Toast.LENGTH_SHORT).show();
                 }else{
                     HoTro nhaPhanPhoi=new HoTro(ma,ten,gioithieu);
                     HoTroDAO nhaPhanPhoiDAO=new HoTroDAO(getContext());
                     boolean check=nhaPhanPhoiDAO.themNPPtest(nhaPhanPhoi);
                     if (check==true){
-                        Toast.makeText(getContext(), "Them thanh cong", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Cảm ơn quý khách đã sử dụng dịch vụ", Toast.LENGTH_SHORT).show();
                         edtmanpp.setText("");
                         edttennpp.setText("");
                         edtgioithiue.setText("");
 
                     }else{
-                        Toast.makeText(getContext(), "Da ton tai nha phan phoi nay!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Chúng tôi sẽ nhanh chóng hỗ trợ dịch vụ này", Toast.LENGTH_SHORT).show();
                     }
                 }
 
             }
         });
-
-
-
         return view;
     }
 }
