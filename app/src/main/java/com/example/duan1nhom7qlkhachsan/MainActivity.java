@@ -181,10 +181,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
         SharedPreferences sharedPreferences = getSharedPreferences("AdminInfo", 0);
-        String role  = sharedPreferences.getString("role","");
-        Log.d(">>>>>>>>>>>","role "+role);
-        if(!role.equals("admin"))
-        {
+        String role = sharedPreferences.getString("role", "");
+        Log.d(">>>>>>>>>>>", "role " + role);
+        if (!role.equals("admin")) {
             Menu menu = navigationView.getMenu();
             menu.findItem(R.id.mDoanhThu).setVisible(false);
             menu.findItem(R.id.mTop10).setVisible(false);
@@ -193,13 +192,14 @@ public class MainActivity extends AppCompatActivity {
             menu.findItem(R.id.mHotro).setVisible(false);
         }
     }
+
     final private ActivityResultLauncher<Intent> mActivityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
                 @Override
                 public void onActivityResult(ActivityResult result) {
-                    if (result.getResultCode() == RESULT_OK){
+                    if (result.getResultCode() == RESULT_OK) {
                         Intent intent = result.getData();
-                        if (intent == null){
+                        if (intent == null) {
                             return;
                         }
                         // set anh len profile
@@ -215,12 +215,13 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
-    public void openGallery(){ // mo thu vien de chon anh
+    public void openGallery() { // mo thu vien de chon anh
         Intent i = new Intent();
         i.setType("image/*");
         i.setAction(Intent.ACTION_GET_CONTENT);
         mActivityResultLauncher.launch(Intent.createChooser(i, "Select Picture"));
     }
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
