@@ -1,77 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Guide.Load1Activity">
-
-    <ImageView
-        android:layout_width="600dp"
-        android:layout_height="250dp"
-        android:layout_marginTop="136dp"
-        android:src="@drawable/load"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".HuongDan.LoadActivity">
 
     <TextView
+        android:id="@+id/tvSkip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="404dp"
-        android:text="Đặt phòng"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="452dp"
-        android:gravity="center"
-        android:text="Tìm kiếm và lựa chọn phòng
-phù hợp với giá tiền   và nhu cầu của bản thân ! "
-        android:textColor="@color/black"
+        android:text="Skip"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-    <TextView
-        android:id="@+id/tvNext3"
-        android:layout_width="22dp"
-        android:layout_height="68dp"
-        android:layout_marginEnd="156dp"
-        android:layout_marginBottom="92dp"
-        android:backgroundTint="@color/white"
+        android:textColor="@android:color/black"
+        android:layout_alignParentEnd="true"/>
 
-        android:drawableEnd="@drawable/ic_next"
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/vp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottom"
+        android:layout_below="@id/tvSkip"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp" />
 
-        android:text=""
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+    <RelativeLayout
+        android:id="@+id/bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:layout_alignParentBottom="true">
 
-    <TextView
-        android:id="@+id/tvNext4"
-        android:layout_width="61dp"
-        android:layout_height="29dp"
-        android:layout_marginBottom="116dp"
-        android:backgroundTint="@color/white"
+        <me.relex.circleindicator.CircleIndicator
+            android:id="@+id/circleIndicator"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            app:ci_drawable="@drawable/bg_circle_red"
+            android:layout_height="30dp"/>
 
-        android:text="Next"
-        android:textAlignment="center"
-        android:textColor="@color/black"
+        <LinearLayout
+            android:id="@+id/next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-        android:textSize="25dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/tvNext3"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Next"
+                android:textSize="20sp"
+                android:textColor="@color/black"/>
+            
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_next"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

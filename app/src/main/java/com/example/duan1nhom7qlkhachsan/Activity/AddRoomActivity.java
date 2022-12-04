@@ -24,7 +24,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -73,7 +73,7 @@ public class AddRoomActivity extends AppCompatActivity implements AdapterAddRoom
         String priceRoom = edtPriceRoom.getText().toString();
         String startDay = edtStartDay.getText().toString();
         String endDay = edtEndDay.getText().toString();
-        if (codeRoom.equals("") || nameRoom.equals("") || typeRoom.equals("") || priceRoom.equals("")) {
+        if (codeRoom.equals("")|| nameRoom.equals("") || typeRoom.equals("") || priceRoom.equals("")) {
             Toast.makeText(this, "Hãy nhập đủ thông tin", Toast.LENGTH_SHORT).show();
         } else {
             // Create a new user with a first and last name

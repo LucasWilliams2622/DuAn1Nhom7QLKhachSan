@@ -4,20 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="10dp"
-    android:outlineAmbientShadowColor="@color/black"
     app:cardCornerRadius="10dp"
-    app:cardElevation="10dp"
+    app:cardElevation="3dp"
+    android:layout_margin="10dp"
     app:cardPreventCornerOverlap="true"
-    tools:context=".Activity.BookRoomActivity">
-
+    android:outlineAmbientShadowColor="@color/black"
+    >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="13dp"
 
         android:orientation="vertical">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -26,11 +24,11 @@
 
 
             <TextView
-                android:id="@+id/tvCodeRoom"
+                android:id="@+id/tvIdRoom"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Code room"
+                android:hint="Id room"
                 android:inputType="textPersonName"
                 android:paddingLeft="7dp"
                 android:paddingTop="10dp"
@@ -40,11 +38,11 @@
                 android:textSize="17dp" />
 
             <TextView
-                android:id="@+id/tvNameRoom"
+                android:id="@+id/tvIdService"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Name room"
+                android:hint="Id Service"
                 android:inputType="textPersonName"
                 android:paddingLeft="7dp"
                 android:paddingTop="10dp"
@@ -54,11 +52,11 @@
                 android:textSize="17dp" />
 
             <TextView
-                android:id="@+id/tvTypeRoom"
+                android:id="@+id/tvNameService"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Type room"
+                android:hint="Name Service"
                 android:inputType="textPersonName"
                 android:paddingLeft="7dp"
                 android:paddingTop="10dp"
@@ -68,11 +66,11 @@
                 android:textSize="17dp" />
 
             <TextView
-                android:id="@+id/tvPriceRoom"
+                android:id="@+id/tvTypeService"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Price room"
+                android:hint="Price service"
                 android:inputType="textPersonName"
                 android:paddingLeft="7dp"
                 android:paddingTop="10dp"
@@ -82,11 +80,11 @@
                 android:textSize="17dp" />
 
             <TextView
-                android:id="@+id/tvStartDay"
+                android:id="@+id/tvPriceService"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Start day"
+                android:hint="Type service "
                 android:inputType="textPersonName"
                 android:paddingLeft="7dp"
                 android:paddingTop="10dp"
@@ -95,19 +93,6 @@
                 android:textColorHint="@color/black"
                 android:textSize="17dp" />
 
-            <TextView
-                android:id="@+id/tvEndDay"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="End day"
-                android:inputType="textPersonName"
-                android:paddingLeft="7dp"
-                android:paddingTop="10dp"
-                android:text=""
-                android:textColor="@color/black"
-                android:textColorHint="@color/black"
-                android:textSize="17dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -115,25 +100,20 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/btnUpdate"
+                    android:id="@+id/btnBookService"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:backgroundTint="#CDDC39"
-
-                    android:text="Update Room "
-
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    android:text="Update Service " />
 
                 <Button
-                    android:id="@+id/btnDelete"
+                    android:id="@+id/btnDeleteService"
+                    android:textColor="@color/black"
                     android:layout_width="0dp"
-
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:backgroundTint="#F86F65"
-                    android:text="Delete Room"
-                    android:textColor="@color/black" />
+                    android:text="Delete Service" />
 
             </LinearLayout>
         </LinearLayout>

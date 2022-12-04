@@ -141,7 +141,7 @@ public class AddServiceActivity extends AppCompatActivity implements IAdapterAdd
         String nameService = edtNameService.getText().toString();
         String priceService = edtPriceService.getText().toString();
         String typeService = sharedPrefeTypeService.getString("typeService", "");
-        if (idRoom.equals("") || idService.equals("") || nameService.equals("") || priceService.equals("")) {
+        if ( idService.equals("") || nameService.equals("") || priceService.equals("")) {
             Toast.makeText(this, "Vui lòng nhập đủ thông tin", Toast.LENGTH_SHORT).show();
         } else {
             // Create a new user with a first and last name

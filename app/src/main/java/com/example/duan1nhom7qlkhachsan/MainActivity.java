@@ -2,7 +2,10 @@ package com.example.duan1nhom7qlkhachsan;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -12,6 +15,10 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
@@ -25,7 +32,9 @@ import androidx.fragment.app.FragmentManager;
 
 import com.example.duan1nhom7qlkhachsan.Activity.AddRoomActivity;
 import com.example.duan1nhom7qlkhachsan.Activity.AddServiceActivity;
+import com.example.duan1nhom7qlkhachsan.Activity.BookedRoomActivity;
 import com.example.duan1nhom7qlkhachsan.Activity.EditProfileActivity;
+import com.example.duan1nhom7qlkhachsan.Activity.LaudryActivity;
 import com.example.duan1nhom7qlkhachsan.Activity.LoginActivity;
 
 import com.example.duan1nhom7qlkhachsan.Activity.BookRoomActivity;
@@ -33,6 +42,7 @@ import com.example.duan1nhom7qlkhachsan.Activity.hotro.HotroAdminFragment;
 import com.example.duan1nhom7qlkhachsan.Activity.hotro.HoTroFragment;
 
 import com.example.duan1nhom7qlkhachsan.Fragment.DoanhThuFragment;
+import com.example.duan1nhom7qlkhachsan.Fragment.LaudryFragment;
 import com.example.duan1nhom7qlkhachsan.Fragment.TrangChuFragment;
 import com.example.duan1nhom7qlkhachsan.Fragment.BookedRoomFragment;
 import com.example.duan1nhom7qlkhachsan.Fragment.ServiceFragment;
@@ -46,7 +56,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.io.IOException;
+
 public class MainActivity extends AppCompatActivity {
+    public static final int MY_REQUEST_CODE = 10;
 
     DrawerLayout drawerLayout;
     FrameLayout frameLayout;
@@ -56,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
     GoogleSignInClient gsc;
     GoogleSignInAccount account;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    final private EditProfileActivity mNguoiDungFragment = new EditProfileActivity();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,8 +106,10 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 Fragment fragment = null;
                 switch (item.getItemId()) {
+
                     case R.id.mDichVu:
-                        fragment = new ServiceFragment();
+                        Intent intentService = new Intent(MainActivity.this, LaudryActivity.class);
+                        startActivity(intentService);
                         break;
                     case R.id.mDatPhong:
                         Intent itentBookRoom = new Intent(MainActivity.this, BookRoomActivity.class);
@@ -109,7 +125,8 @@ public class MainActivity extends AppCompatActivity {
                         fragment = new HoTroFragment();
                         break;
                     case R.id.mPhongDaDat:
-                        fragment = new BookedRoomFragment();
+                        Intent itentBookedRoom = new Intent(MainActivity.this, BookedRoomActivity.class);
+                        startActivity(itentBookedRoom);
                         break;
                     case R.id.mGioiThieu:
                         fragment = new TrangChuFragment();
@@ -164,10 +181,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
         SharedPreferences sharedPreferences = getSharedPreferences("AdminInfo", 0);
-        String role  = sharedPreferences.getString("role","");
-        Log.d(">>>>>>>>>>>","role "+role);
-        if(!role.equals("admin"))
-        {
+        String role = sharedPreferences.getString("role", "");
+        Log.d(">>>>>>>>>>>", "role " + role);
+        if (!role.equals("admin")) {
             Menu menu = navigationView.getMenu();
             menu.findItem(R.id.mDoanhThu).setVisible(false);
             menu.findItem(R.id.mTop10).setVisible(false);
@@ -175,6 +191,35 @@ public class MainActivity extends AppCompatActivity {
             menu.findItem(R.id.mAddService).setVisible(false);
             menu.findItem(R.id.mHotro).setVisible(false);
         }
+    }
+
+    final private ActivityResultLauncher<Intent> mActivityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == RESULT_OK) {
+                        Intent intent = result.getData();
+                        if (intent == null) {
+                            return;
+                        }
+                        // set anh len profile
+                        Uri uri = intent.getData();
+                        mNguoiDungFragment.setUri(uri);
+                        try {
+                            Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                            mNguoiDungFragment.setBitmapImageView(bitmap);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            });
+
+    public void openGallery() { // mo thu vien de chon anh
+        Intent i = new Intent();
+        i.setType("image/*");
+        i.setAction(Intent.ACTION_GET_CONTENT);
+        mActivityResultLauncher.launch(Intent.createChooser(i, "Select Picture"));
     }
 
     @Override

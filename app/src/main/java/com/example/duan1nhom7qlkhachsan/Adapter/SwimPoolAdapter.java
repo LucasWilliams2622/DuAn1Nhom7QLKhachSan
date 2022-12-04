@@ -6,23 +6,17 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
-
 import com.example.duan1nhom7qlkhachsan.Activity.IAdapterAddServiceClickEvent;
 import com.example.duan1nhom7qlkhachsan.Model.AppService;
 import com.example.duan1nhom7qlkhachsan.R;
 
 import java.util.ArrayList;
 
-public class AddServiceAdapter extends BaseAdapter {
+public class SwimPoolAdapter extends BaseAdapter {
     private ArrayList<AppService> list;
 
     private Button btnUpdateService, btnDeleteService;
     private TextView tvIdRoom, tvIdService, tvNameService, tvPriceService, tvTypeService;
-
-    public AddServiceAdapter(ArrayList<AppService> list) {
-        this.list = list;
-    }
-
     @Override
     public int getCount() {
         return list.size();
@@ -43,7 +37,7 @@ public class AddServiceAdapter extends BaseAdapter {
         View view = _view;
 
         if (view == null) {
-            view = View.inflate(_viewGroup.getContext(), R.layout.item_add_service, null);
+            view = View.inflate(_viewGroup.getContext(), R.layout.item_swim_pool, null);
 
             tvIdRoom = view.findViewById(R.id.tvIdRoom);
             tvIdService = view.findViewById(R.id.tvIdService);
@@ -53,17 +47,17 @@ public class AddServiceAdapter extends BaseAdapter {
             btnDeleteService = view.findViewById(R.id.btnDeleteService);
             btnUpdateService = view.findViewById(R.id.btnBookService);
 
-            AddServiceAdapter.ViewHolder holder = new AddServiceAdapter.ViewHolder(tvIdRoom, tvIdService, tvNameService, tvTypeService, tvPriceService, btnDeleteService, btnUpdateService);
+            ViewHolder holder = new ViewHolder(tvIdRoom, tvIdService, tvNameService, tvTypeService, tvPriceService, btnDeleteService, btnUpdateService);
 
             view.setTag(holder);
         }
         AppService service = (AppService) getItem(_i);
-        AddServiceAdapter.ViewHolder holder = (AddServiceAdapter.ViewHolder) view.getTag();
+        ViewHolder holder = (ViewHolder) view.getTag();
         holder.tvIdRoom.setText("Id Room: "+service.getCodeRoom());
         holder.tvIdService.setText("Id: "+service.getCodeService());
         holder.tvNameService.setText("Tên: "+service.getNameService());
         holder.tvTypeService.setText("Loại: "+service.getTypeService());
-        holder.tvPriceService.setText("Gía: "+service.getPriceService());
+        holder.tvPriceService.setText("Giá: "+service.getPriceService());
 
 
 
@@ -84,7 +78,6 @@ public class AddServiceAdapter extends BaseAdapter {
 
         return view;
     }
-
     private static class ViewHolder {
         final Button btnUpdateService, btnDeleteService;
         final TextView tvIdRoom, tvIdService, tvNameService, tvPriceService, tvTypeService;

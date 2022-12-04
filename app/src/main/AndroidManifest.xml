@@ -16,26 +16,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DuAn1Nhom7QLKhachSan"
         tools:targetApi="31">
-        <!--       <service-->
-        <!--           android:name=".AddRoomService"-->
-        <!--            android:enabled="true"-->
-        <!--            android:exported="true"></service> -->
-        <!--        <service-->
-        <!--            android:name=".AppAdminService"-->
-        <!--            android:enabled="true"-->
-        <!--            android:exported="true" />-->
-        <!--        <service-->
-        <!--            android:name=".BookedRoomService"-->
-        <!--            android:enabled="true"-->
-        <!--            android:exported="true" />-->
-        <!--        <service-->
-        <!--            android:name=".RoomService"-->
-        <!--            android:enabled="true"-->
-        <!--            android:exported="true" />-->
-        <!--        <service-->
-        <!--            android:name=".UserService"-->
-        <!--            android:enabled="true"-->
-        <!--            android:exported="true" />-->
 
         <activity
             android:name=".Activity.EditProfileActivity"
@@ -59,41 +39,7 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity
-            android:name=".Guide.Load2Activity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".Guide.Load4Activity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".Guide.Load3Activity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".Guide.Load1Activity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".Guide.LoadActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
+
         <activity
             android:name=".Activity.CustomTabActivity"
             android:exported="true">
@@ -109,16 +55,7 @@
 
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:scheme="@string/fb_login_protocol_scheme" />
-            </intent-filter>
         </activity>
-y>
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
@@ -141,6 +78,28 @@ y>
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
+
+        </activity>
+        <activity
+            android:name=".Activity.LaudryActivity"
+            android:exported="true">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Activity.ClockActivity"
+            android:exported="true">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Activity.SwinPoolActivity"
+            android:exported="true">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
         </activity>
         <activity
             android:name=".Activity.BeginActivity"
@@ -148,12 +107,16 @@ y>
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
+        </activity>
+
+        <activity
+            android:name=".HuongDan.LoadActivity"
+            android:exported="true">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
         </activity>
         <activity
             android:name=".Activity.RegisterActivity"
@@ -170,12 +133,19 @@ y>
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

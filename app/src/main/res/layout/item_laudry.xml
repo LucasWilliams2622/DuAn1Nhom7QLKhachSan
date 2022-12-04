@@ -17,7 +17,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/ivHotelRoom"
             android:layout_width="match_parent"
@@ -30,7 +29,7 @@
             android:paddingTop="10dp"
             android:paddingRight="0dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/hotel_room_1" />
+            android:src="@drawable/hotel_service_pic" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -39,59 +38,83 @@
             android:paddingTop="210dp">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingLeft="15dp"
-                    android:text="Mã phòng: "
+                    android:text="Id room:"
 
                     android:textColor="@color/black"
-
                     android:textSize="20dp" />
 
-                <TextView
-                    android:id="@+id/tvCodeBookRoom"
+                <EditText
+                    android:id="@+id/tvIdRoom"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
 
-
+                    android:hint="hãy nhập id phòng của bạn"
                     android:paddingTop="4dp"
                     android:paddingRight="15dp"
-                    android:text=" 002"
+                    android:text=""
                     android:textColor="@color/black"
-                    android:textSize="20dp"
+                    android:textSize="17dp"
                     android:textStyle="normal" />
             </LinearLayout>
 
 
             <TextView
-                android:id="@+id/tvNameBookRoom"
+                android:id="@+id/tvIdService"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 android:paddingLeft="15dp"
                 android:paddingTop="4dp"
                 android:paddingRight="15dp"
-                android:text=" R002"
+                android:text=" Id service"
                 android:textColor="@color/black"
                 android:textSize="20dp"
                 android:textStyle="normal" />
 
             <TextView
-                android:id="@+id/tvTypeBookRoom"
+                android:id="@+id/tvNameService"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="15dp"
                 android:paddingTop="4dp"
                 android:paddingRight="15dp"
-                android:text=" King Room"
+                android:text=" name service"
                 android:textColor="@color/black"
                 android:textSize="20dp"
                 android:textStyle="normal" />
 
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="15dp"
+                    android:text="Loại:"
+
+                    android:textColor="@color/black"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/tvTypeService"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/design_edit_no_stoke"
+
+                    android:paddingTop="10dp"
+                    android:paddingRight="15dp"
+                    android:text=" type service"
+                    android:textColor="@color/black"
+                    android:textSize="20dp" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -107,18 +130,17 @@
                     android:textSize="20dp" />
 
                 <TextView
-                    android:id="@+id/tvPriceBookRoom"
+                    android:id="@+id/tvPriceService"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="15dp"
-                    android:paddingTop="4dp"
+                    android:background="@drawable/design_edit_no_stoke"
 
+                    android:paddingTop="10dp"
                     android:paddingRight="15dp"
-                    android:text=" 99"
+                    android:text=" price service"
                     android:textColor="@color/black"
-                    android:textSize="20dp"
-                    android:textStyle="normal" />
-
+                    android:textColorHint="#323030"
+                    android:textSize="20dp" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -127,44 +149,19 @@
                     android:textSize="20dp" />
             </LinearLayout>
 
-            <EditText
-                android:id="@+id/edtCheckInDay"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/design_edit_no_stoke"
-                android:hint="Chọn ngày check in:"
-                android:paddingLeft="15dp"
-                android:paddingTop="10dp"
-                android:textColorHint="@color/black"
-                android:textSize="17dp" />
-
-            <EditText
-                android:id="@+id/edtCheckOutDay"
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/design_edit_no_stoke"
-                android:hint="Chọn Ngày check out:"
-                android:paddingLeft="15dp"
-                android:paddingTop="10dp"
-
-                android:textColorHint="#323030"
-                android:textSize="17dp" />
-
 
             <Button
-                android:id="@+id/btnBookRoom"
+                android:id="@+id/btnBookService"
                 android:layout_width="337dp"
                 android:layout_height="42dp"
                 android:layout_marginLeft="10dp"
-
                 android:layout_marginTop="20dp"
                 android:background="@drawable/design_green_btn"
                 android:backgroundTint="#DAF1DB"
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:paddingLeft="15dp"
-                android:text="Đặt phòng"
+                android:text="Đặt dịch vụ"
                 android:textColor="@color/green"
                 app:backgroundTint="@null"
                 app:layout_constraintBottom_toBottomOf="parent"

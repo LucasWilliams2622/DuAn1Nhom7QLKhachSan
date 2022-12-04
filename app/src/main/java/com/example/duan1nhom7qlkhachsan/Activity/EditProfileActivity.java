@@ -9,10 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -40,7 +37,6 @@ public class EditProfileActivity extends AppCompatActivity implements IAdapterUs
     private Button btnUpdateAccount, btnDeleteAccount, btnBackToMainActivity;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private AppUser appUser = null;
-    Animation scaleUp,scaleDown;
     SharedPreferences sharedPreferForUser;
 
     //    ActivityUpdateDataBinding
@@ -56,47 +52,6 @@ public class EditProfileActivity extends AppCompatActivity implements IAdapterUs
         btnDeleteAccount = findViewById(R.id.btnDeleteAccount);
         btnBackToMainActivity = findViewById(R.id.btnBackToMainActivity);
         sharedPreferForUser = getSharedPreferences("UserInfo", 0);
-        scaleUp = AnimationUtils.loadAnimation(this,R.anim.scale_up);
-        scaleDown = AnimationUtils.loadAnimation(this,R.anim.scale_down);
-        btnUpdateAccount.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction()==MotionEvent.ACTION_UP){
-                    btnUpdateAccount.startAnimation(scaleDown);
-
-                }else if(event.getAction()==MotionEvent.ACTION_DOWN){
-                    btnUpdateAccount.startAnimation(scaleUp);
-                }
-                return false;
-            }
-        });
-        btnDeleteAccount.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction()==MotionEvent.ACTION_UP){
-                    btnDeleteAccount.startAnimation(scaleDown);
-
-                }else if(event.getAction()==MotionEvent.ACTION_DOWN){
-                    btnUpdateAccount.startAnimation(scaleUp);
-                }
-                return false;
-            }
-        });
-        btnBackToMainActivity.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction()==MotionEvent.ACTION_UP){
-                    btnBackToMainActivity.startAnimation(scaleDown);
-
-                }else if(event.getAction()==MotionEvent.ACTION_DOWN){
-                    btnBackToMainActivity.startAnimation(scaleUp);
-                }
-                return false;
-            }
-        });
-
-
-
 
         btnDeleteAccount.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,7 +82,6 @@ public class EditProfileActivity extends AppCompatActivity implements IAdapterUs
         getLoginUserData();
     }
 
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -143,7 +97,6 @@ public class EditProfileActivity extends AppCompatActivity implements IAdapterUs
         edtEmailUser.setText(emailUser);
         edtPhoneNumberUser.setText(phoneNumUser);
     }
-
 
     public void onUpdateProfileUser() {
         String fullnameUser = edtFullNameUser.getText().toString();

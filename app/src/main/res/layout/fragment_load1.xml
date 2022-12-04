@@ -4,15 +4,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:id="@+id/load2Activity"
     android:layout_height="match_parent"
-    tools:context=".Guide.Load1Activity">
+    >
 
     <ImageView
         android:layout_width="600dp"
         android:layout_height="250dp"
         android:layout_marginTop="136dp"
-        android:src="@drawable/hotel"
+        android:src="@drawable/load"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="404dp"
-        android:text="SaViLa Hotel"
+        android:text="Đặt phòng"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -31,48 +30,17 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="452dp"
         android:gravity="center"
-        android:text="Bạn muốn tìm phòng tốt và chất lượng.Đừng lo đã có SaViLa ."
+        android:text="Tìm kiếm và lựa chọn phòng
+phù hợp với giá tiền   và nhu cầu của bản thân ! "
         android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tvNext1"
-        android:layout_width="22dp"
-        android:layout_height="68dp"
-        android:layout_marginEnd="156dp"
-        android:layout_marginBottom="92dp"
-        android:backgroundTint="@color/white"
-
-        android:drawableEnd="@drawable/ic_next"
-
-        android:text=""
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <TextView
-        android:id="@+id/tvNext2"
-        android:layout_width="61dp"
-        android:layout_height="29dp"
-        android:layout_marginBottom="116dp"
-        android:backgroundTint="@color/white"
-
-        android:text="Next"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-
-        android:textSize="25dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/tvNext1"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

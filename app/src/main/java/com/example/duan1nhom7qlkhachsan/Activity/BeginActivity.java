@@ -10,7 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 
-import com.example.duan1nhom7qlkhachsan.Guide.Load2Activity;
+
+import com.example.duan1nhom7qlkhachsan.HuongDan.LoadActivity;
 import com.example.duan1nhom7qlkhachsan.R;
 import com.example.duan1nhom7qlkhachsan.SharedPreferances.DataLocalManager;
 
@@ -30,7 +31,7 @@ public class BeginActivity extends AppCompatActivity {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    Intent i = new Intent(BeginActivity.this, Load2Activity.class);
+                    Intent i = new Intent(BeginActivity.this, LoadActivity.class);
                     startActivity(i);
                 }
             },1500);

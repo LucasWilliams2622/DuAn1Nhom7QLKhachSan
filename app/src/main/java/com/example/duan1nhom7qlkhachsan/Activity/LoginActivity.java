@@ -1,17 +1,12 @@
 package com.example.duan1nhom7qlkhachsan.Activity;
 
-import static android.app.PendingIntent.getActivity;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -76,10 +71,6 @@ public class LoginActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     SharedPreferences sharedPreferForUser;
     ImageView ivShowPass;
-
-    Animation scaleUp,scaleDown;
-    Button btnGoogle,login_button;
-
     CheckBox chkSavePassword;
 
     TextView tvNameUserLogin;
@@ -100,10 +91,6 @@ public class LoginActivity extends AppCompatActivity {
         Button btn_login = findViewById(R.id.btn_login);
         Button btn_register = findViewById(R.id.btnGoRegister);
         ivShowPass = findViewById(R.id.ivShowPass);
-
-        scaleUp = AnimationUtils.loadAnimation(this,R.anim.scale_up);
-        scaleDown = AnimationUtils.loadAnimation(this,R.anim.scale_down);
-
         chkSavePassword = findViewById(R.id.chkSavePassword);
         chkSavePassword.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,11 +100,8 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(LoginActivity.this, "Đã lưu mậy khẩu", Toast.LENGTH_SHORT).show();
             }
         });
-
         sharedPreferences = getSharedPreferences("AdminInfo", 0);
         sharedPreferForUser = getSharedPreferences("UserInfo", 0);
-
-
         //Show Password
         edt_username.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
         //Hide Password
@@ -171,19 +155,6 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
-        btn_login.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction()==MotionEvent.ACTION_UP){
-                    btn_login.startAnimation(scaleDown);
-
-                }else if(event.getAction()==MotionEvent.ACTION_DOWN){
-                    btn_login.startAnimation(scaleUp);
-                }
-                return false;
-            }
-        });
-
 
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -191,18 +162,6 @@ public class LoginActivity extends AppCompatActivity {
                 Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(intent);
 
-            }
-        });
-        btn_register.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction()==MotionEvent.ACTION_UP){
-                    btn_register.startAnimation(scaleDown);
-
-                }else if(event.getAction()==MotionEvent.ACTION_DOWN){
-                    btn_register.startAnimation(scaleUp);
-                }
-                return false;
             }
         });
 
