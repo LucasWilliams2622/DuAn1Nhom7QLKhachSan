@@ -53,7 +53,7 @@ public class BookedRoomActivity extends AppCompatActivity {
         getDataBookedRoom();
     }
 
-    private  void getDataBookedRoom()
+    public void getDataBookedRoom()
     {
         db.collection("bookedRoom")
                 .get()

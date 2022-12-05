@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 
 import com.example.duan1nhom7qlkhachsan.Activity.AddRoomActivity;
 import com.example.duan1nhom7qlkhachsan.Activity.BookedRoomActivity;
+import com.example.duan1nhom7qlkhachsan.Fragment.BookedRoomFragment;
 import com.example.duan1nhom7qlkhachsan.Model.AppBookedRoom;
 import com.example.duan1nhom7qlkhachsan.Model.AppRoom;
 import com.example.duan1nhom7qlkhachsan.R;
@@ -31,11 +32,14 @@ import java.util.Map;
 public class BookedRoomAdapter extends BaseAdapter {
     private ArrayList<AppBookedRoom> list  ;
     private Button btnHuyPhong;
+    BookedRoomFragment bookedRoomFragment;
+    BookedRoomActivity bookedRoomActivity;
     private TextView tvTenPhong, tvMaPhong, tvLoaiPhong, tvGiaPhong,tvEndDay,tvStartDay;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    public BookedRoomAdapter(ArrayList<AppBookedRoom> list) {
+    public BookedRoomAdapter(ArrayList<AppBookedRoom> list, BookedRoomFragment bookedRoomFragment) {
         this.list = list;
+        this.bookedRoomFragment= bookedRoomFragment;
     }
 
 
@@ -101,7 +105,7 @@ public class BookedRoomAdapter extends BaseAdapter {
                 new AlertDialog.Builder(btnHuyPhong.getContext())
                         .setTitle("Xóa")
                         .setMessage("Bạn có chắc muốn hủy phòng")
-                        .setNegativeButton("Khong", null)
+                        .setNegativeButton("Không", null)
                         .setPositiveButton("Có", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -111,7 +115,7 @@ public class BookedRoomAdapter extends BaseAdapter {
                                             @Override
                                             public void onSuccess(Void aVoid) {
                                                 Toast.makeText(btnHuyPhong.getContext(), "Hủy phòng thành công", Toast.LENGTH_SHORT).show();
-
+                                                bookedRoomFragment.onAdapter();
                                             }
                                         })
                                         .addOnFailureListener(new OnFailureListener() {

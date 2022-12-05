@@ -14,14 +14,21 @@ import com.example.duan1nhom7qlkhachsan.Adapter.BookedRoomAdapter;
 import com.example.duan1nhom7qlkhachsan.Model.AppBookedRoom;
 import com.example.duan1nhom7qlkhachsan.Model.AppRoom;
 import com.example.duan1nhom7qlkhachsan.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 
 public class BookedRoomFragment extends Fragment {
     private ListView lvFrgBookedRoom;
-
+    BookedRoomAdapter bookedRoomAdapter;
     private ArrayList<AppBookedRoom>  room ;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public BookedRoomFragment() {
         // Required empty public constructor
@@ -52,7 +59,38 @@ public class BookedRoomFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         lvFrgBookedRoom = view.findViewById(R.id.lvFrgBookedRoom);
-        BookedRoomAdapter bookedRoomAdapter = new BookedRoomAdapter(room);
-        lvFrgBookedRoom.setAdapter(bookedRoomAdapter);
+        onAdapter();
+    }
+    public void onAdapter()
+    {
+        db.collection("bookedRoom")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            ArrayList<AppBookedRoom> list= new ArrayList<>();
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Map<String, Object> map= document.getData();
+                                String code=map.get("codeRoom").toString();
+                                String name=map.get("nameRoom").toString();
+                                String type=map.get("typeRoom").toString();
+                                String price=map.get("priceRoom").toString();
+                                String startDay=map.get("startDay").toString();
+                                String endDay=map.get("endDay").toString();
+
+                                AppBookedRoom room = new AppBookedRoom(-1,code,name,type,price,startDay,endDay);
+                                room.setRoomId(document.getId());
+                                list.add(room);
+
+                            }
+                            room = list;
+                            bookedRoomAdapter = new BookedRoomAdapter(room,BookedRoomFragment.this);
+                            lvFrgBookedRoom.setAdapter(bookedRoomAdapter);
+
+                        }
+                    }
+                });
+
     }
 }

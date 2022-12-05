@@ -98,10 +98,10 @@ public class BookRoomAdapter extends BaseAdapter {
         AppRoom room = (AppRoom) getItem(_i);
         ViewHolder holder = (BookRoomAdapter.ViewHolder) view.getTag();
 
-        holder.tvCodeBookRoom.setText(room.getCodeRoom());
+        holder.tvCodeBookRoom.setText("Mã phòng: " + room.getCodeRoom());
         holder.tvNameBookRoom.setText("Tên phòng: " + room.getNameRoom());
         holder.tvTypeBookRoom.setText("Loại phòng: " + room.getTypeRoom());
-        holder.tvPriceBookRoom.setText(room.getPriceRoom());
+        holder.tvPriceBookRoom.setText("Giá phòng: " + room.getPriceRoom());
         holder.edtCheckOutDay.setText(room.getEndDay());
         holder.edtCheckInDay.setText(room.getStartDay());
 
