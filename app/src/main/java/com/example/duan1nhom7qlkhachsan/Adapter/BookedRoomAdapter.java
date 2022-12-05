@@ -117,7 +117,7 @@ public class BookedRoomAdapter extends BaseAdapter {
                                         .addOnFailureListener(new OnFailureListener() {
                                             @Override
                                             public void onFailure(@NonNull Exception e) {
-                                                Toast.makeText(btnHuyPhong.getContext(), "Hủy phong không thành công", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(btnHuyPhong.getContext(), "Hủy phòng không thành công", Toast.LENGTH_SHORT).show();
                                             }
                                         });
 
