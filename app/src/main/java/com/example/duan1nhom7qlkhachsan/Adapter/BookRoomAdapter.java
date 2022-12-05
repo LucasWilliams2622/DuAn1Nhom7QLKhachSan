@@ -98,10 +98,10 @@ public class BookRoomAdapter extends BaseAdapter {
         AppRoom room = (AppRoom) getItem(_i);
         ViewHolder holder = (BookRoomAdapter.ViewHolder) view.getTag();
 
-        holder.tvCodeBookRoom.setText("Mã phòng: " + room.getCodeRoom());
-        holder.tvNameBookRoom.setText("Tên phòng: " + room.getNameRoom());
-        holder.tvTypeBookRoom.setText("Loại phòng: " + room.getTypeRoom());
-        holder.tvPriceBookRoom.setText("Giá phòng: " + room.getPriceRoom());
+        holder.tvCodeBookRoom.setText(room.getCodeRoom());
+        holder.tvNameBookRoom.setText(room.getNameRoom());
+        holder.tvTypeBookRoom.setText(room.getTypeRoom());
+        holder.tvPriceBookRoom.setText(room.getPriceRoom());
         holder.edtCheckOutDay.setText(room.getEndDay());
         holder.edtCheckInDay.setText(room.getStartDay());
 
@@ -125,7 +125,7 @@ public class BookRoomAdapter extends BaseAdapter {
                                 } else {
                                     thang = String.valueOf(month + 1);
                                 }
-                                holder.edtCheckInDay.setText("Check In Day: " + year + "/" + thang + "/" + ngay);//month in DatePickerDialog 0 -->11
+                                holder.edtCheckInDay.setText(year + "/" + thang + "/" + ngay);//month in DatePickerDialog 0 -->11
                                 Log.d(">>>>>>>>>>>>>>>>>>", "date:" + year + "/" + thang + "/" + ngay);
                             }
                         }
@@ -157,7 +157,7 @@ public class BookRoomAdapter extends BaseAdapter {
                                 } else {
                                     thang = String.valueOf(month + 1);
                                 }
-                                holder.edtCheckOutDay.setText("Check Out Day: " + year + "/" + thang + "/" + ngay);//month in DatePickerDialog 0 -->11
+                                holder.edtCheckOutDay.setText(year + "/" + thang + "/" + ngay);//month in DatePickerDialog 0 -->11
                                 Log.d(">>>>>>>>>>>>>>>>>>", "date:" + year + "/" + thang + "/" + ngay);
 
                             }
