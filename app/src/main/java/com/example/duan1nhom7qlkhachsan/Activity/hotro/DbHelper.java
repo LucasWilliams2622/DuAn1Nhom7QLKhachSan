@@ -14,7 +14,7 @@ public class DbHelper extends SQLiteOpenHelper {
         String sql="Create table NHAPHANPHOI (MaNPP text primary key, TenNPP text, GioiThieu text)";
         sqLiteDatabase.execSQL(sql);
 
-        String insnpp="insert into NHAPHANPHOI values('Ho và tên:','ID User:','Nội Dung')";
+        String insnpp="insert into NHAPHANPHOI values('Ho và tên: ','Số điện thoại: ','Nội Dung: ')";
         sqLiteDatabase.execSQL(insnpp);
 
     }

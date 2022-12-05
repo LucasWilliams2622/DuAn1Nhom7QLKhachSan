@@ -8,21 +8,35 @@
     android:layout_margin="10dp"
     tools:context=".Activity.BookRoomActivity" >
 
-    <Button
-        android:id="@+id/btnBackToMainActivity"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
-        android:background="@drawable/design_green_btn"
-        android:text="Back"
-        android:backgroundTint="#DFE1DF"
-        android:textColor="#090909"
-        app:backgroundTint="@null"
+        android:layout_height="60dp">
 
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.077"
-        app:layout_constraintStart_toStartOf="parent" />
+        <Button
+            android:id="@+id/btnBackToMainActivity"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/button"
+            android:backgroundTint="@color/white"
+            android:text="Back"
+            android:textColor="@color/black"
+            android:textSize="17dp"
+            android:drawableLeft="@drawable/icreturn"
+            app:backgroundTint="@null" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingRight="70dp"
+            android:text="Phòng đã đặt"
+            android:textColor="#FFC107"
+            android:textSize="30dp"
+            android:textStyle="bold|italic" />
+    </LinearLayout>
+
+
     <FrameLayout
         android:id="@+id/flBookedRoom"
         android:layout_width="match_parent"

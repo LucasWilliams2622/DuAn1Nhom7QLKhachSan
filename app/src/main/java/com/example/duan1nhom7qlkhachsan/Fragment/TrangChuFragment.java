@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.duan1nhom7qlkhachsan.Activity.BookRoomActivity;
 import com.example.duan1nhom7qlkhachsan.Activity.EditProfileActivity;
+import com.example.duan1nhom7qlkhachsan.Activity.LaudryActivity;
 import com.example.duan1nhom7qlkhachsan.Activity.hotro.HoTroFragment;
 import com.example.duan1nhom7qlkhachsan.R;
 
@@ -41,7 +42,7 @@ ImageView ivSuport,ivService,ivBookRoom,ivProfile;
         ivService.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getContext(), ServiceFragment.class);
+                Intent i = new Intent(getContext(), LaudryActivity.class);
                 startActivity(i);
             }
         });

@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
@@ -60,7 +61,8 @@ import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
     public static final int MY_REQUEST_CODE = 10;
-
+    SharedPreferences sharedPreferences, sharedPreferForUser;
+    String role;
     DrawerLayout drawerLayout;
     FrameLayout frameLayout;
     Toolbar toolBar;
@@ -82,11 +84,35 @@ public class MainActivity extends AppCompatActivity {
         navigationView = findViewById(R.id.navigationView);
         headerLayout = navigationView.getHeaderView(0);
 
-//        TextView tvNameUserLogin = headerLayout.findViewById(R.id.tvNameUserLogin);
-//        TextView tvEmailUserLogin = headerLayout.findViewById(R.id.tvEmailUserLogin);
+        TextView tvNameUserLogin = headerLayout.findViewById(R.id.tvNameUserLogin);
+        TextView tvEmailUserLogin = headerLayout.findViewById(R.id.tvEmailUserLogin);
 
-//        tvNameUserLogin.setText(account.getDisplayName());
-//        tvEmailUserLogin.setText(account.getEmail());
+        //SahredPreferance for admin
+        sharedPreferences = getSharedPreferences("AdminInfo", 0);
+        String nameAdmin = sharedPreferences.getString("nameAdmin", "");
+        String emailAdmin = sharedPreferences.getString("emailAdmin", "");
+
+        //SahredPreferance for user
+        sharedPreferForUser = getSharedPreferences("UserInfo", 0);
+        String nameUser = sharedPreferForUser.getString("nameUser", "");
+        String emailUser = sharedPreferForUser.getString("emailUser", "");
+
+        Log.d(">>>>>>>>>>>>>>>>", "nameAdimin" + nameAdmin);
+        Log.d(">>>>>>>>>>>>>>>>", "registerEmailAdmin" + emailAdmin);
+
+        Log.d(">>>>>>>>>>>>>>>>", "emailUser" + emailUser);
+        Log.d(">>>>>>>>>>>>>>>>", "emailUser" + emailUser);
+
+         role = sharedPreferences.getString("role", "");
+        if (role.equals("admin")) {
+            tvNameUserLogin.setText(nameAdmin);
+            tvEmailUserLogin.setText(emailAdmin);
+
+        } else {
+            tvNameUserLogin.setText(nameUser);
+            tvEmailUserLogin.setText(emailUser);
+        }
+
 
         setSupportActionBar(toolBar);
         ActionBar actionBar = getSupportActionBar();
@@ -180,11 +206,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        SharedPreferences sharedPreferences = getSharedPreferences("AdminInfo", 0);
-        String role  = sharedPreferences.getString("role","");
-        Log.d(">>>>>>>>>>>","role "+role);
-        if(!role.equals("admin"))
-        {
+        sharedPreferences = getSharedPreferences("AdminInfo", 0);
+         role = sharedPreferences.getString("role", "");
+        Log.d(">>>>>>>>>>>", "role " + role);
+        if (!role.equals("admin")) {
             Menu menu = navigationView.getMenu();
             menu.findItem(R.id.mDoanhThu).setVisible(false);
             menu.findItem(R.id.mTop10).setVisible(false);
@@ -193,21 +218,22 @@ public class MainActivity extends AppCompatActivity {
             menu.findItem(R.id.mHotro).setVisible(false);
         }
     }
+
     final private ActivityResultLauncher<Intent> mActivityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
                 @Override
                 public void onActivityResult(ActivityResult result) {
-                    if (result.getResultCode() == RESULT_OK){
+                    if (result.getResultCode() == RESULT_OK) {
                         Intent intent = result.getData();
-                        if (intent == null){
+                        if (intent == null) {
                             return;
                         }
                         // set anh len profile
                         Uri uri = intent.getData();
-                      //  mNguoiDungFragment.setUri(uri);
+                        //  mNguoiDungFragment.setUri(uri);
                         try {
                             Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-                          //  mNguoiDungFragment.setBitmapImageView(bitmap);
+                            //  mNguoiDungFragment.setBitmapImageView(bitmap);
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -215,12 +241,13 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
-    public void openGallery(){ // mo thu vien de chon anh
+    public void openGallery() { // mo thu vien de chon anh
         Intent i = new Intent();
         i.setType("image/*");
         i.setAction(Intent.ACTION_GET_CONTENT);
         mActivityResultLauncher.launch(Intent.createChooser(i, "Select Picture"));
     }
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == android.R.id.home) {

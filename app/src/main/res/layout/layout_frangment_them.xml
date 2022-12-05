@@ -4,7 +4,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
 xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
-android:background="@drawable/background_advise"
+android:background="@drawable/white_radius"
 android:padding="16dp"
 android:orientation="horizontal">
 <LinearLayout
@@ -46,7 +46,7 @@ android:orientation="horizontal">
 <!--            android:orientation="vertical">-->
 
             <EditText
-                android:id="@+id/edtmanpp"
+                android:id="@+id/edtNameUserSp"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"
@@ -63,7 +63,7 @@ android:orientation="horizontal">
                 android:hint="Họ và tên" />
 
             <EditText
-                android:id="@+id/edttennpp"
+                android:id="@+id/edtSDTUserSp"
 
 
                 android:layout_width="match_parent"
@@ -78,11 +78,11 @@ android:orientation="horizontal">
 
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:hint="ID User" />
+                android:hint="Số điện thoại" />
 
 
             <EditText
-                android:id="@+id/edtgioithieu"
+                android:id="@+id/edtContentSp"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:textColorHint="@color/black"
@@ -97,14 +97,16 @@ android:orientation="horizontal">
                 android:hint="Nội dung: " />
 
             <Button
-                android:id="@+id/btnthem"
+                android:id="@+id/btnSendReport"
+                android:drawableLeft="@drawable/messenger_bubble_large_white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:text="Gửi hỗ trợ"
                 android:textStyle="bold|italic"
-                android:background="@drawable/button"
+                android:background="@drawable/design_green_btn"
                 app:backgroundTint="@null"
+                android:backgroundTint="#40D646"
                 android:layout_marginTop="20dp"
                 android:textAllCaps="false" />
 

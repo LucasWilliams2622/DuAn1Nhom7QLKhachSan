@@ -29,49 +29,44 @@ public class BookedRoomActivity extends AppCompatActivity {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private Button btnBackToMainActivity;
     private AppBookedRoom appRoom = null;
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booked_room);
-        btnBackToMainActivity= findViewById(R.id.btnBackToMainActivity);
+        btnBackToMainActivity = findViewById(R.id.btnBackToMainActivity);
         btnBackToMainActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(BookedRoomActivity.this, MainActivity.class);
-                startActivity(i);
+                onBackPressed();
             }
         });
         getDataBookedRoom();
-
     }
+
     @Override
     protected void onResume() {
         super.onResume();
         getDataBookedRoom();
     }
 
-    public void getDataBookedRoom()
-    {
+    private void getDataBookedRoom() {
         db.collection("bookedRoom")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
-                            ArrayList<AppBookedRoom> list= new ArrayList<>();
+                            ArrayList<AppBookedRoom> list = new ArrayList<>();
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                Map<String, Object> map= document.getData();
-                                String code=map.get("codeRoom").toString();
-                                String name=map.get("nameRoom").toString();
-                                String type=map.get("typeRoom").toString();
-                                String price=map.get("priceRoom").toString();
-                                String startDay=map.get("startDay").toString();
-                                String endDay=map.get("endDay").toString();
+                                Map<String, Object> map = document.getData();
+                                String code = map.get("codeRoom").toString();
+                                String name = map.get("nameRoom").toString();
+                                String type = map.get("typeRoom").toString();
+                                String price = map.get("priceRoom").toString();
+                                String startDay = map.get("startDay").toString();
+                                String endDay = map.get("endDay").toString();
 
-                                AppBookedRoom room = new AppBookedRoom(-1,code,name,type,price,startDay,endDay);
+                                AppBookedRoom room = new AppBookedRoom(-1, code, name, type, price, startDay, endDay);
                                 room.setRoomId(document.getId());
                                 list.add(room);
 

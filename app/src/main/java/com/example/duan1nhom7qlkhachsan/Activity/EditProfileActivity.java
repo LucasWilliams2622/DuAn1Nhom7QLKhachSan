@@ -37,7 +37,7 @@ public class EditProfileActivity extends AppCompatActivity implements IAdapterUs
     private Button btnUpdateAccount, btnDeleteAccount, btnBackToMainActivity;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private AppUser appUser = null;
-    SharedPreferences sharedPreferForUser;
+    SharedPreferences sharedPreferForUser, sharedPreferences;
 
     //    ActivityUpdateDataBinding
 //    DatabaseReferance
@@ -52,6 +52,7 @@ public class EditProfileActivity extends AppCompatActivity implements IAdapterUs
         btnDeleteAccount = findViewById(R.id.btnDeleteAccount);
         btnBackToMainActivity = findViewById(R.id.btnBackToMainActivity);
         sharedPreferForUser = getSharedPreferences("UserInfo", 0);
+        sharedPreferences = getSharedPreferences("AdminInfo", 0);
 
         btnDeleteAccount.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,19 +90,35 @@ public class EditProfileActivity extends AppCompatActivity implements IAdapterUs
     }
 
     public void getLoginUserData() {
+        //ShảedPreferance for user
         String emailUser = sharedPreferForUser.getString("emailUser", "");
         String nameUser = sharedPreferForUser.getString("nameUser", "");
         String phoneNumUser = sharedPreferForUser.getString("phoneNumUser", "");
 
-        edtFullNameUser.setText(nameUser);
-        edtEmailUser.setText(emailUser);
-        edtPhoneNumberUser.setText(phoneNumUser);
+        //SharedPreferance for Admin
+        String nameAdmin = sharedPreferences.getString("nameAdmin", "");
+        String emailAdmin = sharedPreferences.getString("emailAdmin", "");
+
+
+        String role = sharedPreferences.getString("role", "");
+        if (role.equals("admin")) {
+            edtFullNameUser.setText(nameAdmin);
+            edtEmailUser.setText(emailAdmin);
+            edtPhoneNumberUser.setText("");
+
+        } else {
+            edtFullNameUser.setText(nameUser);
+            edtEmailUser.setText(emailUser);
+            edtPhoneNumberUser.setText(phoneNumUser);
+        }
+
+
     }
 
     public void onUpdateProfileUser() {
         String fullnameUser = edtFullNameUser.getText().toString();
         String emailUser = edtEmailUser.getText().toString();
-        String phoneNumUser =edtPhoneNumberUser.getText().toString();
+        String phoneNumUser = edtPhoneNumberUser.getText().toString();
 
         Map<String, Object> user = new HashMap<>();
         user.put("nmaeUser", fullnameUser);

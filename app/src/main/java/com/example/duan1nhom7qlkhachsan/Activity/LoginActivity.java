@@ -97,7 +97,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
 
 
-                Toast.makeText(LoginActivity.this, "Đã lưu mậy khẩu", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "Đã lưu mật khẩu", Toast.LENGTH_SHORT).show();
             }
         });
         sharedPreferences = getSharedPreferences("AdminInfo", 0);
@@ -123,24 +123,33 @@ public class LoginActivity extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                     if (task.isSuccessful()) {
                                         List<String> list = new ArrayList<>();
+
+
                                         for (QueryDocumentSnapshot document : task.getResult()) {
                                             list.add(document.getId());
                                             //    private String idAdmin,emailAdmin,nameAdmin,passwordAdmin,role;
                                             SharedPreferences.Editor editorAdmin = sharedPreferences.edit();
                                             editorAdmin.putString("role", "admin");
-                                            editorAdmin.apply();
+
                                             Map<String, Object> map = document.getData();
                                             String passwordAdmin = map.get("passwordAdmin").toString();
                                             String emailAdmin = map.get("emailAdmin").toString();
                                             String nameAdmin = map.get("nameAdmin").toString();
-
+                                            editorAdmin.putString("nameAdmin", nameAdmin);
+                                            editorAdmin.putString("emailAdmin", emailAdmin);
+                                            Log.d(">>>>>>>>>>","nameAdmin in Login"+nameAdmin);
+                                            Log.d(">>>>>>>>>>","emailAdmin in Login"+emailAdmin);
+                                            editorAdmin.apply();
+                                            //Login by account Admin
                                             String username = edt_username.getText().toString();
                                             String password = edt_password.getText().toString();
 
                                             String registerEmailAdmin = sharedPreferences.getString("emailAdmin", "");
                                             String registerPasswordAdmin = sharedPreferences.getString("passwordAdmin", "");
+
                                             if ((username.equals(registerEmailAdmin) && password.equals(registerPasswordAdmin)) || (username.equals(emailAdmin) && password.equals(passwordAdmin))) {
                                                 Toast.makeText(LoginActivity.this, "Wellcome " + nameAdmin, Toast.LENGTH_SHORT).show();
+
                                                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
                                             } else {
                                                 Toast.makeText(LoginActivity.this, "Login failed !", Toast.LENGTH_SHORT).show();
@@ -164,25 +173,6 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
-
-//        ivShowPass.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                check++;
-//                if (check % 2 == 0) {
-//                    edt_password.setInputType(1);
-//                    Log.d(">>>>>>>>>", "check " + check);
-//                } else {
-//                    //edt_password.setInputType();
-//
-//                    //  edt_password.setInputType(Integer.parseInt("textPassword"));
-//                }
-//            }
-//        });
-
-
-
-
 
         /*
          *Start: Đăng nhâp bằng Google

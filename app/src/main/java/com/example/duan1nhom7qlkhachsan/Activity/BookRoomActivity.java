@@ -41,8 +41,7 @@ public class BookRoomActivity extends AppCompatActivity {
         btnBackToMainActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(BookRoomActivity.this, MainActivity.class);
-                startActivity(i);
+                onBackPressed();
             }
         });
         getDataRoom();

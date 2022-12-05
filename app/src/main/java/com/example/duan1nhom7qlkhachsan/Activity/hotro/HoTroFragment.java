@@ -1,6 +1,5 @@
 package com.example.duan1nhom7qlkhachsan.Activity.hotro;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -26,22 +25,22 @@ public class HoTroFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.layout_frangment_them,container,false);
 
-        EditText edtmanpp=view.findViewById(R.id.edtmanpp);
-        EditText edttennpp=view.findViewById(R.id.edttennpp);
-        EditText edtgioithiue=view.findViewById(R.id.edtgioithieu);
-        Button btnthem=view.findViewById(R.id.btnthem);
+        EditText edtNameUserSp=view.findViewById(R.id.edtNameUserSp);
+        EditText edtSDTUserSp=view.findViewById(R.id.edtSDTUserSp);
+        EditText edtContentSp=view.findViewById(R.id.edtContentSp);
+        Button btnSendReport=view.findViewById(R.id.btnSendReport);
 
         scaleUp = AnimationUtils.loadAnimation(getActivity(),R.anim.scale_up);
         scaleDown = AnimationUtils.loadAnimation(getActivity(),R.anim.scale_down);
 
-        btnthem.setOnTouchListener(new View.OnTouchListener() {
+        btnSendReport.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction()==MotionEvent.ACTION_UP){
-                    btnthem.startAnimation(scaleDown);
+                    btnSendReport.startAnimation(scaleDown);
 
                 }else if(event.getAction()==MotionEvent.ACTION_DOWN){
-                    btnthem.startAnimation(scaleUp);
+                    btnSendReport.startAnimation(scaleUp);
                 }
                 return false;
             }
@@ -49,13 +48,13 @@ public class HoTroFragment extends Fragment {
 
 
 
-        btnthem.setOnClickListener(new View.OnClickListener() {
+        btnSendReport.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
-                String ma=edtmanpp.getText().toString();
-                String ten=edttennpp.getText().toString();
-                String gioithieu=edtgioithiue.getText().toString();
+                String ma=edtNameUserSp.getText().toString();
+                String ten=edtSDTUserSp.getText().toString();
+                String gioithieu=edtContentSp.getText().toString();
                 if (ma.equals("")||ten.equals("")||gioithieu.equals("")){
                     Toast.makeText(getContext(), "Quý khách vui lòng điển đủ thông tin để được hỗ trợ", Toast.LENGTH_SHORT).show();
                 }else{
@@ -64,9 +63,10 @@ public class HoTroFragment extends Fragment {
                     boolean check=nhaPhanPhoiDAO.themNPPtest(nhaPhanPhoi);
                     if (check==true){
                         Toast.makeText(getContext(), "Cảm ơn quý khách đã sử dụng dịch vụ", Toast.LENGTH_SHORT).show();
-                        edtmanpp.setText("");
-                        edttennpp.setText("");
-                        edtgioithiue.setText("");
+                        edtNameUserSp.setText("");
+                        edtSDTUserSp.setText("");
+                        edtContentSp.setText("");
+
 
                     }else{
                         Toast.makeText(getContext(), "Chúng tôi sẽ nhanh chóng hỗ trợ dịch vụ này", Toast.LENGTH_SHORT).show();

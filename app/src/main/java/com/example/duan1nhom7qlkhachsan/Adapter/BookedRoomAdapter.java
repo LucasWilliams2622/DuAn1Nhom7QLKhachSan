@@ -33,7 +33,7 @@ public class BookedRoomAdapter extends BaseAdapter {
     private ArrayList<AppBookedRoom> list  ;
     private Button btnHuyPhong;
     BookedRoomFragment bookedRoomFragment;
-    BookedRoomActivity bookedRoomActivity;
+
     private TextView tvTenPhong, tvMaPhong, tvLoaiPhong, tvGiaPhong,tvEndDay,tvStartDay;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 

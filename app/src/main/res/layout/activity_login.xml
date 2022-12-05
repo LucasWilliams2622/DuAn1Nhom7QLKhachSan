@@ -163,10 +163,10 @@
             android:layout_width="52dp"
             android:layout_height="100dp"
             android:layout_margin="20dp"
-            android:background="@drawable/facebook_icon_"
+            android:background="@drawable/com_facebook_favicon_blue"
             android:rotationX="8"
 
-            app:background="@null"
+
             tools:layout_editor_absoluteX="90dp"
             tools:layout_editor_absoluteY="625dp" />
 

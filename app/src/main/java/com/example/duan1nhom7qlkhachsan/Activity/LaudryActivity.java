@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import com.example.duan1nhom7qlkhachsan.Fragment.AddServiceFragment;
 import com.example.duan1nhom7qlkhachsan.Fragment.LaudryFragment;
@@ -21,10 +23,18 @@ import java.util.Map;
 public class LaudryActivity extends AppCompatActivity {
     private AppService appService = null;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    Button btnBack;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_laudry);
+        btnBack = findViewById(R.id.btnBack);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
     @Override
     protected void onResume() {
