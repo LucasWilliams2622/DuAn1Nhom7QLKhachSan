@@ -204,10 +204,10 @@ public class MainActivity extends AppCompatActivity {
                         }
                         // set anh len profile
                         Uri uri = intent.getData();
-                        mNguoiDungFragment.setUri(uri);
+                      //  mNguoiDungFragment.setUri(uri);
                         try {
                             Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-                            mNguoiDungFragment.setBitmapImageView(bitmap);
+                          //  mNguoiDungFragment.setBitmapImageView(bitmap);
                         } catch (IOException e) {
                             e.printStackTrace();
                         }

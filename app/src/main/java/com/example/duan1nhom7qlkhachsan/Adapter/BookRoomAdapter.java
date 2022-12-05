@@ -80,16 +80,16 @@ public class BookRoomAdapter extends BaseAdapter {
             tvPriceBookRoom = view.findViewById(R.id.tvPriceBookRoom);
             edtCheckInDay = view.findViewById(R.id.edtCheckInDay);
             edtCheckOutDay = view.findViewById(R.id.edtCheckOutDay);
-
-//            view.findViewById(R.id.btnBookRoom).setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    ivHotelRoom.startActionMode( AnimationUtils.loadAnimation(
-//                           context.getApplicationContext(),
-//                            R.anim.animation_scale
-//                    ));
-//                }
-//            });
+            ivHotelRoom = view.findViewById(R.id.ivHotelRoom);
+            view.findViewById(R.id.ivHotelRoom).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ivHotelRoom.startAnimation( AnimationUtils.loadAnimation(
+                           context.getApplicationContext(),
+                            R.anim.animation_scale
+                    ));
+                }
+            });
 
 
             BookRoomAdapter.ViewHolder holder = new BookRoomAdapter.ViewHolder(btnBookRoom, tvCodeBookRoom, tvNameBookRoom, tvTypeBookRoom, tvPriceBookRoom, edtCheckInDay, edtCheckOutDay);
