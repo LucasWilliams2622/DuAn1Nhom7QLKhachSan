@@ -47,69 +47,87 @@
                     android:layout_height="wrap_content"
                     android:paddingLeft="15dp"
                     android:text="Mã phòng: "
-
                     android:textColor="@color/black"
-
                     android:textSize="20dp" />
 
                 <TextView
                     android:id="@+id/tvCodeBookRoom"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
-
                     android:paddingTop="4dp"
                     android:paddingRight="15dp"
-                    android:text=" 002"
+                    android:text="    002"
                     android:textColor="@color/black"
                     android:textSize="20dp"
                     android:textStyle="normal" />
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="15dp"
+                    android:text="Tên phòng: "
+                    android:textColor="@color/black"
+                    android:textSize="20dp" />
+                <TextView
+                    android:id="@+id/tvNameBookRoom"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="4dp"
+                    android:paddingRight="15dp"
+                    android:text="R002"
+                    android:textColor="@color/black"
+                    android:textSize="20dp"
+                    android:textStyle="normal" />
 
-
+            </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
             <TextView
-                android:id="@+id/tvNameBookRoom"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
                 android:paddingLeft="15dp"
-                android:paddingTop="4dp"
-                android:paddingRight="15dp"
-                android:text=" R002"
+                android:text="Loại phòng: "
                 android:textColor="@color/black"
-                android:textSize="20dp"
-                android:textStyle="normal" />
-
+                android:textSize="20dp" />
             <TextView
                 android:id="@+id/tvTypeBookRoom"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingLeft="15dp"
+                android:paddingLeft="10dp"
                 android:paddingTop="4dp"
                 android:paddingRight="15dp"
                 android:text=" King Room"
                 android:textColor="@color/black"
                 android:textSize="20dp"
                 android:textStyle="normal" />
-
+        </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="15dp"
+                    android:text="Giá phòng: "
+                    android:textColor="@color/black"
+                    android:textSize="20dp" />
                 <TextView
                     android:id="@+id/tvPriceBookRoom"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingLeft="15dp"
                     android:paddingTop="4dp"
-
                     android:paddingRight="15dp"
                     android:text=" 99"
                     android:textColor="@color/black"
                     android:textSize="20dp"
                     android:textStyle="normal" />
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -131,14 +149,12 @@
 
             <EditText
                 android:id="@+id/edtCheckOutDay"
-
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/design_edit_no_stoke"
                 android:hint="Chọn Ngày check out:"
                 android:paddingLeft="15dp"
                 android:paddingTop="10dp"
-
                 android:textColorHint="#323030"
                 android:textSize="17dp" />
 
@@ -148,7 +164,6 @@
                 android:layout_width="337dp"
                 android:layout_height="42dp"
                 android:layout_marginLeft="10dp"
-
                 android:layout_marginTop="20dp"
                 android:background="@drawable/design_green_btn"
                 android:backgroundTint="#DAF1DB"
