@@ -63,7 +63,7 @@ public class AddServiceAdapter extends BaseAdapter {
         holder.tvIdService.setText("Id: "+service.getCodeService());
         holder.tvNameService.setText("Tên: "+service.getNameService());
         holder.tvTypeService.setText("Loại: "+service.getTypeService());
-        holder.tvPriceService.setText("Gía: "+service.getPriceService());
+        holder.tvPriceService.setText("Giá: "+service.getPriceService());
 
 
 

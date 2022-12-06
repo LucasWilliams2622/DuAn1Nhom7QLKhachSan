@@ -34,6 +34,7 @@ import androidx.fragment.app.FragmentManager;
 import com.example.duan1nhom7qlkhachsan.Activity.AddRoomActivity;
 import com.example.duan1nhom7qlkhachsan.Activity.AddServiceActivity;
 import com.example.duan1nhom7qlkhachsan.Activity.BookedRoomActivity;
+import com.example.duan1nhom7qlkhachsan.Activity.BookedServiceActivity;
 import com.example.duan1nhom7qlkhachsan.Activity.EditProfileActivity;
 import com.example.duan1nhom7qlkhachsan.Activity.LaudryActivity;
 import com.example.duan1nhom7qlkhachsan.Activity.LoginActivity;
@@ -136,6 +137,10 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.mDichVu:
                         Intent intentService = new Intent(MainActivity.this, LaudryActivity.class);
                         startActivity(intentService);
+                        break;
+                    case R.id.mDichVuDaDat:
+                        Intent intentBookedService = new Intent(MainActivity.this, BookedServiceActivity.class);
+                        startActivity(intentBookedService);
                         break;
                     case R.id.mDatPhong:
                         Intent itentBookRoom = new Intent(MainActivity.this, BookRoomActivity.class);
