@@ -276,7 +276,6 @@ public class EditProfileActivity extends AppCompatActivity implements IAdapterUs
                 });
     }
 
-
     @Override
     public void onDeleteAccountClick(AppUser user) {
         new AlertDialog.Builder(EditProfileActivity.this)
