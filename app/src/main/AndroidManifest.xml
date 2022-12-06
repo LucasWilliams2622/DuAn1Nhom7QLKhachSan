@@ -16,7 +16,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DuAn1Nhom7QLKhachSan"
         tools:targetApi="31">
-
+        <activity
+            android:name=".Activity.CheckOutActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Activity.BookedServiceActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".Activity.EditProfileActivity"
             android:exported="false">
@@ -34,12 +47,10 @@
         <activity
             android:name=".Activity.AddRoomActivity"
             android:exported="true">
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-
         <activity
             android:name=".Activity.CustomTabActivity"
             android:exported="true">
@@ -70,7 +81,6 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-
         </activity>
         <activity
             android:name=".Activity.BookRoomActivity"
@@ -78,7 +88,6 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-
         </activity>
         <activity
             android:name=".Activity.LaudryActivity"
@@ -107,14 +116,7 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
-
         <activity
             android:name=".HuongDan.LoadActivity"
             android:exported="true">
@@ -144,9 +146,7 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-
         </activity>
-
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -154,9 +154,12 @@
                 android:name="android.app.lib_name"
                 android:value="" />
 
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
-
 
 </manifest>

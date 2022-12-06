@@ -18,10 +18,21 @@
         android:icon="@drawable/ic_checkroom"
         android:title="Phòng đã đặt" />
     <item
+        android:id="@+id/mTraPhong"
+        android:icon="@drawable/living_room"
+
+        android:title="Trả Phòng" />
+    <item
         android:id="@+id/mDichVu"
         android:icon="@drawable/ic_baseline_local_laundry_service_24"
 
-        android:title="Dịch vụ" />
+        android:title="Dịch vụ " />
+    <item
+        android:id="@+id/mDichVuDaDat"
+        android:icon="@drawable/ic_baseline_local_laundry_service_24"
+
+        android:title="Dịch vụ đã đặt" />
+
     <item
         android:id="@+id/mTuVanKH"
         android:icon="@drawable/ic_baseline_phone_24"

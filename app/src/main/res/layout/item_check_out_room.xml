@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="#f5f5f5">
+
+<androidx.cardview.widget.CardView
+    android:layout_width="360dp"
+    android:layout_height="470dp"
+    android:layout_marginTop="16dp"
+    android:background="@drawable/design_of_edt"
+    app:cardCornerRadius="20dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.49"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/shapeableImageView"
+        android:layout_width="match_parent"
+        android:layout_height="203dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="366dp"
+        android:adjustViewBounds="true"
+        android:paddingTop="10dp"
+        android:paddingRight="0dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/hotel_room_1" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="210dp">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="15dp"
+            android:text="Mã phòng: "
+            android:textColor="@color/black"
+            android:textSize="20dp" />
+        <TextView
+            android:id="@+id/tvMaPhong"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="15dp"
+            android:paddingTop="4dp"
+            android:paddingRight="15dp"
+            android:text="002"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="normal" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="15dp"
+            android:text="Tên phòng: "
+            android:textColor="@color/black"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/tvTenPhong"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="15dp"
+            android:paddingTop="4dp"
+            android:paddingRight="15dp"
+            android:text="R002"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="normal" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="15dp"
+            android:text="Loại phòng: "
+            android:textColor="@color/black"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/tvLoaiPhong"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="15dp"
+            android:paddingTop="4dp"
+            android:paddingRight="15dp"
+            android:text="King Room"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="normal" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="15dp"
+            android:text="Giá phòng: "
+            android:textColor="@color/black"
+            android:textSize="20dp" />
+        <TextView
+            android:id="@+id/tvGiaPhong"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="15dp"
+            android:paddingTop="4dp"
+            android:paddingRight="15dp"
+            android:text="999$"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="normal" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="15dp"
+            android:text="Ngày check in : "
+            android:textColor="@color/black"
+            android:textSize="20dp" />
+        <TextView
+            android:id="@+id/tvStartDay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="15dp"
+            android:paddingTop="4dp"
+            android:paddingRight="15dp"
+            android:text="11/11/1111"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="normal" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="15dp"
+            android:text="Ngày check out: "
+            android:textColor="@color/black"
+            android:textSize="20dp" />
+        <TextView
+            android:id="@+id/tvEndDay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="15dp"
+            android:paddingTop="4dp"
+            android:paddingRight="15dp"
+            android:text="11/11/1111"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="normal" />
+    </LinearLayout>
+        <Button
+            android:id="@+id/btnCheckOutRoom"
+            android:layout_width="337dp"
+            android:layout_height="42dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/design_green_btn"
+            android:backgroundTint="#DAF1DB"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:paddingLeft="15dp"
+            android:text="Trả phòng"
+            android:textColor="@color/green"
+            app:backgroundTint="@null"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView4"
+            app:layout_constraintVertical_bias="0.004" />
+
+
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
