@@ -1,29 +1,39 @@
 package com.example.duan1nhom7qlkhachsan.Activity;
 
+import static com.example.duan1nhom7qlkhachsan.MainActivity.MY_REQUEST_CODE;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.duan1nhom7qlkhachsan.Fragment.AddRoomFragment;
 import com.example.duan1nhom7qlkhachsan.MainActivity;
-import com.example.duan1nhom7qlkhachsan.Model.AppAdmin;
-import com.example.duan1nhom7qlkhachsan.Model.AppRoom;
 import com.example.duan1nhom7qlkhachsan.Model.AppUser;
 import com.example.duan1nhom7qlkhachsan.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -38,9 +48,13 @@ public class EditProfileActivity extends AppCompatActivity implements IAdapterUs
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private AppUser appUser = null;
     SharedPreferences sharedPreferForUser, sharedPreferences;
+    String role;
+    private ProgressDialog progressDialog;
+    private ImageView ivEditProfileUser;
+    private MainActivity mMainActivity;
+    View headerLayout;
+    private Uri mUri;
 
-    //    ActivityUpdateDataBinding
-//    DatabaseReferance
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,9 +65,11 @@ public class EditProfileActivity extends AppCompatActivity implements IAdapterUs
         btnUpdateAccount = findViewById(R.id.btnUpdateAccount);
         btnDeleteAccount = findViewById(R.id.btnDeleteAccount);
         btnBackToMainActivity = findViewById(R.id.btnBackToMainActivity);
+        ivEditProfileUser = findViewById(R.id.ivEditProfileUser);
         sharedPreferForUser = getSharedPreferences("UserInfo", 0);
         sharedPreferences = getSharedPreferences("AdminInfo", 0);
 
+        progressDialog = new ProgressDialog(EditProfileActivity.this);
         btnDeleteAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,9 +80,8 @@ public class EditProfileActivity extends AppCompatActivity implements IAdapterUs
             @Override
             public void onClick(View v) {
 
+                onClickEditEmail();
 
-                Toast.makeText(EditProfileActivity.this, "Update User Successful", Toast.LENGTH_SHORT).show();
-                Log.d(">>>>>>>>>>>.", "Update User Successful");
             }
         });
         btnBackToMainActivity.setOnClickListener(new View.OnClickListener() {
@@ -77,19 +92,25 @@ public class EditProfileActivity extends AppCompatActivity implements IAdapterUs
                 startActivity(i);
             }
         });
+       setProfileOfUser();
 
-//        getUserData();
-
-        getLoginUserData();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-//        getUserData();
+       setProfileOfUser();
     }
 
-    public void getLoginUserData() {
+    public void setUri(Uri mUri) {
+        this.mUri = mUri;
+    }
+
+    public void setBitmapImageView(Bitmap bitmapImageView) {
+        ivEditProfileUser.setImageBitmap(bitmapImageView);
+    }
+
+    public void setProfileOfUser() {
         //ShảedPreferance for user
         String emailUser = sharedPreferForUser.getString("emailUser", "");
         String nameUser = sharedPreferForUser.getString("nameUser", "");
@@ -114,34 +135,107 @@ public class EditProfileActivity extends AppCompatActivity implements IAdapterUs
 
 
     }
+    private void onClickEditEmail(){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-    public void onUpdateProfileUser() {
-        String fullnameUser = edtFullNameUser.getText().toString();
-        String emailUser = edtEmailUser.getText().toString();
-        String phoneNumUser = edtPhoneNumberUser.getText().toString();
-
-        Map<String, Object> user = new HashMap<>();
-        user.put("nmaeUser", fullnameUser);
-        user.put("emailUser", emailUser);
-        user.put("phoneNumUser", phoneNumUser);
-        db.collection("user")
-                .document(appUser.getIdUser())
-                .set(user)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
+        String newEmail = edtEmailUser.getText().toString().trim();
+        progressDialog.setTitle("Chỉnh sửa Email...");
+        progressDialog.show();
+        user.updateEmail(newEmail)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
-                    public void onSuccess(Void aVoid) {
-                        Toast.makeText(EditProfileActivity.this, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
-                        getUserData();
-                        appUser = null;
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(EditProfileActivity.this, "Cập nhật không thành công", Toast.LENGTH_SHORT).show();
+                    public void onComplete(@NonNull Task<Void> task) {
+                        progressDialog.dismiss();
+                        if (task.isSuccessful()) {
+                            Toast.makeText(mMainActivity, "Chỉnh sửa Email thành công !!!", Toast.LENGTH_SHORT).show();
+                            mMainActivity.showProfile();
+                        }else{
+                            Toast.makeText(mMainActivity, "Chỉnh sửa Email thất bại !!!", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
+    }
+    public void onUpdateProfileUser() {
+        Log.d(">>>>>>>>>>>>.", "Click");
+        FirebaseUser userDB = FirebaseAuth.getInstance().getCurrentUser();
 
+        String fullnameUser = edtFullNameUser.getText().toString().trim();
+        String emailUser = edtEmailUser.getText().toString().trim();
+        String phoneNumUser = edtPhoneNumberUser.getText().toString().trim();
+        if (fullnameUser.equals("") || emailUser.equals("") || phoneNumUser.equals("")) {
+            Toast.makeText(this, "Hãy nhập đủ thông tin", Toast.LENGTH_SHORT).show();
+            Log.d(">>>>>>>>>>>>.", "validation");
+
+        } else {
+            Log.d(">>>>>>>>>>>>.", "in");
+
+            progressDialog.setTitle("Update Profile ...");
+            progressDialog.show();
+            sharedPreferences = getSharedPreferences("AdminInfo", 0);
+            role = sharedPreferences.getString("role", "");
+            if (role.equals("admin")) {
+                TextView fullNameUpdate = headerLayout.findViewById(R.id.tvNameUserLogin);
+                TextView emailAdmin = headerLayout.findViewById(R.id.tvEmailUserLogin);
+                fullNameUpdate.setText("Wellcom " + fullnameUser);
+                emailAdmin.setText("" + emailUser);
+
+            } else {
+
+//                TextView fullNameUpdate = headerLayout.findViewById(R.id.tvNameUserLogin);
+//                TextView emailAdmin = headerLayout.findViewById(R.id.tvEmailUserLogin);
+//                fullNameUpdate.setText("Wellcom " + fullnameUser);
+//                emailAdmin.setText("" + emailUser);
+                UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                        .setDisplayName(fullnameUser)
+                        .setPhotoUri(mUri)
+                        .build();
+
+                userDB.updateProfile(profileUpdates)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                progressDialog.dismiss();
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(getApplicationContext(), "Update Profile thành công !!!", Toast.LENGTH_SHORT).show();
+                                    Log.d(">>>>>>>>>>>.", "Update  Successful");
+                                }
+                            }
+                        });
+                Map<String, Object> user = new HashMap<>();
+                user.put("nameUser", fullnameUser);
+                user.put("emailUser", emailUser);
+                user.put("phoneNumUser", phoneNumUser);
+                Log.d(">>>>>>>>>", "fullnameUser" + fullnameUser);
+                Log.d(">>>>>>>>>", "emailUser" + emailUser);
+                Log.d(">>>>>>>>>", "phoneNumUser" + phoneNumUser);
+
+//                if (appUser == null) {
+//                    Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
+//                } else {
+//                    db.collection("user")
+//                            .document(appUser.getIdUser())
+//                            .set(user)
+//                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                                @Override
+//                                public void onSuccess(Void aVoid) {
+//                                    //  progressDialog.dismiss();
+//
+//                                    Toast.makeText(EditProfileActivity.this, "Update Successful", Toast.LENGTH_SHORT).show();
+//                                    Log.d(">>>>>>>>>>>.", "Update  Successful");
+//
+//                                    appUser = null;
+//                                }
+//                            })
+//                            .addOnFailureListener(new OnFailureListener() {
+//                                @Override
+//                                public void onFailure(@NonNull Exception e) {
+//                                    Toast.makeText(EditProfileActivity.this, "Cập nhật không thành công", Toast.LENGTH_SHORT).show();
+//                                }
+//                            });
+//                }
+            }
+
+        }
     }
 
     public void getUserData() {
@@ -182,6 +276,7 @@ public class EditProfileActivity extends AppCompatActivity implements IAdapterUs
                 });
     }
 
+
     @Override
     public void onDeleteAccountClick(AppUser user) {
         new AlertDialog.Builder(EditProfileActivity.this)
@@ -214,5 +309,37 @@ public class EditProfileActivity extends AppCompatActivity implements IAdapterUs
                 .show();
     }
 
+    private void clickAvatar() {
+        ivEditProfileUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openAlbum();
+            }
+        });
 
+
+        btnUpdateAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onClickEditEmail();
+            }
+        });
+    }
+
+    private void openAlbum() {
+        if (mMainActivity == null) {
+            return;
+        }
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) { // < hon android 6
+            mMainActivity.openGallery();
+            return;
+        }
+        if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+            mMainActivity.openGallery();
+        } else {
+            String[] permission = {Manifest.permission.READ_EXTERNAL_STORAGE};
+            requestPermissions(permission, MY_REQUEST_CODE);
+
+        }
+    }
 }

@@ -2,6 +2,7 @@ package com.example.duan1nhom7qlkhachsan;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +33,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 
+import com.bumptech.glide.Glide;
 import com.example.duan1nhom7qlkhachsan.Activity.AddRoomActivity;
 import com.example.duan1nhom7qlkhachsan.Activity.AddServiceActivity;
 import com.example.duan1nhom7qlkhachsan.Activity.BookedRoomActivity;
@@ -48,13 +51,17 @@ import com.example.duan1nhom7qlkhachsan.Fragment.TrangChuFragment;
 import com.example.duan1nhom7qlkhachsan.Fragment.BookedRoomFragment;
 import com.example.duan1nhom7qlkhachsan.Fragment.ServiceFragment;
 
+import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.IOException;
@@ -65,13 +72,38 @@ public class MainActivity extends AppCompatActivity {
     String role;
     DrawerLayout drawerLayout;
     FrameLayout frameLayout;
-    Toolbar toolBar;
-    NavigationView navigationView;
-    View headerLayout;
     GoogleSignInClient gsc;
     GoogleSignInAccount account;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private TextView tvNameUserLogin, tvEmailUserLogin;
+    private ImageView ivAvatarHeader;
+    NavigationView navigationView;
+    View headerLayout;
+    Toolbar toolBar;
+    GoogleApiClient mGoogleApiClient;
+
     final private EditProfileActivity mNguoiDungFragment = new EditProfileActivity();
+    final private ActivityResultLauncher<Intent> mActivityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == RESULT_OK) {
+                        Intent intent = result.getData();
+                        if (intent == null) {
+                            return;
+                        }
+                        // set anh len profile
+                        Uri uri = intent.getData();
+                        mNguoiDungFragment.setUri(uri);
+                        try {
+                            Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                            mNguoiDungFragment.setBitmapImageView(bitmap);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,8 +116,8 @@ public class MainActivity extends AppCompatActivity {
         navigationView = findViewById(R.id.navigationView);
         headerLayout = navigationView.getHeaderView(0);
 
-        TextView tvNameUserLogin = headerLayout.findViewById(R.id.tvNameUserLogin);
-        TextView tvEmailUserLogin = headerLayout.findViewById(R.id.tvEmailUserLogin);
+        tvNameUserLogin = headerLayout.findViewById(R.id.tvNameUserLogin);
+        tvEmailUserLogin = headerLayout.findViewById(R.id.tvEmailUserLogin);
 
         //SahredPreferance for admin
         sharedPreferences = getSharedPreferences("AdminInfo", 0);
@@ -103,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d(">>>>>>>>>>>>>>>>", "emailUser" + emailUser);
         Log.d(">>>>>>>>>>>>>>>>", "emailUser" + emailUser);
 
-         role = sharedPreferences.getString("role", "");
+        role = sharedPreferences.getString("role", "");
         if (role.equals("admin")) {
             tvNameUserLogin.setText(nameAdmin);
             tvEmailUserLogin.setText(emailAdmin);
@@ -112,7 +144,6 @@ public class MainActivity extends AppCompatActivity {
             tvNameUserLogin.setText(nameUser);
             tvEmailUserLogin.setText(emailUser);
         }
-
 
         setSupportActionBar(toolBar);
         ActionBar actionBar = getSupportActionBar();
@@ -126,6 +157,7 @@ public class MainActivity extends AppCompatActivity {
         gsc = GoogleSignIn.getClient(MainActivity.this, gso);
         account = GoogleSignIn.getLastSignedInAccount(MainActivity.this);
 
+        showProfile();
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -207,7 +239,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         sharedPreferences = getSharedPreferences("AdminInfo", 0);
-         role = sharedPreferences.getString("role", "");
+        role = sharedPreferences.getString("role", "");
         Log.d(">>>>>>>>>>>", "role " + role);
         if (!role.equals("admin")) {
             Menu menu = navigationView.getMenu();
@@ -219,27 +251,25 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    final private ActivityResultLauncher<Intent> mActivityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
-            new ActivityResultCallback<ActivityResult>() {
-                @Override
-                public void onActivityResult(ActivityResult result) {
-                    if (result.getResultCode() == RESULT_OK) {
-                        Intent intent = result.getData();
-                        if (intent == null) {
-                            return;
-                        }
-                        // set anh len profile
-                        Uri uri = intent.getData();
-                        //  mNguoiDungFragment.setUri(uri);
-                        try {
-                            Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-                            //  mNguoiDungFragment.setBitmapImageView(bitmap);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            });
+    public void showProfile() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user == null) {
+            return;
+        }
+        String name = user.getDisplayName();
+        String email = user.getEmail();
+        Uri photoUrl = user.getPhotoUrl();
+
+        if (name == null) {
+            tvNameUserLogin.setVisibility(View.GONE);
+        } else {
+            tvNameUserLogin.setVisibility(View.VISIBLE);
+            tvNameUserLogin.setText(name);
+        }
+        tvNameUserLogin.setText(name);
+        tvEmailUserLogin.setText(email);
+        // Glide.with(this).load(photoUrl).error(R.drawable.ic_avatar).into(img_avatar);
+    }
 
     public void openGallery() { // mo thu vien de chon anh
         Intent i = new Intent();
@@ -256,66 +286,28 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
 
     }
-
-
-    public void showDialogChangePass() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this)
-                .setPositiveButton("Update", null)
-                .setNegativeButton("Cancel", null);
-        LayoutInflater inflater = getLayoutInflater();
-        View view = inflater.inflate(R.layout.dialog_changepassword, null);
-        EditText edtOldPass = view.findViewById(R.id.edtOldPass);
-        EditText edtNewPass = view.findViewById(R.id.edtNewPass);
-        EditText edtReNewPass = view.findViewById(R.id.edtReOldPass);
-
-        builder.setView(view);
-
-
-        AlertDialog alertDialog = builder.create();
-        alertDialog.setCancelable(false);//nhấn ra ngoài k thoát
-        alertDialog.show();
-        finish();
-
-        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String oldPass = edtOldPass.getText().toString();
-                String newPass = edtNewPass.getText().toString();
-                String reNewPass = edtReNewPass.getText().toString();
-                if (oldPass.equals("") || newPass.equals("") || reNewPass.equals("")) {
-                    Toast.makeText(MainActivity.this, "Please enter these field", Toast.LENGTH_SHORT).show();
-                } else {
-
-                    if (newPass.equals(reNewPass)) {
-//                        SharedPreferences sharedPreferences =getSharedPreferences("THONGTIN",MODE_PRIVATE);
-//
-//                        String matt = sharedPreferences.getString("matt","");
-//                        //update
-//                        ThuThuDAO thuThuDAO=new ThuThuDAO(MainActivity.this);
-//                        int check = thuThuDAO.checkChangePassword(matt,oldPass,newPass);
-//                        if (check==1)
-//                        {
-//                            Toast.makeText(MainActivity.this, "Update Successful", Toast.LENGTH_SHORT).show();
-//                            Intent intent = new Intent(MainActivity.this,LoginActivity.class);
-//                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                            startActivity(intent);
-//                        }
-//                        else if(check==0)
-//                        {
-//                            Toast.makeText(MainActivity.this, "Update Failed,Old password is wrong", Toast.LENGTH_SHORT).show();
-//
-//                        }else
-//                        {
-//                            Toast.makeText(MainActivity.this, "Update Failed", Toast.LENGTH_SHORT).show();
-//
-//                        }
-                    } else {
-                        Toast.makeText(MainActivity.this, "Please enter the same new password", Toast.LENGTH_SHORT).show();
-                    }
-                }
-
-            }
-        });
+    @Override
+    protected void onStart() {
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
+        mGoogleApiClient.connect();
+        super.onStart();
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == MY_REQUEST_CODE){
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                openGallery();
+            }else{
+                Toast.makeText(this, "Vui lòng cho phép cấp quền truy cập !!!", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 }

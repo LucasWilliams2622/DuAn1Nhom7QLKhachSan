@@ -8,12 +8,16 @@
     android:orientation="vertical"
     tools:context=".Activity.AddServiceActivity">
 
+
     <Button
         android:id="@+id/btnBackToMain"
+        android:drawableLeft="@drawable/icreturn"
+        android:textSize="17dp"
+        android:backgroundTint="#6AE0EF"
+        android:textColor="@color/black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Back" />
-
     <Spinner
         android:id="@+id/spnTypeService"
         android:layout_width="match_parent"
