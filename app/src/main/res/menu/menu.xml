@@ -17,11 +17,7 @@
         android:id="@+id/mPhongDaDat"
         android:icon="@drawable/ic_checkroom"
         android:title="Phòng đã đặt" />
-    <item
-        android:id="@+id/mTraPhong"
-        android:icon="@drawable/living_room"
 
-        android:title="Trả Phòng" />
     <item
         android:id="@+id/mDichVu"
         android:icon="@drawable/ic_baseline_local_laundry_service_24"
@@ -29,7 +25,7 @@
         android:title="Dịch vụ " />
     <item
         android:id="@+id/mDichVuDaDat"
-        android:icon="@drawable/ic_baseline_local_laundry_service_24"
+        android:icon="@drawable/ic_service_booked"
 
         android:title="Dịch vụ đã đặt" />
 
@@ -48,9 +44,10 @@
                 android:icon="@drawable/ic_room_service"
                 android:title="Thêm dịch vụ" />
             <item
-                android:id="@+id/mTop10"
-                android:icon="@drawable/ic_top"
-                android:title="Top 3 phòng được đặt nhiều nhất" />
+                android:id="@+id/mTraPhong"
+                android:icon="@drawable/ic_check_out_room"
+
+                android:title="Trả Phòng" />
             <item
                 android:id="@+id/mHotro"
                 android:icon="@drawable/ic_baseline_phone_24"

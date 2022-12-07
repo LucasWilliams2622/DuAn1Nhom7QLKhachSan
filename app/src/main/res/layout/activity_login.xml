@@ -174,7 +174,7 @@
             android:layout_width="49dp"
             android:layout_height="49dp"
             android:layout_margin="20dp"
-
+android:id="@+id/ivTwitter"
             android:src="@drawable/twitter"
             tools:layout_editor_absoluteX="90dp"
             tools:layout_editor_absoluteY="625dp" />

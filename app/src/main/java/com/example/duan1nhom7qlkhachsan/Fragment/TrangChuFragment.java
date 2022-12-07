@@ -15,6 +15,7 @@ import com.example.duan1nhom7qlkhachsan.Activity.BookRoomActivity;
 import com.example.duan1nhom7qlkhachsan.Activity.EditProfileActivity;
 import com.example.duan1nhom7qlkhachsan.Activity.LaudryActivity;
 import com.example.duan1nhom7qlkhachsan.Activity.hotro.HoTroFragment;
+import com.example.duan1nhom7qlkhachsan.MainActivity;
 import com.example.duan1nhom7qlkhachsan.R;
 import com.example.duan1nhom7qlkhachsan.SlideShow.Photo;
 import com.example.duan1nhom7qlkhachsan.SlideShow.PhotoViewPagerAdapter;
@@ -68,8 +69,7 @@ private List<Photo> mListPhoto;
         ivSuport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getActivity(),  HoTroFragment.class);
-                startActivity(i);
+                ((MainActivity)getActivity()).openSupportFragment();
             }
         });
         ivProfile.setOnClickListener(new View.OnClickListener() {

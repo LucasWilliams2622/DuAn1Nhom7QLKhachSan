@@ -1,8 +1,8 @@
 package com.example.duan1nhom7qlkhachsan.Model;
 
 public class AppUser {
-    private Integer id  ;
-    private String idUser,nameUser,emailUser,phoneNumUser,idRoom;
+    private Integer id ;
+    private String idUser,nameUser,emailUser,phoneNumUser,idRoom, codeUser;
 
     public Integer getId() {
         return id;
@@ -29,7 +29,21 @@ public class AppUser {
         this.idRoom = idRoom;
     }
 
+    public AppUser(String nameUser, String emailUser, String phoneNumUser) {
+        this.nameUser = nameUser;
+        this.emailUser = emailUser;
+        this.phoneNumUser = phoneNumUser;
+    }
+
     public AppUser() {
+    }
+
+    public String getCodeUser() {
+        return codeUser;
+    }
+
+    public void setCodeUser(String codeUser) {
+        this.codeUser = codeUser;
     }
 
     public String getIdUser() {

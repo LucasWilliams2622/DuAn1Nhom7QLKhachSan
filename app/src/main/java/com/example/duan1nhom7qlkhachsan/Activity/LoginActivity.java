@@ -23,7 +23,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import com.example.duan1nhom7qlkhachsan.Fragment.AddRoomFragment;
 import com.example.duan1nhom7qlkhachsan.MainActivity;
+import com.example.duan1nhom7qlkhachsan.Model.AppAdmin;
+import com.example.duan1nhom7qlkhachsan.Model.AppRoom;
+import com.example.duan1nhom7qlkhachsan.Model.AppUser;
 import com.example.duan1nhom7qlkhachsan.R;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -70,9 +74,9 @@ public class LoginActivity extends AppCompatActivity {
     EditText edt_username, edt_password;
     SharedPreferences sharedPreferences;
     SharedPreferences sharedPreferForUser;
-    ImageView ivShowPass;
+    ImageView ivShowPass,ivTwitter;
     CheckBox chkSavePassword;
-
+    AppUser appUser = null;
     TextView tvNameUserLogin;
     //Google
     GoogleSignInClient gsc;
@@ -91,12 +95,17 @@ public class LoginActivity extends AppCompatActivity {
         Button btn_login = findViewById(R.id.btn_login);
         Button btn_register = findViewById(R.id.btnGoRegister);
         ivShowPass = findViewById(R.id.ivShowPass);
+        ivTwitter = findViewById(R.id.ivTwitter);
+        ivTwitter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(LoginActivity.this, "Đăng nhập Twitter đang được phát triển", Toast.LENGTH_SHORT).show();
+            }
+        });
         chkSavePassword = findViewById(R.id.chkSavePassword);
         chkSavePassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 Toast.makeText(LoginActivity.this, "Đã lưu mật khẩu", Toast.LENGTH_SHORT).show();
             }
         });
@@ -122,11 +131,10 @@ public class LoginActivity extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                     if (task.isSuccessful()) {
-                                        List<String> list = new ArrayList<>();
+                                        ArrayList<AppAdmin> list = new ArrayList<>();
 
 
                                         for (QueryDocumentSnapshot document : task.getResult()) {
-                                            list.add(document.getId());
                                             //    private String idAdmin,emailAdmin,nameAdmin,passwordAdmin,role;
                                             SharedPreferences.Editor editorAdmin = sharedPreferences.edit();
                                             editorAdmin.putString("role", "admin");
@@ -135,10 +143,11 @@ public class LoginActivity extends AppCompatActivity {
                                             String passwordAdmin = map.get("passwordAdmin").toString();
                                             String emailAdmin = map.get("emailAdmin").toString();
                                             String nameAdmin = map.get("nameAdmin").toString();
+
                                             editorAdmin.putString("nameAdmin", nameAdmin);
                                             editorAdmin.putString("emailAdmin", emailAdmin);
-                                            Log.d(">>>>>>>>>>","nameAdmin in Login"+nameAdmin);
-                                            Log.d(">>>>>>>>>>","emailAdmin in Login"+emailAdmin);
+                                            Log.d(">>>>>>>>>>", "nameAdmin in Login" + nameAdmin);
+                                            Log.d(">>>>>>>>>>", "emailAdmin in Login" + emailAdmin);
                                             editorAdmin.apply();
                                             //Login by account Admin
                                             String username = edt_username.getText().toString();
@@ -146,6 +155,12 @@ public class LoginActivity extends AppCompatActivity {
 
                                             String registerEmailAdmin = sharedPreferences.getString("emailAdmin", "");
                                             String registerPasswordAdmin = sharedPreferences.getString("passwordAdmin", "");
+
+//
+//                                            AppAdmin appAdmin = new AppAdmin("",username,emailAdmin,passwordAdmin,"admin");
+//                                            appAdmin.setIdAdmin(document.getId());
+//                                            list.add(appAdmin);
+//
 
                                             if ((username.equals(registerEmailAdmin) && password.equals(registerPasswordAdmin)) || (username.equals(emailAdmin) && password.equals(passwordAdmin))) {
                                                 Toast.makeText(LoginActivity.this, "Wellcome " + nameAdmin, Toast.LENGTH_SHORT).show();
@@ -241,16 +256,12 @@ public class LoginActivity extends AppCompatActivity {
                         GoogleSignInAccount account = task.getResult(ApiException.class);
                         String email = account.getEmail();
                         String displayName = account.getDisplayName();
-                        // lưu database (tự làm)
-                        //check neu email chua co trong db thi them
-                        //neu co thi bao loi
-//                        UserDao userDao = new UserDao(LoginActivity.this);
-//                        userDao.register(email, null, 1);
+
                         Map<String, Object> user = new HashMap<>();
                         user.put("nameUser", displayName);
                         user.put("emailUser", email);
                         user.put("idRoom", "");
-                        user.put("idUser", "USER" + email.toLowerCase().substring(1, 5) + email.toUpperCase().lastIndexOf(1));
+                        user.put("idUser", "USER" + email.toLowerCase().substring(0, 5) + email.toUpperCase().lastIndexOf(1));
                         user.put("phoneNumUser", "");
 
                         //SharedPreFerances
@@ -262,37 +273,43 @@ public class LoginActivity extends AppCompatActivity {
                         SharedPreferences.Editor editorAdmin = sharedPreferences.edit();
                         editorAdmin.putString("role", "user");
                         editorAdmin.apply();
-
                         //end saving by sharedPreferances
+
+
+                        getDataUserLogin();
                         // Add a new document with a generated ID
+                        if (appUser == null) {
+                            db.collection("user")
+                                    .add(user)
+                                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                        @Override
+                                        public void onSuccess(DocumentReference documentReference) {
+                                            Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
 
-                        db.collection("user")
-                                .add(user)
-                                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                    @Override
-                                    public void onSuccess(DocumentReference documentReference) {
-                                        Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                                            //Log.d("TAG", "DocumentSnapshot added with ID: " + documentReference.getId());
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(LoginActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
 
-                                        //Log.d("TAG", "DocumentSnapshot added with ID: " + documentReference.getId());
-                                    }
-                                })
-                                .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(LoginActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
-
-                                    }
-                                });
+                                        }
+                                    });
 
 
-                        // chuyển màn hình qua Home
-                        Intent homeIntent = new Intent(LoginActivity.this, MainActivity.class);
-                        startActivity(homeIntent);
-                        finish();
+                            // chuyển màn hình qua Home
+                            Intent homeIntent = new Intent(LoginActivity.this, MainActivity.class);
+                            startActivity(homeIntent);
+                            finish();
 
-                        Log.d(">>>>>TAG", "onActivityResult: " + displayName);
-                        Log.d(">>>>>TAG", ">>>: " + email);
-
+//                        Log.d(">>>>>TAG", "onActivityResult: " + displayName);
+//                        Log.d(">>>>>TAG", ">>>: " + email);
+                        } else {
+                            Intent homeIntent = new Intent(LoginActivity.this, MainActivity.class);
+                            startActivity(homeIntent);
+                            finish();
+                        }
                     } catch (Exception e) {
                         Log.d(">>>>>TAG", "onActivityResult error: " + e.getMessage());
                     }
@@ -336,7 +353,33 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    public void getData() {
+    public void getDataUserLogin() {
+        db.collection("user")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            ArrayList<AppUser> list = new ArrayList<>();
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                //  private String idUser,nameUser,emailUser,phoneNumUser,idRoom, codeUser;
 
+                                Map<String, Object> map = document.getData();
+                                String idUser = map.get("idUser").toString();
+                                String idRoom = map.get("idRoom").toString();
+                                String nameUser = map.get("nameUser").toString();
+                                String emailUser = map.get("emailUser").toString();
+                                String phoneNumUser = map.get("phoneNumUser").toString();
+
+
+                                AppUser appUser = new AppUser(-1, idUser, nameUser, emailUser, phoneNumUser, idRoom);
+                                appUser.setCodeUser(document.getId());
+                                list.add(appUser);
+                                Log.d(">>>>>>>>>>>>>","document.getId() "+document.getId());
+
+                            }
+                        }
+                    }
+                });
     }
 }

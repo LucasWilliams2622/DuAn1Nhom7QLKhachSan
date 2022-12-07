@@ -254,11 +254,19 @@ public class MainActivity extends AppCompatActivity {
         if (!role.equals("admin")) {
             Menu menu = navigationView.getMenu();
             menu.findItem(R.id.mDoanhThu).setVisible(false);
-            menu.findItem(R.id.mTop10).setVisible(false);
+            menu.findItem(R.id.mTraPhong).setVisible(false);
+
             menu.findItem(R.id.mAddRoom).setVisible(false);
             menu.findItem(R.id.mAddService).setVisible(false);
             menu.findItem(R.id.mHotro).setVisible(false);
         }
+    }
+
+    public void openSupportFragment(){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.frameLayout, new HoTroFragment())
+                .commit();
     }
 
     public void showProfile() {

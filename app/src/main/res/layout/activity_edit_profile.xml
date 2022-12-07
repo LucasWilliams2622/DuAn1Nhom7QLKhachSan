@@ -29,6 +29,7 @@
         android:id="@+id/ivEditProfileUser"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:background="@drawable/photo_frame"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
@@ -134,7 +135,7 @@
 
 
         <TextView
-            android:id="@+id/tvv"
+            android:id="@+id/tvProfileEdit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
