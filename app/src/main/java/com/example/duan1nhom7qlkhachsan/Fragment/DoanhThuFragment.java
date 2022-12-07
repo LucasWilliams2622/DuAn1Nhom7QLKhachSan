@@ -50,6 +50,8 @@ public class DoanhThuFragment extends Fragment {
         EditText edtEndDay = view.findViewById(R.id.edtEndDay);
         Button btnThongKe = view.findViewById(R.id.btnThongKe);
         TextView tvResult = view.findViewById(R.id.tvResult);
+        TextView tvMoneyRoom = view.findViewById(R.id.tvMoneyRoom);
+        TextView tvMoneyService = view.findViewById(R.id.tvMoneyService);
 
         Calendar calendar = Calendar.getInstance();
         edtStartDay.setOnClickListener(new View.OnClickListener() {
@@ -185,6 +187,8 @@ public class DoanhThuFragment extends Fragment {
                                     int moneyOfRoom = Integer.parseInt(sharedDoanhThu.getString("moneyOfRoom", ""));
                                     int tongDoanhThu = moneyOfRoom + moneyOfService;
                                     Log.d(">>>>>>>>>>>", "Total" + tongDoanhThu);
+                                    tvMoneyRoom.setText(moneyOfRoom + " $");
+                                    tvMoneyService.setText(moneyOfService + " $");
                                     tvResult.setText(tongDoanhThu + " $");
 
                                 }
