@@ -58,7 +58,6 @@
         android:layout_height="wrap_content"
         android:backgroundTint="#EAF1EA"
         app:cardCornerRadius="40dp">
-
         <FrameLayout
             android:id="@+id/flMap"
             android:layout_width="match_parent"
