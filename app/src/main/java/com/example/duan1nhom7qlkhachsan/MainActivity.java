@@ -8,11 +8,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -24,7 +22,6 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -33,7 +30,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 
-import com.bumptech.glide.Glide;
 import com.example.duan1nhom7qlkhachsan.Activity.AddRoomActivity;
 import com.example.duan1nhom7qlkhachsan.Activity.AddServiceActivity;
 import com.example.duan1nhom7qlkhachsan.Activity.BookedRoomActivity;
@@ -44,14 +40,11 @@ import com.example.duan1nhom7qlkhachsan.Activity.LaudryActivity;
 import com.example.duan1nhom7qlkhachsan.Activity.LoginActivity;
 
 import com.example.duan1nhom7qlkhachsan.Activity.BookRoomActivity;
-import com.example.duan1nhom7qlkhachsan.Activity.hotro.HotroAdminFragment;
-import com.example.duan1nhom7qlkhachsan.Activity.hotro.HoTroFragment;
+import com.example.duan1nhom7qlkhachsan.Activity.SupportCustomerActivity;
 
 import com.example.duan1nhom7qlkhachsan.Fragment.DoanhThuFragment;
-import com.example.duan1nhom7qlkhachsan.Fragment.LaudryFragment;
+import com.example.duan1nhom7qlkhachsan.Fragment.SupportCustomerFragment;
 import com.example.duan1nhom7qlkhachsan.Fragment.TrangChuFragment;
-import com.example.duan1nhom7qlkhachsan.Fragment.BookedRoomFragment;
-import com.example.duan1nhom7qlkhachsan.Fragment.ServiceFragment;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -62,8 +55,8 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+//import com.google.firebase.auth.FirebaseAuth;
+//import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.IOException;
@@ -159,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
         gsc = GoogleSignIn.getClient(MainActivity.this, gso);
         account = GoogleSignIn.getLastSignedInAccount(MainActivity.this);
 
-        showProfile();
+//        showProfile();
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -187,10 +180,11 @@ public class MainActivity extends AppCompatActivity {
                         fragment = new DoanhThuFragment();
                         break;
                     case R.id.mHotro:
-                        fragment = new HotroAdminFragment();
+                        openSupportFragmentHotro();
                         break;
                     case R.id.mTuVanKH:
-                        fragment = new HoTroFragment();
+                        Intent itentSupport = new Intent(MainActivity.this, SupportCustomerActivity.class);
+                        startActivity(itentSupport);
                         break;
                     case R.id.mPhongDaDat:
                         Intent itentBookedRoom = new Intent(MainActivity.this, BookedRoomActivity.class);
@@ -261,33 +255,39 @@ public class MainActivity extends AppCompatActivity {
             menu.findItem(R.id.mHotro).setVisible(false);
         }
     }
-
-    public void openSupportFragment(){
+//
+//    public void openSupportFragment(){
+//        FragmentManager fragmentManager = getSupportFragmentManager();
+//        fragmentManager.beginTransaction()
+//                .replace(R.id.frameLayout, new HoTroFragment())
+//                .commit();
+//    }
+    public void openSupportFragmentHotro(){
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.frameLayout, new HoTroFragment())
+                .replace(R.id.frameLayout, new SupportCustomerFragment())
                 .commit();
     }
 
-    public void showProfile() {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user == null) {
-            return;
-        }
-        String name = user.getDisplayName();
-        String email = user.getEmail();
-        Uri photoUrl = user.getPhotoUrl();
-
-        if (name == null) {
-            tvNameUserLogin.setVisibility(View.GONE);
-        } else {
-            tvNameUserLogin.setVisibility(View.VISIBLE);
-            tvNameUserLogin.setText(name);
-        }
-        tvNameUserLogin.setText(name);
-        tvEmailUserLogin.setText(email);
-        // Glide.with(this).load(photoUrl).error(R.drawable.ic_avatar).into(img_avatar);
-    }
+//    public void showProfile() {
+//        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+//        if (user == null) {
+//            return;
+//        }
+//        String name = user.getDisplayName();
+//        String email = user.getEmail();
+//        Uri photoUrl = user.getPhotoUrl();
+//
+//        if (name == null) {
+//            tvNameUserLogin.setVisibility(View.GONE);
+//        } else {
+//            tvNameUserLogin.setVisibility(View.VISIBLE);
+//            tvNameUserLogin.setText(name);
+//        }
+//        tvNameUserLogin.setText(name);
+//        tvEmailUserLogin.setText(email);
+//        // Glide.with(this).load(photoUrl).error(R.drawable.ic_avatar).into(img_avatar);
+//    }
 
     public void openGallery() { // mo thu vien de chon anh
         Intent i = new Intent();
