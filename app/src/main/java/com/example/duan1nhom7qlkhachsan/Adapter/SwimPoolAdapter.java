@@ -39,7 +39,7 @@ public class SwimPoolAdapter extends BaseAdapter {
         if (view == null) {
             view = View.inflate(_viewGroup.getContext(), R.layout.item_swim_pool, null);
 
-            tvIdRoom = view.findViewById(R.id.tvIdRoom);
+            tvIdRoom = view.findViewById(R.id.edtIdRoomBookService);
             tvIdService = view.findViewById(R.id.tvIdService);
             tvNameService = view.findViewById(R.id.tvNameService);
             tvTypeService = view.findViewById(R.id.tvPriceService);

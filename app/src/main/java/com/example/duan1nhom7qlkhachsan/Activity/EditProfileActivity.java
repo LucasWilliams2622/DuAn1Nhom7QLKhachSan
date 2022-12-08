@@ -357,7 +357,6 @@ public class EditProfileActivity extends AppCompatActivity implements IAdapterUs
                                     progressDialog.dismiss();
                                     Toast.makeText(EditProfileActivity.this, "Update Successful", Toast.LENGTH_SHORT).show();
                                     Log.d(">>>>>>>>>>>.", "Update  Successful");
-
                                 }
                             })
                             .addOnFailureListener(new OnFailureListener() {

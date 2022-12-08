@@ -51,11 +51,11 @@
                     android:textSize="20dp" />
 
                 <EditText
-                    android:id="@+id/tvIdRoom"
+                    android:id="@+id/edtIdRoomBookService"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
 
-                    android:hint="hãy nhập id phòng của bạn"
+                    android:hint="   Hãy nhập id phòng của bạn"
                     android:paddingTop="4dp"
                     android:paddingRight="15dp"
                     android:text=""

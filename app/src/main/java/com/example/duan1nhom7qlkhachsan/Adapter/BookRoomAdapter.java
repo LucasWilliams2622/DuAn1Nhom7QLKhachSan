@@ -38,7 +38,7 @@ import java.util.Map;
 public class BookRoomAdapter extends BaseAdapter {
     private Button btnBookRoom;
     private TextView tvCodeBookRoom, tvNameBookRoom, tvTypeBookRoom, tvPriceBookRoom;
-    private EditText edtCheckInDay, edtCheckOutDay;
+    private Button edtCheckInDay, edtCheckOutDay;
     private ImageView ivHotelRoom;
     private ArrayList<AppRoom> list;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -84,8 +84,8 @@ public class BookRoomAdapter extends BaseAdapter {
             view.findViewById(R.id.ivHotelRoom).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ivHotelRoom.startAnimation( AnimationUtils.loadAnimation(
-                           context.getApplicationContext(),
+                    ivHotelRoom.startAnimation(AnimationUtils.loadAnimation(
+                            context.getApplicationContext(),
                             R.anim.animation_scale
                     ));
                 }
@@ -175,8 +175,16 @@ public class BookRoomAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
 
-
-//                private TextView tvIdBookRoom, tvNameBookRoom, tvTypeBookRoom, tvPriceBookRoom;
+                String dayCheckIn = edtCheckInDay.getText().toString().trim();
+                String dayCheckOut = edtCheckOutDay.getText().toString().trim();
+                if ((dayCheckIn.length() == 0 || dayCheckIn.length() < 9) && (dayCheckOut.length() == 0 || dayCheckOut.length() < 9)) {
+                    edtCheckInDay.setError("Bạn chưa cọn ngày check in");
+                    edtCheckInDay.requestFocus();
+                    edtCheckOutDay.setError("Bạn chưa cọn ngày check out");
+                    edtCheckOutDay.requestFocus();
+                    return;
+                }
+                //                private TextView tvIdBookRoom, tvNameBookRoom, tvTypeBookRoom, tvPriceBookRoom;
 //                private EditText edtCheckInDay, edtCheckOutDay;
                 String codeRoom = holder.tvCodeBookRoom.getText().toString();
                 String nameRoom = holder.tvNameBookRoom.getText().toString();
@@ -226,10 +234,10 @@ public class BookRoomAdapter extends BaseAdapter {
     private static class ViewHolder {
         final Button btnBookRoom;
         final TextView tvCodeBookRoom, tvNameBookRoom, tvTypeBookRoom, tvPriceBookRoom;
-        final EditText edtCheckInDay, edtCheckOutDay;
+        final Button edtCheckInDay, edtCheckOutDay;
 
 
-        public ViewHolder(Button btnBookRoom, TextView tvCodeBookRoom, TextView tvNameBookRoom, TextView tvTypeBookRoom, TextView tvPriceBookRoom, EditText edtCheckInDay, EditText edtCheckOutDay) {
+        public ViewHolder(Button btnBookRoom, TextView tvCodeBookRoom, TextView tvNameBookRoom, TextView tvTypeBookRoom, TextView tvPriceBookRoom, Button edtCheckInDay, Button edtCheckOutDay) {
             this.btnBookRoom = btnBookRoom;
             this.tvCodeBookRoom = tvCodeBookRoom;
             this.tvNameBookRoom = tvNameBookRoom;

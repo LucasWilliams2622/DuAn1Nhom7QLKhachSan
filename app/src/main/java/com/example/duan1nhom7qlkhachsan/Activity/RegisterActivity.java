@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
@@ -109,9 +110,28 @@ public class RegisterActivity extends AppCompatActivity {
         String role = edtRoleAdmin.getText().toString();
 
         if (emailAdmin.equals("") || nameAdmin.equals("") || passwordAdmin.equals("") || idAdmin.equals("") || role.equals("")) {
+            edtEmailAdmin.setError("Vui lòng nhập email");
+            edtNameAdmin.setError("Vui lòng nhập tên admin");
+            edtPasswordAdmin.setError("Vui lòng nhập mật khẩu");
+            edtIdAdmin.setError("Vui lòng nhập id admin");
+            edtRoleAdmin.setError("Vui lòng nhập loại đăng kí ");
+            edtEmailAdmin.requestFocus();
+            edtNameAdmin.requestFocus();
+            edtPasswordAdmin.requestFocus();
+            edtIdAdmin.requestFocus();
+            edtRoleAdmin.requestFocus();
             Toast.makeText(this, "Vui lòng điền đủ thông tin !", Toast.LENGTH_SHORT).show();
         } else {
-
+            if (!Patterns.EMAIL_ADDRESS.matcher(emailAdmin).matches()){
+                edtEmailAdmin.setError("Vui lòng nhập email hợp lệ");
+                edtEmailAdmin.requestFocus();
+                return;
+            }
+            if (passwordAdmin.length() < 6){
+                edtPasswordAdmin.setError("Mật khẩu tối thiểu 6 kí tự");
+                edtPasswordAdmin.requestFocus();
+                return;
+            }
             //save information of admin for login
             sharedPreferences = getSharedPreferences("AdminInfo", 0);
             SharedPreferences.Editor editor = sharedPreferences.edit();

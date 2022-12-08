@@ -11,7 +11,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
-import com.example.duan1nhom7qlkhachsan.Activity.IAdapterAddServiceClickEvent;
 import com.example.duan1nhom7qlkhachsan.Model.AppService;
 import com.example.duan1nhom7qlkhachsan.R;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -25,7 +24,7 @@ import java.util.Map;
 
 public class LaudryAdapter extends BaseAdapter {
     private ArrayList<AppService> list;
-    private EditText tvIdRoom;
+    private EditText edtIdRoomBookService;
     private Button btnBookService;
     private TextView tvIdService, tvNameService, tvPriceService, tvTypeService;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -56,16 +55,14 @@ public class LaudryAdapter extends BaseAdapter {
         if (view == null) {
             view = View.inflate(_viewGroup.getContext(), R.layout.item_laudry, null);
 
-            tvIdRoom = view.findViewById(R.id.tvIdRoom);
+            edtIdRoomBookService = view.findViewById(R.id.edtIdRoomBookService);
             tvIdService = view.findViewById(R.id.tvIdService);
             tvNameService = view.findViewById(R.id.tvNameService);
             tvTypeService = view.findViewById(R.id.tvPriceService);
             tvPriceService = view.findViewById(R.id.tvTypeService);
             btnBookService = view.findViewById(R.id.btnBookService);
 
-
-            ViewHolder holder = new ViewHolder(btnBookService,tvIdService, tvNameService, tvTypeService, tvPriceService, tvIdRoom);
-
+            ViewHolder holder = new ViewHolder(btnBookService, tvIdService, tvNameService, tvTypeService, tvPriceService, edtIdRoomBookService);
             view.setTag(holder);
         }
         AppService service = (AppService) getItem(_i);
@@ -73,29 +70,33 @@ public class LaudryAdapter extends BaseAdapter {
         holder.tvIdRoom.setText(service.getCodeRoom());
         holder.tvIdService.setText(service.getCodeService());
         holder.tvNameService.setText(service.getNameService());
-        holder.tvTypeService.setText(service.getTypeService());
-        holder.tvPriceService.setText(service.getPriceService());
+        holder.tvTypeService.setText(" "+service.getTypeService());
+        holder.tvPriceService.setText(" "+service.getPriceService());
 
 
         holder.btnBookService.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                String idRoomBookService = edtIdRoomBookService.getText().toString().trim();
+//                if ((idRoomBookService.length() == 0 || idRoomBookService.length() < 3)) {
+//                    edtIdRoomBookService.setError("Bạn chưa cọn ngày check in");
+//                    edtIdRoomBookService.requestFocus();
+//                    return;
+//                }
                 String idRoom = holder.tvIdRoom.getText().toString();
                 String idService = holder.tvIdService.getText().toString();
                 String nameService = holder.tvNameService.getText().toString();
                 String typeService = holder.tvTypeService.getText().toString();
                 String priceService = holder.tvPriceService.getText().toString();
 
-
                 // private String idRoom,nameRoom,typeRoom,priceRoom,startDay,endDay;
                 // Create a new user with a first and last name
                 Map<String, Object> user = new HashMap<>();
-                user.put("idRoom",idRoom);
-                user.put("idService",idService);
+                user.put("idRoom", idRoom);
+                user.put("idService", idService);
                 user.put("nameService", nameService);
                 user.put("priceService", priceService);
                 user.put("typeService", typeService);
-
 
 
                 db.collection("bookedService")

@@ -15,7 +15,7 @@
         android:layout_height="62dp"
         android:layout_marginTop="10dp"
 
-        android:background="@drawable/design_of_edt"
+        android:background="@drawable/design_edit_square"
         android:drawableStart="@drawable/ic_person"
         android:ems="10"
         android:hint="  Enter Admin Name"
@@ -37,7 +37,7 @@
         android:layout_marginTop="10dp"
 
 
-        android:background="@drawable/design_of_edt"
+        android:background="@drawable/design_edit_square"
         android:drawableStart="@drawable/ic_role"
         android:ems="10"
         android:hint="  Enter Role (Admin | Manager)"
@@ -56,7 +56,7 @@
         android:layout_width="343dp"
         android:layout_height="62dp"
         android:layout_marginTop="5dp"
-        android:background="@drawable/design_of_edt"
+        android:background="@drawable/design_edit_square"
 
         android:drawableStart="@drawable/ic_email"
         android:ems="10"
@@ -78,7 +78,7 @@
         android:layout_marginTop="10dp"
 
 
-        android:background="@drawable/design_of_edt"
+        android:background="@drawable/design_edit_square"
         android:drawableStart="@drawable/ic_dice"
         android:ems="10"
         android:hint="  Enter Id Admin"
@@ -99,7 +99,7 @@
         android:layout_marginTop="10dp"
 
 
-        android:background="@drawable/design_of_edt"
+        android:background="@drawable/design_edit_square"
         android:drawableStart="@drawable/ic_lock"
         android:ems="10"
         android:hint="  Enter Password"
@@ -117,13 +117,14 @@
         android:id="@+id/btnRegister"
         android:layout_width="153dp"
         android:layout_height="46dp"
-        android:layout_marginBottom="172dp"
+        android:layout_marginBottom="176dp"
         android:background="@drawable/button_cus"
         android:onClick="onRegisterClick"
         android:text="Register"
         android:textColor="@color/black"
         android:textColorHint="@color/black"
         android:textStyle="bold"
+        app:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

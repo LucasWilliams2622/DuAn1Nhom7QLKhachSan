@@ -12,11 +12,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
-import com.example.duan1nhom7qlkhachsan.Fragment.BookedRoomFragment;
 import com.example.duan1nhom7qlkhachsan.Fragment.BookedServiceFragment;
-import com.example.duan1nhom7qlkhachsan.Model.AppBookedRoom;
 import com.example.duan1nhom7qlkhachsan.Model.AppBookedService;
-import com.example.duan1nhom7qlkhachsan.Model.AppService;
 import com.example.duan1nhom7qlkhachsan.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -58,7 +55,7 @@ public class BookedServiceAdapter extends BaseAdapter {
         View view = _view;
         if (view == null) {
             view = View.inflate(_viewGroup.getContext(), R.layout.item_booked_service, null);
-            tvIdRoom = view.findViewById(R.id.tvIdRoom);
+            tvIdRoom = view.findViewById(R.id.edtIdRoomBookService);
             tvIdService = view.findViewById(R.id.tvIdService);
             tvTypeService = view.findViewById(R.id.tvTypeService);
             tvNameService = view.findViewById(R.id.tvNameService);
@@ -95,7 +92,7 @@ public class BookedServiceAdapter extends BaseAdapter {
 
                 new AlertDialog.Builder(btnHuyService.getContext())
                         .setTitle("Xóa")
-                        .setMessage("Bạn có chắc muốn hủy phòng")
+                        .setMessage("Bạn có chắc muốn hủy dịch vụ")
                         .setNegativeButton("Không", null)
                         .setPositiveButton("Có", new DialogInterface.OnClickListener() {
                             @Override
@@ -105,14 +102,14 @@ public class BookedServiceAdapter extends BaseAdapter {
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void aVoid) {
-                                                Toast.makeText(btnHuyService.getContext(), "Hủy phòng thành công", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(btnHuyService.getContext(), "Hủy dịch vụ thành công", Toast.LENGTH_SHORT).show();
                                                 bookedServiceFragment.onAdapter();
                                             }
                                         })
                                         .addOnFailureListener(new OnFailureListener() {
                                             @Override
                                             public void onFailure(@NonNull Exception e) {
-                                                Toast.makeText(btnHuyService.getContext(), "Hủy phòng không thành công", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(btnHuyService.getContext(), "Hủy dịch vụ không thành công", Toast.LENGTH_SHORT).show();
                                             }
                                         });
 

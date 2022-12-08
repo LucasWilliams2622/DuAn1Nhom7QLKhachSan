@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -119,12 +120,27 @@ public class LoginActivity extends AppCompatActivity {
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String username = edt_username.getText().toString();
-                String password = edt_password.getText().toString();
+
+                String username = edt_username.getText().toString().trim();
+                String password = edt_password.getText().toString().trim();
                 if (username.equals("") || password.equals("")) {
-                    Toast.makeText(LoginActivity.this, "Vui lòng điền đủ thông tin", Toast.LENGTH_SHORT).show();
+                    edt_username.setError("Vui lòng nhập email hợp lệ");
+                    edt_username.requestFocus();
+                    edt_password.setError("Vui lòng nhập password");
+                    edt_password.requestFocus();
+
 
                 } else {
+                    if (!Patterns.EMAIL_ADDRESS.matcher(username).matches()){
+                        edt_username.setError("Vui lòng nhập email hợp lệ");
+                        edt_username.requestFocus();
+                        return;
+                    }
+                    if (password.length() < 6){
+                        edt_password.setError("Mật khẩu tối thiểu 6 kí tự");
+                        edt_password.requestFocus();
+                        return;
+                    }
                     db.collection("admin")
                             .get()
                             .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -161,6 +177,11 @@ public class LoginActivity extends AppCompatActivity {
                                                 Toast.makeText(LoginActivity.this, "Wellcome " + nameAdmin, Toast.LENGTH_SHORT).show();
 
                                                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                                            }
+                                            else
+                                            {
+                                                Toast.makeText(LoginActivity.this, "Tài khoản hoặc mật khẩu không chính xác ! " , Toast.LENGTH_SHORT).show();
+
                                             }
                                         }
                                     } else {
@@ -209,8 +230,6 @@ public class LoginActivity extends AppCompatActivity {
                 googleLauncher.launch(googleIntent);//hientai khoan dang login trong may
             }
         });
-
-
         /*
          *End: Đăng nhâp bằng Google*/
 
