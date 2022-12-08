@@ -32,7 +32,8 @@ public class TrangChuFragment extends Fragment {
     private ViewPager mViewPager;
 
     private CircleIndicator mCircleIndicator;
-private List<Photo> mListPhoto;
+    private List<Photo> mListPhoto;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -69,7 +70,7 @@ private List<Photo> mListPhoto;
         ivSuport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity)getActivity()).openSupportFragment();
+                ((MainActivity) getActivity()).openSupportFragment();
             }
         });
         ivProfile.setOnClickListener(new View.OnClickListener() {

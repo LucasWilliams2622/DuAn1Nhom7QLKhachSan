@@ -8,11 +8,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -24,7 +22,6 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -33,13 +30,13 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 
-import com.bumptech.glide.Glide;
 import com.example.duan1nhom7qlkhachsan.Activity.AddRoomActivity;
 import com.example.duan1nhom7qlkhachsan.Activity.AddServiceActivity;
 import com.example.duan1nhom7qlkhachsan.Activity.BookedRoomActivity;
 import com.example.duan1nhom7qlkhachsan.Activity.BookedServiceActivity;
 import com.example.duan1nhom7qlkhachsan.Activity.CheckOutActivity;
 import com.example.duan1nhom7qlkhachsan.Activity.EditProfileActivity;
+import com.example.duan1nhom7qlkhachsan.Activity.GioiThieuActivity;
 import com.example.duan1nhom7qlkhachsan.Activity.LaudryActivity;
 import com.example.duan1nhom7qlkhachsan.Activity.LoginActivity;
 
@@ -48,10 +45,7 @@ import com.example.duan1nhom7qlkhachsan.Activity.hotro.HotroAdminFragment;
 import com.example.duan1nhom7qlkhachsan.Activity.hotro.HoTroFragment;
 
 import com.example.duan1nhom7qlkhachsan.Fragment.DoanhThuFragment;
-import com.example.duan1nhom7qlkhachsan.Fragment.LaudryFragment;
 import com.example.duan1nhom7qlkhachsan.Fragment.TrangChuFragment;
-import com.example.duan1nhom7qlkhachsan.Fragment.BookedRoomFragment;
-import com.example.duan1nhom7qlkhachsan.Fragment.ServiceFragment;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -192,11 +186,16 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.mTuVanKH:
                         fragment = new HoTroFragment();
                         break;
+                    case R.id.mGioiThieuSavila:
+                        Intent intentGioiThieu = new Intent(MainActivity.this, GioiThieuActivity.class);
+                        startActivity(intentGioiThieu);
+                        break;
+
                     case R.id.mPhongDaDat:
                         Intent itentBookedRoom = new Intent(MainActivity.this, BookedRoomActivity.class);
                         startActivity(itentBookedRoom);
                         break;
-                    case R.id.mGioiThieu:
+                    case R.id.mTrangChu:
                         fragment = new TrangChuFragment();
                         break;
 
@@ -241,9 +240,7 @@ public class MainActivity extends AppCompatActivity {
                     toolBar.setTitle(item.getTitle());
                 }
 
-
                 drawerLayout.closeDrawer(GravityCompat.START);
-
                 return false;
             }
         });

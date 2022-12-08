@@ -111,8 +111,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="10dp"
+        android:textStyle="bold"
         android:layout_marginTop="20dp"
-        android:text="TỔNG TIỀN: "
+        android:text="Tổng Doanh Thu: "
         android:textColor="@color/black"
         android:textSize="30dp" />
     <TextView

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/btnBackToMainActivity"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button"
+        android:backgroundTint="@color/white"
+        android:drawableLeft="@drawable/icreturn"
+        android:text="Back"
+        android:textColor="@color/black"
+        android:textSize="17dp"
+        app:backgroundTint="@null" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:outlineAmbientShadowColor="@color/black"
+        android:outlineSpotShadowColor="@color/black"
+        app:cardCornerRadius="30dp">
+
+        <Button
+            android:id="@+id/btnShowLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="7dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="-4dp"
+            android:background="@drawable/design_edit_no_stoke"
+            android:backgroundTint="@color/white"
+            android:drawableLeft="@drawable/ic_baseline_search_24"
+            android:onClick="onShowMap"
+            android:text="Show Savila location "
+            android:textColor="@color/black"
+            android:textSize="23dp"
+            android:textStyle="italic|normal"
+            app:backgroundTint="@null"></Button>
+    </androidx.cardview.widget.CardView>
+
+
+    <TextView
+        android:id="@+id/tvLocation"
+        android:layout_width="10dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="76dp" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#EAF1EA"
+        app:cardCornerRadius="40dp">
+
+        <FrameLayout
+            android:id="@+id/flMap"
+            android:layout_width="match_parent"
+            android:layout_height="239dp"
+            android:layout_below="@+id/btnShowLocation"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_centerInParent="true"
+
+            android:layout_marginStart="10dp"
+
+            android:layout_marginEnd="10dp" />
+    </androidx.cardview.widget.CardView>
+
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="406dp"
+        android:layout_height="48dp"
+        android:drawableStart="@drawable/savila_icon_plant"
+        android:drawableEnd="@drawable/savila_icon_plant"
+        android:text="Giới Thiệu về Savila"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="27dp"
+        android:textStyle="italic|bold" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/textView133"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="10dp"
+                android:text="      Khách sạn Savila tọa lạc gần Trung tâm quận 1. Nằm giữa trung tâm kinh tế và văn hóa của Thành Phố Hồ Chí Minh."
+                android:textAlignment="textStart"
+                android:textSize="23dp" />
+
+            <TextView
+                android:id="@+id/textView131"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="10dp"
+                android:text="        Savila mong muốn là cánh cửa đầu tiên ở Hồ Chí Minh chào đón Quý khách trong nước và Quốc tế về với Hồ Chí Minh."
+                android:textAlignment="textStart"
+
+                android:textSize="23dp" />
+
+            <TextView
+                android:id="@+id/textView13q1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="10dp"
+
+                android:text="      Khách sạn SAVILA được thiết kế bao gồm 5 tầng với 30 phòng các loại với nội thất cao cấp và sang trọng. Tất cả các phòng nghỉ của Khách sạn đều có cửa sổ lớn nhìn ra không gian bên ngoài với xa xa là khung cảnh non nước hữu tình đầy thơ mộng và cảnh đẹp lung linh của Thành phố Hồ Chí Minh khi màn đêm buông xuống để mặc những ánh đèn đua nhau thắp lên. Hơn thế nữa,  Khách sạn SAVILA còn lựa chọn cách thiết kế độc đáo, thuận tiện cho phòng VIP, Family Suite và Excutive Suite trong đó phòng khách và phòng nghỉ được tách biệt với diện tích phòng lên đến 72m2."
+                android:textAlignment="textStart"
+                android:textSize="23dp" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

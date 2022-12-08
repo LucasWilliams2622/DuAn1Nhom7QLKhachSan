@@ -6,9 +6,13 @@
         android:title="Profile" />
 
     <item
-        android:id="@+id/mGioiThieu"
+        android:id="@+id/mTrangChu"
         android:icon="@drawable/ic_home"
         android:title="Trang chủ" />
+    <item
+        android:id="@+id/mGioiThieuSavila"
+        android:icon="@drawable/savia_icon_black"
+        android:title="Giới thiệu Savila" />
     <item
         android:id="@+id/mDatPhong"
         android:icon="@drawable/living_room"
@@ -37,12 +41,12 @@
         <menu>
             <item
                 android:id="@+id/mAddRoom"
-                android:icon="@drawable/ic_room_no2"
-                android:title="Thêm phòng " />
+                android:icon="@drawable/ic_hotel_room"
+                android:title="Quản lý phòng " />
             <item
                 android:id="@+id/mAddService"
                 android:icon="@drawable/ic_room_service"
-                android:title="Thêm dịch vụ" />
+                android:title="Quản lý dịch vụ" />
             <item
                 android:id="@+id/mTraPhong"
                 android:icon="@drawable/ic_check_out_room"

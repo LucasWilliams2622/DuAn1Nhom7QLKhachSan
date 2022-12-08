@@ -27,6 +27,9 @@ import com.example.duan1nhom7qlkhachsan.MainActivity;
 import com.example.duan1nhom7qlkhachsan.Model.AppAdmin;
 import com.example.duan1nhom7qlkhachsan.Model.AppUser;
 import com.example.duan1nhom7qlkhachsan.R;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -405,8 +408,6 @@ public class EditProfileActivity extends AppCompatActivity implements IAdapterUs
                                                                     Toast.makeText(EditProfileActivity.this, "Xóa thành công", Toast.LENGTH_SHORT).show();
                                                                     Intent i = new Intent(EditProfileActivity.this, BeginActivity.class);
                                                                     startActivity(i);
-
-
                                                                 }
                                                             })
                                                             .addOnFailureListener(new OnFailureListener() {
@@ -458,6 +459,7 @@ public class EditProfileActivity extends AppCompatActivity implements IAdapterUs
                                                                 @Override
                                                                 public void onSuccess(Void aVoid) {
                                                                     Toast.makeText(EditProfileActivity.this, "Xóa thành công", Toast.LENGTH_SHORT).show();
+                                                                   // onLogoutClick();
                                                                     Intent i = new Intent(EditProfileActivity.this, BeginActivity.class);
                                                                     startActivity(i);
 
@@ -483,7 +485,18 @@ public class EditProfileActivity extends AppCompatActivity implements IAdapterUs
 
 
     }
+    /*
+public void  onLogoutClick()
+{
+    GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions
+            .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.AUTH_ID))
+            .requestEmail()
+            .build();
 
+    GoogleSignInClient googleSignInClient = GoogleSignIn.getClient(EditProfileActivity.this, googleSignInOptions);
+    googleSignInClient.signOut();
+}*/
 
 //    private void openAlbum() {
 //        if (mMainActivity == null) {
