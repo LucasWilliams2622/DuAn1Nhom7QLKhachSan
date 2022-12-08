@@ -26,9 +26,9 @@ import java.util.Map;
 public class CheckOutRoomAdapter extends BaseAdapter {
     private ArrayList<AppBookedRoom> list  ;
     private Button btnCheckOutRoom;
-    CheckOutRoomFragment checkOutRoomFragment;
-
     private TextView tvTenPhong, tvMaPhong, tvLoaiPhong, tvGiaPhong,tvEndDay,tvStartDay;
+
+    CheckOutRoomFragment checkOutRoomFragment;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public CheckOutRoomAdapter(ArrayList<AppBookedRoom> list, CheckOutRoomFragment checkOutRoomFragment) {

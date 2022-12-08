@@ -19,7 +19,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DuAn1Nhom7QLKhachSan"
         tools:targetApi="31">
-
+        <activity
+            android:name=".Activity.HandleSupportRequestActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 
@@ -37,6 +43,13 @@
 
         <activity
             android:name=".Activity.CheckOutActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Activity.SupportCustomerActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -129,7 +142,6 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-
         <activity
             android:name=".HuongDan.LoadActivity"
             android:exported="true">
@@ -166,7 +178,6 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-
         </activity>
         <activity
             android:name=".MainActivity"
@@ -174,7 +185,6 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-
         </activity>
         <activity
             android:name=".Activity.BeginActivity"

@@ -64,8 +64,6 @@
     </item>
     <item android:title="">
         <menu>
-
-
             <item
                 android:id="@+id/mDangXuat"
                 android:icon="@drawable/ic_exit"

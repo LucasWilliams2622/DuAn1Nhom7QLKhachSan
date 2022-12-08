@@ -14,6 +14,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.example.duan1nhom7qlkhachsan.Activity.BookRoomActivity;
 import com.example.duan1nhom7qlkhachsan.Activity.EditProfileActivity;
 import com.example.duan1nhom7qlkhachsan.Activity.LaudryActivity;
+import com.example.duan1nhom7qlkhachsan.Activity.SupportCustomerActivity;
 import com.example.duan1nhom7qlkhachsan.Activity.hotro.HoTroFragment;
 import com.example.duan1nhom7qlkhachsan.MainActivity;
 import com.example.duan1nhom7qlkhachsan.R;
@@ -70,7 +71,9 @@ public class TrangChuFragment extends Fragment {
         ivSuport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity) getActivity()).openSupportFragment();
+                Intent i = new Intent(getContext(), SupportCustomerActivity.class);
+                startActivity(i);
+
             }
         });
         ivProfile.setOnClickListener(new View.OnClickListener() {

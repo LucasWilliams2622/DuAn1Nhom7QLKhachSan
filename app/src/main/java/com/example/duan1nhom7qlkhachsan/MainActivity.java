@@ -36,6 +36,8 @@ import com.example.duan1nhom7qlkhachsan.Activity.BookedRoomActivity;
 import com.example.duan1nhom7qlkhachsan.Activity.BookedServiceActivity;
 import com.example.duan1nhom7qlkhachsan.Activity.CheckOutActivity;
 import com.example.duan1nhom7qlkhachsan.Activity.EditProfileActivity;
+import com.example.duan1nhom7qlkhachsan.Activity.GioiThieuActivity;
+import com.example.duan1nhom7qlkhachsan.Activity.HandleSupportRequestActivity;
 import com.example.duan1nhom7qlkhachsan.Activity.LaudryActivity;
 import com.example.duan1nhom7qlkhachsan.Activity.LoginActivity;
 
@@ -43,7 +45,7 @@ import com.example.duan1nhom7qlkhachsan.Activity.BookRoomActivity;
 import com.example.duan1nhom7qlkhachsan.Activity.SupportCustomerActivity;
 
 import com.example.duan1nhom7qlkhachsan.Fragment.DoanhThuFragment;
-import com.example.duan1nhom7qlkhachsan.Fragment.SupportCustomerFragment;
+
 import com.example.duan1nhom7qlkhachsan.Fragment.TrangChuFragment;
 
 import com.google.android.gms.auth.api.Auth;
@@ -180,7 +182,9 @@ public class MainActivity extends AppCompatActivity {
                         fragment = new DoanhThuFragment();
                         break;
                     case R.id.mHotro:
-                        openSupportFragmentHotro();
+                        Intent itentSupportCus = new Intent(MainActivity.this, HandleSupportRequestActivity.class);
+                        startActivity(itentSupportCus);
+
                         break;
                     case R.id.mTuVanKH:
                         Intent itentSupport = new Intent(MainActivity.this, SupportCustomerActivity.class);
@@ -190,10 +194,14 @@ public class MainActivity extends AppCompatActivity {
                         Intent itentBookedRoom = new Intent(MainActivity.this, BookedRoomActivity.class);
                         startActivity(itentBookedRoom);
                         break;
-                    case R.id.mGioiThieu:
+                    case R.id.mTrangChu:
                         fragment = new TrangChuFragment();
                         break;
 
+                    case R.id.mGioiThieuSavila:
+                        Intent intentGioiThieuSavile = new Intent(MainActivity.this, GioiThieuActivity.class);
+                        startActivity(intentGioiThieuSavile);
+                        break;
                     case R.id.mAddRoom:
                         Intent intentAddRoom = new Intent(MainActivity.this, AddRoomActivity.class);
                         startActivity(intentAddRoom);
@@ -262,12 +270,12 @@ public class MainActivity extends AppCompatActivity {
 //                .replace(R.id.frameLayout, new HoTroFragment())
 //                .commit();
 //    }
-    public void openSupportFragmentHotro(){
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.frameLayout, new SupportCustomerFragment())
-                .commit();
-    }
+//    public void openSupportFragmentHotro(){
+//        FragmentManager fragmentManager = getSupportFragmentManager();
+//        fragmentManager.beginTransaction()
+//                .replace(R.id.frameLayout, new SupportCustomerFragment())
+//                .commit();
+//    }
 
 //    public void showProfile() {
 //        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();

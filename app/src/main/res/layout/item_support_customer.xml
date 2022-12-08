@@ -6,20 +6,24 @@
     android:layout_margin="10dp"
     app:cardCornerRadius="10dp">
     <LinearLayout
+        android:padding="10dp"
         android:orientation="vertical"
-        android:background="#059FE4"
+        android:background="#CDE9F6"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
             android:layout_width="match_parent"
+            android:padding="7dp"
             android:layout_height="match_parent">
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:paddingLeft="15dp"
+                android:paddingLeft="0dp"
+                android:textStyle="bold"
+                android:textSize="23dp"
                 android:text="Họ và tên :"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                />
             <TextView
                 android:id="@+id/tvNameSupport"
                 android:layout_width="match_parent"
@@ -34,14 +38,17 @@
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
+            android:padding="7dp"
+
             android:layout_height="match_parent">
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:paddingLeft="15dp"
+                android:paddingLeft="0dp"
                 android:text="Số điện thoại :"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textStyle="bold"
+                android:textSize="23dp" />
             <TextView
                 android:id="@+id/tvPhoneSupport"
                 android:layout_width="match_parent"
@@ -56,14 +63,17 @@
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
+            android:padding="7dp"
+
             android:layout_height="match_parent">
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:paddingLeft="15dp"
+                android:paddingLeft="0dp"
                 android:text="Nội dung :"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textStyle="bold"
+                android:textSize="23dp" />
             <TextView
                 android:id="@+id/tvContentSupport"
                 android:layout_width="match_parent"
@@ -80,19 +90,26 @@
             android:id="@+id/btnHuySupport"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/design_btn"
-            android:backgroundTint="#F6D1CF"
+
+            android:backgroundTint="#DAEF0A"
             android:ems="10"
+            android:drawableStart="@android:drawable/checkbox_on_background"
+            android:layout_marginTop="100dp"
             android:inputType="textPersonName"
             android:paddingLeft="15dp"
-            android:text="Hủy yêu cầu"
-            android:textColor="#E61B0C"
+            android:layout_marginBottom="15dp"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:text="Đã xử lý hỗ trợ"
+            android:textColor="#3F51B5"
             app:backgroundTint="@null"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView4"
             app:layout_constraintVertical_bias="0.004" />
+
+
 
 
     </LinearLayout>

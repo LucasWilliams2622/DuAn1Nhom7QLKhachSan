@@ -5,8 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_advise"
-    android:padding="16dp"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:padding="16dp">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -25,25 +26,25 @@
             android:gravity="center"
             android:text="Phiếu Hỗ Trợ"
             android:textColor="#121315"
-            android:textStyle="italic|bold"
-            android:textSize="30sp" />
+            android:textSize="30sp"
+            android:textStyle="italic|bold" />
 
         <EditText
             android:id="@+id/edtNameCustomer"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="10dp"
-            android:ems="10"
-
             android:layout_marginLeft="0dp"
+            android:layout_marginTop="10dp"
+
             android:layout_marginBottom="10dp"
-            android:paddingTop="5dp"
-            android:paddingLeft="20dp"
-            android:gravity="left"
             android:background="@drawable/design_of_edt"
-            android:textColorHint="@color/black"
+            android:ems="10"
+            android:gravity="left"
+            android:hint="Họ và tên"
             android:inputType="textPersonName"
-            android:hint="Họ và tên" />
+            android:paddingLeft="20dp"
+            android:paddingTop="5dp"
+            android:textColorHint="@color/black" />
 
         <EditText
             android:id="@+id/edtPhoneNumberCustomer"
@@ -51,45 +52,63 @@
             android:layout_height="50dp"
             android:layout_marginLeft="0dp"
             android:layout_marginBottom="10dp"
-            android:paddingTop="5dp"
-            android:paddingLeft="20dp"
-            android:gravity="left"
             android:background="@drawable/design_of_edt"
-            android:textColorHint="@color/black"
             android:ems="10"
+            android:gravity="left"
+            android:hint="Số điện thoại"
             android:inputType="textPersonName"
-            android:hint="Số điện thoại" />
+            android:paddingLeft="20dp"
+            android:paddingTop="5dp"
+            android:textColorHint="@color/black" />
 
 
         <EditText
             android:id="@+id/edtContentSupport"
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:textColorHint="@color/black"
             android:layout_marginLeft="0dp"
             android:layout_marginBottom="10dp"
-            android:paddingTop="10dp"
-            android:paddingLeft="20dp"
-            android:gravity="left"
             android:background="@drawable/design_of_edt"
             android:ems="10"
+            android:gravity="left"
+            android:hint="Nội dung: "
             android:inputType="textPersonName"
-            android:hint="Nội dung: " />
+            android:paddingLeft="20dp"
+            android:paddingTop="10dp"
+            android:textColorHint="@color/black" />
 
         <Button
             android:id="@+id/btnSupportCustomer"
-            android:drawableLeft="@drawable/messenger_bubble_large_white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:text="Gửi hỗ trợ"
-            android:textStyle="bold|italic"
-            android:background="@drawable/design_green_btn"
-            app:backgroundTint="@null"
-            android:backgroundTint="#40D646"
             android:layout_marginTop="20dp"
-            android:textAllCaps="false" />
+            android:background="@drawable/design_green_btn"
+            android:backgroundTint="#40D646"
+            android:drawableLeft="@drawable/messenger_bubble_large_white"
+            android:text="Gửi hỗ trợ"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textStyle="bold|italic"
+            app:backgroundTint="@null" />
 
+        <Button
+            android:id="@+id/btnBackToMainActivity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="4dp"
+            android:background="@drawable/design_green_btn"
+            android:drawableLeft="@drawable/icreturn"
+            android:text="Back"
+
+            android:textColor="#0DED16"
+            android:textStyle="bold|italic"
+            android:textSize="23dp"
+            app:backgroundTint="@null"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.077"
+            app:layout_constraintStart_toStartOf="parent" />
     </LinearLayout>
 
 
