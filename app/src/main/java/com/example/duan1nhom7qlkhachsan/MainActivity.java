@@ -36,15 +36,14 @@ import com.example.duan1nhom7qlkhachsan.Activity.BookedRoomActivity;
 import com.example.duan1nhom7qlkhachsan.Activity.BookedServiceActivity;
 import com.example.duan1nhom7qlkhachsan.Activity.CheckOutActivity;
 import com.example.duan1nhom7qlkhachsan.Activity.EditProfileActivity;
-import com.example.duan1nhom7qlkhachsan.Activity.GioiThieuActivity;
 import com.example.duan1nhom7qlkhachsan.Activity.LaudryActivity;
 import com.example.duan1nhom7qlkhachsan.Activity.LoginActivity;
 
 import com.example.duan1nhom7qlkhachsan.Activity.BookRoomActivity;
-import com.example.duan1nhom7qlkhachsan.Activity.hotro.HotroAdminFragment;
-import com.example.duan1nhom7qlkhachsan.Activity.hotro.HoTroFragment;
+import com.example.duan1nhom7qlkhachsan.Activity.SupportCustomerActivity;
 
 import com.example.duan1nhom7qlkhachsan.Fragment.DoanhThuFragment;
+import com.example.duan1nhom7qlkhachsan.Fragment.SupportCustomerFragment;
 import com.example.duan1nhom7qlkhachsan.Fragment.TrangChuFragment;
 
 import com.google.android.gms.auth.api.Auth;
@@ -56,8 +55,8 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+//import com.google.firebase.auth.FirebaseAuth;
+//import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.IOException;
@@ -153,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
         gsc = GoogleSignIn.getClient(MainActivity.this, gso);
         account = GoogleSignIn.getLastSignedInAccount(MainActivity.this);
 
-        showProfile();
+//        showProfile();
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -181,21 +180,17 @@ public class MainActivity extends AppCompatActivity {
                         fragment = new DoanhThuFragment();
                         break;
                     case R.id.mHotro:
-                        fragment = new HotroAdminFragment();
+                        openSupportFragmentHotro();
                         break;
                     case R.id.mTuVanKH:
-                        fragment = new HoTroFragment();
+                        Intent itentSupport = new Intent(MainActivity.this, SupportCustomerActivity.class);
+                        startActivity(itentSupport);
                         break;
-                    case R.id.mGioiThieuSavila:
-                        Intent intentGioiThieu = new Intent(MainActivity.this, GioiThieuActivity.class);
-                        startActivity(intentGioiThieu);
-                        break;
-
                     case R.id.mPhongDaDat:
                         Intent itentBookedRoom = new Intent(MainActivity.this, BookedRoomActivity.class);
                         startActivity(itentBookedRoom);
                         break;
-                    case R.id.mTrangChu:
+                    case R.id.mGioiThieu:
                         fragment = new TrangChuFragment();
                         break;
 
@@ -240,7 +235,9 @@ public class MainActivity extends AppCompatActivity {
                     toolBar.setTitle(item.getTitle());
                 }
 
+
                 drawerLayout.closeDrawer(GravityCompat.START);
+
                 return false;
             }
         });
@@ -258,33 +255,39 @@ public class MainActivity extends AppCompatActivity {
             menu.findItem(R.id.mHotro).setVisible(false);
         }
     }
-
-    public void openSupportFragment(){
+//
+//    public void openSupportFragment(){
+//        FragmentManager fragmentManager = getSupportFragmentManager();
+//        fragmentManager.beginTransaction()
+//                .replace(R.id.frameLayout, new HoTroFragment())
+//                .commit();
+//    }
+    public void openSupportFragmentHotro(){
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.frameLayout, new HoTroFragment())
+                .replace(R.id.frameLayout, new SupportCustomerFragment())
                 .commit();
     }
 
-    public void showProfile() {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user == null) {
-            return;
-        }
-        String name = user.getDisplayName();
-        String email = user.getEmail();
-        Uri photoUrl = user.getPhotoUrl();
-
-        if (name == null) {
-            tvNameUserLogin.setVisibility(View.GONE);
-        } else {
-            tvNameUserLogin.setVisibility(View.VISIBLE);
-            tvNameUserLogin.setText(name);
-        }
-        tvNameUserLogin.setText(name);
-        tvEmailUserLogin.setText(email);
-        // Glide.with(this).load(photoUrl).error(R.drawable.ic_avatar).into(img_avatar);
-    }
+//    public void showProfile() {
+//        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+//        if (user == null) {
+//            return;
+//        }
+//        String name = user.getDisplayName();
+//        String email = user.getEmail();
+//        Uri photoUrl = user.getPhotoUrl();
+//
+//        if (name == null) {
+//            tvNameUserLogin.setVisibility(View.GONE);
+//        } else {
+//            tvNameUserLogin.setVisibility(View.VISIBLE);
+//            tvNameUserLogin.setText(name);
+//        }
+//        tvNameUserLogin.setText(name);
+//        tvEmailUserLogin.setText(email);
+//        // Glide.with(this).load(photoUrl).error(R.drawable.ic_avatar).into(img_avatar);
+//    }
 
     public void openGallery() { // mo thu vien de chon anh
         Intent i = new Intent();
