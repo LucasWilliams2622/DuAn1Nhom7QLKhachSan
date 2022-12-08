@@ -80,7 +80,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 String role = map.get("role").toString();
 
 
-                                AppAdmin admin = new AppAdmin(idAdmin, emailAdmin, nameAdmin, passwordAdmin, role);
+                                AppAdmin admin = new AppAdmin(-1,idAdmin, emailAdmin, nameAdmin, passwordAdmin, role);
                                 admin.setIdAdmin(document.getId());
                                 list.add(admin);
                             }

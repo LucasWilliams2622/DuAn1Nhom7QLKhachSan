@@ -132,8 +132,6 @@ public class LoginActivity extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                     if (task.isSuccessful()) {
                                         ArrayList<AppAdmin> list = new ArrayList<>();
-
-
                                         for (QueryDocumentSnapshot document : task.getResult()) {
                                             //    private String idAdmin,emailAdmin,nameAdmin,passwordAdmin,role;
                                             SharedPreferences.Editor editorAdmin = sharedPreferences.edit();
@@ -156,12 +154,9 @@ public class LoginActivity extends AppCompatActivity {
                                             String registerEmailAdmin = sharedPreferences.getString("emailAdmin", "");
                                             String registerPasswordAdmin = sharedPreferences.getString("passwordAdmin", "");
 
-//
 //                                            AppAdmin appAdmin = new AppAdmin("",username,emailAdmin,passwordAdmin,"admin");
 //                                            appAdmin.setIdAdmin(document.getId());
 //                                            list.add(appAdmin);
-//
-
                                             if ((username.equals(registerEmailAdmin) && password.equals(registerPasswordAdmin)) || (username.equals(emailAdmin) && password.equals(passwordAdmin))) {
                                                 Toast.makeText(LoginActivity.this, "Wellcome " + nameAdmin, Toast.LENGTH_SHORT).show();
 
@@ -261,7 +256,9 @@ public class LoginActivity extends AppCompatActivity {
                         user.put("nameUser", displayName);
                         user.put("emailUser", email);
                         user.put("idRoom", "");
-                        user.put("idUser", "USER" + email.toLowerCase().substring(0, 5) + email.toUpperCase().lastIndexOf(1));
+
+                        String index = "USER" + email.toLowerCase().substring(0, 6);
+                        user.put("idUser", index);
                         user.put("phoneNumUser", "");
 
                         //SharedPreFerances
@@ -269,6 +266,7 @@ public class LoginActivity extends AppCompatActivity {
                         editor.putString("emailUser", email);
                         editor.putString("nameUser", displayName);
                         editor.putString("phoneNumUser", "");
+                        editor.putString("idUser", index);
                         editor.apply();
                         SharedPreferences.Editor editorAdmin = sharedPreferences.edit();
                         editorAdmin.putString("role", "user");

@@ -1,24 +1,18 @@
 package com.example.duan1nhom7qlkhachsan.Activity;
 
-import static com.example.duan1nhom7qlkhachsan.MainActivity.MY_REQUEST_CODE;
-
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -30,15 +24,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.duan1nhom7qlkhachsan.MainActivity;
+import com.example.duan1nhom7qlkhachsan.Model.AppAdmin;
 import com.example.duan1nhom7qlkhachsan.Model.AppUser;
 import com.example.duan1nhom7qlkhachsan.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -54,14 +46,17 @@ public class EditProfileActivity extends AppCompatActivity implements IAdapterUs
     private Button btnUpdateAccount, btnDeleteAccount, btnBackToMainActivity;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private AppUser appUser = null;
+    private AppAdmin appAdmin = null;
+
     SharedPreferences sharedPreferForUser, sharedPreferences;
     String role;
     private ProgressDialog progressDialog;
-    private ImageView ivEditProfileUser,edtAvatar;
+    private ImageView ivEditProfileUser, edtAvatar;
     private MainActivity mMainActivity;
     View headerLayout;
     private Uri mUri;
     int SELECT_PICTURE = 200;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,7 +76,16 @@ public class EditProfileActivity extends AppCompatActivity implements IAdapterUs
         btnDeleteAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onDeleteAccountClick(appUser);
+                sharedPreferences = getSharedPreferences("AdminInfo", 0);
+                role = sharedPreferences.getString("role", "");
+                if (role.equals("admin"))
+                {
+                    onDeleteAccountAdmin(appAdmin);
+                }
+                else {
+                    onDeleteAccountClick(appUser);
+
+                }
             }
         });
         btnUpdateAccount.setOnClickListener(new View.OnClickListener() {
@@ -108,6 +112,7 @@ public class EditProfileActivity extends AppCompatActivity implements IAdapterUs
         setProfileOfUser();
 
     }
+
     void imageChooser() {
 
         // create an instance of the
@@ -120,6 +125,7 @@ public class EditProfileActivity extends AppCompatActivity implements IAdapterUs
         // with the returned requestCode
         startActivityForResult(Intent.createChooser(i, "Select Picture"), SELECT_PICTURE);
     }
+
     ActivityResultLauncher<Intent> launchSomeActivity
             = registerForActivityResult(
             new ActivityResultContracts
@@ -138,8 +144,7 @@ public class EditProfileActivity extends AppCompatActivity implements IAdapterUs
                                     = MediaStore.Images.Media.getBitmap(
                                     this.getContentResolver(),
                                     selectedImageUri);
-                        }
-                        catch (IOException e) {
+                        } catch (IOException e) {
                             e.printStackTrace();
                         }
                         ivEditProfileUser.setImageBitmap(
@@ -167,6 +172,7 @@ public class EditProfileActivity extends AppCompatActivity implements IAdapterUs
             }
         }
     }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -194,6 +200,35 @@ public class EditProfileActivity extends AppCompatActivity implements IAdapterUs
 
         String role = sharedPreferences.getString("role", "");
         if (role.equals("admin")) {
+
+            db.collection("admin")
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                ArrayList<AppAdmin> list = new ArrayList<>();
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    Map<String, Object> map = document.getData();
+                                    String nameAdmin = map.get("nameAdmin").toString();
+                                    String emailAdmin = map.get("emailAdmin").toString();
+
+                                    String passwordAdmin = map.get("passwordAdmin").toString();
+
+                                    appAdmin = new AppAdmin(nameAdmin, emailAdmin, passwordAdmin);
+                                    edtFullNameUser.setText(nameAdmin);
+                                    edtEmailUser.setText(emailAdmin);
+                                    edtPhoneNumberUser.setText(passwordAdmin);
+                                    appAdmin.setCodeAdmin(document.getId());
+                                    //Test
+                                    String a = appAdmin.getCodeAdmin();
+                                    Log.d(">>>>>>>>>>>>>>>> onComplete Editròile", "     " + a);
+                                    //end test
+                                    list.add(appAdmin);
+                                }
+                            }
+                        }
+                    });
             edtFullNameUser.setText(nameAdmin);
             edtEmailUser.setText(emailAdmin);
             tvProfileEdit.setText("Password");
@@ -217,6 +252,7 @@ public class EditProfileActivity extends AppCompatActivity implements IAdapterUs
                                     edtFullNameUser.setText(nameUser);
                                     edtEmailUser.setText(emailUser);
                                     edtPhoneNumberUser.setText(phoneNumUser);
+
                                     appUser.setCodeUser(document.getId());
 
                                     //Test
@@ -246,16 +282,55 @@ public class EditProfileActivity extends AppCompatActivity implements IAdapterUs
             sharedPreferences = getSharedPreferences("AdminInfo", 0);
             role = sharedPreferences.getString("role", "");
             if (role.equals("admin")) {
-                TextView fullNameUpdate = headerLayout.findViewById(R.id.tvNameUserLogin);
-                TextView emailAdmin = headerLayout.findViewById(R.id.tvEmailUserLogin);
-                fullNameUpdate.setText("Wellcom " + fullnameUser);
-                emailAdmin.setText("" + emailUser);
+//                TextView fullNameUpdate = headerLayout.findViewById(R.id.tvNameUserLogin);
+//                    TextView emailAdmin = headerLayout.findViewById(R.id.tvEmailUserLogin);
+//                fullNameUpdate.setText("Wellcom " + fullnameUser);
+//                emailAdmin.setText("" + emailUser);
+                Map<String, Object> user = new HashMap<>();
+                user.put("nameAdmin", fullnameUser);
+                user.put("emailAdmin", emailUser);
+                user.put("passwordAdmin", phoneNumUser);
+                user.put("idAdmin", "ADMIN001");
+                user.put("role", "admin");
+
+                Log.d(">>>>>>>>>", "nameAdmin" + fullnameUser);
+                Log.d(">>>>>>>>>", "emailAdmin" + emailUser);
+                Log.d(">>>>>>>>>", "passwordAdmin" + phoneNumUser);
+                if (appAdmin == null) {
+                    progressDialog.dismiss();
+                    Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
+                } else {
+                    db.collection("admin")
+                            .document(appAdmin.getCodeAdmin())
+                            .set(user)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    progressDialog.dismiss();
+                                    Toast.makeText(EditProfileActivity.this, "Update admin  Successful", Toast.LENGTH_SHORT).show();
+                                    Log.d(">>>>>>>>>>>.", "Update  Successful");
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    progressDialog.dismiss();
+
+                                    Toast.makeText(EditProfileActivity.this, "Cập nhật không thành công", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                }
 
             } else {
+                String idUser = sharedPreferForUser.getString("idUser", "");
+
                 Map<String, Object> user = new HashMap<>();
                 user.put("nameUser", fullnameUser);
                 user.put("emailUser", emailUser);
                 user.put("phoneNumUser", phoneNumUser);
+                user.put("idRoom", "");
+                user.put("idUser", idUser);
+
                 Log.d(">>>>>>>>>", "fullnameUser" + fullnameUser);
                 Log.d(">>>>>>>>>", "emailUser" + emailUser);
                 Log.d(">>>>>>>>>", "phoneNumUser" + phoneNumUser);
@@ -269,7 +344,6 @@ public class EditProfileActivity extends AppCompatActivity implements IAdapterUs
 //                TextView email = (TextView)header.findViewById(R.id.tvEmailUserLogin);
 //                name.setText(fullnameUser);
 //                email.setText(emailUser);
-
                 if (appUser == null) {
                     progressDialog.dismiss();
                     Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
@@ -283,7 +357,7 @@ public class EditProfileActivity extends AppCompatActivity implements IAdapterUs
                                     progressDialog.dismiss();
                                     Toast.makeText(EditProfileActivity.this, "Update Successful", Toast.LENGTH_SHORT).show();
                                     Log.d(">>>>>>>>>>>.", "Update  Successful");
-                                    appUser = null;
+
                                 }
                             })
                             .addOnFailureListener(new OnFailureListener() {
@@ -300,6 +374,59 @@ public class EditProfileActivity extends AppCompatActivity implements IAdapterUs
         }
     }
 
+    public void onDeleteAccountAdmin(AppAdmin admin) {
+        String emailUser = edtEmailUser.getText().toString().trim();
+
+        db.collection("admin")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            ArrayList<AppAdmin> list = new ArrayList<>();
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+
+                                Map<String, Object> map = document.getData();
+                                String emailUserDB = map.get("emailAdmin").toString();
+                                if (emailUserDB.equals(emailUser)) {
+
+                                    new AlertDialog.Builder(EditProfileActivity.this)
+                                            .setTitle("Xóa tài khoản")
+                                            .setMessage("Xóa sẽ không phục hồi được")
+                                            .setNegativeButton("Hủy", null)
+                                            .setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+
+                                                    db.collection("admin").document(admin.getCodeAdmin())
+                                                            .delete()
+                                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                @Override
+                                                                public void onSuccess(Void aVoid) {
+                                                                    Toast.makeText(EditProfileActivity.this, "Xóa thành công", Toast.LENGTH_SHORT).show();
+                                                                    Intent i = new Intent(EditProfileActivity.this, BeginActivity.class);
+                                                                    startActivity(i);
+
+
+                                                                }
+                                                            })
+                                                            .addOnFailureListener(new OnFailureListener() {
+                                                                @Override
+                                                                public void onFailure(@NonNull Exception e) {
+                                                                    Toast.makeText(EditProfileActivity.this, "Xóa không thành công", Toast.LENGTH_SHORT).show();
+                                                                }
+                                                            });
+
+                                                }
+                                            })
+                                            .show();
+                                }
+
+                            }
+                        }
+                    }
+                });
+    }
 
     @Override
     public void onDeleteAccountClick(AppUser user) {
@@ -319,7 +446,7 @@ public class EditProfileActivity extends AppCompatActivity implements IAdapterUs
                                 if (emailUserDB.equals(emailUser)) {
 
                                     new AlertDialog.Builder(EditProfileActivity.this)
-                                            .setTitle("Xóa")
+                                            .setTitle("Xóa tài khoản")
                                             .setMessage("Xóa sẽ không phục hồi được")
                                             .setNegativeButton("Hủy", null)
                                             .setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
@@ -341,7 +468,7 @@ public class EditProfileActivity extends AppCompatActivity implements IAdapterUs
                                                             .addOnFailureListener(new OnFailureListener() {
                                                                 @Override
                                                                 public void onFailure(@NonNull Exception e) {
-                                                                    Toast.makeText(EditProfileActivity.this, "Xóa khong thành công", Toast.LENGTH_SHORT).show();
+                                                                    Toast.makeText(EditProfileActivity.this, "Xóa không thành công", Toast.LENGTH_SHORT).show();
                                                                 }
                                                             });
 
@@ -354,6 +481,7 @@ public class EditProfileActivity extends AppCompatActivity implements IAdapterUs
                         }
                     }
                 });
+
 
     }
 
