@@ -17,15 +17,15 @@
             android:layout_height="match_parent"
             android:background="@drawable/button"
             android:backgroundTint="@color/white"
+            android:drawableLeft="@drawable/icreturn"
             android:text="Back"
             android:textColor="@color/black"
             android:textSize="17dp"
-            android:drawableLeft="@drawable/icreturn"
             app:backgroundTint="@null" />
 
         <TextView
             android:id="@+id/textView5"
-            android:layout_width="match_parent"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:paddingRight="70dp"
@@ -33,7 +33,47 @@
             android:textColor="@color/green"
             android:textSize="30dp"
             android:textStyle="bold|italic" />
+        <Button
+            android:id="@+id/btnSearchService"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/design_edit_no_stoke"
+            android:backgroundTint="@color/white"
+            android:drawableLeft="@drawable/ic_baseline_search_24"
+            android:textColor="@color/black"
+            android:textSize="23dp"
+            app:backgroundTint="@null"></Button>
     </LinearLayout>
+<LinearLayout
+    android:id="@+id/containerLL"
+   android:visibility="invisible"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="0dp">
+    <AutoCompleteTextView
+        android:id="@+id/tvSearch"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:visibility="visible"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/design_edit_square"
+        android:drawableStart="@drawable/ic_baseline_search_24"
+        android:hint="  Search service"
+        android:paddingLeft="30dp" />
+    <Button
+        android:id="@+id/btnHide"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
+        android:background="@drawable/design_edit_no_stoke"
+        android:backgroundTint="@color/white"
+        android:text="Hide"
+        android:textColor="@color/black"
+        android:textSize="17dp"
+        app:backgroundTint="@null"></Button>
+</LinearLayout>
+
 
     <FrameLayout
         android:id="@+id/flLaudry"

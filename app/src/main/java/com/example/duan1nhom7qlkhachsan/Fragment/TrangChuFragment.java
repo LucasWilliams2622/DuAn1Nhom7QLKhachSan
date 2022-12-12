@@ -15,7 +15,7 @@ import com.example.duan1nhom7qlkhachsan.Activity.BookRoomActivity;
 import com.example.duan1nhom7qlkhachsan.Activity.EditProfileActivity;
 import com.example.duan1nhom7qlkhachsan.Activity.LaudryActivity;
 import com.example.duan1nhom7qlkhachsan.Activity.SupportCustomerActivity;
-import com.example.duan1nhom7qlkhachsan.Activity.hotro.HoTroFragment;
+
 import com.example.duan1nhom7qlkhachsan.MainActivity;
 import com.example.duan1nhom7qlkhachsan.R;
 import com.example.duan1nhom7qlkhachsan.SlideShow.Photo;

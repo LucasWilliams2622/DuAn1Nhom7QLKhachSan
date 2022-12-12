@@ -1,5 +1,6 @@
 package com.example.duan1nhom7qlkhachsan.Fragment;
 
+import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,18 +10,22 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AutoCompleteTextView;
 import android.widget.ListView;
 
 import com.example.duan1nhom7qlkhachsan.Adapter.AddRoomAdapter;
 import com.example.duan1nhom7qlkhachsan.Adapter.AddServiceAdapter;
 import com.example.duan1nhom7qlkhachsan.Model.AppService;
 import com.example.duan1nhom7qlkhachsan.R;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
 public class AddServiceFragment extends Fragment {
     private ArrayList<AppService> service;
     private ListView lvFragAddService;
+    private AutoCompleteTextView tvSearch;
+
 
     public AddServiceFragment() {
         // Required empty public constructor
@@ -54,9 +59,12 @@ public class AddServiceFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         lvFragAddService=view.findViewById(R.id.lvFragAddService);
         AddServiceAdapter adapter = new AddServiceAdapter(service);
         lvFragAddService.setAdapter(adapter);
+
+
 //        lvFragCourses.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //            @Override
 //            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

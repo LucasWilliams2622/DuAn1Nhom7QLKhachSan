@@ -79,7 +79,7 @@ public class LaudryAdapter extends BaseAdapter {
             public void onClick(View v) {
 //                String idRoomBookService = edtIdRoomBookService.getText().toString().trim();
 //                if ((idRoomBookService.length() == 0 || idRoomBookService.length() < 3)) {
-//                    edtIdRoomBookService.setError("Bạn chưa cọn ngày check in");
+//                    edtIdRoomBookService.setError("Bạn chưa chọn ngày check in");
 //                    edtIdRoomBookService.requestFocus();
 //                    return;
 //                }

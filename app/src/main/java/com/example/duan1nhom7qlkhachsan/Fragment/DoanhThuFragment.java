@@ -117,8 +117,8 @@ public class DoanhThuFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                String ngaybatdau = edtStartDay.getText().toString();
-                String ngayketthuc = edtEndDay.getText().toString();
+                String ngaybatdau = edtStartDay.getText().toString().trim();
+                String ngayketthuc = edtEndDay.getText().toString().trim()  ;
                 ngaybatdau = ngaybatdau.replace("/", "");
                 ngayketthuc = ngayketthuc.replace("/", "");
 
@@ -134,8 +134,8 @@ public class DoanhThuFragment extends Fragment {
 //                                    ArrayList<AppBookedService> list = new ArrayList<>();
                                     for (QueryDocumentSnapshot document : task.getResult()) {
                                         Map<String, Object> map = document.getData();
-                                        String priceService = map.get("priceService").toString();
-                                        sumService.add(Integer.valueOf(priceService));
+                                        String priceService = map.get("priceService").toString().trim();
+                                        sumService.add(Integer. valueOf(priceService));
 //                                        Log.d(">>>>>>>>>>", "Price: " + priceService);
                                     }
                                     Log.d(">>>>>>>>>>", "List: " + sumService);
@@ -194,8 +194,6 @@ public class DoanhThuFragment extends Fragment {
                                 }
                             }
                         });
-
-
             }
         });
         return view;

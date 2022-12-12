@@ -2,68 +2,95 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:layout_margin="10dp"
     android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    android:orientation="vertical"
     tools:context=".Fragment.DoanhThuFragment">
 
 
     <TextView
         android:id="@+id/textView8"
-        android:textSize="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:paddingBottom="10dp"
+        android:text="Since:"
         android:textColor="@color/black"
-        android:layout_marginLeft="10dp"
-        android:paddingBottom="10dp"
-        android:text="Since:" />
+        android:textSize="30dp" />
 
-    <EditText
-        android:layout_marginLeft="10dp"
-
-        android:id="@+id/edtStartDay"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:paddingBottom="10dp"
+        android:layout_height="wrap_content">
 
-        android:hint="Start day" />
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10sp"
+            android:background="@drawable/ic_baseline_calendar_month_24" />
+
+        <EditText
+            android:id="@+id/edtStartDay"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:ems="10"
+            android:hint="Start day"
+            android:inputType="textPersonName"
+
+            android:paddingBottom="10dp" />
+    </LinearLayout>
+
 
     <TextView
         android:id="@+id/tvToDay"
-        android:textSize="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:paddingBottom="10dp"
+        android:text="To:"
+
         android:textColor="@color/black"
-        android:paddingBottom="10dp"
+        android:textSize="30dp" />
 
-        android:layout_marginLeft="10dp"
-        android:text="To:" />
-
-    <EditText
-        android:id="@+id/edtEndDay"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:paddingBottom="10dp"
-        android:layout_marginLeft="10dp"
-        android:hint="End day" />
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10sp"
+            android:background="@drawable/ic_baseline_calendar_month_24" />
+
+        <EditText
+            android:id="@+id/edtEndDay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:ems="10"
+            android:hint="End day"
+            android:inputType="textPersonName"
+            android:paddingBottom="10dp" />
+    </LinearLayout>
+
 
     <Button
         android:id="@+id/btnThongKe"
-        android:paddingBottom="10dp"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:textSize="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Statistic " />
+        android:paddingBottom="10dp"
+        android:text="Statistic "
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp">
+        android:layout_marginTop="50dp"
+        android:orientation="horizontal">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -71,6 +98,7 @@
             android:text="Tổng tiền thuê phòng: "
             android:textColor="@color/black"
             android:textSize="20dp" />
+
         <TextView
             android:id="@+id/tvMoneyRoom"
             android:layout_width="match_parent"
@@ -82,11 +110,25 @@
             android:textColor="@color/black"
             android:textSize="20dp"
             android:textStyle="normal" />
+        <TextView
+            android:id="@+id/currancy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="15dp"
+            android:paddingTop="4dp"
+            android:paddingRight="15dp"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="normal" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -94,6 +136,7 @@
             android:text="Tổng tiền dùng dịch vụ: "
             android:textColor="@color/black"
             android:textSize="20dp" />
+
         <TextView
             android:id="@+id/tvMoneyService"
             android:layout_width="match_parent"
@@ -105,25 +148,61 @@
             android:textColor="@color/black"
             android:textSize="20dp"
             android:textStyle="normal" />
+        <TextView
+            android:id="@+id/currancyb"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="15dp"
+            android:paddingTop="4dp"
+            android:paddingRight="15dp"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="normal" />
     </LinearLayout>
+
     <TextView
-        android:textAlignment="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="10dp"
-        android:textStyle="bold"
         android:layout_marginTop="20dp"
-        android:text="Tổng Doanh Thu: "
-        android:textColor="@color/black"
-        android:textSize="30dp" />
-    <TextView
-        android:id="@+id/tvResult"
-        android:textAlignment="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:paddingBottom="10dp"
-        android:layout_marginTop="10dp"
-        android:text=""
+        android:text="Tổng Doanh Thu: "
+        android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="30dp" />
+        android:textSize="30dp"
+        android:textStyle="bold" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:id="@+id/tvResult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:paddingBottom="10dp"
+            android:text=""
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="30dp" />
+
+        <TextView
+
+            android:id="@+id/currancyba"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="15dp"
+            android:paddingTop="10dp"
+            android:paddingRight="15dp"
+            android:text=""
+
+            android:textColor="@color/black"
+            android:textSize="30dp"
+            android:textStyle="normal" />
+    </LinearLayout>
+
 </LinearLayout>

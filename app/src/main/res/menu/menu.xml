@@ -59,7 +59,7 @@
             <item
                 android:id="@+id/mDoanhThu"
                 android:icon="@drawable/ic_money"
-                android:title="Doanh Thu" />
+                android:title="Thống kê doanh thu" />
         </menu>
     </item>
     <item android:title="">

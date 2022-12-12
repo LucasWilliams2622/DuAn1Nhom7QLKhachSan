@@ -169,7 +169,7 @@ public class BookRoomAdapter extends BaseAdapter {
             }
         });
 
-
+        holder.edtCheckInDay.getText().toString().trim();
         holder.btnBookRoom.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -184,6 +184,10 @@ public class BookRoomAdapter extends BaseAdapter {
                     edtCheckOutDay.requestFocus();
                     return;
                 }
+                edtCheckInDay.setError(null);
+                edtCheckOutDay.setError(null);
+
+
                 //                private TextView tvIdBookRoom, tvNameBookRoom, tvTypeBookRoom, tvPriceBookRoom;
 //                private EditText edtCheckInDay, edtCheckOutDay;
                 String codeRoom = holder.tvCodeBookRoom.getText().toString();

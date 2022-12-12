@@ -85,7 +85,7 @@ public class BookedRoomFragment extends Fragment {
 
                             }
                             room = list;
-                            bookedRoomAdapter = new BookedRoomAdapter(room,BookedRoomFragment.this);
+                            bookedRoomAdapter = new BookedRoomAdapter(room,BookedRoomFragment.this,getContext());
                             lvFrgBookedRoom.setAdapter(bookedRoomAdapter);
 
                         }

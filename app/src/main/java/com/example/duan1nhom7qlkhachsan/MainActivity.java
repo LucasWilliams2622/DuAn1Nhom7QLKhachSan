@@ -232,7 +232,8 @@ public class MainActivity extends AppCompatActivity {
                             startActivity(intent);
                         }
                     default:
-                        fragment = new TrangChuFragment();
+                        Intent intentGioiThieuSavilee= new Intent(MainActivity.this, GioiThieuActivity.class);
+                        startActivity(intentGioiThieuSavilee);
                         break;
                 }
                 if (fragment != null) {

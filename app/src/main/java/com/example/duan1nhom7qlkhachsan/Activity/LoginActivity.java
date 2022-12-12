@@ -1,5 +1,6 @@
 package com.example.duan1nhom7qlkhachsan.Activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -71,6 +72,7 @@ public class LoginActivity extends AppCompatActivity {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CallbackManager callbackManager;
     private ProfileTracker profileTracker;
+    private ProgressDialog progressDialog;
     private static final String EMAIL = "email";
     EditText edt_username, edt_password;
     SharedPreferences sharedPreferences;
@@ -78,6 +80,7 @@ public class LoginActivity extends AppCompatActivity {
     ImageView ivShowPass,ivTwitter;
     CheckBox chkSavePassword;
     AppUser appUser = null;
+
     TextView tvNameUserLogin;
     //Google
     GoogleSignInClient gsc;
@@ -95,6 +98,8 @@ public class LoginActivity extends AppCompatActivity {
         edt_password = findViewById(R.id.edt_password_lgoin);
         Button btn_login = findViewById(R.id.btn_login);
         Button btn_register = findViewById(R.id.btnGoRegister);
+        progressDialog = new ProgressDialog(LoginActivity.this);
+
         ivShowPass = findViewById(R.id.ivShowPass);
         ivTwitter = findViewById(R.id.ivTwitter);
         ivTwitter.setOnClickListener(new View.OnClickListener() {
@@ -141,6 +146,8 @@ public class LoginActivity extends AppCompatActivity {
                         edt_password.requestFocus();
                         return;
                     }
+//                    progressDialog.setTitle(" Login  ...");
+//                    progressDialog.show();
                     db.collection("admin")
                             .get()
                             .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -158,10 +165,11 @@ public class LoginActivity extends AppCompatActivity {
                                             String emailAdmin = map.get("emailAdmin").toString();
                                             String nameAdmin = map.get("nameAdmin").toString();
 
+
                                             editorAdmin.putString("nameAdmin", nameAdmin);
                                             editorAdmin.putString("emailAdmin", emailAdmin);
-                                            Log.d(">>>>>>>>>>", "nameAdmin in Login" + nameAdmin);
-                                            Log.d(">>>>>>>>>>", "emailAdmin in Login" + emailAdmin);
+//                                            Log.d(">>>>>>>>>>", "nameAdmin in Login" + nameAdmin);
+//                                            Log.d(">>>>>>>>>>", "emailAdmin in Login" + emailAdmin);
                                             editorAdmin.apply();
                                             //Login by account Admin
                                             String username = edt_username.getText().toString();
@@ -174,6 +182,13 @@ public class LoginActivity extends AppCompatActivity {
 //                                            appAdmin.setIdAdmin(document.getId());
 //                                            list.add(appAdmin);
                                             if ((username.equals(registerEmailAdmin) && password.equals(registerPasswordAdmin)) || (username.equals(emailAdmin) && password.equals(passwordAdmin))) {
+                                                Log.d(">>>>>>>>>>>>>","username"+username);
+                                                Log.d(">>>>>>>>>>>>>","emailAdmin"+emailAdmin);
+                                                Log.d(">>>>>>>>>>>>>","registerEmailAdmin"+registerEmailAdmin);
+
+
+//                                                progressDialog.dismiss();
+
                                                 Toast.makeText(LoginActivity.this, "Wellcome " + nameAdmin, Toast.LENGTH_SHORT).show();
 
                                                 startActivity(new Intent(LoginActivity.this, MainActivity.class));

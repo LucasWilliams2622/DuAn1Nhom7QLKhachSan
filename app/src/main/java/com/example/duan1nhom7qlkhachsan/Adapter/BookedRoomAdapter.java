@@ -6,9 +6,11 @@ import android.content.DialogInterface;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,14 +34,20 @@ import java.util.Map;
 public class BookedRoomAdapter extends BaseAdapter {
     private ArrayList<AppBookedRoom> list  ;
     private Button btnHuyPhong;
+    private ImageView ivBookedRoom;
+    private Context context;
+
+
     BookedRoomFragment bookedRoomFragment;
 
     private TextView tvTenPhong, tvMaPhong, tvLoaiPhong, tvGiaPhong,tvEndDay,tvStartDay;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    public BookedRoomAdapter(ArrayList<AppBookedRoom> list, BookedRoomFragment bookedRoomFragment) {
+    public BookedRoomAdapter(ArrayList<AppBookedRoom> list, BookedRoomFragment bookedRoomFragment,Context context) {
         this.list = list;
         this.bookedRoomFragment= bookedRoomFragment;
+        this.context = context;
+
     }
 
 
@@ -70,6 +78,16 @@ public class BookedRoomAdapter extends BaseAdapter {
             tvMaPhong = view.findViewById(R.id.tvMaPhong);
             tvLoaiPhong = view.findViewById(R.id.tvLoaiPhong);
             tvGiaPhong = view.findViewById(R.id.tvGiaPhong);
+            ivBookedRoom = view.findViewById(R.id.ivBookedRoom);
+            view.findViewById(R.id.ivBookedRoom).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ivBookedRoom.startAnimation(AnimationUtils.loadAnimation(
+                            context.getApplicationContext(),
+                            R.anim.animation_scale
+                    ));
+                }
+            });
             ViewHolder holder = new ViewHolder(btnHuyPhong, tvTenPhong, tvMaPhong, tvLoaiPhong, tvGiaPhong,tvEndDay,tvStartDay);
             view.setTag(holder);
         }
