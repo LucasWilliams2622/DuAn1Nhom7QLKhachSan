@@ -34,7 +34,7 @@ import java.util.Map;
 public class RegisterActivity extends AppCompatActivity {
     private EditText edtEmailAdmin, edtNameAdmin, edtPasswordAdmin, edtIdAdmin, edtRoleAdmin;
     private Button btnRegister;
-    Animation scaleUp,scaleDown;
+    Animation scaleUp, scaleDown;
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     SharedPreferences sharedPreferences;
@@ -49,8 +49,8 @@ public class RegisterActivity extends AppCompatActivity {
         edtPasswordAdmin = findViewById(R.id.edtPasswordAdmin);
         edtIdAdmin = findViewById(R.id.edtIdAdmin);
         edtRoleAdmin = findViewById(R.id.edtRoleAdmin);
-        scaleUp = AnimationUtils.loadAnimation(this,R.anim.scale_up);
-        scaleDown = AnimationUtils.loadAnimation(this,R.anim.scale_down);
+        scaleUp = AnimationUtils.loadAnimation(this, R.anim.scale_up);
+        scaleDown = AnimationUtils.loadAnimation(this, R.anim.scale_down);
         btnRegister = findViewById(R.id.btnRegister);
 
     }
@@ -81,7 +81,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 String role = map.get("role").toString();
 
 
-                                AppAdmin admin = new AppAdmin(-1,idAdmin, emailAdmin, nameAdmin, passwordAdmin, role);
+                                AppAdmin admin = new AppAdmin(-1, idAdmin, emailAdmin, nameAdmin, passwordAdmin, role);
                                 admin.setIdAdmin(document.getId());
                                 list.add(admin);
                             }
@@ -89,6 +89,9 @@ public class RegisterActivity extends AppCompatActivity {
                                     .beginTransaction()
 //                                    .replace(R.id.flRoom, BookRoomFragment.newInstance(list))
                                     .commit();
+                        } else {
+                            Toast.makeText(RegisterActivity.this, "Tạo tài khoản đã tồn tại!", Toast.LENGTH_SHORT).show();
+
                         }
                     }
                 });
@@ -122,12 +125,12 @@ public class RegisterActivity extends AppCompatActivity {
             edtRoleAdmin.requestFocus();
             Toast.makeText(this, "Vui lòng điền đủ thông tin !", Toast.LENGTH_SHORT).show();
         } else {
-            if (!Patterns.EMAIL_ADDRESS.matcher(emailAdmin).matches()){
+            if (!Patterns.EMAIL_ADDRESS.matcher(emailAdmin).matches()) {
                 edtEmailAdmin.setError("Vui lòng nhập email hợp lệ");
                 edtEmailAdmin.requestFocus();
                 return;
             }
-            if (passwordAdmin.length() < 6){
+            if (passwordAdmin.length() < 6) {
                 edtPasswordAdmin.setError("Mật khẩu tối thiểu 6 kí tự");
                 edtPasswordAdmin.requestFocus();
                 return;
@@ -139,8 +142,8 @@ public class RegisterActivity extends AppCompatActivity {
             editor.putString("passwordAdmin", passwordAdmin);
             editor.putString("role", "admin");
 
-            Log.d(">>>>>>>>>","emailAdmin"+emailAdmin);
-            Log.d(">>>>>>>>>","passwordAdmin"+passwordAdmin);
+            Log.d(">>>>>>>>>", "emailAdmin" + emailAdmin);
+            Log.d(">>>>>>>>>", "passwordAdmin" + passwordAdmin);
             editor.apply();
             //end saving by sharedPreferances
 
@@ -175,10 +178,10 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegister.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction()==MotionEvent.ACTION_UP){
+                if (event.getAction() == MotionEvent.ACTION_UP) {
                     btnRegister.startAnimation(scaleDown);
 
-                }else if(event.getAction()==MotionEvent.ACTION_DOWN){
+                } else if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     btnRegister.startAnimation(scaleUp);
                 }
                 return false;

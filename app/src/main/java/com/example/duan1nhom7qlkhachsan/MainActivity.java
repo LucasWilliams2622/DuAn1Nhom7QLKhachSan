@@ -48,12 +48,15 @@ import com.example.duan1nhom7qlkhachsan.Fragment.DoanhThuFragment;
 
 import com.example.duan1nhom7qlkhachsan.Fragment.TrangChuFragment;
 
+import com.facebook.login.LoginManager;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
@@ -153,9 +156,7 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         gsc = GoogleSignIn.getClient(MainActivity.this, gso);
         account = GoogleSignIn.getLastSignedInAccount(MainActivity.this);
-
 //        showProfile();
-
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -184,7 +185,6 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.mHotro:
                         Intent itentSupportCus = new Intent(MainActivity.this, HandleSupportRequestActivity.class);
                         startActivity(itentSupportCus);
-
                         break;
                     case R.id.mTuVanKH:
                         Intent itentSupport = new Intent(MainActivity.this, SupportCustomerActivity.class);
@@ -197,7 +197,6 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.mTrangChu:
                         fragment = new TrangChuFragment();
                         break;
-
                     case R.id.mGioiThieuSavila:
                         Intent intentGioiThieuSavile = new Intent(MainActivity.this, GioiThieuActivity.class);
                         startActivity(intentGioiThieuSavile);
@@ -216,23 +215,38 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case R.id.mDangXuat:
-                        if (account != null) {
-                            gsc.signOut().addOnCompleteListener(MainActivity.this,
-                                    new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            Intent homeIntent = new Intent(MainActivity.this, LoginActivity.class);
-                                            startActivity(homeIntent);
-                                            finish();
-                                        }
-                                    });
-                        } else {
-                            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            startActivity(intent);
-                        }
+                        //Logout google
+                        Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
+                                new ResultCallback<Status>() {
+                                    @Override
+                                    public void onResult(Status status) {
+                                        // ...
+                                        Toast.makeText(getApplicationContext(),"Logged Out",Toast.LENGTH_SHORT).show();
+                                        Intent i=new Intent(getApplicationContext(),LoginActivity.class);
+                                        //Sau khi out khỏi account sẽ trở về màn hình điện thoại, không trở về main
+                                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                        startActivity(i);
+                                    }
+                                });
+                        LoginManager.getInstance().logOut();
+//                        if (account != null) {
+//                            gsc.signOut().addOnCompleteListener(MainActivity.this,
+//                                    new OnCompleteListener<Void>() {
+//                                        @Override
+//                                        public void onComplete(@NonNull Task<Void> task) {
+//                                            Intent homeIntent = new Intent(MainActivity.this, LoginActivity.class);
+//                                            startActivity(homeIntent);
+//                                            finish();
+//                                        }
+//                                    });
+//                        } else {
+//                            Log.d(">>>>>", "amdin");
+//                            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+////                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                            startActivity(intent);
+//                        }
                     default:
-                        Intent intentGioiThieuSavilee= new Intent(MainActivity.this, GioiThieuActivity.class);
+                        Intent intentGioiThieuSavilee = new Intent(MainActivity.this, GioiThieuActivity.class);
                         startActivity(intentGioiThieuSavilee);
                         break;
                 }
@@ -313,6 +327,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
 
     }
+
     @Override
     protected void onStart() {
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -329,10 +344,10 @@ public class MainActivity extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        if (requestCode == MY_REQUEST_CODE){
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+        if (requestCode == MY_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 openGallery();
-            }else{
+            } else {
                 Toast.makeText(this, "Vui lòng cho phép cấp quền truy cập !!!", Toast.LENGTH_SHORT).show();
             }
         }

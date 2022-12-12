@@ -27,9 +27,14 @@ import com.example.duan1nhom7qlkhachsan.MainActivity;
 import com.example.duan1nhom7qlkhachsan.Model.AppAdmin;
 import com.example.duan1nhom7qlkhachsan.Model.AppUser;
 import com.example.duan1nhom7qlkhachsan.R;
+import com.facebook.login.LoginManager;
+import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -50,6 +55,7 @@ public class EditProfileActivity extends AppCompatActivity implements IAdapterUs
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private AppUser appUser = null;
     private AppAdmin appAdmin = null;
+    GoogleApiClient mGoogleApiClient;
 
     SharedPreferences sharedPreferForUser, sharedPreferences;
     String role;
@@ -81,11 +87,9 @@ public class EditProfileActivity extends AppCompatActivity implements IAdapterUs
             public void onClick(View v) {
                 sharedPreferences = getSharedPreferences("AdminInfo", 0);
                 role = sharedPreferences.getString("role", "");
-                if (role.equals("admin"))
-                {
+                if (role.equals("admin")) {
                     onDeleteAccountAdmin(appAdmin);
-                }
-                else {
+                } else {
                     onDeleteAccountClick(appUser);
 
                 }
@@ -459,11 +463,20 @@ public class EditProfileActivity extends AppCompatActivity implements IAdapterUs
                                                                 @Override
                                                                 public void onSuccess(Void aVoid) {
                                                                     Toast.makeText(EditProfileActivity.this, "Xóa thành công", Toast.LENGTH_SHORT).show();
-                                                                   // onLogoutClick();
-                                                                    Intent i = new Intent(EditProfileActivity.this, BeginActivity.class);
-                                                                    startActivity(i);
-
-
+//                                                                     onLogoutClick();
+                                                                    Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
+                                                                            new ResultCallback<Status>() {
+                                                                                @Override
+                                                                                public void onResult(Status status) {
+                                                                                    // ...
+                                                                                    Toast.makeText(getApplicationContext(), "Logged Out", Toast.LENGTH_SHORT).show();
+                                                                                    Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+                                                                                    //Sau khi out khỏi account sẽ trở về màn hình điện thoại, không trở về main
+                                                                                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                                                                    startActivity(i);
+                                                                                }
+                                                                            });
+                                                                    LoginManager.getInstance().logOut();
                                                                 }
                                                             })
                                                             .addOnFailureListener(new OnFailureListener() {
@@ -485,7 +498,7 @@ public class EditProfileActivity extends AppCompatActivity implements IAdapterUs
 
 
     }
-    /*
+
 public void  onLogoutClick()
 {
     GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions
@@ -496,7 +509,7 @@ public void  onLogoutClick()
 
     GoogleSignInClient googleSignInClient = GoogleSignIn.getClient(EditProfileActivity.this, googleSignInOptions);
     googleSignInClient.signOut();
-}*/
+}
 
 //    private void openAlbum() {
 //        if (mMainActivity == null) {

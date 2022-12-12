@@ -227,4 +227,15 @@
         app:layout_constraintHorizontal_bias="0.077"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="108dp"
+        android:layout_height="28dp"
+        android:layout_marginBottom="4dp"
+        android:text="@string/APP_VERSION"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.928"
+        app:layout_constraintStart_toEndOf="@+id/btnBackToMainActivity" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
