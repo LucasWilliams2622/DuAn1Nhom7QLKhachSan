@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
+
     <application
         android:name=".SharedPreferances.MyApplication"
         android:allowBackup="true"
@@ -19,6 +20,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DuAn1Nhom7QLKhachSan"
         tools:targetApi="31">
+        <activity
+            android:name=".Activity.ForgotPasswordActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".Activity.HandleSupportRequestActivity"
             android:exported="false">
@@ -185,6 +193,7 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -197,8 +206,6 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-
-
         </activity>
     </application>
 

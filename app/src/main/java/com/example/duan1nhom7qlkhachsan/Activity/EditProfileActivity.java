@@ -1,18 +1,23 @@
 package com.example.duan1nhom7qlkhachsan.Activity;
 
+import static com.example.duan1nhom7qlkhachsan.MainActivity.MY_REQUEST_CODE;
+
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -23,6 +28,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.duan1nhom7qlkhachsan.MainActivity;
 import com.example.duan1nhom7qlkhachsan.Model.AppAdmin;
 import com.example.duan1nhom7qlkhachsan.Model.AppUser;
@@ -39,28 +45,44 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class EditProfileActivity extends AppCompatActivity implements IAdapterUserClickEvent {
     private EditText edtFullNameUser, edtEmailUser, edtPhoneNumberUser;
     private TextView tvProfileEdit;
-    private Button btnUpdateAccount, btnDeleteAccount, btnBackToMainActivity;
+    private Button btnUpdateAccount, btnDeleteAccount, btnBackToMainActivity, btnUpdateImage;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private AppUser appUser = null;
     private AppAdmin appAdmin = null;
     GoogleApiClient mGoogleApiClient;
+    //update image
+    FirebaseAuth auth;
+    FirebaseDatabase database;
+    FirebaseStorage storage;
+    CircleImageView ivEditProfileUser;
+    Uri selectedImage;
+    private ImageView edtAvatar;
+    String idUser, nameUser, emailUser, phoneNumUser, idRoom, codeUser;
+//    private String idUser,nameUser,emailUser,phoneNumUser,idRoom, codeUser,imageUrl;
 
+    //end update image
     SharedPreferences sharedPreferForUser, sharedPreferences;
     String role;
     private ProgressDialog progressDialog;
-    private ImageView ivEditProfileUser, edtAvatar;
     private MainActivity mMainActivity;
     View headerLayout;
     private Uri mUri;
@@ -76,12 +98,70 @@ public class EditProfileActivity extends AppCompatActivity implements IAdapterUs
         btnUpdateAccount = findViewById(R.id.btnUpdateAccount);
         btnDeleteAccount = findViewById(R.id.btnDeleteAccount);
         btnBackToMainActivity = findViewById(R.id.btnBackToMainActivity);
+        btnUpdateImage = findViewById(R.id.btnUpdateImage);
         ivEditProfileUser = findViewById(R.id.ivEditProfileUser);
         edtAvatar = findViewById(R.id.edtAvatar);
+        auth = FirebaseAuth.getInstance();
         tvProfileEdit = findViewById(R.id.tvProfileEdit);
         sharedPreferForUser = getSharedPreferences("UserInfo", 0);
         sharedPreferences = getSharedPreferences("AdminInfo", 0);
         progressDialog = new ProgressDialog(EditProfileActivity.this);
+
+
+//    private String idUser,nameUser,emailUser,phoneNumUser,idRoom, codeUser,imageUrl;
+        idUser = getIntent().getStringExtra("idUser");
+        nameUser = getIntent().getStringExtra("nameUser");
+        emailUser = getIntent().getStringExtra("emailUser");
+        phoneNumUser = getIntent().getStringExtra("phoneNumUser");
+        idRoom = getIntent().getStringExtra("idRoom");
+        codeUser = getIntent().getStringExtra("codeUser");
+
+
+//        btnUpdateImage.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (selectedImage != null) {
+//                    StorageReference reference = storage.getReference().child("user").child(auth.getCurrentUser().getPhoneNumber());
+//                    reference.putFile(selectedImage).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+//                        @Override
+//                        public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+//                            if (task.isSuccessful()) {
+//                                reference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+//                                    @Override
+//                                    public void onSuccess(Uri uri) {
+//
+//                                        String imageUrl = uri.toString();
+//
+////    private String idUser,nameUser,emailUser,phoneNumUser,idRoom, codeUser,imageUrl;
+//
+//                                        AppUser addNewUser = new AppUser(idUser, nameUser, emailUser, phoneNumUser, idRoom, imageUrl);
+//
+//                                        database.getReference()
+//                                                .child("user")
+//
+//                                                .setValue(addNewUser)
+//                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                                                    @Override
+//                                                    public void onSuccess(Void aVoid) {
+//                                                        // dialog.dismiss();
+//                                                        Intent intent = new Intent(EditProfileActivity.this, LoginActivity.class);
+//                                                        Toast.makeText(EditProfileActivity.this, "Successfully registered", Toast.LENGTH_SHORT).show();
+//                                                        startActivity(intent);
+//                                                        finish();
+//                                                    }
+//                                                });
+//
+//                                    }
+//                                });
+//                            }
+//                        }
+//                    });
+//                } else {
+//
+//
+//                }
+//            }
+//        });
         btnDeleteAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -113,6 +193,7 @@ public class EditProfileActivity extends AppCompatActivity implements IAdapterUs
         edtAvatar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 imageChooser();
             }
         });
@@ -121,16 +202,17 @@ public class EditProfileActivity extends AppCompatActivity implements IAdapterUs
     }
 
     void imageChooser() {
-
         // create an instance of the
         // intent of the type image
         Intent i = new Intent();
-        i.setType("image/*");
         i.setAction(Intent.ACTION_GET_CONTENT);
+        i.setType("image/*");
 
         // pass the constant to compare it
         // with the returned requestCode
-        startActivityForResult(Intent.createChooser(i, "Select Picture"), SELECT_PICTURE);
+
+        //startActivityForResult(Intent.createChooser(i, "Select Picture"), SELECT_PICTURE);
+        startActivityForResult(i, 45);
     }
 
     ActivityResultLauncher<Intent> launchSomeActivity
@@ -195,6 +277,7 @@ public class EditProfileActivity extends AppCompatActivity implements IAdapterUs
     }
 
     public void setProfileOfUser() {
+
         //ShảedPreferance for user
         String emailUser = sharedPreferForUser.getString("emailUser", "");
         String nameUser = sharedPreferForUser.getString("nameUser", "");
@@ -499,17 +582,16 @@ public class EditProfileActivity extends AppCompatActivity implements IAdapterUs
 
     }
 
-public void  onLogoutClick()
-{
-    GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions
-            .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.AUTH_ID))
-            .requestEmail()
-            .build();
+    public void onLogoutClick() {
+        GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions
+                .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.AUTH_ID))
+                .requestEmail()
+                .build();
 
-    GoogleSignInClient googleSignInClient = GoogleSignIn.getClient(EditProfileActivity.this, googleSignInOptions);
-    googleSignInClient.signOut();
-}
+        GoogleSignInClient googleSignInClient = GoogleSignIn.getClient(EditProfileActivity.this, googleSignInOptions);
+        googleSignInClient.signOut();
+    }
 
 //    private void openAlbum() {
 //        if (mMainActivity == null) {

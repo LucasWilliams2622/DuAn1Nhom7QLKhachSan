@@ -2,7 +2,7 @@ package com.example.duan1nhom7qlkhachsan.Model;
 
 public class AppUser {
     private Integer id ;
-    private String idUser,nameUser,emailUser,phoneNumUser,idRoom, codeUser;
+    private String idUser,nameUser,emailUser,phoneNumUser,idRoom, codeUser,imageUrl;
 
     public Integer getId() {
         return id;
@@ -20,15 +20,15 @@ public class AppUser {
         this.phoneNumUser = phoneNumUser;
     }
 
-    public AppUser(Integer id, String idUser, String nameUser, String emailUser, String phoneNumUser, String idRoom) {
+    public AppUser(Integer id, String idUser, String nameUser, String emailUser, String phoneNumUser, String idRoom,String imageUrl) {
         this.id =id;
         this.idUser = idUser;
         this.nameUser = nameUser;
         this.emailUser = emailUser;
         this.phoneNumUser = phoneNumUser;
         this.idRoom = idRoom;
+        this.imageUrl = imageUrl;
     }
-
     public AppUser(String nameUser, String emailUser, String phoneNumUser) {
         this.nameUser = nameUser;
         this.emailUser = emailUser;

@@ -60,6 +60,10 @@
                 android:id="@+id/mDoanhThu"
                 android:icon="@drawable/ic_money"
                 android:title="Thống kê doanh thu" />
+            <item
+                android:id="@+id/mTest"
+                android:icon="@drawable/ic_exit"
+                android:title="Test" />
         </menu>
     </item>
     <item android:title="">
@@ -68,6 +72,7 @@
                 android:id="@+id/mDangXuat"
                 android:icon="@drawable/ic_exit"
                 android:title="Đăng Xuất" />
+
         </menu>
     </item>
 </menu>

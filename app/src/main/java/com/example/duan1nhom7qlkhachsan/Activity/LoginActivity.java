@@ -74,11 +74,13 @@ public class LoginActivity extends AppCompatActivity {
     private ProfileTracker profileTracker;
     private ProgressDialog progressDialog;
     private static final String EMAIL = "email";
-    EditText edt_username, edt_password;
-    SharedPreferences sharedPreferences;
-    SharedPreferences sharedPreferForUser;
-    ImageView ivShowPass,ivTwitter;
-    CheckBox chkSavePassword;
+    private EditText edt_username, edt_password;
+    private TextView tvForgotPassword;
+
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences sharedPreferForUser;
+    private ImageView ivShowPass, ivTwitter;
+    private CheckBox chkSavePassword;
     AppUser appUser = null;
 
     TextView tvNameUserLogin;
@@ -96,11 +98,19 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         edt_username = findViewById(R.id.edt_username_login);
         edt_password = findViewById(R.id.edt_password_lgoin);
+        tvForgotPassword = findViewById(R.id.tvForgotPassword);
         Button btn_login = findViewById(R.id.btn_login);
         Button btn_register = findViewById(R.id.btnGoRegister);
         progressDialog = new ProgressDialog(LoginActivity.this);
 
         ivShowPass = findViewById(R.id.ivShowPass);
+        tvForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentForgotPass = new Intent(LoginActivity.this,ForgotPasswordActivity.class);
+                startActivity(intentForgotPass);
+            }
+        });
         ivTwitter = findViewById(R.id.ivTwitter);
         ivTwitter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,12 +146,12 @@ public class LoginActivity extends AppCompatActivity {
 
 
                 } else {
-                    if (!Patterns.EMAIL_ADDRESS.matcher(username).matches()){
+                    if (!Patterns.EMAIL_ADDRESS.matcher(username).matches()) {
                         edt_username.setError("Vui lòng nhập email hợp lệ");
                         edt_username.requestFocus();
                         return;
                     }
-                    if (password.length() < 6){
+                    if (password.length() < 6) {
                         edt_password.setError("Mật khẩu tối thiểu 6 kí tự");
                         edt_password.requestFocus();
                         return;
@@ -182,9 +192,9 @@ public class LoginActivity extends AppCompatActivity {
 //                                            appAdmin.setIdAdmin(document.getId());
 //                                            list.add(appAdmin);
                                             if ((username.equals(registerEmailAdmin) && password.equals(registerPasswordAdmin)) || (username.equals(emailAdmin) && password.equals(passwordAdmin))) {
-                                                Log.d(">>>>>>>>>>>>>","username"+username);
-                                                Log.d(">>>>>>>>>>>>>","emailAdmin"+emailAdmin);
-                                                Log.d(">>>>>>>>>>>>>","registerEmailAdmin"+registerEmailAdmin);
+                                                Log.d(">>>>>>>>>>>>>", "username" + username);
+                                                Log.d(">>>>>>>>>>>>>", "emailAdmin" + emailAdmin);
+                                                Log.d(">>>>>>>>>>>>>", "registerEmailAdmin" + registerEmailAdmin);
 
 
 //                                                progressDialog.dismiss();
@@ -192,10 +202,8 @@ public class LoginActivity extends AppCompatActivity {
                                                 Toast.makeText(LoginActivity.this, "Wellcome " + nameAdmin, Toast.LENGTH_SHORT).show();
 
                                                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                                            }
-                                            else
-                                            {
-                                                Toast.makeText(LoginActivity.this, "Tài khoản hoặc mật khẩu không chính xác ! " , Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                Toast.makeText(LoginActivity.this, "Tài khoản hoặc mật khẩu không chính xác ! ", Toast.LENGTH_SHORT).show();
 
                                             }
                                         }
@@ -404,10 +412,10 @@ public class LoginActivity extends AppCompatActivity {
                                 String phoneNumUser = map.get("phoneNumUser").toString();
 
 
-                                AppUser appUser = new AppUser(-1, idUser, nameUser, emailUser, phoneNumUser, idRoom);
+                                AppUser appUser = new AppUser(-1, idUser, nameUser, emailUser, phoneNumUser, idRoom,null);
                                 appUser.setCodeUser(document.getId());
                                 list.add(appUser);
-                                Log.d(">>>>>>>>>>>>>","document.getId() "+document.getId());
+                                Log.d(">>>>>>>>>>>>>", "document.getId() " + document.getId());
 
                             }
                         }

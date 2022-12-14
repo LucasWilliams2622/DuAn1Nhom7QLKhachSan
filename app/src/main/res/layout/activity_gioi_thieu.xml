@@ -54,22 +54,39 @@
         android:layout_marginStart="76dp" />
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewMap"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:backgroundTint="#EAF1EA"
+        android:visibility="invisible"
         app:cardCornerRadius="40dp">
+
         <FrameLayout
-            android:id="@+id/flMap"
             android:layout_width="match_parent"
-            android:layout_height="239dp"
-            android:layout_below="@+id/btnShowLocation"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_centerInParent="true"
+            android:layout_height="wrap_content">
 
-            android:layout_marginStart="10dp"
+            <Button
+                android:id="@+id/btnCloseMap"
+                android:layout_width="40dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center|top"
+                android:backgroundTint="@color/white"
+                android:drawableBottom="@drawable/ic_baseline_keyboard_arrow_up_24"
+                android:textSize="30dp" />
 
-            android:layout_marginEnd="10dp" />
+            <FrameLayout
+                android:id="@+id/flMap"
+                android:layout_width="match_parent"
+                android:layout_height="230dp"
+                android:layout_below="@+id/btnShowLocation"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="10dp" />
+        </FrameLayout>
+
     </androidx.cardview.widget.CardView>
 
 
@@ -117,6 +134,12 @@
                 android:textAlignment="textStart"
 
                 android:textSize="23dp" />
+
+            <ImageView
+                android:src="@drawable/room_1"
+                android:layout_gravity="center"
+                android:layout_width="400dp"
+                android:layout_height="300dp" />
 
             <TextView
                 android:id="@+id/textView13q1"

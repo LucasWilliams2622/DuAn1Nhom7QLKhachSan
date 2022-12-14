@@ -48,6 +48,7 @@ import com.example.duan1nhom7qlkhachsan.Fragment.DoanhThuFragment;
 
 import com.example.duan1nhom7qlkhachsan.Fragment.TrangChuFragment;
 
+import com.example.duan1nhom7qlkhachsan.Test.TestActivity;
 import com.facebook.login.LoginManager;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -214,6 +215,10 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intentProfile);
                         break;
 
+                    case R.id.mTest:
+                        Intent intentmTest = new Intent(MainActivity.this, TestActivity.class);
+                        startActivity(intentmTest);
+                        break;
                     case R.id.mDangXuat:
                         //Logout google
                         Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
@@ -272,6 +277,7 @@ public class MainActivity extends AppCompatActivity {
             Menu menu = navigationView.getMenu();
             menu.findItem(R.id.mDoanhThu).setVisible(false);
             menu.findItem(R.id.mTraPhong).setVisible(false);
+            menu.findItem(R.id.mTest).setVisible(false);
 
             menu.findItem(R.id.mAddRoom).setVisible(false);
             menu.findItem(R.id.mAddService).setVisible(false);

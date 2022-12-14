@@ -2,6 +2,8 @@ package com.example.duan1nhom7qlkhachsan.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.LinearLayoutCompat;
+import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
@@ -9,6 +11,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -25,13 +28,23 @@ public class GioiThieuActivity extends AppCompatActivity {
     FusedLocationProviderClient mfusedLocationProviderClient;
     Location mLastLocation;
     TextView tvLocation;
-    Button btnBackToMainActivity;
+    Button btnBackToMainActivity, btnCloseMap;
+    CardView cardViewMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gioi_thieu);
         tvLocation = findViewById(R.id.tvLocation);
+        btnCloseMap = findViewById(R.id.btnCloseMap);
+        cardViewMap = (CardView) findViewById(R.id.cardViewMap);
+        btnCloseMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cardViewMap.setVisibility(View.INVISIBLE);
+                cardViewMap.setLayoutParams(new LinearLayoutCompat.LayoutParams(0, 0));
+            }
+        });
         btnBackToMainActivity = findViewById(R.id.btnBackToMainActivity);
         btnBackToMainActivity.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,7 +57,10 @@ public class GioiThieuActivity extends AppCompatActivity {
         btnShowLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                cardViewMap.setVisibility(View.VISIBLE);
+                cardViewMap.setLayoutParams(new LinearLayoutCompat.LayoutParams(1060, 570));
                 onShowMap(v);
+
             }
         });
     }
